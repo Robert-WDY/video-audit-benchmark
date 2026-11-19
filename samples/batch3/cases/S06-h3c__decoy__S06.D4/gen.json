@@ -1,0 +1,42 @@
+{
+  "case_id": "S06-h3c__decoy__S06.D4",
+  "scene": "S06",
+  "take": "S06-h3c",
+  "source": "../generated/S06__base__seed20261121.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "grade",
+      "from": 0,
+      "to": 6,
+      "temperature": 4200,
+      "id": null
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "grade",
+      "from": 0,
+      "to": 6,
+      "temperature": 4200,
+      "id": null,
+      "out": [
+        0,
+        6
+      ]
+    }
+  ],
+  "duration": 6
+}

@@ -1,0 +1,80 @@
+{
+  "case_id": "S02-h3e__combo__S02.I3+S02.I4",
+  "blind_id": "v_4bcc6791ef",
+  "video": "S02-h3e__combo__S02.I3+S02.I4__TC7+TE2.mp4",
+  "tier": "combo",
+  "pattern": "overlap",
+  "continuous": false,
+  "ref": null,
+  "scene": "S02",
+  "take": "S02-h3e",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 10.4,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：动作完整；结尾手仍拿着杯盖未离开画面（脚本终态要求手离开），待人工判断是否算 SA5"
+  ],
+  "injected": [
+    {
+      "id": "S02.I3",
+      "category": "TC",
+      "sub": "TC7",
+      "secondary": [
+        "TC3"
+      ],
+      "category_name": "时序/因果",
+      "sub_name": "同一动作无理由重复",
+      "evidence": "E3",
+      "visibility": "V2",
+      "disposition": "fix",
+      "judge_basis": "common_sense",
+      "description": "拧开后画面回到拧紧状态再拧一遍",
+      "method": "repeat",
+      "auto": true,
+      "windows": [
+        [
+          5.4,
+          8.2
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S02.I4",
+      "category": "TE",
+      "sub": "TE2",
+      "secondary": [],
+      "category_name": "技术缺陷",
+      "sub_name": "冻帧（非刻意定格）",
+      "evidence": "E2",
+      "visibility": "V1",
+      "disposition": "fix",
+      "judge_basis": "common_sense",
+      "description": "拧松瞬间画面冻住 1.6 秒",
+      "method": "freeze",
+      "auto": true,
+      "windows": [
+        [
+          3.8,
+          5.4
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "black_silence"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

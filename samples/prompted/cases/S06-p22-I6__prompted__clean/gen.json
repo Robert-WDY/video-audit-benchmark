@@ -1,0 +1,25 @@
+{
+  "case_id": "S06-p22-I6__prompted__clean",
+  "scene": "S06",
+  "source": "../generated/S06__S06.I6__seed20261122.mp4",
+  "method": "prompt",
+  "requested": [
+    "S06.I6"
+  ],
+  "ops": [],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [],
+  "duration": 6,
+  "needs_manual": false,
+  "manual_tasks": []
+}

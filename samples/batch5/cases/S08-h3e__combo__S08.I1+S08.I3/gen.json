@@ -1,0 +1,90 @@
+{
+  "case_id": "S08-h3e__combo__S08.I1+S08.I3",
+  "scene": "S08",
+  "take": "S08-h3e",
+  "source": "../generated/S08__base__seed20261124.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "tint",
+      "from": 1.9,
+      "to": 4.4,
+      "region": [
+        0.17,
+        0.34,
+        0.58,
+        0.16
+      ],
+      "color": "#ff8fb0",
+      "opacity": 0.4,
+      "id": "S08.I1"
+    },
+    {
+      "op": "insert",
+      "from": 0,
+      "to": 1.0999999999999999,
+      "at": 5.9,
+      "id": "S08.I3"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        1.0999999999999999
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "src": [
+        1.0999999999999999,
+        5.9
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "src": [
+        0,
+        1.0999999999999999
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": "S08.I3"
+    },
+    {
+      "src": [
+        5.9,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "tint",
+      "from": 1.9,
+      "to": 4.4,
+      "region": [
+        0.17,
+        0.34,
+        0.58,
+        0.16
+      ],
+      "color": "#ff8fb0",
+      "opacity": 0.4,
+      "id": "S08.I1",
+      "out": [
+        1.9,
+        4.4
+      ]
+    }
+  ],
+  "duration": 7.1
+}

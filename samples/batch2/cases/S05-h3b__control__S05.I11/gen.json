@@ -1,0 +1,50 @@
+{
+  "case_id": "S05-h3b__control__S05.I11",
+  "scene": "S05",
+  "take": "S05-h3b",
+  "source": "../generated/S05__base__seed20261120.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "caption",
+      "from": 3,
+      "to": 6,
+      "text": "*最高支持 15W 无线快充",
+      "size": 48,
+      "x": 0.05,
+      "y": 0.93,
+      "control": true,
+      "id": null
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "caption",
+      "from": 3,
+      "to": 6,
+      "text": "*最高支持 15W 无线快充",
+      "size": 48,
+      "x": 0.05,
+      "y": 0.93,
+      "control": true,
+      "id": null,
+      "out": [
+        3,
+        6
+      ]
+    }
+  ],
+  "duration": 6
+}

@@ -1,0 +1,75 @@
+{
+  "case_id": "S08-h3e__combo__S08.I1+S08.I4",
+  "scene": "S08",
+  "take": "S08-h3e",
+  "source": "../generated/S08__base__seed20261124.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "tint",
+      "from": 1.9,
+      "to": 4.4,
+      "region": [
+        0.17,
+        0.34,
+        0.58,
+        0.16
+      ],
+      "color": "#ff8fb0",
+      "opacity": 0.4,
+      "id": "S08.I1"
+    },
+    {
+      "op": "black",
+      "at": 5,
+      "dur": 0.2,
+      "id": "S08.I4"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        5
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "black": 0.2,
+      "tag": "S08.I4"
+    },
+    {
+      "src": [
+        5,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "tint",
+      "from": 1.9,
+      "to": 4.4,
+      "region": [
+        0.17,
+        0.34,
+        0.58,
+        0.16
+      ],
+      "color": "#ff8fb0",
+      "opacity": 0.4,
+      "id": "S08.I1",
+      "out": [
+        1.9,
+        4.4
+      ]
+    }
+  ],
+  "duration": 6.2
+}

@@ -1,0 +1,26 @@
+{
+  "case_id": "S01-p21-I6I8__prompted__combo",
+  "scene": "S01",
+  "source": "../generated/S01__S01.I6+S01.I8__seed20261121.mp4",
+  "method": "prompt",
+  "requested": [
+    "S01.I6",
+    "S01.I8"
+  ],
+  "ops": [],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [],
+  "duration": 6,
+  "needs_manual": false,
+  "manual_tasks": []
+}

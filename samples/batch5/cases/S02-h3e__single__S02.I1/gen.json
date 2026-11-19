@@ -1,0 +1,29 @@
+{
+  "case_id": "S02-h3e__single__S02.I1",
+  "scene": "S02",
+  "take": "S02-h3e",
+  "source": "../generated/S02__base__seed20261124.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "reverse",
+      "from": 0,
+      "to": 6,
+      "id": "S02.I1"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": true,
+      "speed": 1,
+      "tag": "S02.I1"
+    }
+  ],
+  "overlays": [],
+  "duration": 6
+}

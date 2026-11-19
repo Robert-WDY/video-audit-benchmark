@@ -1,0 +1,27 @@
+{
+  "case_id": "S08-h3e__decoy__S08.D2",
+  "blind_id": "v_b6dec7898e",
+  "video": "S08-h3e__decoy__S08.D2__looks-TE2.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": false,
+  "ref": null,
+  "scene": "S08",
+  "take": "S08-h3e",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6.9,
+  "decoy": {
+    "id": "S08.D2",
+    "looks_like": "TE2",
+    "description": "涂抹段 0.5 倍慢动作"
+  },
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：开盖、蘸取、涂抹完整；涂抹到最后一帧仍在进行，待人工确认"
+  ],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

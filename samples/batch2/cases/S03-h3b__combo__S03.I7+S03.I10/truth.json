@@ -1,0 +1,79 @@
+{
+  "case_id": "S03-h3b__combo__S03.I7+S03.I10",
+  "blind_id": "v_95220522d8",
+  "video": "S03-h3b__combo__S03.I7+S03.I10__TC6+VT2.mp4",
+  "tier": "combo",
+  "pattern": "overlap",
+  "continuous": true,
+  "ref": null,
+  "scene": "S03",
+  "take": "S03-h3b",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [],
+  "injected": [
+    {
+      "id": "S03.I7",
+      "category": "TC",
+      "sub": "TC6",
+      "secondary": [
+        "PH2"
+      ],
+      "category_name": "时序/因果",
+      "sub_name": "有因无果（按下开关毫无反应，且事实声明开关有效）",
+      "evidence": "E2",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "水一直往玻璃杯里倒，玻璃杯却始终是空的（水流进杯后消失）",
+      "method": "freeze_region",
+      "auto": true,
+      "windows": [
+        [
+          2.4,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S03.I10",
+      "category": "VT",
+      "sub": "VT2",
+      "secondary": [],
+      "category_name": "文字/视觉瑕疵",
+      "sub_name": "局部融化或扭曲",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "倒水前玻璃杯局部扭曲变形，像融化",
+      "method": "warp_region",
+      "auto": true,
+      "windows": [
+        [
+          0.5,
+          2.4
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "garbled_text",
+        "product_drift"
+      ],
+      "expected_fix": "replace_plate"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

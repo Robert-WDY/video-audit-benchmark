@@ -1,0 +1,42 @@
+{
+  "case_id": "S02-h3e__decoy__S02.D3",
+  "scene": "S02",
+  "take": "S02-h3e",
+  "source": "../generated/S02__base__seed20261124.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "zoom",
+      "from": 0.5,
+      "to": 6,
+      "scale": 1.15,
+      "id": null
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "zoom",
+      "from": 0.5,
+      "to": 6,
+      "scale": 1.15,
+      "id": null,
+      "out": [
+        0.5,
+        6
+      ]
+    }
+  ],
+  "duration": 6
+}

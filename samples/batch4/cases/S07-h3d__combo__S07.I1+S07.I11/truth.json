@@ -1,0 +1,81 @@
+{
+  "case_id": "S07-h3d__combo__S07.I1+S07.I11",
+  "blind_id": "v_b82f99f85d",
+  "video": "S07-h3d__combo__S07.I1+S07.I11__TC4+VT1.mp4",
+  "tier": "combo",
+  "pattern": "mask",
+  "continuous": false,
+  "ref": null,
+  "scene": "S07",
+  "take": "S07-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：三个圆形按键横排，中间最大为电源键；一只手按下中间键后光环亮起，无闪烁。待人工确认"
+  ],
+  "injected": [
+    {
+      "id": "S07.I1",
+      "category": "TC",
+      "sub": "TC4",
+      "secondary": [
+        "TC5"
+      ],
+      "category_name": "时序/因果",
+      "sub_name": "前后顺序颠倒",
+      "evidence": "E3",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "光环先亮，手指之后才去按键",
+      "method": "swap",
+      "auto": true,
+      "windows": [
+        [
+          0.2,
+          2.6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S07.I11",
+      "category": "VT",
+      "sub": "VT1",
+      "secondary": [],
+      "category_name": "文字/视觉瑕疵",
+      "sub_name": "乱码或伪文字（非代码字幕）",
+      "evidence": "E1",
+      "visibility": "V3",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "顶部按键下方出现一行读不通的小字",
+      "method": "text_overlay",
+      "auto": true,
+      "windows": [
+        [
+          0,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "garbled_text",
+        "product_drift"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

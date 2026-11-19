@@ -1,0 +1,27 @@
+{
+  "case_id": "S01-h3d__decoy__S01.D4",
+  "blind_id": "v_b54cc43b62",
+  "video": "S01-h3d__decoy__S01.D4__looks-PF1.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S01",
+  "take": "S01-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": {
+    "id": "S01.D4",
+    "looks_like": "PF1",
+    "description": "整片偏暖的调色，所有物体一起变暖，产品真实颜色未变"
+  },
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：平顶黑色旋盖，无提环无锁扣；Logo 竖排（事实未规定方向）。待人工确认"
+  ],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

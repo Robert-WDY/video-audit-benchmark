@@ -1,0 +1,27 @@
+{
+  "case_id": "S05-h3e__decoy__S05.D2",
+  "blind_id": "v_43d42e0033",
+  "video": "S05-h3e__decoy__S05.D2__looks-TE2.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": false,
+  "ref": null,
+  "scene": "S05",
+  "take": "S05-h3e",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6.6,
+  "decoy": {
+    "id": "S05.D2",
+    "looks_like": "TE2",
+    "description": "放上后定格 0.6 秒强调结果"
+  },
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [
+    "手 3.5 秒才离开、3.6 秒屏幕和光环同时亮，没有「手已离开、光环未亮」的画面可做区域定格，排除 S05.I8"
+  ],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

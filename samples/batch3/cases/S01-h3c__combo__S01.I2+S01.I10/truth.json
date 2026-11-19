@@ -1,0 +1,109 @@
+{
+  "case_id": "S01-h3c__combo__S01.I2+S01.I10",
+  "blind_id": "v_507ef077a2",
+  "video": "S01-h3c__combo__S01.I2+S01.I10__PF1+VT3.mp4",
+  "tier": "combo",
+  "pattern": "overlap",
+  "continuous": true,
+  "ref": null,
+  "scene": "S01",
+  "take": "S01-h3c",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [
+    {
+      "id": "S01-h3c#K1",
+      "category": "PF",
+      "sub": "PF3",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "部件数量或位置错（按键、耳罩、接口、杯盖）",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "杯盖带提环和正面锁扣，多个角度可见（事实：无提手的黑色旋盖）",
+      "method": "base",
+      "auto": false,
+      "windows": [
+        [
+          0,
+          6
+        ]
+      ],
+      "window_status": "annotated",
+      "duration_bucket": null,
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "regen",
+      "source": "base",
+      "reviewed_by": "human"
+    }
+  ],
+  "base_notes": [],
+  "injected": [
+    {
+      "id": "S01.I2",
+      "category": "PF",
+      "sub": "PF1",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "颜色或材质与事实不符/中途改变",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "fix",
+      "judge_basis": "facts",
+      "description": "杯身颜色只在约 0.15 秒内闪变成蓝色",
+      "method": "tint",
+      "auto": true,
+      "windows": [
+        [
+          3,
+          3.15
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "flash",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    },
+    {
+      "id": "S01.I10",
+      "category": "VT",
+      "sub": "VT3",
+      "secondary": [],
+      "category_name": "文字/视觉瑕疵",
+      "sub_name": "重影（同一物体多个叠加版本）",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "fix",
+      "judge_basis": "common_sense",
+      "description": "旋转时杯身出现半透明的重影（落后约 0.3 秒的残影）",
+      "method": "retime_region",
+      "auto": true,
+      "windows": [
+        [
+          1.3,
+          5.5
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "garbled_text",
+        "product_drift"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

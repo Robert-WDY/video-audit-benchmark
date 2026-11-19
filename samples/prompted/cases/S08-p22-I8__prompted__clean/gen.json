@@ -1,0 +1,25 @@
+{
+  "case_id": "S08-p22-I8__prompted__clean",
+  "scene": "S08",
+  "source": "../generated/S08__S08.I8__seed20261122.mp4",
+  "method": "prompt",
+  "requested": [
+    "S08.I8"
+  ],
+  "ops": [],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [],
+  "duration": 6,
+  "needs_manual": false,
+  "manual_tasks": []
+}

@@ -1,0 +1,54 @@
+{
+  "case_id": "S04-h3e__single__S04.I7",
+  "blind_id": "v_2a593a5482",
+  "video": "S04-h3e__single__S04.I7__PF3.mp4",
+  "tier": "single",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S04",
+  "take": "S04-h3e",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [
+    "这个构图看不到盒子正面的指示灯，排除指示灯类错误 S04.I4。另一只手扶着盒子，不算错误"
+  ],
+  "injected": [
+    {
+      "id": "S04.I7",
+      "category": "PF",
+      "sub": "PF3",
+      "secondary": [
+        "SA6"
+      ],
+      "category_name": "产品事实",
+      "sub_name": "部件数量或位置错（按键、耳罩、接口、杯盖）",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "开盖后盒盖内侧多出一只耳机（一共三只，事实为一副两只）",
+      "method": "clone",
+      "auto": true,
+      "windows": [
+        [
+          1.5,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

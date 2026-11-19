@@ -1,0 +1,42 @@
+{
+  "case_id": "S07-h3b__decoy__S07.D4",
+  "scene": "S07",
+  "take": "S07-h3b",
+  "source": "../generated/S07__base__seed20261120.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "grade",
+      "from": 0,
+      "to": 6,
+      "temperature": 4200,
+      "id": null
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "grade",
+      "from": 0,
+      "to": 6,
+      "temperature": 4200,
+      "id": null,
+      "out": [
+        0,
+        6
+      ]
+    }
+  ],
+  "duration": 6
+}

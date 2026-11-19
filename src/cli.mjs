@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // 视频审核评测集命令行。用法见 ../README.md。
-import { existsSync } from 'node:fs';
+import { existsSync, statSync } from 'node:fs';
 import { copyFile, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { parseArgs } from 'node:util';
@@ -98,7 +98,7 @@ const commands = {
     for (const d of dirs) {
       const gen = await readJson(path.join(d, 'gen.json')); const truth = await readJson(path.join(d, 'truth.json'));
       const dst = videoOf(truth);
-      if (existsSync(dst) && !a.force) { ok++; continue; }
+      if (existsSync(dst) && statSync(dst).size > 0 && !a.force) { ok++; continue; }
       const src = gen.needs_manual ? path.join(out, 'manual', `${gen.case_id}.mp4`) : path.resolve(out, gen.source);
       if (a['dry-run'] && !gen.needs_manual) {
         const fake = { duration: gen.duration, width: 1080, height: 1920, fps: 30, audio: true };
@@ -179,6 +179,99 @@ const commands = {
     console.log(`已写入 ${f}（${truths.length} 条）`);
   },
 
+  async verify() {
+    const { decodeGray, verifyCase } = await import('./verify.mjs');
+    const dirs = await caseDirs();
+    const cases = await Promise.all(dirs.map(async (d) => ({ gen: await readJson(path.join(d, 'gen.json')), truth: await readJson(path.join(d, 'truth.json')) })));
+    const cleanOf = new Map(cases.filter((c) => c.truth.tier === 'clean').map((c) => [c.truth.take, c]));
+    const cache = new Map();
+    const frames = async (t) => { const f = videoOf(t); if (!cache.has(f)) cache.set(f, await decodeGray(a.ffmpeg, f)); return cache.get(f); };
+    const results = []; let ok = 0; let bad = 0; let skipped = 0;
+    for (const c of cases) {
+      const clean = cleanOf.get(c.truth.take);
+      if (!clean || c === clean || !existsSync(videoOf(c.truth)) || !existsSync(videoOf(clean.truth))) { skipped++; continue; }
+      let r;
+      try {
+        const fps = (await probe(a.ffmpeg, videoOf(c.truth))).fps;
+        r = verifyCase(c, await frames(c.truth), await frames(clean.truth), fps);
+      } catch (err) { r = { status: 'problem', problems: [{ kind: 'unreadable', message: String(err.message).slice(0, 120) }] }; }
+      results.push({ case_id: c.truth.case_id, video: c.truth.video, ...r });
+      if (r.status === 'ok') ok++; else { bad++; console.log(`✗ ${c.truth.video}: ${r.problems.map((p) => (p.kind === 'not_visible' ? `${p.error} 窗口内看不到变化（${p.max}）` : p.kind === 'unreadable' ? `视频读不出来：${p.message}` : `窗口外 ${p.t}s 有 ${(p.frac * 100).toFixed(2)}% 像素变化`)).join('；')}`); }
+      if (cache.size > 6) cache.delete(cache.keys().next().value);
+    }
+    await writeFile(path.join(out, 'verify.json'), J({ ok, problem: bad, skipped, results }));
+    console.log(`校验完成：通过 ${ok}，有问题 ${bad}，跳过 ${skipped}（正确视频本身和缺视频的用例）`);
+    if (bad) process.exitCode = 1;
+  },
+
+  // 提示词诱导的视频：按清单（每条视频实际出现了哪些错误）生成标准用例
+  async prompted() {
+    const tax = await loadTaxonomy(a.taxonomy); const scenes = await loadScenes(a.scenes);
+    const { reviewInput, blindId } = await import('./cases.mjs');
+    const m = await readJson(path.resolve(a.takes || die('需要 --takes <清单>')));
+    const base = path.dirname(path.resolve(a.takes));
+    await mkdir(path.join(out, 'videos'), { recursive: true });
+    let n = 0;
+    for (const v of m.videos) {
+      const scene = scenes.find((s) => s.id === v.scene) || die(`没有场景 ${v.scene}`);
+      const errors = (v.errors || []).map((e) => {
+        const inj = scene.injections.find((i) => i.id === e.id);
+        const cat = tax.categories[e.category || inj?.category];
+        const sub = e.sub || inj?.sub;
+        if (!cat || !cat.subs[sub]) die(`${v.id}: 错误 ${e.id} 的类别不对`);
+        return { id: e.id, category: e.category || inj.category, sub, secondary: inj?.secondary || [], category_name: cat.name, sub_name: cat.subs[sub],
+          evidence: e.evidence || inj?.evidence || null, visibility: e.visibility || inj?.visibility || null, disposition: e.disposition || inj?.disposition || 'block',
+          judge_basis: e.judge_basis || inj?.judge_basis || cat.judge_basis, description: e.description || inj?.description,
+          method: inj ? 'prompt' : 'accidental', auto: false, windows: e.windows, window_status: 'estimated', duration_bucket: null,
+          expected_checks: cat.reviewer_checks, expected_fix: 'regen', source: inj ? 'injected' : 'accidental', reviewed_by: e.reviewed_by || 'claude' };
+      });
+      const cats = new Set(errors.map((e) => e.category));
+      const tier = !errors.length ? 'clean' : errors.length === 1 ? 'single' : cats.size === 1 ? 'multi' : 'combo';
+      const id = `${v.id}__prompted__${tier}`;
+      const video = `${id}__${errors.map((e) => e.sub).join('+') || 'ok'}.mp4`;
+      const d = path.join(out, 'cases', id); await mkdir(d, { recursive: true });
+      await copyFile(path.resolve(base, v.path), path.join(out, 'videos', video));
+      const input = reviewInput(scene, [], v.duration || 6);
+      await writeFile(path.join(d, 'gen.json'), J({ case_id: id, scene: scene.id, source: v.path, method: 'prompt', requested: v.requested || [], ops: [], pieces: [{ src: [0, v.duration || 6], rev: false, speed: 1, tag: null }], overlays: [], duration: v.duration || 6, needs_manual: false, manual_tasks: [] }));
+      await writeFile(path.join(d, 'input.json'), J(input));
+      await writeFile(path.join(d, 'input.script.json'), J(reviewInput(scene, [], v.duration || 6, { withScript: true })));
+      await writeFile(path.join(d, 'truth.json'), J({ case_id: id, blind_id: blindId(id, a.salt), video, tier, pattern: null, continuous: true, ref: null,
+        scene: scene.id, take: v.id, source_kind: 'ai', baseline_verified: false, duration: v.duration || 6, decoy: null,
+        should_block: errors.some((e) => e.disposition !== 'accept'), injected: errors, base_errors: [], base_notes: v.notes || [],
+        requested: v.requested || [], actual: null, annotation_status: 'pending' }));
+      n++;
+    }
+    console.log(`已生成 ${n} 个提示词诱导用例到 ${out}`);
+  },
+
+  // 覆盖度：统计一个或多个输出目录里已渲染样本的各维度分布，标出样本不足的格子
+  async coverage() {
+    const tax = await loadTaxonomy(a.taxonomy); const MIN = 15;
+    const T = [];
+    for (const o of a.out.split(',').map((x) => path.resolve(x.trim()))) {
+      for (const c of await readdir(path.join(o, 'cases'))) {
+        const t = await readJson(path.join(o, 'cases', c, 'truth.json'));
+        if (existsSync(path.join(o, 'videos', t.video || `${t.blind_id}.mp4`))) T.push(t);
+      }
+    }
+    const errs = T.flatMap((t) => [...t.injected, ...(t.base_errors || [])]);
+    const cnt = (arr, f) => arr.reduce((m, x) => { const k = f(x) ?? '-'; m[k] = (m[k] || 0) + 1; return m; }, {});
+    const line = (name, m, keys = Object.keys(m)) => console.log(`${name}：${keys.map((k) => `${k} ${m[k] || 0}${(m[k] || 0) < MIN ? '⚠' : ''}`).join('，')}`);
+    console.log(`视频 ${T.length}，错误实例 ${errs.length}（⚠ 表示少于 ${MIN}）`);
+    line('应拦截 / 不应拦截', cnt(T, (t) => (t.should_block ? '应拦截' : '不应拦截')));
+    line('用例类型', cnt(T, (t) => t.tier));
+    line('一级类别', cnt(errs, (e) => e.category), Object.keys(tax.categories));
+    const subs = Object.entries(tax.categories).flatMap(([, c]) => Object.keys(c.subs));
+    line('二级子类', cnt(errs, (e) => e.sub), subs);
+    line('发现所需证据', cnt(errs, (e) => e.evidence), Object.keys(tax.evidence_levels));
+    line('显著度', cnt(errs, (e) => e.visibility), Object.keys(tax.visibility_levels));
+    line('判定依据', cnt(errs, (e) => e.judge_basis));
+    line('场景', cnt(T, (t) => t.scene));
+    const multi = T.filter((t) => t.injected.length > 1);
+    console.log(`多错误视频 ${multi.length}，其中同一连续镜头 ${multi.filter((t) => t.continuous).length}`);
+    console.log(`未出现的子类：${subs.filter((s) => !errs.some((e) => e.sub === s)).join(' ') || '无'}`);
+  },
+
   async reconcile() {
     const tax = await loadTaxonomy(a.taxonomy); const truths = await loadTruths();
     const blinds = await Promise.all(blindFiles().map(async (f) => readBlind(parseCsv(await readFile(f, 'utf8')), annotatorOf(f))));
@@ -226,7 +319,7 @@ const commands = {
 };
 
 if (!commands[cmd]) {
-  console.log('用法: node src/cli.mjs <validate|build|render|index|review|sheets|reconcile|agreement|finalize|score> [选项]\n详见 README.md');
+  console.log('用法: node src/cli.mjs <validate|build|render|index|verify|prompted|coverage|review|sheets|reconcile|agreement|finalize|score> [选项]\n详见 README.md');
   process.exit(cmd ? 1 : 0);
 }
 await commands[cmd]();

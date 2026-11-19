@@ -205,6 +205,32 @@
           "factor": 0.5
         }
       ]
+    },
+    {
+      "id": "S06.D3",
+      "looks_like": "PF2",
+      "description": "镜头缓慢数码推近（广告常用手法），产品在画面中变大但比例不变",
+      "ops": [
+        {
+          "op": "zoom",
+          "from": "foot_in",
+          "to": "end",
+          "scale": 1.15
+        }
+      ]
+    },
+    {
+      "id": "S06.D4",
+      "looks_like": "PF1",
+      "description": "整片偏暖的调色，所有物体一起变暖，产品真实颜色未变",
+      "ops": [
+        {
+          "op": "grade",
+          "from": "start",
+          "to": "end",
+          "temperature": 4200
+        }
+      ]
     }
   ],
   "chains": [],

@@ -1,0 +1,48 @@
+{
+  "case_id": "S05-h3e__single__S05.I11",
+  "scene": "S05",
+  "take": "S05-h3e",
+  "source": "../generated/S05__base__seed20261124.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "caption",
+      "from": 3,
+      "to": 6,
+      "text": "*最高支持 50W 无线快充",
+      "size": 48,
+      "x": 0.05,
+      "y": 0.93,
+      "id": "S05.I11"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "caption",
+      "from": 3,
+      "to": 6,
+      "text": "*最高支持 50W 无线快充",
+      "size": 48,
+      "x": 0.05,
+      "y": 0.93,
+      "id": "S05.I11",
+      "out": [
+        3,
+        6
+      ]
+    }
+  ],
+  "duration": 6
+}

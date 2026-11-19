@@ -1,0 +1,76 @@
+{
+  "case_id": "S07-h3d__combo__S07.I3+S07.I10",
+  "scene": "S07",
+  "take": "S07-h3d",
+  "source": "../generated/S07__base__seed20261123.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "freeze",
+      "at": 1.85,
+      "dur": 1.5,
+      "id": "S07.I3"
+    },
+    {
+      "op": "warp_region",
+      "from": 2.6,
+      "to": 6,
+      "region": [
+        0.3,
+        0.39,
+        0.4,
+        0.09
+      ],
+      "k1": -0.95,
+      "k2": 0.7,
+      "id": "S07.I10"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        1.85
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "hold": 1.8333333333333335,
+      "dur": 1.5,
+      "tag": "S07.I3"
+    },
+    {
+      "src": [
+        1.85,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "warp_region",
+      "from": 2.6,
+      "to": 6,
+      "region": [
+        0.3,
+        0.39,
+        0.4,
+        0.09
+      ],
+      "k1": -0.95,
+      "k2": 0.7,
+      "id": "S07.I10",
+      "out": [
+        4.1,
+        7.5
+      ]
+    }
+  ],
+  "duration": 7.5
+}

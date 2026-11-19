@@ -1,0 +1,51 @@
+{
+  "case_id": "S04-h3e__single__S04.I2",
+  "blind_id": "v_c290d62588",
+  "video": "S04-h3e__single__S04.I2__TC3.mp4",
+  "tier": "single",
+  "pattern": null,
+  "continuous": false,
+  "ref": null,
+  "scene": "S04",
+  "take": "S04-h3e",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6.8,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [
+    "这个构图看不到盒子正面的指示灯，排除指示灯类错误 S04.I4。另一只手扶着盒子，不算错误"
+  ],
+  "injected": [
+    {
+      "id": "S04.I2",
+      "category": "TC",
+      "sub": "TC3",
+      "secondary": [],
+      "category_name": "时序/因果",
+      "sub_name": "状态回跳（已发生的变化又复原）",
+      "evidence": "E3",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "耳机已经拿在手里，画面又回到两只耳机都在盒里",
+      "method": "insert",
+      "auto": true,
+      "windows": [
+        [
+          4.6,
+          5.4
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "short",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

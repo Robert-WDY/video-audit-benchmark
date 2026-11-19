@@ -1,0 +1,55 @@
+{
+  "case_id": "S05-p22-I10__prompted__single",
+  "blind_id": "v_380d89a1a7",
+  "video": "S05-p22-I10__prompted__single__PF4.mp4",
+  "tier": "single",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S05",
+  "take": "S05-p22-I10",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S05.I10",
+      "category": "PF",
+      "sub": "PF4",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "Logo、型号、品牌标识错误",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "充电板中央的字样拼成 Vlot（事实为 Volt）",
+      "method": "prompt",
+      "auto": false,
+      "windows": [
+        [
+          0,
+          3
+        ]
+      ],
+      "window_status": "estimated",
+      "duration_bucket": null,
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "regen",
+      "source": "injected",
+      "reviewed_by": "claude"
+    }
+  ],
+  "base_errors": [],
+  "base_notes": [],
+  "requested": [
+    "S05.I10"
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

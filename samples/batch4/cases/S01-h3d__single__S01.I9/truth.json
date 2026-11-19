@@ -1,0 +1,52 @@
+{
+  "case_id": "S01-h3d__single__S01.I9",
+  "blind_id": "v_081eb86f06",
+  "video": "S01-h3d__single__S01.I9__PF2.mp4",
+  "tier": "single",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S01",
+  "take": "S01-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：平顶黑色旋盖，无提环无锁扣；Logo 竖排（事实未规定方向）。待人工确认"
+  ],
+  "injected": [
+    {
+      "id": "S01.I9",
+      "category": "PF",
+      "sub": "PF2",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "外形或比例改变",
+      "evidence": "E3",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "转到背面后杯身被拉高约 15%，比例明显变瘦长",
+      "method": "scale_region",
+      "auto": true,
+      "windows": [
+        [
+          3,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

@@ -1,0 +1,78 @@
+{
+  "case_id": "S07-h3d__combo__S07.I2+S07.I11",
+  "scene": "S07",
+  "take": "S07-h3d",
+  "source": "../generated/S07__base__seed20261123.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "caption",
+      "from": 1.85,
+      "to": 6,
+      "text": "24 小时超长续航",
+      "id": "S07.I2"
+    },
+    {
+      "op": "text_overlay",
+      "from": 0,
+      "to": 6,
+      "region": [
+        0.4,
+        0.475,
+        0.2,
+        0.02
+      ],
+      "text": "HUMQ ZEROT",
+      "size": 55,
+      "color": "white",
+      "opacity": 0.75,
+      "id": "S07.I11"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "caption",
+      "from": 1.85,
+      "to": 6,
+      "text": "24 小时超长续航",
+      "id": "S07.I2",
+      "out": [
+        1.85,
+        6
+      ]
+    },
+    {
+      "op": "text_overlay",
+      "from": 0,
+      "to": 6,
+      "region": [
+        0.4,
+        0.475,
+        0.2,
+        0.02
+      ],
+      "text": "HUMQ ZEROT",
+      "size": 55,
+      "color": "white",
+      "opacity": 0.75,
+      "id": "S07.I11",
+      "out": [
+        0,
+        6
+      ]
+    }
+  ],
+  "duration": 6
+}

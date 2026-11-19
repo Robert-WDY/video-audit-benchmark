@@ -1,0 +1,80 @@
+{
+  "case_id": "S07-h3d__combo__S07.I2+S07.I11",
+  "blind_id": "v_d0776c4ad1",
+  "video": "S07-h3d__combo__S07.I2+S07.I11__PF8+VT1.mp4",
+  "tier": "combo",
+  "pattern": "mask",
+  "continuous": true,
+  "ref": null,
+  "scene": "S07",
+  "take": "S07-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：三个圆形按键横排，中间最大为电源键；一只手按下中间键后光环亮起，无闪烁。待人工确认"
+  ],
+  "injected": [
+    {
+      "id": "S07.I2",
+      "category": "PF",
+      "sub": "PF8",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "字幕写的规格或卖点与事实不符",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "字幕写 24 小时续航，事实是 12 小时",
+      "method": "caption",
+      "auto": true,
+      "windows": [
+        [
+          1.85,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S07.I11",
+      "category": "VT",
+      "sub": "VT1",
+      "secondary": [],
+      "category_name": "文字/视觉瑕疵",
+      "sub_name": "乱码或伪文字（非代码字幕）",
+      "evidence": "E1",
+      "visibility": "V3",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "顶部按键下方出现一行读不通的小字",
+      "method": "text_overlay",
+      "auto": true,
+      "windows": [
+        [
+          0,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "garbled_text",
+        "product_drift"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

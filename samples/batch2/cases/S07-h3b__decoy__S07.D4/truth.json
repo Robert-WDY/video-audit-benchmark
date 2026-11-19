@@ -1,0 +1,57 @@
+{
+  "case_id": "S07-h3b__decoy__S07.D4",
+  "blind_id": "v_8dd5bf5aa0",
+  "video": "S07-h3b__decoy__S07.D4__looks-PF1_base-SA7.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S07",
+  "take": "S07-h3b",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": {
+    "id": "S07.D4",
+    "looks_like": "PF1",
+    "description": "整片偏暖的调色，所有物体一起变暖，产品真实颜色未变"
+  },
+  "should_block": true,
+  "base_errors": [
+    {
+      "id": "S07-h3b#K1",
+      "category": "SA",
+      "sub": "SA7",
+      "secondary": [
+        "TC5"
+      ],
+      "category_name": "脚本偏离（状态/动作）",
+      "sub_name": "执行了错误的动作（按错键、拿错物体、操作了错误部件）",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "食指按的是左侧小键，中间电源键没有被按下，蓝环却在约 3.9 秒亮起（事实：中间是电源键，按下电源键才亮）",
+      "method": "base",
+      "auto": false,
+      "windows": [
+        [
+          2.7,
+          4
+        ]
+      ],
+      "window_status": "annotated",
+      "duration_bucket": null,
+      "expected_checks": [],
+      "expected_fix": "regen",
+      "source": "base",
+      "reviewed_by": "human"
+    }
+  ],
+  "base_notes": [
+    "约 2.0–3.8 秒布面变红褐，邻近木桌同步偏暖，判断为光照变化，不算材质漂移"
+  ],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

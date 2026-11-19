@@ -203,6 +203,24 @@
           "dy": -0.13
         }
       ]
+    },
+    {
+      "id": "S04.I8",
+      "category": "TC",
+      "sub": "TC2",
+      "evidence": "E3",
+      "visibility": "V1",
+      "disposition": "block",
+      "description": "开盖后左耳机凭空消失约 1 秒，随后又出现",
+      "ops": [
+        {
+          "op": "clone",
+          "from": "lid_open+0.4",
+          "to": "lid_open+1.4",
+          "region": "lid",
+          "offset": "lid_to_bud"
+        }
+      ]
     }
   ],
   "decoys": [
@@ -228,6 +246,32 @@
           "from": "reach_start",
           "to": "grab",
           "factor": 0.5
+        }
+      ]
+    },
+    {
+      "id": "S04.D3",
+      "looks_like": "PF2",
+      "description": "镜头缓慢数码推近（广告常用手法），产品在画面中变大但比例不变",
+      "ops": [
+        {
+          "op": "zoom",
+          "from": "lid_open",
+          "to": "end",
+          "scale": 1.15
+        }
+      ]
+    },
+    {
+      "id": "S04.D4",
+      "looks_like": "PF1",
+      "description": "整片偏暖的调色，所有物体一起变暖，产品真实颜色未变",
+      "ops": [
+        {
+          "op": "grade",
+          "from": "start",
+          "to": "end",
+          "temperature": 4200
         }
       ]
     }

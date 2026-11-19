@@ -223,6 +223,83 @@
           "instruction": "照脚本生成，但音箱顶部按键旁边印着一行看起来像英文却拼不出任何单词的小字，字迹清晰"
         }
       ]
+    },
+    {
+      "id": "S07.I9",
+      "category": "TC",
+      "sub": "TC5",
+      "secondary": [
+        "SA2",
+        "TC1"
+      ],
+      "evidence": "E3",
+      "visibility": "V1",
+      "disposition": "block",
+      "description": "没看到按键动作，光环自己亮了（按键过程被剪掉，手直接出现在离开的位置）",
+      "ops": [
+        {
+          "op": "drop",
+          "from": "reach",
+          "to": "light_on-0.1"
+        }
+      ]
+    },
+    {
+      "id": "S07.I10",
+      "category": "VT",
+      "sub": "VT2",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "block",
+      "description": "手离开后顶部按键区域局部扭曲变形",
+      "ops": [
+        {
+          "op": "warp_region",
+          "from": "settle",
+          "to": "end",
+          "region": "buttons",
+          "k1": -0.95,
+          "k2": 0.7
+        }
+      ]
+    },
+    {
+      "id": "S07.I11",
+      "category": "VT",
+      "sub": "VT1",
+      "evidence": "E1",
+      "visibility": "V3",
+      "disposition": "block",
+      "description": "顶部按键下方出现一行读不通的小字",
+      "ops": [
+        {
+          "op": "text_overlay",
+          "from": "start",
+          "to": "end",
+          "region": "label",
+          "text": "HUMQ ZEROT",
+          "size": 55,
+          "color": "white",
+          "opacity": 0.75
+        }
+      ]
+    },
+    {
+      "id": "S07.I12",
+      "category": "TE",
+      "sub": "TE5",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "fix",
+      "description": "开机提示音比光环亮起晚约 0.7 秒（音画不同步）",
+      "ops": [
+        {
+          "op": "av_offset",
+          "from": "start",
+          "to": "end",
+          "ms": 700
+        }
+      ]
     }
   ],
   "decoys": [
@@ -247,6 +324,32 @@
           "op": "freeze",
           "at": "settle",
           "dur": 0.6
+        }
+      ]
+    },
+    {
+      "id": "S07.D3",
+      "looks_like": "PF2",
+      "description": "镜头缓慢数码推近（广告常用手法），产品在画面中变大但比例不变",
+      "ops": [
+        {
+          "op": "zoom",
+          "from": "reach",
+          "to": "end",
+          "scale": 1.15
+        }
+      ]
+    },
+    {
+      "id": "S07.D4",
+      "looks_like": "PF1",
+      "description": "整片偏暖的调色，所有物体一起变暖，产品真实颜色未变",
+      "ops": [
+        {
+          "op": "grade",
+          "from": "start",
+          "to": "end",
+          "temperature": 4200
         }
       ]
     }

@@ -1,0 +1,19 @@
+{ "takes": [
+  { "id": "S02-h3e", "scene": "S02", "kind": "ai", "path": "../generated/S02__base__seed20261124.mp4", "duration": 6.0, "verified_clean": false,
+    "markers": { "grip": 0.5, "twist_start": 1.0, "twist_end": 3.8, "lift_end": 4.4, "place_end": 5.2 }, "regions": {},
+    "review_notes": ["Claude 看帧：动作完整；结尾手仍拿着杯盖未离开画面（脚本终态要求手离开），待人工判断是否算 SA5"] },
+  { "id": "S08-h3e", "scene": "S08", "kind": "ai", "path": "../generated/S08__base__seed20261124.mp4", "duration": 6.0, "verified_clean": false,
+    "markers": { "lid_off": 1.9, "dip": 2.5, "scoop_end": 4.4, "apply_start": 5.0, "apply_end": 5.9 },
+    "regions": { "jar": [0.17, 0.34, 0.58, 0.16] },
+    "review_notes": ["Claude 看帧：开盖、蘸取、涂抹完整；涂抹到最后一帧仍在进行，待人工确认"] },
+  { "id": "S04-h3e", "scene": "S04", "kind": "ai", "path": "../generated/S04__base__seed20261124.mp4", "duration": 6.0, "verified_clean": false,
+    "markers": { "lid_start": 0.5, "lid_open": 1.5, "reach_start": 2.3, "grab": 3.0, "lift_end": 4.6 },
+    "regions": { "bud": [0.14, 0.42, 0.19, 0.11], "lid": [0.12, 0.29, 0.19, 0.1] }, "offsets": { "lid_to_bud": [0, 0.13] },
+    "exclude": ["S04.I4"],
+    "review_notes": ["这个构图看不到盒子正面的指示灯，排除指示灯类错误 S04.I4。另一只手扶着盒子，不算错误"] },
+  { "id": "S05-h3e", "scene": "S05", "kind": "ai", "path": "../generated/S05__base__seed20261124.mp4", "duration": 6.0, "verified_clean": false,
+    "markers": { "pick": 1.8, "move_start": 2.0, "place": 3.0, "ring_on": 3.6 },
+    "regions": { "ring": [0.03, 0.31, 0.92, 0.42], "pad": [0.03, 0.31, 0.92, 0.42], "logo": [0.36, 0.42, 0.28, 0.14], "label": [0.42, 0.54, 0.2, 0.03] },
+    "exclude": ["S05.I8"],
+    "review_notes": ["手 3.5 秒才离开、3.6 秒屏幕和光环同时亮，没有「手已离开、光环未亮」的画面可做区域定格，排除 S05.I8"] }
+] }

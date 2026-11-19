@@ -1,0 +1,58 @@
+{
+  "case_id": "S04-h3a__single__S04.I8",
+  "scene": "S04",
+  "take": "S04-h3a",
+  "source": "../generated/S04__base__seed20261119.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "clone",
+      "from": 1.7999999999999998,
+      "to": 2.8,
+      "region": [
+        0.15,
+        0.315,
+        0.22,
+        0.115
+      ],
+      "offset": "lid_to_bud",
+      "id": "S04.I8",
+      "dx": 0,
+      "dy": 0.15
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "clone",
+      "from": 1.7999999999999998,
+      "to": 2.8,
+      "region": [
+        0.15,
+        0.315,
+        0.22,
+        0.115
+      ],
+      "offset": "lid_to_bud",
+      "id": "S04.I8",
+      "dx": 0,
+      "dy": 0.15,
+      "out": [
+        1.8,
+        2.8
+      ]
+    }
+  ],
+  "duration": 6
+}

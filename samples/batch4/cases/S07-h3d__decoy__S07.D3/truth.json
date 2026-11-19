@@ -1,0 +1,27 @@
+{
+  "case_id": "S07-h3d__decoy__S07.D3",
+  "blind_id": "v_ec6ed106fd",
+  "video": "S07-h3d__decoy__S07.D3__looks-PF2.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S07",
+  "take": "S07-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": {
+    "id": "S07.D3",
+    "looks_like": "PF2",
+    "description": "镜头缓慢数码推近（广告常用手法），产品在画面中变大但比例不变"
+  },
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：三个圆形按键横排，中间最大为电源键；一只手按下中间键后光环亮起，无闪烁。待人工确认"
+  ],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

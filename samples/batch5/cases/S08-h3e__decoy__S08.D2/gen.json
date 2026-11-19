@@ -1,0 +1,48 @@
+{
+  "case_id": "S08-h3e__decoy__S08.D2",
+  "scene": "S08",
+  "take": "S08-h3e",
+  "source": "../generated/S08__base__seed20261124.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "slow",
+      "from": 5,
+      "to": 5.9,
+      "factor": 0.5,
+      "id": null
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        5
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "src": [
+        5,
+        5.9
+      ],
+      "rev": false,
+      "speed": 0.5,
+      "tag": null
+    },
+    {
+      "src": [
+        5.9,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [],
+  "duration": 6.9
+}

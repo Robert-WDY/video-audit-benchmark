@@ -1,0 +1,78 @@
+{
+  "case_id": "S05-h3b__multi__S05.I2+S05.I11",
+  "blind_id": "v_ad4d4f8a94",
+  "video": "S05-h3b__multi__S05.I2+S05.I11__PF8+PF8.mp4",
+  "tier": "multi",
+  "pattern": "mask",
+  "continuous": true,
+  "ref": null,
+  "scene": "S05",
+  "take": "S05-h3b",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [],
+  "injected": [
+    {
+      "id": "S05.I2",
+      "category": "PF",
+      "sub": "PF8",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "字幕写的规格或卖点与事实不符",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "字幕写 50W，事实是 15W",
+      "method": "caption",
+      "auto": true,
+      "windows": [
+        [
+          3,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S05.I11",
+      "category": "PF",
+      "sub": "PF8",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "字幕写的规格或卖点与事实不符",
+      "evidence": "E1",
+      "visibility": "V3",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "角落小字写「最高支持 50W 无线快充」，事实为 15W",
+      "method": "caption",
+      "auto": true,
+      "windows": [
+        [
+          3,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

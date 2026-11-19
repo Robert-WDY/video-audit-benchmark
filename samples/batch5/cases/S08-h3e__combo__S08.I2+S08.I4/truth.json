@@ -1,0 +1,78 @@
+{
+  "case_id": "S08-h3e__combo__S08.I2+S08.I4",
+  "blind_id": "v_60e321278d",
+  "video": "S08-h3e__combo__S08.I2+S08.I4__TC7+TE1.mp4",
+  "tier": "combo",
+  "pattern": "separate",
+  "continuous": false,
+  "ref": null,
+  "scene": "S08",
+  "take": "S08-h3e",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 8.1,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：开盖、蘸取、涂抹完整；涂抹到最后一帧仍在进行，待人工确认"
+  ],
+  "injected": [
+    {
+      "id": "S08.I2",
+      "category": "TC",
+      "sub": "TC7",
+      "secondary": [],
+      "category_name": "时序/因果",
+      "sub_name": "同一动作无理由重复",
+      "evidence": "E3",
+      "visibility": "V2",
+      "disposition": "fix",
+      "judge_basis": "common_sense",
+      "description": "蘸取动作重复了一遍（霜面指痕消失又出现）",
+      "method": "repeat",
+      "auto": true,
+      "windows": [
+        [
+          4.4,
+          6.3
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S08.I4",
+      "category": "TE",
+      "sub": "TE1",
+      "secondary": [],
+      "category_name": "技术缺陷",
+      "sub_name": "黑场",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "fix",
+      "judge_basis": "common_sense",
+      "description": "涂抹前插入 0.2 秒短黑场（低于硬门槛 0.3 秒）",
+      "method": "black",
+      "auto": true,
+      "windows": [
+        [
+          6.9,
+          7.1
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "flash",
+      "expected_checks": [
+        "black_silence"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

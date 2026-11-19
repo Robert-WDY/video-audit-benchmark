@@ -91,12 +91,14 @@ export function validateTake(take, scene, tax = null) {
   for (let i = 1; i < vals.length; i++) if (vals[i] < vals[i - 1]) e('标记点应按场景里定义的顺序递增');
   const regions = new Set();
   for (const x of [...scene.injections, ...(scene.decoys || [])]) {
-    if (x.retired) continue;
+    if (x.retired || (take.exclude || []).includes(x.id)) continue;
     for (const o of [...x.ops, ...(x.control || [])]) if (typeof o.region === 'string') regions.add(o.region);
   }
   const offsets = new Set();
+  const excl = new Set(take.exclude || []);
+  for (const id of excl) if (!scene.injections.some((i) => i.id === id)) e(`exclude 引用了不存在的 ${id}`);
   for (const x of [...scene.injections, ...(scene.decoys || [])]) {
-    if (x.retired) continue;
+    if (x.retired || excl.has(x.id)) continue;
     for (const o of x.ops) if (typeof o.offset === 'string') offsets.add(o.offset);
   }
   for (const o of offsets) {
@@ -262,7 +264,7 @@ function controlFor(single, inj, scene, take, tax, salt) {
   return c;
 }
 
-const AUDIO_OPS = new Set(['mute']);
+const AUDIO_OPS = new Set(['mute', 'av_offset']);
 export const isAudioOnly = (inj) => inj.ops.every((o) => AUDIO_OPS.has(o.op));
 
 // 把相邻、连续、同方向同速度的片段合并，得到与切点无关的规范形式
@@ -282,7 +284,7 @@ function canonicalPieces(pieces) {
 // 用例的画面指纹：规范化的片段 + 所有改变画面的叠加层。两条用例指纹相同 = 画面逐帧相同
 export function visualSignature(c) {
   const ov = c.gen.overlays.filter((o) => !AUDIO_OPS.has(o.op))
-    .map((o) => ({ op: o.op, out: o.out, text: o.text, region: o.region, hue: o.hue, key: o.key, color: o.color, frames: o.frames }));
+    .map((o) => ({ op: o.op, out: o.out, text: o.text, region: o.region, hue: o.hue, key: o.key, color: o.color, frames: o.frames, sx: o.sx, sy: o.sy, k1: o.k1, src_from: o.src_from, opacity: o.opacity, scale: o.scale, temperature: o.temperature, chroma: o.chroma, size: o.size, x: o.x, y: o.y }));
   // 手工步骤会产生不同的素材，必须计入指纹，否则会被误判为与正确底片相同
   const manual = c.gen.manual_tasks.map((m) => `${m.for}|${m.method}|${m.instruction}`);
   return JSON.stringify([canonicalPieces(c.gen.pieces), ov, manual]);
@@ -327,9 +329,12 @@ export function expand(scenes, takes, tax, { maxMultiPerTake = 3, maxComboPerTak
   const usableDecoy = (d) => includeShoot || !methods(d).includes('shoot');
   for (const take of takes) {
     const scene0 = byId.get(take.scene);
-    const scene = { ...scene0, injections: scene0.injections.filter(usable), decoys: (scene0.decoys || []).filter(usableDecoy),
-      bundles: (scene0.bundles || []).filter((b) => b.ids.every((id) => scene0.injections.some((i) => i.id === id && usable(i)))),
-      chains: (scene0.chains || []).filter((c) => c.ids.every((id) => scene0.injections.some((i) => i.id === id && usable(i)))) };
+    // 底片上看不到相应部件时（例如这个构图里看不到指示灯），用 exclude 排除对应错误
+    const excluded = new Set(take.exclude || []);
+    const usableHere = (inj) => usable(inj) && !excluded.has(inj.id);
+    const scene = { ...scene0, injections: scene0.injections.filter(usableHere), decoys: (scene0.decoys || []).filter(usableDecoy),
+      bundles: (scene0.bundles || []).filter((b) => b.ids.every((id) => scene0.injections.some((i) => i.id === id && usableHere(i)))),
+      chains: (scene0.chains || []).filter((c) => c.ids.every((id) => scene0.injections.some((i) => i.id === id && usableHere(i)))) };
     const base = { scene, take };
     cases.push(tryMake({ ...base, tier: 'clean' }));
     for (const d of scene.decoys || []) cases.push(tryMake({ ...base, tier: 'decoy', extra: [{ id: null, ops: d.ops }], decoy: d }));
@@ -371,7 +376,7 @@ export function expand(scenes, takes, tax, { maxMultiPerTake = 3, maxComboPerTak
   // 兜底去重：画面和声音都相同的用例只留第一个；只有声音不同的，标出它与哪条画面相同
   const out = []; const seen = new Map();
   for (const c of cases.filter(Boolean)) {
-    const audio = JSON.stringify(c.gen.overlays.filter((o) => AUDIO_OPS.has(o.op)).map((o) => o.out));
+    const audio = JSON.stringify(c.gen.overlays.filter((o) => AUDIO_OPS.has(o.op)).map((o) => [o.op, o.out, o.ms ?? null]));
     const vis = `${c.truth.take}|${visualSignature(c)}`;
     const full = `${vis}|${audio}|${JSON.stringify(c.input.plan.captions)}`;
     if (seen.has(full)) { skipped.push({ take: c.truth.take, ids: c.truth.injected.map((e) => e.id), reason: `与 ${seen.get(full)} 完全相同` }); continue; }

@@ -1,0 +1,497 @@
+{
+  "ok": 49,
+  "problem": 0,
+  "skipped": 3,
+  "results": [
+    {
+      "case_id": "S01-h3c__combo__S01.I1+S01.I10",
+      "video": "S01-h3c__combo__S01.I1+S01.I10__PF1+VT3.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__combo__S01.I1+S01.I11",
+      "video": "S01-h3c__combo__S01.I1+S01.I11__PF1+VT1.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__combo__S01.I1+S01.I3+S01.I5",
+      "video": "S01-h3c__combo__S01.I1+S01.I3+S01.I5__PF1+PF8+TE4.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__combo__S01.I1+S01.I5",
+      "video": "S01-h3c__combo__S01.I1+S01.I5__PF1+TE4.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__combo__S01.I2+S01.I10",
+      "video": "S01-h3c__combo__S01.I2+S01.I10__PF1+VT3.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__combo__S01.I2+S01.I5",
+      "video": "S01-h3c__combo__S01.I2+S01.I5__PF1+TE4.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__combo__S01.I3+S01.I11",
+      "video": "S01-h3c__combo__S01.I3+S01.I11__PF8+VT1.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__control__S01.I3",
+      "video": "S01-h3c__control__S01.I3__base-PF3.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__decoy__S01.D2",
+      "video": "S01-h3c__decoy__S01.D2__looks-TE2_base-PF3.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 192,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__decoy__S01.D3",
+      "video": "S01-h3c__decoy__S01.D3__looks-PF2_base-PF3.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__decoy__S01.D4",
+      "video": "S01-h3c__decoy__S01.D4__looks-PF1_base-PF3.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__multi__S01.I1+S01.I12",
+      "video": "S01-h3c__multi__S01.I1+S01.I12__PF1+PF1.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__multi__S01.I1+S01.I2",
+      "video": "S01-h3c__multi__S01.I1+S01.I2__PF1+PF1.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__multi__S01.I3+S01.I12",
+      "video": "S01-h3c__multi__S01.I3+S01.I12__PF8+PF1.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__single__S01.I1",
+      "video": "S01-h3c__single__S01.I1__PF1.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__single__S01.I10",
+      "video": "S01-h3c__single__S01.I10__VT3.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__single__S01.I11",
+      "video": "S01-h3c__single__S01.I11__VT1.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__single__S01.I12",
+      "video": "S01-h3c__single__S01.I12__PF1.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__single__S01.I2",
+      "video": "S01-h3c__single__S01.I2__PF1.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__single__S01.I3",
+      "video": "S01-h3c__single__S01.I3__PF8.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__single__S01.I4",
+      "video": "S01-h3c__single__S01.I4__TC1.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 125,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__single__S01.I5",
+      "video": "S01-h3c__single__S01.I5__TE4.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S01-h3c__single__S01.I9",
+      "video": "S01-h3c__single__S01.I9__PF2.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S04-h3a__combo__S04.I1+S04.I4",
+      "video": "S04-h3a__combo__S04.I1+S04.I4__TC1+PF5.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 120,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S04-h3a__combo__S04.I1+S04.I7",
+      "video": "S04-h3a__combo__S04.I1+S04.I7__TC1+PF3.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 120,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S04-h3a__combo__S04.I2+S04.I4",
+      "video": "S04-h3a__combo__S04.I2+S04.I4__TC3+PF5.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 159,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S04-h3a__combo__S04.I2+S04.I7",
+      "video": "S04-h3a__combo__S04.I2+S04.I7__TC3+PF3.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 159,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S04-h3a__combo__S04.I4+S04.I8",
+      "video": "S04-h3a__combo__S04.I4+S04.I8__PF5+TC2.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S04-h3a__combo__S04.I7+S04.I8",
+      "video": "S04-h3a__combo__S04.I7+S04.I8__PF3+TC2.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S04-h3a__decoy__S04.D2",
+      "video": "S04-h3a__decoy__S04.D2__looks-TE2.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 168,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S04-h3a__decoy__S04.D3",
+      "video": "S04-h3a__decoy__S04.D3__looks-PF2.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S04-h3a__decoy__S04.D4",
+      "video": "S04-h3a__decoy__S04.D4__looks-PF1.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S04-h3a__multi__S04.I1+S04.I2",
+      "video": "S04-h3a__multi__S04.I1+S04.I2__TC1+TC3.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 135,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S04-h3a__multi__S04.I2+S04.I8",
+      "video": "S04-h3a__multi__S04.I2+S04.I8__TC3+TC2.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 159,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S04-h3a__multi__S04.I4+S04.I7",
+      "video": "S04-h3a__multi__S04.I4+S04.I7__PF5+PF3.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S04-h3a__multi__S04.I7+S04.I4",
+      "video": "S04-h3a__multi__S04.I7+S04.I4__PF3+PF5.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S04-h3a__single__S04.I1",
+      "video": "S04-h3a__single__S04.I1__TC1.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 120,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S04-h3a__single__S04.I2",
+      "video": "S04-h3a__single__S04.I2__TC3.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 159,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S04-h3a__single__S04.I3",
+      "video": "S04-h3a__single__S04.I3__SA3.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S04-h3a__single__S04.I4",
+      "video": "S04-h3a__single__S04.I4__PF5.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S04-h3a__single__S04.I7",
+      "video": "S04-h3a__single__S04.I7__PF3.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S04-h3a__single__S04.I8",
+      "video": "S04-h3a__single__S04.I8__TC2.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S06-h3c__combo__S06.I2+S06.I3",
+      "video": "S06-h3c__combo__S06.I2+S06.I3__PF4+TC1.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 128,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S06-h3c__decoy__S06.D2",
+      "video": "S06-h3c__decoy__S06.D2__looks-TE2_base-SA5.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 240,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S06-h3c__decoy__S06.D3",
+      "video": "S06-h3c__decoy__S06.D3__looks-PF2_base-SA5.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S06-h3c__decoy__S06.D4",
+      "video": "S06-h3c__decoy__S06.D4__looks-PF1_base-SA5.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S06-h3c__single__S06.I1",
+      "video": "S06-h3c__single__S06.I1__SA3.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S06-h3c__single__S06.I2",
+      "video": "S06-h3c__single__S06.I2__PF4.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
+      "case_id": "S06-h3c__single__S06.I3",
+      "video": "S06-h3c__single__S06.I3__TC1.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 128,
+        "worst_outside": 0
+      }
+    }
+  ]
+}

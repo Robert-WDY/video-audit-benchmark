@@ -1,0 +1,27 @@
+{
+  "case_id": "S02-h3e__decoy__S02.D4",
+  "blind_id": "v_78cbadd6ee",
+  "video": "S02-h3e__decoy__S02.D4__looks-PF1.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S02",
+  "take": "S02-h3e",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": {
+    "id": "S02.D4",
+    "looks_like": "PF1",
+    "description": "整片偏暖的调色，所有物体一起变暖，产品真实颜色未变"
+  },
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：动作完整；结尾手仍拿着杯盖未离开画面（脚本终态要求手离开），待人工判断是否算 SA5"
+  ],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

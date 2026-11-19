@@ -1,0 +1,27 @@
+{
+  "case_id": "S05-h3e__decoy__S05.D3",
+  "blind_id": "v_c3f0b623b6",
+  "video": "S05-h3e__decoy__S05.D3__looks-PF2.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S05",
+  "take": "S05-h3e",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": {
+    "id": "S05.D3",
+    "looks_like": "PF2",
+    "description": "镜头缓慢数码推近（广告常用手法），产品在画面中变大但比例不变"
+  },
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [
+    "手 3.5 秒才离开、3.6 秒屏幕和光环同时亮，没有「手已离开、光环未亮」的画面可做区域定格，排除 S05.I8"
+  ],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

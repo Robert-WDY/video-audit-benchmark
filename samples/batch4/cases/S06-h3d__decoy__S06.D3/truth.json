@@ -1,0 +1,27 @@
+{
+  "case_id": "S06-h3d__decoy__S06.D3",
+  "blind_id": "v_73ed43704c",
+  "video": "S06-h3d__decoy__S06.D3__looks-PF2.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S06",
+  "take": "S06-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": {
+    "id": "S06.D3",
+    "looks_like": "PF2",
+    "description": "镜头缓慢数码推近（广告常用手法），产品在画面中变大但比例不变"
+  },
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：约 5.3 秒起人物站直，终态达成。待人工确认"
+  ],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

@@ -1,0 +1,42 @@
+{
+  "case_id": "S07-h3b__single__S07.I9",
+  "scene": "S07",
+  "take": "S07-h3b",
+  "source": "../generated/S07__base__seed20261120.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "drop",
+      "from": 1.4,
+      "to": 3.8,
+      "id": "S07.I9"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        1.4
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "marker": true,
+      "tag": "S07.I9"
+    },
+    {
+      "src": [
+        3.8,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [],
+  "duration": 3.6
+}

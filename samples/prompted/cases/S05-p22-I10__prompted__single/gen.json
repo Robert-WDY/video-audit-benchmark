@@ -1,0 +1,25 @@
+{
+  "case_id": "S05-p22-I10__prompted__single",
+  "scene": "S05",
+  "source": "../generated/S05__S05.I10__seed20261122.mp4",
+  "method": "prompt",
+  "requested": [
+    "S05.I10"
+  ],
+  "ops": [],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [],
+  "duration": 6,
+  "needs_manual": false,
+  "manual_tasks": []
+}

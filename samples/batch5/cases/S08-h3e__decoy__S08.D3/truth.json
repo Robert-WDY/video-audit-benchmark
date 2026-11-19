@@ -1,0 +1,27 @@
+{
+  "case_id": "S08-h3e__decoy__S08.D3",
+  "blind_id": "v_44d717b12b",
+  "video": "S08-h3e__decoy__S08.D3__looks-PF2.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S08",
+  "take": "S08-h3e",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": {
+    "id": "S08.D3",
+    "looks_like": "PF2",
+    "description": "镜头缓慢数码推近（广告常用手法），产品在画面中变大但比例不变"
+  },
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：开盖、蘸取、涂抹完整；涂抹到最后一帧仍在进行，待人工确认"
+  ],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

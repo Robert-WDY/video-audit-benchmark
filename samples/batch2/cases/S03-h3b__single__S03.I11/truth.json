@@ -1,0 +1,50 @@
+{
+  "case_id": "S03-h3b__single__S03.I11",
+  "blind_id": "v_065e26232b",
+  "video": "S03-h3b__single__S03.I11__TE5.mp4",
+  "tier": "single",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S03",
+  "take": "S03-h3b",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [],
+  "injected": [
+    {
+      "id": "S03.I11",
+      "category": "TE",
+      "sub": "TE5",
+      "secondary": [],
+      "category_name": "技术缺陷",
+      "sub_name": "音画不同步",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "fix",
+      "judge_basis": "common_sense",
+      "description": "全片声音比画面晚约 0.6 秒（倒水声与水流不同步）",
+      "method": "av_offset",
+      "auto": true,
+      "windows": [
+        [
+          0,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "black_silence"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending",
+  "same_picture_as": "S03-h3b__clean__base"
+}

@@ -1,0 +1,27 @@
+{
+  "case_id": "S04-h3e__decoy__S04.D2",
+  "blind_id": "v_d4bf64e511",
+  "video": "S04-h3e__decoy__S04.D2__looks-TE2.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": false,
+  "ref": null,
+  "scene": "S04",
+  "take": "S04-h3e",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6.7,
+  "decoy": {
+    "id": "S04.D2",
+    "looks_like": "TE2",
+    "description": "取耳机段 0.5 倍慢动作"
+  },
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [
+    "这个构图看不到盒子正面的指示灯，排除指示灯类错误 S04.I4。另一只手扶着盒子，不算错误"
+  ],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

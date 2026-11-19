@@ -1,0 +1,74 @@
+{
+  "case_id": "S07-h3b__combo__S07.I2+S07.I10",
+  "scene": "S07",
+  "take": "S07-h3b",
+  "source": "../generated/S07__base__seed20261120.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "caption",
+      "from": 3.9,
+      "to": 6,
+      "text": "24 小时超长续航",
+      "id": "S07.I2"
+    },
+    {
+      "op": "warp_region",
+      "from": 4.6,
+      "to": 6,
+      "region": [
+        0.3,
+        0.38,
+        0.42,
+        0.1
+      ],
+      "k1": -0.95,
+      "k2": 0.7,
+      "id": "S07.I10"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "caption",
+      "from": 3.9,
+      "to": 6,
+      "text": "24 小时超长续航",
+      "id": "S07.I2",
+      "out": [
+        3.9,
+        6
+      ]
+    },
+    {
+      "op": "warp_region",
+      "from": 4.6,
+      "to": 6,
+      "region": [
+        0.3,
+        0.38,
+        0.42,
+        0.1
+      ],
+      "k1": -0.95,
+      "k2": 0.7,
+      "id": "S07.I10",
+      "out": [
+        4.6,
+        6
+      ]
+    }
+  ],
+  "duration": 6
+}

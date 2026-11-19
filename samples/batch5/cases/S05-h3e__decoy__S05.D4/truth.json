@@ -1,0 +1,27 @@
+{
+  "case_id": "S05-h3e__decoy__S05.D4",
+  "blind_id": "v_41498e9601",
+  "video": "S05-h3e__decoy__S05.D4__looks-PF1.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S05",
+  "take": "S05-h3e",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": {
+    "id": "S05.D4",
+    "looks_like": "PF1",
+    "description": "整片偏暖的调色，所有物体一起变暖，产品真实颜色未变"
+  },
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [
+    "手 3.5 秒才离开、3.6 秒屏幕和光环同时亮，没有「手已离开、光环未亮」的画面可做区域定格，排除 S05.I8"
+  ],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

@@ -1,0 +1,82 @@
+{
+  "case_id": "S07-h3d__combo__S07.I9+S07.I10",
+  "blind_id": "v_be636a8b36",
+  "video": "S07-h3d__combo__S07.I9+S07.I10__TC5+VT2.mp4",
+  "tier": "combo",
+  "pattern": "separate",
+  "continuous": false,
+  "ref": null,
+  "scene": "S07",
+  "take": "S07-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 4.45,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：三个圆形按键横排，中间最大为电源键；一只手按下中间键后光环亮起，无闪烁。待人工确认"
+  ],
+  "injected": [
+    {
+      "id": "S07.I9",
+      "category": "TC",
+      "sub": "TC5",
+      "secondary": [
+        "SA2",
+        "TC1"
+      ],
+      "category_name": "时序/因果",
+      "sub_name": "有果无因（没开盖水却流出）",
+      "evidence": "E3",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "没看到按键动作，光环自己亮了（按键过程被剪掉，手直接出现在离开的位置）",
+      "method": "drop",
+      "auto": true,
+      "windows": [
+        [
+          0,
+          0.5
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "instant",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S07.I10",
+      "category": "VT",
+      "sub": "VT2",
+      "secondary": [],
+      "category_name": "文字/视觉瑕疵",
+      "sub_name": "局部融化或扭曲",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "手离开后顶部按键区域局部扭曲变形",
+      "method": "warp_region",
+      "auto": true,
+      "windows": [
+        [
+          1.05,
+          4.45
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "garbled_text",
+        "product_drift"
+      ],
+      "expected_fix": "replace_plate"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

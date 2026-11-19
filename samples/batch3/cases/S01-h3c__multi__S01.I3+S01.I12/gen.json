@@ -1,0 +1,78 @@
+{
+  "case_id": "S01-h3c__multi__S01.I3+S01.I12",
+  "scene": "S01",
+  "take": "S01-h3c",
+  "source": "../generated/S01__base__seed20261121.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "caption",
+      "from": 1,
+      "to": 3.5,
+      "text": "500ml 超大容量",
+      "id": "S01.I3"
+    },
+    {
+      "op": "tint",
+      "from": 3,
+      "to": 6,
+      "region": [
+        0.24,
+        0.14,
+        0.48,
+        0.75
+      ],
+      "key": "#c41e2a",
+      "similarity": 0.32,
+      "blend": 0.08,
+      "hue": 25,
+      "id": "S01.I12"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "caption",
+      "from": 1,
+      "to": 3.5,
+      "text": "500ml 超大容量",
+      "id": "S01.I3",
+      "out": [
+        1,
+        3.5
+      ]
+    },
+    {
+      "op": "tint",
+      "from": 3,
+      "to": 6,
+      "region": [
+        0.24,
+        0.14,
+        0.48,
+        0.75
+      ],
+      "key": "#c41e2a",
+      "similarity": 0.32,
+      "blend": 0.08,
+      "hue": 25,
+      "id": "S01.I12",
+      "out": [
+        3,
+        6
+      ]
+    }
+  ],
+  "duration": 6
+}

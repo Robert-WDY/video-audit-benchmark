@@ -1,0 +1,23 @@
+{
+  "case_id": "S08-h3e__clean__base",
+  "blind_id": "v_a4e9e0a5fd",
+  "video": "S08-h3e__clean__base__ok.mp4",
+  "tier": "clean",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S08",
+  "take": "S08-h3e",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：开盖、蘸取、涂抹完整；涂抹到最后一帧仍在进行，待人工确认"
+  ],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

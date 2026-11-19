@@ -1,0 +1,78 @@
+{
+  "case_id": "S01-h3d__combo__S01.I3+S01.I11",
+  "scene": "S01",
+  "take": "S01-h3d",
+  "source": "../generated/S01__base__seed20261122.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "caption",
+      "from": 0.2,
+      "to": 2.7,
+      "text": "500ml 超大容量",
+      "id": "S01.I3"
+    },
+    {
+      "op": "text_overlay",
+      "from": 0,
+      "to": 6,
+      "region": [
+        0.41,
+        0.68,
+        0.25,
+        0.03
+      ],
+      "text": "QXRNE VLOMTH ZIRAK",
+      "size": 50,
+      "color": "white",
+      "opacity": 0.7,
+      "id": "S01.I11"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "caption",
+      "from": 0.2,
+      "to": 2.7,
+      "text": "500ml 超大容量",
+      "id": "S01.I3",
+      "out": [
+        0.2,
+        2.7
+      ]
+    },
+    {
+      "op": "text_overlay",
+      "from": 0,
+      "to": 6,
+      "region": [
+        0.41,
+        0.68,
+        0.25,
+        0.03
+      ],
+      "text": "QXRNE VLOMTH ZIRAK",
+      "size": 50,
+      "color": "white",
+      "opacity": 0.7,
+      "id": "S01.I11",
+      "out": [
+        0,
+        6
+      ]
+    }
+  ],
+  "duration": 6
+}

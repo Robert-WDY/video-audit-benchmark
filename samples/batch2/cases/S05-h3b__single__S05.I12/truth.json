@@ -1,0 +1,50 @@
+{
+  "case_id": "S05-h3b__single__S05.I12",
+  "blind_id": "v_926dc23aac",
+  "video": "S05-h3b__single__S05.I12__VT1.mp4",
+  "tier": "single",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S05",
+  "take": "S05-h3b",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [],
+  "injected": [
+    {
+      "id": "S05.I12",
+      "category": "VT",
+      "sub": "VT1",
+      "secondary": [],
+      "category_name": "文字/视觉瑕疵",
+      "sub_name": "乱码或伪文字（非代码字幕）",
+      "evidence": "E1",
+      "visibility": "V3",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "充电板上 Logo 下方出现一行读不通的小字",
+      "method": "text_overlay",
+      "auto": true,
+      "windows": [
+        [
+          0,
+          2.7
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "garbled_text",
+        "product_drift"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

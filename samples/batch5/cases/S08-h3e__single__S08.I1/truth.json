@@ -1,0 +1,52 @@
+{
+  "case_id": "S08-h3e__single__S08.I1",
+  "blind_id": "v_2bb3f46d1e",
+  "video": "S08-h3e__single__S08.I1__PF1.mp4",
+  "tier": "single",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S08",
+  "take": "S08-h3e",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：开盖、蘸取、涂抹完整；涂抹到最后一帧仍在进行，待人工确认"
+  ],
+  "injected": [
+    {
+      "id": "S08.I1",
+      "category": "PF",
+      "sub": "PF1",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "颜色或材质与事实不符/中途改变",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "罐内霜体变成粉色（事实为纯白）",
+      "method": "tint",
+      "auto": true,
+      "windows": [
+        [
+          1.9,
+          4.4
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

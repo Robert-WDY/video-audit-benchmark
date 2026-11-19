@@ -78,7 +78,7 @@ test('不生成只切不改的对照组；内容对照（字幕）保留', () =>
 });
 
 test('没有画面、声音、字幕都相同的重复用例', () => {
-  const keys = cases.map((c) => `${c.truth.take}|${visualSignature(c)}|${JSON.stringify(c.gen.overlays.filter((o) => o.op === 'mute').map((o) => o.out))}|${JSON.stringify(c.input.plan.captions)}`);
+  const keys = cases.map((c) => `${c.truth.take}|${visualSignature(c)}|${JSON.stringify(c.gen.overlays.filter((o) => ['mute', 'av_offset'].includes(o.op)).map((o) => [o.op, o.out, o.ms]))}|${JSON.stringify(c.input.plan.captions)}`);
   assert.equal(new Set(keys).size, keys.length);
 });
 
@@ -157,4 +157,11 @@ test('底片上人工确认的错误进入每条派生用例的真值，窗口�
   assert.deepEqual(rev.truth.base_errors[0].windows, [[0, 1]]);
   const bad = { ...tk, known_errors: [{ id: 'K2', category: 'SA', sub: 'PF1', description: 'x', window: [0, 1] }] };
   assert.ok(validateTake(bad, scenes.find((s) => s.id === 'S06'), tax).some((e) => e.includes('PF1')));
+});
+
+test('静音和音画偏移不会被当成同一条视频去重', () => {
+  const tk = takes.filter((t) => t.scene === 'S07');
+  const cs = expand(scenes, tk, tax, {});
+  assert.ok(cs.some((c) => c.id.endsWith('__single__S07.I4')));
+  assert.ok(cs.some((c) => c.id.endsWith('__single__S07.I12')));
 });

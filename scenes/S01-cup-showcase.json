@@ -211,6 +211,86 @@
           "instruction": "照脚本生成，但杯身 Logo 下方印一行看起来像英文但拼不出任何单词的小字"
         }
       ]
+    },
+    {
+      "id": "S01.I9",
+      "category": "PF",
+      "sub": "PF2",
+      "evidence": "E3",
+      "visibility": "V2",
+      "disposition": "block",
+      "description": "转到背面后杯身被拉高约 15%，比例明显变瘦长",
+      "ops": [
+        {
+          "op": "scale_region",
+          "from": "rot_half",
+          "to": "end",
+          "region": "product",
+          "sx": 1.0,
+          "sy": 1.15
+        }
+      ]
+    },
+    {
+      "id": "S01.I10",
+      "category": "VT",
+      "sub": "VT3",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "fix",
+      "description": "旋转时杯身出现半透明的重影（落后约 0.3 秒的残影）",
+      "ops": [
+        {
+          "op": "retime_region",
+          "src_from": "rot_start",
+          "from": "rot_start+0.3",
+          "to": "rot_end",
+          "region": "product",
+          "opacity": 0.45
+        }
+      ]
+    },
+    {
+      "id": "S01.I11",
+      "category": "VT",
+      "sub": "VT1",
+      "evidence": "E1",
+      "visibility": "V3",
+      "disposition": "block",
+      "description": "杯身下部出现一行读不通的小字",
+      "ops": [
+        {
+          "op": "text_overlay",
+          "from": "start",
+          "to": "end",
+          "region": "label",
+          "text": "QXRNE VLOMTH ZIRAK",
+          "size": 50,
+          "color": "white",
+          "opacity": 0.7
+        }
+      ]
+    },
+    {
+      "id": "S01.I12",
+      "category": "PF",
+      "sub": "PF1",
+      "evidence": "E3",
+      "visibility": "V3",
+      "disposition": "fix",
+      "description": "转到背面后杯身轻微偏橙（色相偏移约 25 度）",
+      "ops": [
+        {
+          "op": "tint",
+          "from": "rot_half",
+          "to": "end",
+          "region": "product",
+          "key": "#c41e2a",
+          "similarity": 0.32,
+          "blend": 0.08,
+          "hue": 25
+        }
+      ]
     }
   ],
   "decoys": [
@@ -236,6 +316,32 @@
           "from": "rot_start",
           "to": "rot_half",
           "factor": 0.5
+        }
+      ]
+    },
+    {
+      "id": "S01.D3",
+      "looks_like": "PF2",
+      "description": "镜头缓慢数码推近（广告常用手法），产品在画面中变大但比例不变",
+      "ops": [
+        {
+          "op": "zoom",
+          "from": "rot_start",
+          "to": "end",
+          "scale": 1.15
+        }
+      ]
+    },
+    {
+      "id": "S01.D4",
+      "looks_like": "PF1",
+      "description": "整片偏暖的调色，所有物体一起变暖，产品真实颜色未变",
+      "ops": [
+        {
+          "op": "grade",
+          "from": "start",
+          "to": "end",
+          "temperature": 4200
         }
       ]
     }

@@ -1,0 +1,27 @@
+{
+  "case_id": "S01-h3d__decoy__S01.D3",
+  "blind_id": "v_2bd3519bb5",
+  "video": "S01-h3d__decoy__S01.D3__looks-PF2.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S01",
+  "take": "S01-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": {
+    "id": "S01.D3",
+    "looks_like": "PF2",
+    "description": "镜头缓慢数码推近（广告常用手法），产品在画面中变大但比例不变"
+  },
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：平顶黑色旋盖，无提环无锁扣；Logo 竖排（事实未规定方向）。待人工确认"
+  ],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

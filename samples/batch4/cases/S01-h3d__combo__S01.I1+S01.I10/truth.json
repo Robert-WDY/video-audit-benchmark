@@ -1,0 +1,80 @@
+{
+  "case_id": "S01-h3d__combo__S01.I1+S01.I10",
+  "blind_id": "v_e84f071855",
+  "video": "S01-h3d__combo__S01.I1+S01.I10__PF1+VT3.mp4",
+  "tier": "combo",
+  "pattern": "overlap",
+  "continuous": true,
+  "ref": null,
+  "scene": "S01",
+  "take": "S01-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：平顶黑色旋盖，无提环无锁扣；Logo 竖排（事实未规定方向）。待人工确认"
+  ],
+  "injected": [
+    {
+      "id": "S01.I1",
+      "category": "PF",
+      "sub": "PF1",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "颜色或材质与事实不符/中途改变",
+      "evidence": "E3",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "转到背面后杯身从红色变成蓝色并一直保持",
+      "method": "tint",
+      "auto": true,
+      "windows": [
+        [
+          3,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    },
+    {
+      "id": "S01.I10",
+      "category": "VT",
+      "sub": "VT3",
+      "secondary": [],
+      "category_name": "文字/视觉瑕疵",
+      "sub_name": "重影（同一物体多个叠加版本）",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "fix",
+      "judge_basis": "common_sense",
+      "description": "旋转时杯身出现半透明的重影（落后约 0.3 秒的残影）",
+      "method": "retime_region",
+      "auto": true,
+      "windows": [
+        [
+          0.5,
+          5.6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "garbled_text",
+        "product_drift"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

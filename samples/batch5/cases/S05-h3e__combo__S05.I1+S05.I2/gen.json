@@ -1,0 +1,68 @@
+{
+  "case_id": "S05-h3e__combo__S05.I1+S05.I2",
+  "scene": "S05",
+  "take": "S05-h3e",
+  "source": "../generated/S05__base__seed20261124.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "swap",
+      "a_from": 2,
+      "a_to": 3,
+      "b_from": 3,
+      "b_to": 6,
+      "id": "S05.I1"
+    },
+    {
+      "op": "caption",
+      "from": 3,
+      "to": 6,
+      "text": "50W 无线超级快充",
+      "id": "S05.I2"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        2
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "src": [
+        3,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": "S05.I1"
+    },
+    {
+      "src": [
+        2,
+        3
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": "S05.I1"
+    }
+  ],
+  "overlays": [
+    {
+      "op": "caption",
+      "from": 3,
+      "to": 6,
+      "text": "50W 无线超级快充",
+      "id": "S05.I2",
+      "out": [
+        2,
+        5
+      ]
+    }
+  ],
+  "duration": 6
+}

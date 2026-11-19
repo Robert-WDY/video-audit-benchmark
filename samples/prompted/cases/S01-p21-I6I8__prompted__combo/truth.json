@@ -1,0 +1,118 @@
+{
+  "case_id": "S01-p21-I6I8__prompted__combo",
+  "blind_id": "v_d0e9dab23d",
+  "video": "S01-p21-I6I8__prompted__combo__PF4+VT1+PF3.mp4",
+  "tier": "combo",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S01",
+  "take": "S01-p21-I6I8",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S01.I6",
+      "category": "PF",
+      "sub": "PF4",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "Logo、型号、品牌标识错误",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "Logo 变成竖排并多出一个「0」，与事实「正面 LUMO 字样」不符",
+      "method": "prompt",
+      "auto": false,
+      "windows": [
+        [
+          0,
+          6
+        ]
+      ],
+      "window_status": "estimated",
+      "duration_bucket": null,
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "regen",
+      "source": "injected",
+      "reviewed_by": "claude"
+    },
+    {
+      "id": "S01.I8",
+      "category": "VT",
+      "sub": "VT1",
+      "secondary": [],
+      "category_name": "文字/视觉瑕疵",
+      "sub_name": "乱码或伪文字（非代码字幕）",
+      "evidence": "E1",
+      "visibility": "V3",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "杯底出现一行读不通的小字",
+      "method": "prompt",
+      "auto": false,
+      "windows": [
+        [
+          0,
+          6
+        ]
+      ],
+      "window_status": "estimated",
+      "duration_bucket": null,
+      "expected_checks": [
+        "garbled_text",
+        "product_drift"
+      ],
+      "expected_fix": "regen",
+      "source": "injected",
+      "reviewed_by": "claude"
+    },
+    {
+      "id": "S01.K1",
+      "category": "PF",
+      "sub": "PF3",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "部件数量或位置错（按键、耳罩、接口、杯盖）",
+      "evidence": null,
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "杯盖带提环和锁扣（与同 seed 底片经人工确认的问题相同），事实为无提手的黑色旋盖",
+      "method": "accidental",
+      "auto": false,
+      "windows": [
+        [
+          0,
+          6
+        ]
+      ],
+      "window_status": "estimated",
+      "duration_bucket": null,
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "regen",
+      "source": "accidental",
+      "reviewed_by": "claude"
+    }
+  ],
+  "base_errors": [],
+  "base_notes": [
+    "同一 seed 的底片已人工确认杯盖带提环（PF3），这条视频的杯盖同样带提环"
+  ],
+  "requested": [
+    "S01.I6",
+    "S01.I8"
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

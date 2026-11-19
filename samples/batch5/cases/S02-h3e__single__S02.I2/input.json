@@ -1,0 +1,40 @@
+{
+  "request": {
+    "product": {
+      "name": "LUMO 保温杯",
+      "appearance": "红色哑光不锈钢圆柱杯身，黑色旋盖（螺纹，需逆时针拧约一圈才能取下），杯身正面白色 LUMO 字样 Logo",
+      "facts": [
+        {
+          "id": "F1",
+          "claim": "容量 350ml",
+          "text": "容量 350ml"
+        },
+        {
+          "id": "F2",
+          "claim": "旋盖为螺纹结构，需拧开才能取下",
+          "text": "旋盖为螺纹结构，需拧开才能取下"
+        },
+        {
+          "id": "F3",
+          "claim": "只有一个杯盖",
+          "text": "只有一个杯盖"
+        }
+      ]
+    }
+  },
+  "plan": {
+    "captions": [],
+    "shots": [
+      {
+        "id": "s1",
+        "kind": "product",
+        "uses_product": true,
+        "use_s": [
+          0,
+          3.2
+        ],
+        "dur": 3.2
+      }
+    ]
+  }
+}

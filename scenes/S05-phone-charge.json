@@ -265,6 +265,58 @@
           "instruction": "照脚本生成，但充电板中央印的品牌字样清楚地拼成 Vlot（字母 l 和 o 的顺序颠倒），字母清晰可读"
         }
       ]
+    },
+    {
+      "id": "S05.I11",
+      "category": "PF",
+      "sub": "PF8",
+      "evidence": "E1",
+      "visibility": "V3",
+      "disposition": "block",
+      "description": "角落小字写「最高支持 50W 无线快充」，事实为 15W",
+      "ops": [
+        {
+          "op": "caption",
+          "from": "place",
+          "to": "end",
+          "text": "*最高支持 50W 无线快充",
+          "size": 48,
+          "x": 0.05,
+          "y": 0.93
+        }
+      ],
+      "control": [
+        {
+          "op": "caption",
+          "from": "place",
+          "to": "end",
+          "text": "*最高支持 15W 无线快充",
+          "size": 48,
+          "x": 0.05,
+          "y": 0.93
+        }
+      ]
+    },
+    {
+      "id": "S05.I12",
+      "category": "VT",
+      "sub": "VT1",
+      "evidence": "E1",
+      "visibility": "V3",
+      "disposition": "block",
+      "description": "充电板上 Logo 下方出现一行读不通的小字",
+      "ops": [
+        {
+          "op": "text_overlay",
+          "from": "start",
+          "to": "place-0.3",
+          "region": "label",
+          "text": "VRQTL OSNE",
+          "size": 55,
+          "color": "white",
+          "opacity": 0.7
+        }
+      ]
     }
   ],
   "decoys": [
@@ -289,6 +341,32 @@
           "op": "freeze",
           "at": "ring_on",
           "dur": 0.6
+        }
+      ]
+    },
+    {
+      "id": "S05.D3",
+      "looks_like": "PF2",
+      "description": "镜头缓慢数码推近（广告常用手法），产品在画面中变大但比例不变",
+      "ops": [
+        {
+          "op": "zoom",
+          "from": "pick",
+          "to": "end",
+          "scale": 1.15
+        }
+      ]
+    },
+    {
+      "id": "S05.D4",
+      "looks_like": "PF1",
+      "description": "整片偏暖的调色，所有物体一起变暖，产品真实颜色未变",
+      "ops": [
+        {
+          "op": "grade",
+          "from": "start",
+          "to": "end",
+          "temperature": 4200
         }
       ]
     }

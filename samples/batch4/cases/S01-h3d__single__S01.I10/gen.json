@@ -1,0 +1,56 @@
+{
+  "case_id": "S01-h3d__single__S01.I10",
+  "scene": "S01",
+  "take": "S01-h3d",
+  "source": "../generated/S01__base__seed20261122.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "retime_region",
+      "src_from": 0.2,
+      "from": 0.5,
+      "to": 5.6,
+      "region": [
+        0.3,
+        0.24,
+        0.37,
+        0.55
+      ],
+      "opacity": 0.45,
+      "id": "S01.I10"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "retime_region",
+      "src_from": 0.2,
+      "from": 0.5,
+      "to": 5.6,
+      "region": [
+        0.3,
+        0.24,
+        0.37,
+        0.55
+      ],
+      "opacity": 0.45,
+      "id": "S01.I10",
+      "out": [
+        0.5,
+        5.6
+      ]
+    }
+  ],
+  "duration": 6
+}

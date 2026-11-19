@@ -1,0 +1,112 @@
+{
+  "case_id": "S07-h3b__combo__S07.I9+S07.I10",
+  "blind_id": "v_8bcc9e7dbc",
+  "video": "S07-h3b__combo__S07.I9+S07.I10__TC5+VT2.mp4",
+  "tier": "combo",
+  "pattern": "separate",
+  "continuous": false,
+  "ref": null,
+  "scene": "S07",
+  "take": "S07-h3b",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 3.6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [
+    {
+      "id": "S07-h3b#K1",
+      "category": "SA",
+      "sub": "SA7",
+      "secondary": [
+        "TC5"
+      ],
+      "category_name": "脚本偏离（状态/动作）",
+      "sub_name": "执行了错误的动作（按错键、拿错物体、操作了错误部件）",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "食指按的是左侧小键，中间电源键没有被按下，蓝环却在约 3.9 秒亮起（事实：中间是电源键，按下电源键才亮）",
+      "method": "base",
+      "auto": false,
+      "windows": [
+        [
+          1.4,
+          1.6
+        ]
+      ],
+      "window_status": "annotated",
+      "duration_bucket": null,
+      "expected_checks": [],
+      "expected_fix": "regen",
+      "source": "base",
+      "reviewed_by": "human"
+    }
+  ],
+  "base_notes": [
+    "约 2.0–3.8 秒布面变红褐，邻近木桌同步偏暖，判断为光照变化，不算材质漂移"
+  ],
+  "injected": [
+    {
+      "id": "S07.I9",
+      "category": "TC",
+      "sub": "TC5",
+      "secondary": [
+        "SA2",
+        "TC1"
+      ],
+      "category_name": "时序/因果",
+      "sub_name": "有果无因（没开盖水却流出）",
+      "evidence": "E3",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "没看到按键动作，光环自己亮了（按键过程被剪掉，手直接出现在离开的位置）",
+      "method": "drop",
+      "auto": true,
+      "windows": [
+        [
+          1.1,
+          1.7
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "instant",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S07.I10",
+      "category": "VT",
+      "sub": "VT2",
+      "secondary": [],
+      "category_name": "文字/视觉瑕疵",
+      "sub_name": "局部融化或扭曲",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "手离开后顶部按键区域局部扭曲变形",
+      "method": "warp_region",
+      "auto": true,
+      "windows": [
+        [
+          2.2,
+          3.6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "garbled_text",
+        "product_drift"
+      ],
+      "expected_fix": "replace_plate"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

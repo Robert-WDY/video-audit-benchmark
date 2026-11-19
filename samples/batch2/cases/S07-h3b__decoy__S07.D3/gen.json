@@ -1,0 +1,42 @@
+{
+  "case_id": "S07-h3b__decoy__S07.D3",
+  "scene": "S07",
+  "take": "S07-h3b",
+  "source": "../generated/S07__base__seed20261120.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "zoom",
+      "from": 1.4,
+      "to": 6,
+      "scale": 1.15,
+      "id": null
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "zoom",
+      "from": 1.4,
+      "to": 6,
+      "scale": 1.15,
+      "id": null,
+      "out": [
+        1.4,
+        6
+      ]
+    }
+  ],
+  "duration": 6
+}

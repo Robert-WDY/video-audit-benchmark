@@ -1,0 +1,26 @@
+{
+  "case_id": "S08-p22-I8__prompted__clean",
+  "blind_id": "v_d16f707bb9",
+  "video": "S08-p22-I8__prompted__clean__ok.mp4",
+  "tier": "clean",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S08",
+  "take": "S08-p22-I8",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": false,
+  "injected": [],
+  "base_errors": [],
+  "base_notes": [
+    "要求的盖面 AUAR 未出现，盖面是正确的 AURA：难负样本"
+  ],
+  "requested": [
+    "S08.I8"
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

@@ -1,0 +1,27 @@
+{
+  "case_id": "S02-h3e__decoy__S02.D2",
+  "blind_id": "v_ef35e0307a",
+  "video": "S02-h3e__decoy__S02.D2__looks-TE2.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": false,
+  "ref": null,
+  "scene": "S02",
+  "take": "S02-h3e",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6.6,
+  "decoy": {
+    "id": "S02.D2",
+    "looks_like": "TE2",
+    "description": "放下杯盖后刻意定格 0.6 秒收尾"
+  },
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：动作完整；结尾手仍拿着杯盖未离开画面（脚本终态要求手离开），待人工判断是否算 SA5"
+  ],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

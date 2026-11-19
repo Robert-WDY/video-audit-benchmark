@@ -1,0 +1,40 @@
+{
+  "request": {
+    "product": {
+      "name": "AURA 保湿面霜",
+      "appearance": "磨砂白玻璃圆罐，金色金属盖，盖面压印 AURA；霜体纯白",
+      "facts": [
+        {
+          "id": "F1",
+          "claim": "净含量 50g",
+          "text": "净含量 50g"
+        },
+        {
+          "id": "F2",
+          "claim": "霜体纯白色",
+          "text": "霜体纯白色"
+        },
+        {
+          "id": "F3",
+          "claim": "无添加香精",
+          "text": "无添加香精"
+        }
+      ]
+    }
+  },
+  "plan": {
+    "captions": [],
+    "shots": [
+      {
+        "id": "s1",
+        "kind": "product",
+        "uses_product": true,
+        "use_s": [
+          0,
+          6.9
+        ],
+        "dur": 6.9
+      }
+    ]
+  }
+}

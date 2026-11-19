@@ -1,0 +1,42 @@
+{
+  "case_id": "S02-h3e__single__S02.I2",
+  "scene": "S02",
+  "take": "S02-h3e",
+  "source": "../generated/S02__base__seed20261124.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "drop",
+      "from": 1,
+      "to": 3.8,
+      "id": "S02.I2"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        1
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "marker": true,
+      "tag": "S02.I2"
+    },
+    {
+      "src": [
+        3.8,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [],
+  "duration": 3.2
+}

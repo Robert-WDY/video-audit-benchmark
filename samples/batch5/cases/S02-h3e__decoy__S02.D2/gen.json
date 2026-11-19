@@ -1,0 +1,43 @@
+{
+  "case_id": "S02-h3e__decoy__S02.D2",
+  "scene": "S02",
+  "take": "S02-h3e",
+  "source": "../generated/S02__base__seed20261124.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "freeze",
+      "at": 5.2,
+      "dur": 0.6,
+      "id": null
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        5.2
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "hold": 5.183333333333334,
+      "dur": 0.6,
+      "tag": null
+    },
+    {
+      "src": [
+        5.2,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [],
+  "duration": 6.6
+}

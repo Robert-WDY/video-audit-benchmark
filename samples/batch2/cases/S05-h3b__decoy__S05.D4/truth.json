@@ -1,0 +1,25 @@
+{
+  "case_id": "S05-h3b__decoy__S05.D4",
+  "blind_id": "v_645bab7bde",
+  "video": "S05-h3b__decoy__S05.D4__looks-PF1.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S05",
+  "take": "S05-h3b",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6,
+  "decoy": {
+    "id": "S05.D4",
+    "looks_like": "PF1",
+    "description": "整片偏暖的调色，所有物体一起变暖，产品真实颜色未变"
+  },
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

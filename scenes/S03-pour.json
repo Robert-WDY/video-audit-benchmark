@@ -241,6 +241,42 @@
           "instruction": "照脚本生成，但玻璃杯外壁印着一行看起来像中文却不是真字的白色文字，字迹清晰"
         }
       ]
+    },
+    {
+      "id": "S03.I10",
+      "category": "VT",
+      "sub": "VT2",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "block",
+      "description": "倒水前玻璃杯局部扭曲变形，像融化",
+      "ops": [
+        {
+          "op": "warp_region",
+          "from": "lift_start",
+          "to": "pour_start",
+          "region": "glass",
+          "k1": -0.55,
+          "k2": 0.45
+        }
+      ]
+    },
+    {
+      "id": "S03.I11",
+      "category": "TE",
+      "sub": "TE5",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "fix",
+      "description": "全片声音比画面晚约 0.6 秒（倒水声与水流不同步）",
+      "ops": [
+        {
+          "op": "av_offset",
+          "from": "start",
+          "to": "end",
+          "ms": 600
+        }
+      ]
     }
   ],
   "decoys": [
@@ -266,6 +302,32 @@
           "from": "pour_start",
           "to": "pour_end",
           "factor": 0.5
+        }
+      ]
+    },
+    {
+      "id": "S03.D3",
+      "looks_like": "PF2",
+      "description": "镜头缓慢数码推近（广告常用手法），产品在画面中变大但比例不变",
+      "ops": [
+        {
+          "op": "zoom",
+          "from": "lift_start",
+          "to": "end",
+          "scale": 1.15
+        }
+      ]
+    },
+    {
+      "id": "S03.D4",
+      "looks_like": "PF1",
+      "description": "整片偏暖的调色，所有物体一起变暖，产品真实颜色未变",
+      "ops": [
+        {
+          "op": "grade",
+          "from": "start",
+          "to": "end",
+          "temperature": 4200
         }
       ]
     }

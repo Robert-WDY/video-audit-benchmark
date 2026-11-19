@@ -1,0 +1,60 @@
+{
+  "case_id": "S05-h3b__single__S05.I12",
+  "scene": "S05",
+  "take": "S05-h3b",
+  "source": "../generated/S05__base__seed20261120.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "text_overlay",
+      "from": 0,
+      "to": 2.7,
+      "region": [
+        0.42,
+        0.53,
+        0.2,
+        0.03
+      ],
+      "text": "VRQTL OSNE",
+      "size": 55,
+      "color": "white",
+      "opacity": 0.7,
+      "id": "S05.I12"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "text_overlay",
+      "from": 0,
+      "to": 2.7,
+      "region": [
+        0.42,
+        0.53,
+        0.2,
+        0.03
+      ],
+      "text": "VRQTL OSNE",
+      "size": 55,
+      "color": "white",
+      "opacity": 0.7,
+      "id": "S05.I12",
+      "out": [
+        0,
+        2.7
+      ]
+    }
+  ],
+  "duration": 6
+}

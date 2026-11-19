@@ -1,0 +1,26 @@
+{
+  "case_id": "S06-p22-I6__prompted__clean",
+  "blind_id": "v_ffe47231ec",
+  "video": "S06-p22-I6__prompted__clean__ok.mp4",
+  "tier": "clean",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S06",
+  "take": "S06-p22-I6",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": false,
+  "injected": [],
+  "base_errors": [],
+  "base_notes": [
+    "要求的鞋舌伪文字未出现：这是「提示词要求了错误、画面里没有」的难负样本，审核不应报错"
+  ],
+  "requested": [
+    "S06.I6"
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

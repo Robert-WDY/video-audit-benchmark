@@ -1,0 +1,25 @@
+{
+  "case_id": "S05-h3b__decoy__S05.D3",
+  "blind_id": "v_fca556a4f0",
+  "video": "S05-h3b__decoy__S05.D3__looks-PF2.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S05",
+  "take": "S05-h3b",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6,
+  "decoy": {
+    "id": "S05.D3",
+    "looks_like": "PF2",
+    "description": "镜头缓慢数码推近（广告常用手法），产品在画面中变大但比例不变"
+  },
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

@@ -1,0 +1,78 @@
+{
+  "case_id": "S05-h3b__combo__S05.I9+S05.I12",
+  "blind_id": "v_ed87a5fca6",
+  "video": "S05-h3b__combo__S05.I9+S05.I12__PF4+VT1.mp4",
+  "tier": "combo",
+  "pattern": "overlap",
+  "continuous": true,
+  "ref": null,
+  "scene": "S05",
+  "take": "S05-h3b",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [],
+  "injected": [
+    {
+      "id": "S05.I9",
+      "category": "PF",
+      "sub": "PF4",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "Logo、型号、品牌标识错误",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "充电板中央的 Volt 字样变成镜像反字",
+      "method": "flip_region",
+      "auto": true,
+      "windows": [
+        [
+          0,
+          2.7
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    },
+    {
+      "id": "S05.I12",
+      "category": "VT",
+      "sub": "VT1",
+      "secondary": [],
+      "category_name": "文字/视觉瑕疵",
+      "sub_name": "乱码或伪文字（非代码字幕）",
+      "evidence": "E1",
+      "visibility": "V3",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "充电板上 Logo 下方出现一行读不通的小字",
+      "method": "text_overlay",
+      "auto": true,
+      "windows": [
+        [
+          0,
+          2.7
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "garbled_text",
+        "product_drift"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

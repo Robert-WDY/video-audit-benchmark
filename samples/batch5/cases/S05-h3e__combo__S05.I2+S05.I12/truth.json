@@ -1,0 +1,80 @@
+{
+  "case_id": "S05-h3e__combo__S05.I2+S05.I12",
+  "blind_id": "v_d80bd72e59",
+  "video": "S05-h3e__combo__S05.I2+S05.I12__PF8+VT1.mp4",
+  "tier": "combo",
+  "pattern": "mask",
+  "continuous": true,
+  "ref": null,
+  "scene": "S05",
+  "take": "S05-h3e",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [
+    "手 3.5 秒才离开、3.6 秒屏幕和光环同时亮，没有「手已离开、光环未亮」的画面可做区域定格，排除 S05.I8"
+  ],
+  "injected": [
+    {
+      "id": "S05.I2",
+      "category": "PF",
+      "sub": "PF8",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "字幕写的规格或卖点与事实不符",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "字幕写 50W，事实是 15W",
+      "method": "caption",
+      "auto": true,
+      "windows": [
+        [
+          3,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S05.I12",
+      "category": "VT",
+      "sub": "VT1",
+      "secondary": [],
+      "category_name": "文字/视觉瑕疵",
+      "sub_name": "乱码或伪文字（非代码字幕）",
+      "evidence": "E1",
+      "visibility": "V3",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "充电板上 Logo 下方出现一行读不通的小字",
+      "method": "text_overlay",
+      "auto": true,
+      "windows": [
+        [
+          0,
+          2.7
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "garbled_text",
+        "product_drift"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

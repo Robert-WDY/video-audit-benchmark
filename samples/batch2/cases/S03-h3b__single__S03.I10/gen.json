@@ -1,0 +1,56 @@
+{
+  "case_id": "S03-h3b__single__S03.I10",
+  "scene": "S03",
+  "take": "S03-h3b",
+  "source": "../generated/S03__base__seed20261120.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "warp_region",
+      "from": 0.5,
+      "to": 2.4,
+      "region": [
+        0.04,
+        0.6,
+        0.5,
+        0.32
+      ],
+      "k1": -0.55,
+      "k2": 0.45,
+      "id": "S03.I10"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "warp_region",
+      "from": 0.5,
+      "to": 2.4,
+      "region": [
+        0.04,
+        0.6,
+        0.5,
+        0.32
+      ],
+      "k1": -0.55,
+      "k2": 0.45,
+      "id": "S03.I10",
+      "out": [
+        0.5,
+        2.4
+      ]
+    }
+  ],
+  "duration": 6
+}

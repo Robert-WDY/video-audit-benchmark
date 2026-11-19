@@ -1,52 +1,53 @@
 {
-  "built_at": "2026-11-19T08:19:00.610Z",
+  "built_at": "2026-11-19T08:57:00.489Z",
   "salt": "vr1",
   "summary": {
-    "cases": 36,
+    "cases": 52,
     "by_tier": {
       "clean": 3,
-      "decoy": 3,
-      "single": 13,
-      "multi": 6,
-      "combo": 10,
+      "decoy": 9,
+      "single": 18,
+      "multi": 7,
+      "combo": 14,
       "control": 1
     },
     "by_pattern": {
-      "-": 20,
-      "mask": 4,
+      "-": 31,
+      "mask": 9,
       "chain": 1,
-      "overlap": 10,
-      "separate": 1
+      "separate": 2,
+      "overlap": 9
     },
     "needs_manual": 0,
-    "errors": 46,
+    "errors": 61,
     "errors_by_category": {
-      "TC": 12,
+      "TC": 16,
       "SA": 2,
-      "PF": 27,
-      "TE": 5
+      "PF": 33,
+      "TE": 4,
+      "VT": 6
     },
     "errors_by_evidence": {
-      "E2": 8,
-      "E3": 11,
+      "E2": 10,
+      "E3": 22,
       "E4": 2,
-      "E1": 25
+      "E1": 27
     },
     "errors_by_visibility": {
-      "V1": 28,
-      "V3": 7,
-      "V2": 11
+      "V1": 34,
+      "V3": 14,
+      "V2": 13
     },
     "errors_by_duration": {
-      "instant": 8,
-      "short": 6,
-      "long": 23,
-      "flash": 9
+      "instant": 7,
+      "short": 11,
+      "long": 35,
+      "flash": 8
     },
     "errors_by_basis": {
-      "common_sense": 17,
+      "common_sense": 26,
       "script": 2,
-      "facts": 27
+      "facts": 33
     }
   },
   "unverified_takes": [

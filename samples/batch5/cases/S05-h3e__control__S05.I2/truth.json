@@ -1,0 +1,23 @@
+{
+  "case_id": "S05-h3e__control__S05.I2",
+  "blind_id": "v_e592748d85",
+  "video": "S05-h3e__control__S05.I2__ok.mp4",
+  "tier": "control",
+  "pattern": null,
+  "continuous": true,
+  "ref": "S05-h3e__single__S05.I2",
+  "scene": "S05",
+  "take": "S05-h3e",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [
+    "手 3.5 秒才离开、3.6 秒屏幕和光环同时亮，没有「手已离开、光环未亮」的画面可做区域定格，排除 S05.I8"
+  ],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

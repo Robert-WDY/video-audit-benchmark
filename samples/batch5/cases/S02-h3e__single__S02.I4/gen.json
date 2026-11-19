@@ -1,0 +1,43 @@
+{
+  "case_id": "S02-h3e__single__S02.I4",
+  "scene": "S02",
+  "take": "S02-h3e",
+  "source": "../generated/S02__base__seed20261124.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "freeze",
+      "at": 3.8,
+      "dur": 1.6,
+      "id": "S02.I4"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        3.8
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "hold": 3.783333333333333,
+      "dur": 1.6,
+      "tag": "S02.I4"
+    },
+    {
+      "src": [
+        3.8,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [],
+  "duration": 7.6
+}

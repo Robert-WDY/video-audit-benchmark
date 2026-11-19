@@ -2,7 +2,7 @@
 // 错误样本与对照组走完全相同的管线（trim → concat → 叠加 → 同参数编码），
 // 避免审核靠「被剪辑/重编码过」这种痕迹而不是内容来判错。
 import { spawn } from 'node:child_process';
-import { mkdir } from 'node:fs/promises';
+import { mkdir, rename, rm } from 'node:fs/promises';
 import path from 'node:path';
 import { totalDur } from './timeline.mjs';
 
@@ -98,20 +98,32 @@ export function buildFilter({ pieces, overlays = [] }, probe, { font } = {}) {
       chains.push(`[${v}]split[${nv}b][${nv}t]`,
         `[${nv}t]crop=${cw}:${ch}:${cx}:${cy},hue=h=${o.hue ?? 180}:s=${o.saturation ?? 1}[${nv}c]`,
         `[${nv}b][${nv}c]overlay=${cx}:${cy}:${between(o.out)}[${nv}]`);
-    } else if (['clone', 'flip_region', 'freeze_region', 'retime_region'].includes(o.op)) {
+    } else if (['clone', 'flip_region', 'freeze_region', 'retime_region', 'scale_region', 'warp_region'].includes(o.op)) {
       const [rx, ry, rw, rh] = o.region || [0, 0, 1, 1];
       const cw = Math.max(2, Math.round(rw * W / 2) * 2); const ch = Math.max(2, Math.round(rh * H / 2) * 2);
       const cx = Math.round(rx * W); const cy = Math.round(ry * H);
       const crop = `crop=${cw}:${ch}:${cx}:${cy}`;
       // 羽化边缘，避免贴片出现生硬的矩形边（那会变成另一处不在真值里的瑕疵）
       const F = Math.max(2, Math.round(Math.min(cw, ch) * (o.feather ?? 0.15)));
-      const feather = `format=rgba,geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='255*clip(min(min(X,W-1-X),min(Y,H-1-Y))/${F},0,1)'`;
+      // opacity < 1 时半透明叠加（例如重影）
+      const feather = `format=rgba,geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='${255 * (o.opacity ?? 1)}*clip(min(min(X,W-1-X),min(Y,H-1-Y))/${F},0,1)'`;
       let px = cx; let py = cy;
       if (o.op === 'clone') {
         px = cx + Math.round((o.dx || 0) * W); py = cy + Math.round((o.dy || 0) * H);
         chains.push(`[${v}]split[${nv}b][${nv}s]`, `[${nv}s]${crop},${feather}[${nv}c]`);
       } else if (o.op === 'flip_region') {
         chains.push(`[${v}]split[${nv}b][${nv}s]`, `[${nv}s]${crop},hflip,${feather}[${nv}c]`);
+      } else if (o.op === 'scale_region') {
+        // 区域放大拉伸（外形/比例改变），以底边中点为锚点，放大后完全盖住原物体
+        const sw = Math.round(cw * (o.sx ?? 1) / 2) * 2; const sh = Math.round(ch * (o.sy ?? 1) / 2) * 2;
+        px = cx + Math.round((cw - sw) / 2); py = cy + (ch - sh);
+        const Fs = Math.max(2, Math.round(Math.min(sw, sh) * (o.feather ?? 0.08)));
+        chains.push(`[${v}]split[${nv}b][${nv}s]`,
+          `[${nv}s]${crop},scale=${sw}:${sh},format=rgba,geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='255*clip(min(min(X,W-1-X),min(Y,H-1-Y))/${Fs},0,1)'[${nv}c]`);
+      } else if (o.op === 'warp_region') {
+        // 局部扭曲（像融化、变形）：镜头畸变滤镜作用在区域内
+        chains.push(`[${v}]split[${nv}b][${nv}s]`,
+          `[${nv}s]${crop},lenscorrection=cx=0.5:cy=0.5:k1=${o.k1 ?? -0.6}:k2=${o.k2 ?? 0.4},${feather}[${nv}c]`);
       } else if (o.op === 'freeze_region') {
         // 区域停在源时间 at 那一帧（例如玻璃杯一直是空的）
         const total = totalDur(pieces) + 1;
@@ -129,8 +141,27 @@ export function buildFilter({ pieces, overlays = [] }, probe, { font } = {}) {
       chains.push(`[${v}]drawbox=x=0:y=0:w=iw:h=ih:color=${o.color || 'white'}@1:t=fill:${between([o.out[0], e])}[${nv}]`);
     } else if (o.op === 'caption') {
       if (!font) throw new Error('caption 需要 --font 指定含中文字形的字体文件');
-      chains.push(`[${v}]drawtext=fontfile='${font}':text='${escapeText(o.text)}':expansion=none:fontsize=h/20:fontcolor=white:` +
-        `borderw=4:bordercolor=black@0.8:x=(w-tw)/2:y=h*0.78:${between(o.out)}[${nv}]`);
+      chains.push(`[${v}]drawtext=fontfile='${font}':text='${escapeText(o.text)}':expansion=none:fontsize=h/${o.size ?? 20}:fontcolor=white:` +
+        `borderw=${o.size && o.size > 30 ? 2 : 4}:bordercolor=black@0.8:x=${o.x !== undefined ? `w*${o.x}` : '(w-tw)/2'}:y=h*${o.y ?? 0.78}:${between(o.out)}[${nv}]`);
+    } else if (o.op === 'text_overlay') {
+      // 印在物体表面的文字（例如伪文字）：无描边、半透明，贴在给定位置
+      if (!font) throw new Error('text_overlay 需要 --font');
+      chains.push(`[${v}]drawtext=fontfile='${font}':text='${escapeText(o.text)}':expansion=none:fontsize=h/${o.size ?? 60}:` +
+        `fontcolor=${o.color || 'white'}@${o.opacity ?? 0.75}:x=w*${o.region ? o.region[0] : o.x}:y=h*${o.region ? o.region[1] : o.y}:${between(o.out)}[${nv}]`);
+    } else if (o.op === 'zoom') {
+      // 干扰项：数码推近（广告常用），画面逐渐放大到 scale 倍后保持
+      const [s0, s1] = o.out; const k = (o.scale ?? 1.15) - 1;
+      const f = `(1+${k}*clip((t-${n(s0)})/${n(Math.max(0.01, s1 - s0))},0,1))`;
+      // crop 的宽高只在初始化时求值，不能逐帧变化；改为逐帧放大（eval=frame）再居中裁回原尺寸
+      chains.push(`[${v}]scale=w='trunc(iw*${f}/2)*2':h='trunc(ih*${f}/2)*2':eval=frame,crop=${W}:${H},setsar=1[${nv}]`);
+    } else if (o.op === 'grade') {
+      // 干扰项：整体调色（色温），所有物体一起变，不是产品颜色错误
+      chains.push(`[${v}]colortemperature=temperature=${o.temperature ?? 4500}:mix=${o.mix ?? 1}[${nv}]`);
+    } else if (o.op === 'av_offset') {
+      if (!audio) throw new Error('av_offset 需要底片带音轨');
+      const na = `ao${j}`; const ms = Math.round(o.ms ?? 500);
+      chains.push(`[${a}]adelay=${ms}:all=1,atrim=duration=${n(totalDur(pieces))}[${na}]`);
+      a = na; j++; continue;
     } else if (o.op === 'mute') {
       if (!audio) throw new Error('mute 需要底片带音轨');
       const na = `ao${j}`;
@@ -166,6 +197,9 @@ export async function probe(ffmpeg, input) {
 
 export async function render(ffmpeg, input, output, timeline, probeInfo, opts) {
   await mkdir(path.dirname(output), { recursive: true });
-  const r = await exec(ffmpeg, ffmpegArgs(input, output, timeline, probeInfo, opts));
-  if (r.code !== 0) throw new Error(`ffmpeg 失败: ${r.stderr.trim().split('\n').slice(-3).join(' | ').slice(0, 400)}`);
+  // 先写临时文件，成功后再改名：失败时不会留下空文件被下次当成「已完成」
+  const tmp = output.replace(/\.mp4$/, '.part.mp4');
+  const r = await exec(ffmpeg, ffmpegArgs(input, tmp, timeline, probeInfo, opts));
+  if (r.code !== 0) { await rm(tmp, { force: true }); throw new Error(`ffmpeg 失败: ${r.stderr.trim().split('\n').slice(-3).join(' | ').slice(0, 400)}`); }
+  await rename(tmp, output);
 }

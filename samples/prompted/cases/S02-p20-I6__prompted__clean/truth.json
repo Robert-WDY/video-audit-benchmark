@@ -1,0 +1,26 @@
+{
+  "case_id": "S02-p20-I6__prompted__clean",
+  "blind_id": "v_b6f2ce3fa7",
+  "video": "S02-p20-I6__prompted__clean__ok.mp4",
+  "tier": "clean",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S02",
+  "take": "S02-p20-I6",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": false,
+  "injected": [],
+  "base_errors": [],
+  "base_notes": [
+    "要求的六根手指未出现，掌心朝镜头清楚是 5 根：难负样本"
+  ],
+  "requested": [
+    "S02.I6"
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

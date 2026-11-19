@@ -1,0 +1,79 @@
+{
+  "case_id": "S05-h3e__combo__S05.I1+S05.I11",
+  "blind_id": "v_04505cf694",
+  "video": "S05-h3e__combo__S05.I1+S05.I11__TC4+PF8.mp4",
+  "tier": "combo",
+  "pattern": "mask",
+  "continuous": false,
+  "ref": null,
+  "scene": "S05",
+  "take": "S05-h3e",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [
+    "手 3.5 秒才离开、3.6 秒屏幕和光环同时亮，没有「手已离开、光环未亮」的画面可做区域定格，排除 S05.I8"
+  ],
+  "injected": [
+    {
+      "id": "S05.I1",
+      "category": "TC",
+      "sub": "TC4",
+      "secondary": [],
+      "category_name": "时序/因果",
+      "sub_name": "前后顺序颠倒",
+      "evidence": "E3",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "先出现手机在板上充电的画面，再出现把手机移过去",
+      "method": "swap",
+      "auto": true,
+      "windows": [
+        [
+          2,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S05.I11",
+      "category": "PF",
+      "sub": "PF8",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "字幕写的规格或卖点与事实不符",
+      "evidence": "E1",
+      "visibility": "V3",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "角落小字写「最高支持 50W 无线快充」，事实为 15W",
+      "method": "caption",
+      "auto": true,
+      "windows": [
+        [
+          2,
+          5
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

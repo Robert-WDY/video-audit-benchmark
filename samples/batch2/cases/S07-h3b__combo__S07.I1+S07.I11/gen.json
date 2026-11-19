@@ -1,0 +1,95 @@
+{
+  "case_id": "S07-h3b__combo__S07.I1+S07.I11",
+  "scene": "S07",
+  "take": "S07-h3b",
+  "source": "../generated/S07__base__seed20261120.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "swap",
+      "a_from": 1.4,
+      "a_to": 2.7,
+      "b_from": 2.7,
+      "b_to": 4.6,
+      "id": "S07.I1"
+    },
+    {
+      "op": "text_overlay",
+      "from": 0,
+      "to": 6,
+      "region": [
+        0.4,
+        0.47,
+        0.2,
+        0.02
+      ],
+      "text": "HUMQ ZEROT",
+      "size": 55,
+      "color": "white",
+      "opacity": 0.75,
+      "id": "S07.I11"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        1.4
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "src": [
+        2.7,
+        4.6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": "S07.I1"
+    },
+    {
+      "src": [
+        1.4,
+        2.7
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": "S07.I1"
+    },
+    {
+      "src": [
+        4.6,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "text_overlay",
+      "from": 0,
+      "to": 6,
+      "region": [
+        0.4,
+        0.47,
+        0.2,
+        0.02
+      ],
+      "text": "HUMQ ZEROT",
+      "size": 55,
+      "color": "white",
+      "opacity": 0.75,
+      "id": "S07.I11",
+      "out": [
+        0,
+        6
+      ]
+    }
+  ],
+  "duration": 6
+}
