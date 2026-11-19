@@ -1,0 +1,45 @@
+{
+  "case_id": "S03-ai-h3__single__S03.I5",
+  "blind_id": "v_5406a9fc73",
+  "tier": "single",
+  "pattern": null,
+  "ref": null,
+  "scene": "S03",
+  "take": "S03-ai-h3",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S03.I5",
+      "category": "SA",
+      "sub": "SA5",
+      "secondary": [
+        "TC2"
+      ],
+      "category_name": "脚本偏离（状态/动作）",
+      "sub_name": "终态错或未达到",
+      "evidence": "E4",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "script",
+      "description": "水倒进去了，但最后玻璃杯仍然是空的",
+      "method": "prompt",
+      "auto": false,
+      "windows": [
+        [
+          4.9,
+          6
+        ]
+      ],
+      "window_status": "estimated",
+      "duration_bucket": "long",
+      "expected_checks": [],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

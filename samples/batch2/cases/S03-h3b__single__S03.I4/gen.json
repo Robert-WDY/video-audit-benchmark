@@ -1,0 +1,40 @@
+{
+  "case_id": "S03-h3b__single__S03.I4",
+  "scene": "S03",
+  "take": "S03-h3b",
+  "source": "../generated/S03__base__seed20261120.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "mute",
+      "from": 2.4,
+      "to": 4.8,
+      "id": "S03.I4"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "mute",
+      "from": 2.4,
+      "to": 4.8,
+      "id": "S03.I4",
+      "out": [
+        2.4,
+        4.8
+      ]
+    }
+  ],
+  "duration": 6
+}

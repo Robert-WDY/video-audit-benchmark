@@ -1,0 +1,17 @@
+{
+  "case_id": "S05-h3b__control__S05.I2",
+  "blind_id": "v_2bd1d1a219",
+  "tier": "control",
+  "pattern": null,
+  "ref": "S05-h3b__single__S05.I2",
+  "scene": "S05",
+  "take": "S05-h3b",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6,
+  "decoy": null,
+  "should_block": false,
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

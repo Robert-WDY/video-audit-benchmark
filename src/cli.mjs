@@ -97,7 +97,7 @@ const commands = {
       const gen = await readJson(path.join(d, 'gen.json')); const truth = await readJson(path.join(d, 'truth.json'));
       const dst = path.join(out, 'videos', `${truth.blind_id}.mp4`);
       if (existsSync(dst) && !a.force) { ok++; continue; }
-      const src = gen.needs_manual ? path.join(out, 'manual', `${gen.case_id}.mp4`) : gen.source;
+      const src = gen.needs_manual ? path.join(out, 'manual', `${gen.case_id}.mp4`) : path.resolve(out, gen.source);
       if (a['dry-run'] && !gen.needs_manual) {
         const fake = { duration: gen.duration, width: 1080, height: 1920, fps: 30, audio: true };
         const args = ffmpegArgs(src, dst, gen, existsSync(src) && existsSync(a.ffmpeg) ? await probe(a.ffmpeg, src) : fake, { font: a.font || '/path/to/cjk-font.ttc' });

@@ -1,0 +1,17 @@
+{
+  "case_id": "S07-h3b__clean__base",
+  "blind_id": "v_16b4e4cd93",
+  "tier": "clean",
+  "pattern": null,
+  "ref": null,
+  "scene": "S07",
+  "take": "S07-h3b",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": false,
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

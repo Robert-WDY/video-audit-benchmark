@@ -1,0 +1,64 @@
+{
+  "case_id": "S07-h3b__combo__S07.I1+S07.I6",
+  "scene": "S07",
+  "take": "S07-h3b",
+  "source": "../generated/S07__base__seed20261120.mp4",
+  "needs_manual": true,
+  "manual_tasks": [
+    {
+      "for": "S07.I6",
+      "method": "ref_edit",
+      "instruction": "在首帧顶部光环内加第 4 个按键，图生视频，按键动作照抄底片"
+    }
+  ],
+  "ops": [
+    {
+      "op": "swap",
+      "a_from": 1.4,
+      "a_to": 2,
+      "b_from": 2,
+      "b_to": 4.6,
+      "id": "S07.I1"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        1.4
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "src": [
+        2,
+        4.6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": "S07.I1"
+    },
+    {
+      "src": [
+        1.4,
+        2
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": "S07.I1"
+    },
+    {
+      "src": [
+        4.6,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [],
+  "duration": 6
+}

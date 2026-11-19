@@ -1,0 +1,21 @@
+{
+  "case_id": "S03-h3b__decoy__S03.D2",
+  "blind_id": "v_6feb35c005",
+  "tier": "decoy",
+  "pattern": null,
+  "ref": null,
+  "scene": "S03",
+  "take": "S03-h3b",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 8.4,
+  "decoy": {
+    "id": "S03.D2",
+    "looks_like": "TE2",
+    "description": "倒水段 0.5 倍慢动作"
+  },
+  "should_block": false,
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

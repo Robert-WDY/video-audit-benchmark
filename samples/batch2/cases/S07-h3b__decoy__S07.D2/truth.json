@@ -1,0 +1,21 @@
+{
+  "case_id": "S07-h3b__decoy__S07.D2",
+  "blind_id": "v_61c1e9da4c",
+  "tier": "decoy",
+  "pattern": null,
+  "ref": null,
+  "scene": "S07",
+  "take": "S07-h3b",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6.6,
+  "decoy": {
+    "id": "S07.D2",
+    "looks_like": "TE2",
+    "description": "开机后定格 0.6 秒"
+  },
+  "should_block": false,
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

@@ -1,0 +1,74 @@
+{
+  "case_id": "S05-h3b__multi__S05.I2+S05.I6",
+  "blind_id": "v_ba3ff50f96",
+  "tier": "multi",
+  "pattern": "overlap",
+  "ref": null,
+  "scene": "S05",
+  "take": "S05-h3b",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S05.I2",
+      "category": "PF",
+      "sub": "PF8",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "字幕写的规格或卖点与事实不符",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "字幕写 50W，事实是 15W",
+      "method": "caption",
+      "auto": true,
+      "windows": [
+        [
+          3,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S05.I6",
+      "category": "PF",
+      "sub": "PF7",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "展示了事实中不存在的功能",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "手机投射出全息充电进度（产品没有此功能）",
+      "method": "prompt",
+      "auto": false,
+      "windows": [
+        [
+          4.3,
+          6
+        ]
+      ],
+      "window_status": "estimated",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

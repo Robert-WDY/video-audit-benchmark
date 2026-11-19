@@ -60,3 +60,12 @@ test('字幕缺字体时报错；无音轨时不建音频链', () => {
 test('转义冒号和反斜杠', () => {
   assert.equal(escapeText('a:b'), 'a\\:b');
 });
+
+test('按颜色选区换色：只改 key 颜色附近的像素', () => {
+  const tl = applyOps(8, [{ op: 'tint', from: 4, to: 8, region: [0, 0, 1, 1], hue: 90, key: '#2aa8ff', similarity: 0.35, id: 'K' }]);
+  const { filter } = buildFilter(tl, P);
+  assert.match(filter, /split=3/);
+  assert.match(filter, /colorkey=color=0x2aa8ff:similarity=0\.35:blend=0\.15,alphaextract,negate/);
+  assert.match(filter, /alphamerge/);
+  assert.match(filter, /overlay=0:0:enable='between\(t,4\.0000,8\.0000\)'/);
+});

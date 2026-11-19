@@ -1,0 +1,55 @@
+{
+  "case_id": "S05-h3b__multi__S05.I1+S05.I7",
+  "scene": "S05",
+  "take": "S05-h3b",
+  "source": "../generated/S05__base__seed20261120.mp4",
+  "needs_manual": true,
+  "manual_tasks": [
+    {
+      "for": "S05.I7",
+      "method": "inpaint",
+      "instruction": "在正确底片上把 ring_on 之后的指示环和屏幕动画修补成熄灭状态"
+    }
+  ],
+  "ops": [
+    {
+      "op": "swap",
+      "a_from": 1.7,
+      "a_to": 3,
+      "b_from": 3,
+      "b_to": 6,
+      "id": "S05.I1"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        1.7
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "src": [
+        3,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": "S05.I1"
+    },
+    {
+      "src": [
+        1.7,
+        3
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": "S05.I1"
+    }
+  ],
+  "overlays": [],
+  "duration": 6
+}

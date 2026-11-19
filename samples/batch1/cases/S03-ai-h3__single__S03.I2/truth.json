@@ -1,0 +1,45 @@
+{
+  "case_id": "S03-ai-h3__single__S03.I2",
+  "blind_id": "v_601d6ffb68",
+  "tier": "single",
+  "pattern": null,
+  "ref": null,
+  "scene": "S03",
+  "take": "S03-ai-h3",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 4.3,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S03.I2",
+      "category": "TC",
+      "sub": "TC1",
+      "secondary": [],
+      "category_name": "时序/因果",
+      "sub_name": "瞬移或位置跳变",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "fix",
+      "judge_basis": "common_sense",
+      "description": "保温杯从刚拿起直接跳到倒水中途的倾斜角度",
+      "method": "drop",
+      "auto": true,
+      "windows": [
+        [
+          1,
+          1.6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "instant",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

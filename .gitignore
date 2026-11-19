@@ -4,5 +4,6 @@ out/
 *-out/
 sources/
 *.mp4
+!samples/**/*.mp4
 *.mov
 .env

@@ -1,0 +1,42 @@
+{
+  "case_id": "S05-h3b__single__S05.I3",
+  "scene": "S05",
+  "take": "S05-h3b",
+  "source": "../generated/S05__base__seed20261120.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "black",
+      "at": 1.7,
+      "dur": 0.6,
+      "id": "S05.I3"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        1.7
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "black": 0.6,
+      "tag": "S05.I3"
+    },
+    {
+      "src": [
+        1.7,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [],
+  "duration": 6.6
+}

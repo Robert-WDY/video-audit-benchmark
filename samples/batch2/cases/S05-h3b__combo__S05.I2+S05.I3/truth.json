@@ -1,0 +1,73 @@
+{
+  "case_id": "S05-h3b__combo__S05.I2+S05.I3",
+  "blind_id": "v_8bfc011f89",
+  "tier": "combo",
+  "pattern": "separate",
+  "ref": null,
+  "scene": "S05",
+  "take": "S05-h3b",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6.6,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S05.I2",
+      "category": "PF",
+      "sub": "PF8",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "字幕写的规格或卖点与事实不符",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "字幕写 50W，事实是 15W",
+      "method": "caption",
+      "auto": true,
+      "windows": [
+        [
+          3.6,
+          6.6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S05.I3",
+      "category": "TE",
+      "sub": "TE1",
+      "secondary": [],
+      "category_name": "技术缺陷",
+      "sub_name": "黑场",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "移动手机时插入 0.6 秒黑场",
+      "method": "black",
+      "auto": true,
+      "windows": [
+        [
+          1.7,
+          2.3
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "short",
+      "expected_checks": [
+        "black_silence"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

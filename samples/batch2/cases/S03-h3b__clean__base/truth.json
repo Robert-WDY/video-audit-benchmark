@@ -1,0 +1,17 @@
+{
+  "case_id": "S03-h3b__clean__base",
+  "blind_id": "v_831ea2571d",
+  "tier": "clean",
+  "pattern": null,
+  "ref": null,
+  "scene": "S03",
+  "take": "S03-h3b",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6,
+  "decoy": null,
+  "should_block": false,
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

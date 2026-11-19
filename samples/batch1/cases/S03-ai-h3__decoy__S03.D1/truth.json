@@ -1,0 +1,21 @@
+{
+  "case_id": "S03-ai-h3__decoy__S03.D1",
+  "blind_id": "v_3940a7b3d2",
+  "tier": "decoy",
+  "pattern": null,
+  "ref": null,
+  "scene": "S03",
+  "take": "S03-ai-h3",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": {
+    "id": "S03.D1",
+    "looks_like": "PH2",
+    "description": "倾斜时保温杯里的液面随之倾斜（正常物理）"
+  },
+  "should_block": false,
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

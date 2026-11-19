@@ -6,57 +6,231 @@
     "name": "Hum 蓝牙音箱",
     "appearance": "深灰色布面圆柱音箱，顶部一圈光环，光环内 3 个圆形按键（中间为电源键）",
     "facts": [
-      { "id": "F1", "claim": "顶部 3 个按键，中间是电源键" },
-      { "id": "F2", "claim": "按下电源键后顶部光环亮蓝色" },
-      { "id": "F3", "claim": "续航 12 小时" },
-      { "id": "F4", "claim": "开机时有提示音" }
+      {
+        "id": "F1",
+        "claim": "顶部 3 个按键，中间是电源键"
+      },
+      {
+        "id": "F2",
+        "claim": "按下电源键后顶部光环亮蓝色"
+      },
+      {
+        "id": "F3",
+        "claim": "续航 12 小时"
+      },
+      {
+        "id": "F4",
+        "claim": "开机时有提示音"
+      }
     ]
   },
-  "captions": ["一键开机", "12 小时续航"],
+  "captions": [
+    "一键开机",
+    "12 小时续航"
+  ],
   "script": {
     "start_state": "音箱立在木桌上，光环熄灭",
     "actions": [
-      { "id": "A1", "actor": "人手", "desc": "食指伸向电源键", "from": "reach", "to": "press" },
-      { "id": "A2", "actor": "人手", "desc": "按下电源键", "from": "press", "to": "light_on" },
-      { "id": "A3", "actor": "设备", "desc": "光环亮蓝色，伴随提示音", "from": "light_on", "to": "settle" }
+      {
+        "id": "A1",
+        "actor": "人手",
+        "desc": "食指伸向电源键",
+        "from": "reach",
+        "to": "press"
+      },
+      {
+        "id": "A2",
+        "actor": "人手",
+        "desc": "按下电源键",
+        "from": "press",
+        "to": "light_on"
+      },
+      {
+        "id": "A3",
+        "actor": "设备",
+        "desc": "光环亮蓝色，伴随提示音",
+        "from": "light_on",
+        "to": "settle"
+      }
     ],
     "end_state": "手离开，光环保持蓝色常亮"
   },
-  "shooting": { "duration_s": 6, "camera": "固定机位，俯拍 30 度，9:16", "notes": "收录开机提示音；拍完填写 ring 区域" },
+  "shooting": {
+    "duration_s": 6,
+    "camera": "固定机位，俯拍 30 度，9:16",
+    "notes": "收录开机提示音；拍完填写 ring 区域"
+  },
   "markers": {
-    "reach": "手指入镜", "press": "手指按到按键", "light_on": "光环亮起", "settle": "手离开画面"
+    "reach": "手指入镜",
+    "press": "手指按到按键",
+    "light_on": "光环亮起",
+    "settle": "手离开画面"
   },
   "injections": [
-    { "id": "S07.I1", "category": "TC", "sub": "TC4", "secondary": ["TC5"], "evidence": "E3", "visibility": "V1", "disposition": "block",
+    {
+      "id": "S07.I1",
+      "category": "TC",
+      "sub": "TC4",
+      "secondary": [
+        "TC5"
+      ],
+      "evidence": "E3",
+      "visibility": "V1",
+      "disposition": "block",
       "description": "光环先亮，手指之后才去按键",
-      "ops": [{ "op": "swap", "a_from": "reach", "a_to": "press", "b_from": "press", "b_to": "settle" }] },
-    { "id": "S07.I2", "category": "PF", "sub": "PF8", "evidence": "E1", "visibility": "V1", "disposition": "block",
+      "ops": [
+        {
+          "op": "swap",
+          "a_from": "reach",
+          "a_to": "press",
+          "b_from": "press",
+          "b_to": "settle"
+        }
+      ]
+    },
+    {
+      "id": "S07.I2",
+      "category": "PF",
+      "sub": "PF8",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
       "description": "字幕写 24 小时续航，事实是 12 小时",
-      "ops": [{ "op": "caption", "from": "light_on", "to": "end", "text": "24 小时超长续航" }],
-      "control": [{ "op": "caption", "from": "light_on", "to": "end", "text": "12 小时续航" }] },
-    { "id": "S07.I3", "category": "TE", "sub": "TE2", "evidence": "E2", "visibility": "V1", "disposition": "fix",
+      "ops": [
+        {
+          "op": "caption",
+          "from": "light_on",
+          "to": "end",
+          "text": "24 小时超长续航"
+        }
+      ],
+      "control": [
+        {
+          "op": "caption",
+          "from": "light_on",
+          "to": "end",
+          "text": "12 小时续航"
+        }
+      ]
+    },
+    {
+      "id": "S07.I3",
+      "category": "TE",
+      "sub": "TE2",
+      "evidence": "E2",
+      "visibility": "V1",
+      "disposition": "fix",
       "description": "光环亮起瞬间冻帧 1.5 秒",
-      "ops": [{ "op": "freeze", "at": "light_on", "dur": 1.5 }] },
-    { "id": "S07.I4", "category": "TE", "sub": "TE3", "evidence": "E4", "visibility": "V1", "disposition": "fix",
+      "ops": [
+        {
+          "op": "freeze",
+          "at": "light_on",
+          "dur": 1.5
+        }
+      ]
+    },
+    {
+      "id": "S07.I4",
+      "category": "TE",
+      "sub": "TE3",
+      "evidence": "E4",
+      "visibility": "V1",
+      "disposition": "fix",
       "description": "全片无声（开机提示音也没有）",
-      "ops": [{ "op": "mute", "from": "start", "to": "end" }] },
-    { "id": "S07.I5", "category": "PF", "sub": "PF5", "evidence": "E1", "visibility": "V2", "disposition": "fix",
+      "ops": [
+        {
+          "op": "mute",
+          "from": "start",
+          "to": "end"
+        }
+      ]
+    },
+    {
+      "id": "S07.I5",
+      "category": "PF",
+      "sub": "PF5",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "fix",
       "description": "光环亮成紫红色（事实为蓝色）",
-      "ops": [{ "op": "tint", "from": "light_on", "to": "end", "region": "ring", "hue": 90 }] },
-    { "id": "S07.I6", "category": "PF", "sub": "PF3", "evidence": "E1", "visibility": "V2", "disposition": "block",
+      "ops": [
+        {
+          "op": "tint",
+          "from": "light_on",
+          "to": "end",
+          "region": "ring",
+          "hue": 90,
+          "key": "#2aa8ff",
+          "similarity": 0.35
+        }
+      ]
+    },
+    {
+      "id": "S07.I6",
+      "category": "PF",
+      "sub": "PF3",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "block",
       "description": "顶部有 4 个按键",
-      "ops": [{ "op": "manual", "method": "ref_edit", "window": { "from": "start", "to": "end" },
-        "instruction": "在首帧顶部光环内加第 4 个按键，图生视频，按键动作照抄底片" }] },
-    { "id": "S07.I7", "category": "TC", "sub": "TC6", "evidence": "E4", "visibility": "V2", "disposition": "block",
+      "ops": [
+        {
+          "op": "manual",
+          "method": "ref_edit",
+          "window": {
+            "from": "start",
+            "to": "end"
+          },
+          "instruction": "在首帧顶部光环内加第 4 个按键，图生视频，按键动作照抄底片"
+        }
+      ]
+    },
+    {
+      "id": "S07.I7",
+      "category": "TC",
+      "sub": "TC6",
+      "evidence": "E4",
+      "visibility": "V2",
+      "disposition": "block",
       "description": "按下电源键后光环始终不亮",
-      "ops": [{ "op": "manual", "method": "inpaint", "window": { "from": "light_on", "to": "end" },
-        "instruction": "在正确底片上把 light_on 之后的光环修补成熄灭状态" }] }
+      "ops": [
+        {
+          "op": "manual",
+          "method": "inpaint",
+          "window": {
+            "from": "light_on",
+            "to": "end"
+          },
+          "instruction": "在正确底片上把 light_on 之后的光环修补成熄灭状态"
+        }
+      ]
+    }
   ],
   "decoys": [
-    { "id": "S07.D1", "looks_like": "PF5", "description": "光环呼吸灯式明暗变化（产品正常行为）",
-      "ops": [{ "op": "manual", "method": "shoot", "instruction": "实拍：使用呼吸灯模式开机，光环亮度周期变化" }] },
-    { "id": "S07.D2", "looks_like": "TE2", "description": "开机后定格 0.6 秒",
-      "ops": [{ "op": "freeze", "at": "settle", "dur": 0.6 }] }
+    {
+      "id": "S07.D1",
+      "looks_like": "PF5",
+      "description": "光环呼吸灯式明暗变化（产品正常行为）",
+      "ops": [
+        {
+          "op": "manual",
+          "method": "shoot",
+          "instruction": "实拍：使用呼吸灯模式开机，光环亮度周期变化"
+        }
+      ]
+    },
+    {
+      "id": "S07.D2",
+      "looks_like": "TE2",
+      "description": "开机后定格 0.6 秒",
+      "ops": [
+        {
+          "op": "freeze",
+          "at": "settle",
+          "dur": 0.6
+        }
+      ]
+    }
   ],
   "chains": []
 }

@@ -1,0 +1,48 @@
+{
+  "case_id": "S05-h3b__multi__S05.I2+S05.I6",
+  "scene": "S05",
+  "take": "S05-h3b",
+  "source": "../generated/S05__base__seed20261120.mp4",
+  "needs_manual": true,
+  "manual_tasks": [
+    {
+      "for": "S05.I6",
+      "method": "prompt",
+      "instruction": "照脚本生成，充电时手机上方出现悬浮的全息电量百分比投影"
+    }
+  ],
+  "ops": [
+    {
+      "op": "caption",
+      "from": 3,
+      "to": 6,
+      "text": "50W 无线超级快充",
+      "id": "S05.I2"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "caption",
+      "from": 3,
+      "to": 6,
+      "text": "50W 无线超级快充",
+      "id": "S05.I2",
+      "out": [
+        3,
+        6
+      ]
+    }
+  ],
+  "duration": 6
+}

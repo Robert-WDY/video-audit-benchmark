@@ -1,0 +1,5 @@
+{ "takes": [
+  { "id": "S03-ai-h3", "scene": "S03", "kind": "ai", "path": "../generated/S03__base__seed20261119.mp4", "duration": 6.0, "verified_clean": false,
+    "markers": { "lift_start": 0.8, "tilt_start": 1.3, "pour_start": 2.0, "pour_end": 4.9, "set_down": 5.3 },
+    "regions": { "glass": [0.18, 0.62, 0.40, 0.30] } }
+] }

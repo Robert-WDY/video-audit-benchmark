@@ -1,0 +1,74 @@
+{
+  "case_id": "S03-h3b__combo__S03.I1+S03.I5",
+  "blind_id": "v_ac46f47199",
+  "tier": "combo",
+  "pattern": "overlap",
+  "ref": null,
+  "scene": "S03",
+  "take": "S03-h3b",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S03.I1",
+      "category": "PH",
+      "sub": "PH2",
+      "secondary": [
+        "TC3"
+      ],
+      "category_name": "物理",
+      "sub_name": "流体错误（向上流、穿过杯壁、凭空出现）",
+      "evidence": "E2",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "倒水段倒放：水从玻璃杯向上流回保温杯（前后衔接处液面也会跳变，算同一处错误）",
+      "method": "reverse",
+      "auto": true,
+      "windows": [
+        [
+          2.4,
+          4.8
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S03.I5",
+      "category": "SA",
+      "sub": "SA5",
+      "secondary": [
+        "TC2"
+      ],
+      "category_name": "脚本偏离（状态/动作）",
+      "sub_name": "终态错或未达到",
+      "evidence": "E4",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "script",
+      "description": "水倒进去了，但最后玻璃杯仍然是空的",
+      "method": "prompt",
+      "auto": false,
+      "windows": [
+        [
+          4.8,
+          6
+        ]
+      ],
+      "window_status": "estimated",
+      "duration_bucket": "long",
+      "expected_checks": [],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

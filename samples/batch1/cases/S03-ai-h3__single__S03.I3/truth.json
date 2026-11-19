@@ -1,0 +1,45 @@
+{
+  "case_id": "S03-ai-h3__single__S03.I3",
+  "blind_id": "v_5310396e68",
+  "tier": "single",
+  "pattern": null,
+  "ref": null,
+  "scene": "S03",
+  "take": "S03-ai-h3",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6.8,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S03.I3",
+      "category": "TC",
+      "sub": "TC3",
+      "secondary": [],
+      "category_name": "时序/因果",
+      "sub_name": "状态回跳（已发生的变化又复原）",
+      "evidence": "E3",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "放回保温杯后，画面回到开头：玻璃杯又变空",
+      "method": "insert",
+      "auto": true,
+      "windows": [
+        [
+          5.3,
+          6.1
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "short",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

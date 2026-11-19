@@ -1,0 +1,75 @@
+{
+  "case_id": "S07-h3b__combo__S07.I1+S07.I5",
+  "blind_id": "v_0a0d937ec0",
+  "tier": "combo",
+  "pattern": "overlap",
+  "ref": null,
+  "scene": "S07",
+  "take": "S07-h3b",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S07.I1",
+      "category": "TC",
+      "sub": "TC4",
+      "secondary": [
+        "TC5"
+      ],
+      "category_name": "时序/因果",
+      "sub_name": "前后顺序颠倒",
+      "evidence": "E3",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "光环先亮，手指之后才去按键",
+      "method": "swap",
+      "auto": true,
+      "windows": [
+        [
+          1.4,
+          4.6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S07.I5",
+      "category": "PF",
+      "sub": "PF5",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "屏幕/指示灯/UI 与事实不符",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "fix",
+      "judge_basis": "facts",
+      "description": "光环亮成紫红色（事实为蓝色）",
+      "method": "tint",
+      "auto": true,
+      "windows": [
+        [
+          3.3,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

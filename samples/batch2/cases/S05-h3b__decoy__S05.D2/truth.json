@@ -1,0 +1,21 @@
+{
+  "case_id": "S05-h3b__decoy__S05.D2",
+  "blind_id": "v_331f6bcbbd",
+  "tier": "decoy",
+  "pattern": null,
+  "ref": null,
+  "scene": "S05",
+  "take": "S05-h3b",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6.6,
+  "decoy": {
+    "id": "S05.D2",
+    "looks_like": "TE2",
+    "description": "放上后定格 0.6 秒强调结果"
+  },
+  "should_block": false,
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

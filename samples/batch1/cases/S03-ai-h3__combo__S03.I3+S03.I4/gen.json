@@ -1,0 +1,74 @@
+{
+  "case_id": "S03-ai-h3__combo__S03.I3+S03.I4",
+  "scene": "S03",
+  "take": "S03-ai-h3",
+  "source": "../generated/S03__base__seed20261119.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "insert",
+      "from": 0,
+      "to": 0.8,
+      "at": 5.3,
+      "id": "S03.I3"
+    },
+    {
+      "op": "mute",
+      "from": 2,
+      "to": 4.9,
+      "id": "S03.I4"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        0.8
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "src": [
+        0.8,
+        5.3
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "src": [
+        0,
+        0.8
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": "S03.I3"
+    },
+    {
+      "src": [
+        5.3,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "mute",
+      "from": 2,
+      "to": 4.9,
+      "id": "S03.I4",
+      "out": [
+        2,
+        4.9
+      ]
+    }
+  ],
+  "duration": 6.8
+}

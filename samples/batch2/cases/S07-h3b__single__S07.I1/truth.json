@@ -1,0 +1,47 @@
+{
+  "case_id": "S07-h3b__single__S07.I1",
+  "blind_id": "v_76f5fe7fe9",
+  "tier": "single",
+  "pattern": null,
+  "ref": null,
+  "scene": "S07",
+  "take": "S07-h3b",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S07.I1",
+      "category": "TC",
+      "sub": "TC4",
+      "secondary": [
+        "TC5"
+      ],
+      "category_name": "时序/因果",
+      "sub_name": "前后顺序颠倒",
+      "evidence": "E3",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "光环先亮，手指之后才去按键",
+      "method": "swap",
+      "auto": true,
+      "windows": [
+        [
+          1.4,
+          4.6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

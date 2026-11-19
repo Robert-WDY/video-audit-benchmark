@@ -1,0 +1,53 @@
+{
+  "case_id": "S03-h3b__multi__S03.I1+S03.I6",
+  "scene": "S03",
+  "take": "S03-h3b",
+  "source": "../generated/S03__base__seed20261120.mp4",
+  "needs_manual": true,
+  "manual_tasks": [
+    {
+      "for": "S03.I6",
+      "method": "prompt",
+      "instruction": "照脚本生成，但水流穿透玻璃杯侧壁直接落到桌面上"
+    }
+  ],
+  "ops": [
+    {
+      "op": "reverse",
+      "from": 2.4,
+      "to": 4.8,
+      "id": "S03.I1"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        2.4
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "src": [
+        2.4,
+        4.8
+      ],
+      "rev": true,
+      "speed": 1,
+      "tag": "S03.I1"
+    },
+    {
+      "src": [
+        4.8,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [],
+  "duration": 6
+}

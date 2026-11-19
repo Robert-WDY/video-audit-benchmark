@@ -1,0 +1,45 @@
+{
+  "case_id": "S07-h3b__single__S07.I7",
+  "blind_id": "v_b04d91f92a",
+  "tier": "single",
+  "pattern": null,
+  "ref": null,
+  "scene": "S07",
+  "take": "S07-h3b",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S07.I7",
+      "category": "TC",
+      "sub": "TC6",
+      "secondary": [],
+      "category_name": "时序/因果",
+      "sub_name": "有因无果（按下开关毫无反应，且事实声明开关有效）",
+      "evidence": "E4",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "按下电源键后光环始终不亮",
+      "method": "inpaint",
+      "auto": false,
+      "windows": [
+        [
+          3.9,
+          6
+        ]
+      ],
+      "window_status": "estimated",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

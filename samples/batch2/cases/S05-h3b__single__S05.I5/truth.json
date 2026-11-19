@@ -1,0 +1,47 @@
+{
+  "case_id": "S05-h3b__single__S05.I5",
+  "blind_id": "v_8dda85a415",
+  "tier": "single",
+  "pattern": null,
+  "ref": null,
+  "scene": "S05",
+  "take": "S05-h3b",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S05.I5",
+      "category": "PH",
+      "sub": "PH1",
+      "secondary": [
+        "PF7"
+      ],
+      "category_name": "物理",
+      "sub_name": "重力错误（悬浮、无支撑平衡）",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "手机悬在充电板上方约 1cm 却显示充电",
+      "method": "prompt",
+      "auto": false,
+      "windows": [
+        [
+          3,
+          6
+        ]
+      ],
+      "window_status": "estimated",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

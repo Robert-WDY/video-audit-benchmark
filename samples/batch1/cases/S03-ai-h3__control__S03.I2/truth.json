@@ -1,0 +1,17 @@
+{
+  "case_id": "S03-ai-h3__control__S03.I2",
+  "blind_id": "v_a98115b99c",
+  "tier": "control",
+  "pattern": null,
+  "ref": "S03-ai-h3__single__S03.I2",
+  "scene": "S03",
+  "take": "S03-ai-h3",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": false,
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

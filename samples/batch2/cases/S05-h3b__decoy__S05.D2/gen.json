@@ -1,0 +1,43 @@
+{
+  "case_id": "S05-h3b__decoy__S05.D2",
+  "scene": "S05",
+  "take": "S05-h3b",
+  "source": "../generated/S05__base__seed20261120.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "freeze",
+      "at": 4.3,
+      "dur": 0.6,
+      "id": null
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        4.3
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "hold": 4.283333333333333,
+      "dur": 0.6,
+      "tag": null
+    },
+    {
+      "src": [
+        4.3,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [],
+  "duration": 6.6
+}
