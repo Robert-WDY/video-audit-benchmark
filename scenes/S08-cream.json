@@ -1,0 +1,223 @@
+{
+  "id": "S08",
+  "name": "面霜取用涂抹",
+  "structure": "sensory-closeup",
+  "product": {
+    "name": "AURA 保湿面霜",
+    "appearance": "磨砂白玻璃圆罐，金色金属盖，盖面压印 AURA；霜体纯白",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": "净含量 50g"
+      },
+      {
+        "id": "F2",
+        "claim": "霜体纯白色"
+      },
+      {
+        "id": "F3",
+        "claim": "无添加香精"
+      }
+    ]
+  },
+  "captions": [
+    "50g 水润面霜"
+  ],
+  "script": {
+    "start_state": "盖好的面霜罐放在大理石台面上，旁边是一只手背",
+    "actions": [
+      {
+        "id": "A1",
+        "actor": "人手",
+        "desc": "拧开并取下金色盖",
+        "from": "start",
+        "to": "lid_off"
+      },
+      {
+        "id": "A2",
+        "actor": "人手",
+        "desc": "指尖蘸取霜体",
+        "from": "dip",
+        "to": "scoop_end"
+      },
+      {
+        "id": "A3",
+        "actor": "人手",
+        "desc": "在手背上涂开",
+        "from": "apply_start",
+        "to": "apply_end"
+      }
+    ],
+    "end_state": "罐子开着，霜面有一道指痕；手背上霜体已推开吸收"
+  },
+  "shooting": {
+    "duration_s": 8.5,
+    "camera": "固定机位，俯拍微距，9:16",
+    "notes": "拍完填写 jar 区域（罐口霜面）"
+  },
+  "markers": {
+    "lid_off": "盖子离开罐身",
+    "dip": "指尖碰到霜面",
+    "scoop_end": "指尖带着霜离开罐口",
+    "apply_start": "霜碰到手背",
+    "apply_end": "涂抹结束"
+  },
+  "injections": [
+    {
+      "id": "S08.I1",
+      "category": "PF",
+      "sub": "PF1",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "block",
+      "description": "罐内霜体变成粉色（事实为纯白）",
+      "ops": [
+        {
+          "op": "tint",
+          "from": "lid_off",
+          "to": "scoop_end",
+          "region": "jar",
+          "color": "#ff8fb0",
+          "opacity": 0.4
+        }
+      ]
+    },
+    {
+      "id": "S08.I2",
+      "category": "TC",
+      "sub": "TC7",
+      "evidence": "E3",
+      "visibility": "V2",
+      "disposition": "fix",
+      "description": "蘸取动作重复了一遍（霜面指痕消失又出现）",
+      "ops": [
+        {
+          "op": "repeat",
+          "from": "dip",
+          "to": "scoop_end"
+        }
+      ]
+    },
+    {
+      "id": "S08.I3",
+      "category": "TC",
+      "sub": "TC3",
+      "evidence": "E3",
+      "visibility": "V1",
+      "disposition": "block",
+      "description": "涂完后画面回到罐子盖着、没动过的状态",
+      "ops": [
+        {
+          "op": "insert",
+          "from": "start",
+          "to": "lid_off-0.8",
+          "at": "apply_end"
+        }
+      ]
+    },
+    {
+      "id": "S08.I4",
+      "category": "TE",
+      "sub": "TE1",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "fix",
+      "description": "涂抹前插入 0.2 秒短黑场（低于硬门槛 0.3 秒）",
+      "ops": [
+        {
+          "op": "black",
+          "at": "apply_start",
+          "dur": 0.2
+        }
+      ]
+    },
+    {
+      "id": "S08.I5",
+      "category": "VT",
+      "sub": "VT1",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "block",
+      "description": "罐身出现乱码文字",
+      "ops": [
+        {
+          "op": "manual",
+          "method": "prompt",
+          "window": {
+            "from": "start",
+            "to": "end"
+          },
+          "instruction": "照脚本生成，罐身侧面印一行乱码汉字（形似汉字但不是真字）"
+        }
+      ]
+    },
+    {
+      "id": "S08.I6",
+      "category": "VT",
+      "sub": "VT2",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "block",
+      "description": "涂抹时指尖与霜体融在一起局部融化",
+      "ops": [
+        {
+          "op": "manual",
+          "method": "prompt",
+          "window": {
+            "from": "apply_start",
+            "to": "apply_end"
+          },
+          "instruction": "照脚本生成，涂抹时指尖边缘与霜体融成一团，失去清晰轮廓"
+        }
+      ]
+    },
+    {
+      "id": "S08.I7",
+      "category": "VT",
+      "sub": "VT4",
+      "evidence": "E2",
+      "visibility": "V3",
+      "disposition": "accept",
+      "description": "大理石台面纹理轻微闪烁（可接受，不应拦截）",
+      "ops": [
+        {
+          "op": "manual",
+          "method": "prompt",
+          "window": {
+            "from": "start",
+            "to": "end"
+          },
+          "instruction": "照脚本生成，允许大理石纹理有轻微的帧间闪烁，其余保持干净"
+        }
+      ]
+    }
+  ],
+  "decoys": [
+    {
+      "id": "S08.D1",
+      "looks_like": "VT2",
+      "description": "霜体在指尖拉丝、被推开变形（正常质地）",
+      "ops": [
+        {
+          "op": "manual",
+          "method": "shoot",
+          "instruction": "实拍：用较稠的霜，蘸取时拉出明显的丝"
+        }
+      ]
+    },
+    {
+      "id": "S08.D2",
+      "looks_like": "TE2",
+      "description": "涂抹段 0.5 倍慢动作",
+      "ops": [
+        {
+          "op": "slow",
+          "from": "apply_start",
+          "to": "apply_end",
+          "factor": 0.5
+        }
+      ]
+    }
+  ],
+  "chains": []
+}

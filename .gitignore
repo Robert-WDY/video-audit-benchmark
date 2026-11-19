@@ -1,0 +1,8 @@
+node_modules/
+.work/
+out/
+*-out/
+sources/
+*.mp4
+*.mov
+.env

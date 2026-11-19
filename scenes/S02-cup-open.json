@@ -1,0 +1,59 @@
+{
+  "id": "S02",
+  "name": "保温杯开盖",
+  "structure": "unboxing-reveal",
+  "product": {
+    "name": "LUMO 保温杯",
+    "appearance": "红色哑光不锈钢圆柱杯身，黑色旋盖（螺纹，需逆时针拧约一圈才能取下），杯身正面白色 LUMO 字样 Logo",
+    "facts": [
+      { "id": "F1", "claim": "容量 350ml" },
+      { "id": "F2", "claim": "旋盖为螺纹结构，需拧开才能取下" },
+      { "id": "F3", "claim": "只有一个杯盖" }
+    ]
+  },
+  "captions": ["一拧即开"],
+  "script": {
+    "start_state": "保温杯立在木桌上，杯盖拧紧；画面右侧一只手入镜",
+    "actions": [
+      { "id": "A1", "actor": "人手", "desc": "握住杯盖", "from": "grip", "to": "twist_start" },
+      { "id": "A2", "actor": "人手", "desc": "逆时针拧开杯盖", "from": "twist_start", "to": "twist_end" },
+      { "id": "A3", "actor": "人手", "desc": "提起杯盖离开杯身", "from": "twist_end", "to": "lift_end" },
+      { "id": "A4", "actor": "人手", "desc": "把杯盖倒扣放在杯子旁边", "from": "lift_end", "to": "place_end" }
+    ],
+    "end_state": "杯盖倒扣在杯子右侧桌面，杯口敞开，手离开画面"
+  },
+  "shooting": { "duration_s": 7, "camera": "固定机位，45 度俯拍，9:16", "notes": "拧盖动作要完整可见" },
+  "markers": {
+    "grip": "手碰到杯盖", "twist_start": "开始拧", "twist_end": "拧松（盖子开始上抬）",
+    "lift_end": "盖子完全离开杯身", "place_end": "盖子放到桌面"
+  },
+  "injections": [
+    { "id": "S02.I1", "category": "SA", "sub": "SA3", "evidence": "E4", "visibility": "V1", "disposition": "block",
+      "description": "整段倒放：变成把杯盖拿起并拧上（脚本是拧开）",
+      "ops": [{ "op": "reverse", "from": "start", "to": "end" }] },
+    { "id": "S02.I2", "category": "TC", "sub": "TC5", "secondary": ["TC1"], "evidence": "E2", "visibility": "V1", "disposition": "block",
+      "description": "没有拧的动作，盖子直接从拧紧状态跳到被提起",
+      "ops": [{ "op": "drop", "from": "twist_start", "to": "twist_end" }] },
+    { "id": "S02.I3", "category": "TC", "sub": "TC7", "secondary": ["TC3"], "evidence": "E3", "visibility": "V2", "disposition": "fix",
+      "description": "拧开后画面回到拧紧状态再拧一遍",
+      "ops": [{ "op": "repeat", "from": "twist_start", "to": "twist_end" }] },
+    { "id": "S02.I4", "category": "TE", "sub": "TE2", "evidence": "E2", "visibility": "V1", "disposition": "fix",
+      "description": "拧松瞬间画面冻住 1.6 秒",
+      "ops": [{ "op": "freeze", "at": "twist_end", "dur": 1.6 }] },
+    { "id": "S02.I5", "category": "PF", "sub": "PF3", "secondary": ["SA6", "TC2"], "evidence": "E2", "visibility": "V1", "disposition": "block",
+      "description": "提起杯盖后杯口上还留着一个杯盖（出现两个杯盖）",
+      "ops": [{ "op": "manual", "method": "prompt", "window": { "from": "twist_end", "to": "end" },
+        "instruction": "照脚本生成开盖视频，但提起杯盖后，杯口上仍然留有一个一模一样的杯盖" }] },
+    { "id": "S02.I6", "category": "PH", "sub": "PH4", "evidence": "E1", "visibility": "V2", "disposition": "block",
+      "description": "握盖的手有六根手指",
+      "ops": [{ "op": "manual", "method": "prompt", "window": { "from": "grip", "to": "lift_end" },
+        "instruction": "照脚本生成，但握杯盖的手清楚地有六根手指（不要模糊处理）" }] }
+  ],
+  "decoys": [
+    { "id": "S02.D1", "looks_like": "TC2", "description": "手臂短暂挡住杯身后杯子重新露出（真实遮挡）",
+      "ops": [{ "op": "manual", "method": "shoot", "instruction": "实拍：放盖时手臂从杯子前方经过，完全挡住杯身约 0.5 秒" }] },
+    { "id": "S02.D2", "looks_like": "TE2", "description": "放下杯盖后刻意定格 0.6 秒收尾",
+      "ops": [{ "op": "freeze", "at": "place_end", "dur": 0.6 }] }
+  ],
+  "chains": []
+}

@@ -1,0 +1,122 @@
+{
+  "version": "1.0",
+  "note": "一级类别互斥：一个异常只取一个主类别，按 decision_order 依次判断，命中即停；其余相关类别记入 secondary。",
+  "decision_order": ["TE", "PF", "SA", "TC", "PH", "VT"],
+  "categories": {
+    "TE": {
+      "name": "技术缺陷",
+      "question": "是否是编码/播放层面的问题（与画面内容无关）？",
+      "judge_basis": "common_sense",
+      "reviewer_checks": ["black_silence"],
+      "hard_gates": ["black", "freeze", "silence"],
+      "subs": {
+        "TE1": "黑场",
+        "TE2": "冻帧（非刻意定格）",
+        "TE3": "静音或长时间无声",
+        "TE4": "闪帧（单帧白/黑/错帧）",
+        "TE5": "音画不同步"
+      }
+    },
+    "PF": {
+      "name": "产品事实",
+      "question": "画面或字幕是否与给定的产品外观/事实（封闭世界）矛盾？",
+      "judge_basis": "facts",
+      "reviewer_checks": ["product_drift", "fact_error"],
+      "subs": {
+        "PF1": "颜色或材质与事实不符/中途改变",
+        "PF2": "外形或比例改变",
+        "PF3": "部件数量或位置错（按键、耳罩、接口、杯盖）",
+        "PF4": "Logo、型号、品牌标识错误",
+        "PF5": "屏幕/指示灯/UI 与事实不符",
+        "PF6": "中途换成另一款产品",
+        "PF7": "展示了事实中不存在的功能",
+        "PF8": "字幕写的规格或卖点与事实不符"
+      }
+    },
+    "SA": {
+      "name": "脚本偏离（状态/动作）",
+      "question": "与镜头卡的起始状态、关键动作、终态不一致？（脱离脚本无法判断）",
+      "judge_basis": "script",
+      "reviewer_checks": [],
+      "subs": {
+        "SA1": "起始状态错（缺失、多余、已打开、位置错）",
+        "SA2": "关键动作缺失",
+        "SA3": "动作反向（打开变关闭、拿起变放下）",
+        "SA4": "动作主体错（应由人操作却自己动）",
+        "SA5": "终态错或未达到",
+        "SA6": "物体数量与脚本不符"
+      }
+    },
+    "TC": {
+      "name": "时序/因果",
+      "question": "需要对比两个以上时刻才能发现：连续性断裂或因果不成立？",
+      "judge_basis": "common_sense",
+      "reviewer_checks": ["physics"],
+      "subs": {
+        "TC1": "瞬移或位置跳变",
+        "TC2": "物体凭空出现或消失",
+        "TC3": "状态回跳（已发生的变化又复原）",
+        "TC4": "前后顺序颠倒",
+        "TC5": "有果无因（没开盖水却流出）",
+        "TC6": "有因无果（按下开关毫无反应，且事实声明开关有效）",
+        "TC7": "同一动作无理由重复"
+      }
+    },
+    "PH": {
+      "name": "物理",
+      "question": "单个时刻或一小段运动就违反物理常识？",
+      "judge_basis": "common_sense",
+      "reviewer_checks": ["physics"],
+      "subs": {
+        "PH1": "重力错误（悬浮、无支撑平衡）",
+        "PH2": "流体错误（向上流、穿过杯壁、凭空出现）",
+        "PH3": "穿模或碰撞错误",
+        "PH4": "手部结构异常（手指数量、关节）",
+        "PH5": "无外力运动或运动方向突变",
+        "PH6": "影子或倒影与物体不一致"
+      }
+    },
+    "VT": {
+      "name": "文字/视觉瑕疵",
+      "question": "生成质量瑕疵：不违反事实/物理，但画面本身坏了？",
+      "judge_basis": "common_sense",
+      "reviewer_checks": ["garbled_text", "product_drift"],
+      "subs": {
+        "VT1": "乱码或伪文字（非代码字幕）",
+        "VT2": "局部融化或扭曲",
+        "VT3": "重影（同一物体多个叠加版本）",
+        "VT4": "纹理闪烁或边缘抖动"
+      }
+    }
+  },
+  "confusion_groups": {
+    "dynamic": ["SA", "TC", "PH"],
+    "appearance": ["PF", "VT"],
+    "technical": ["TE"]
+  },
+  "evidence_levels": {
+    "E1": "单帧即可发现",
+    "E2": "需看动作过程（一小段连续帧）",
+    "E3": "需对比相隔较远的时刻",
+    "E4": "需结合脚本或全片理解"
+  },
+  "visibility_levels": {
+    "V1": "明显：占画面 30% 以上或主体本身，变化强烈",
+    "V2": "中等：主体局部，留心可见",
+    "V3": "细微：小区域、低对比或被遮挡/快切掩盖"
+  },
+  "duration_buckets": {
+    "flash": [0, 0.2],
+    "short": [0.2, 1.0],
+    "long": [1.0, null]
+  },
+  "dispositions": {
+    "block": "必须拦截，不能上线",
+    "fix": "应当返修（可局部替换/重生成）",
+    "accept": "可接受的轻微瑕疵，不计入应拦截"
+  },
+  "matching": {
+    "time_tolerance_s": 1.0,
+    "rule": "审核给出的 confirmed 证据时间点落在真值窗口 ±time_tolerance_s 内即命中；check 属于该类 reviewer_checks 计为分类正确，属于同一 confusion_group 内其他类别的 checks 计为检出但分类错误。"
+  }
+}

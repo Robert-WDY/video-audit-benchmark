@@ -1,0 +1,62 @@
+{
+  "id": "S05",
+  "name": "手机放上无线充电板",
+  "structure": "result-first",
+  "product": {
+    "name": "Volt 无线充电板",
+    "appearance": "黑色圆形磨砂充电板，边缘一圈细蓝色指示环；搭配一台黑色手机",
+    "facts": [
+      { "id": "F1", "claim": "最大 15W 无线充电" },
+      { "id": "F2", "claim": "手机放上后指示环亮蓝色，手机屏幕出现充电动画" },
+      { "id": "F3", "claim": "需要手机贴合放置才能充电" }
+    ]
+  },
+  "captions": ["15W 无线快充", "一放即充"],
+  "script": {
+    "start_state": "充电板在桌面中央，指示环熄灭；黑色手机屏幕朝上放在左侧",
+    "actions": [
+      { "id": "A1", "actor": "人手", "desc": "拿起手机", "from": "pick", "to": "move_start" },
+      { "id": "A2", "actor": "人手", "desc": "把手机移到充电板上放下", "from": "move_start", "to": "place" },
+      { "id": "A3", "actor": "设备", "desc": "指示环亮起，屏幕出现充电动画", "from": "place", "to": "ring_on" }
+    ],
+    "end_state": "手机平贴在充电板上，指示环蓝色，屏幕显示充电中"
+  },
+  "shooting": { "duration_s": 7, "camera": "固定机位，45 度俯拍，9:16", "notes": "拍完填写 ring 区域" },
+  "markers": {
+    "pick": "手碰到手机", "move_start": "手机离开桌面", "place": "手机贴到充电板", "ring_on": "指示环亮起"
+  },
+  "injections": [
+    { "id": "S05.I1", "category": "TC", "sub": "TC4", "evidence": "E3", "visibility": "V1", "disposition": "block",
+      "description": "先出现手机在板上充电的画面，再出现把手机移过去",
+      "ops": [{ "op": "swap", "a_from": "move_start", "a_to": "place", "b_from": "place", "b_to": "end" }] },
+    { "id": "S05.I2", "category": "PF", "sub": "PF8", "evidence": "E1", "visibility": "V1", "disposition": "block",
+      "description": "字幕写 50W，事实是 15W",
+      "ops": [{ "op": "caption", "from": "place", "to": "end", "text": "50W 无线超级快充" }],
+      "control": [{ "op": "caption", "from": "place", "to": "end", "text": "15W 无线快充" }] },
+    { "id": "S05.I3", "category": "TE", "sub": "TE1", "evidence": "E1", "visibility": "V1", "disposition": "block",
+      "description": "移动手机时插入 0.6 秒黑场",
+      "ops": [{ "op": "black", "at": "move_start", "dur": 0.6 }] },
+    { "id": "S05.I4", "category": "PF", "sub": "PF5", "evidence": "E1", "visibility": "V2", "disposition": "fix",
+      "description": "指示环亮成绿色（事实为蓝色）",
+      "ops": [{ "op": "tint", "from": "ring_on", "to": "end", "region": "ring", "hue": -100 }] },
+    { "id": "S05.I5", "category": "PH", "sub": "PH1", "secondary": ["PF7"], "evidence": "E2", "visibility": "V2", "disposition": "block",
+      "description": "手机悬在充电板上方约 1cm 却显示充电",
+      "ops": [{ "op": "manual", "method": "prompt", "window": { "from": "place", "to": "end" },
+        "instruction": "照脚本生成，但手机最后悬停在充电板上方约 1cm 不接触，仍然显示充电动画" }] },
+    { "id": "S05.I6", "category": "PF", "sub": "PF7", "evidence": "E1", "visibility": "V1", "disposition": "block",
+      "description": "手机投射出全息充电进度（产品没有此功能）",
+      "ops": [{ "op": "manual", "method": "prompt", "window": { "from": "ring_on", "to": "end" },
+        "instruction": "照脚本生成，充电时手机上方出现悬浮的全息电量百分比投影" }] },
+    { "id": "S05.I7", "category": "TC", "sub": "TC6", "evidence": "E4", "visibility": "V2", "disposition": "block",
+      "description": "手机放上后指示环和屏幕都没有任何反应",
+      "ops": [{ "op": "manual", "method": "inpaint", "window": { "from": "ring_on", "to": "end" },
+        "instruction": "在正确底片上把 ring_on 之后的指示环和屏幕动画修补成熄灭状态" }] }
+  ],
+  "decoys": [
+    { "id": "S05.D1", "looks_like": "PF5", "description": "屏幕反光让指示环看起来短暂变白",
+      "ops": [{ "op": "manual", "method": "shoot", "instruction": "实拍：放手机时让屏幕把顶灯反射到指示环附近" }] },
+    { "id": "S05.D2", "looks_like": "TE2", "description": "放上后定格 0.6 秒强调结果",
+      "ops": [{ "op": "freeze", "at": "ring_on", "dur": 0.6 }] }
+  ],
+  "chains": []
+}

@@ -1,0 +1,217 @@
+{
+  "id": "S03",
+  "name": "保温杯倒水",
+  "structure": "ritual-moment",
+  "product": {
+    "name": "LUMO 保温杯",
+    "appearance": "红色哑光不锈钢圆柱杯身，杯盖已取下，杯身正面白色 LUMO 字样 Logo",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": "容量 350ml"
+      },
+      {
+        "id": "F2",
+        "claim": "杯口防漏导流设计，出水成一股"
+      }
+    ]
+  },
+  "captions": [
+    "顺滑出水不洒漏"
+  ],
+  "script": {
+    "start_state": "开盖的保温杯（装有约 300ml 水）和一个空玻璃杯并排放在木桌上",
+    "actions": [
+      {
+        "id": "A1",
+        "actor": "人手",
+        "desc": "拿起保温杯",
+        "from": "lift_start",
+        "to": "tilt_start"
+      },
+      {
+        "id": "A2",
+        "actor": "人手",
+        "desc": "倾斜保温杯",
+        "from": "tilt_start",
+        "to": "pour_start"
+      },
+      {
+        "id": "A3",
+        "actor": "人手",
+        "desc": "向玻璃杯倒水",
+        "from": "pour_start",
+        "to": "pour_end"
+      },
+      {
+        "id": "A4",
+        "actor": "人手",
+        "desc": "放回保温杯",
+        "from": "pour_end",
+        "to": "set_down"
+      }
+    ],
+    "end_state": "玻璃杯里约半杯水，保温杯放回原位"
+  },
+  "shooting": {
+    "duration_s": 8,
+    "camera": "固定机位，侧面平视，9:16",
+    "notes": "水流和玻璃杯液面必须清晰可见；拍完填写 glass 区域"
+  },
+  "markers": {
+    "lift_start": "手开始拿起保温杯",
+    "tilt_start": "开始倾斜",
+    "pour_start": "水流出现",
+    "pour_end": "水流停止",
+    "set_down": "保温杯放回桌面"
+  },
+  "injections": [
+    {
+      "id": "S03.I1",
+      "category": "PH",
+      "sub": "PH2",
+      "secondary": [
+        "TC3"
+      ],
+      "evidence": "E2",
+      "visibility": "V1",
+      "disposition": "block",
+      "description": "倒水段倒放：水从玻璃杯向上流回保温杯（前后衔接处液面也会跳变，算同一处错误）",
+      "ops": [
+        {
+          "op": "reverse",
+          "from": "pour_start",
+          "to": "pour_end"
+        }
+      ]
+    },
+    {
+      "id": "S03.I2",
+      "category": "TC",
+      "sub": "TC1",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "fix",
+      "description": "保温杯从刚拿起直接跳到倒水中途的倾斜角度",
+      "ops": [
+        {
+          "op": "drop",
+          "from": "tilt_start",
+          "to": "pour_start+1.0"
+        }
+      ]
+    },
+    {
+      "id": "S03.I3",
+      "category": "TC",
+      "sub": "TC3",
+      "evidence": "E3",
+      "visibility": "V1",
+      "disposition": "block",
+      "description": "放回保温杯后，画面回到开头：玻璃杯又变空",
+      "ops": [
+        {
+          "op": "insert",
+          "from": "start",
+          "to": "lift_start",
+          "at": "set_down"
+        }
+      ]
+    },
+    {
+      "id": "S03.I4",
+      "category": "TE",
+      "sub": "TE3",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "fix",
+      "description": "倒水声在出水期间完全消失",
+      "ops": [
+        {
+          "op": "mute",
+          "from": "pour_start",
+          "to": "pour_end"
+        }
+      ]
+    },
+    {
+      "id": "S03.I5",
+      "category": "SA",
+      "sub": "SA5",
+      "secondary": [
+        "TC2"
+      ],
+      "evidence": "E4",
+      "visibility": "V1",
+      "disposition": "block",
+      "description": "水倒进去了，但最后玻璃杯仍然是空的",
+      "ops": [
+        {
+          "op": "manual",
+          "method": "prompt",
+          "window": {
+            "from": "pour_end",
+            "to": "end"
+          },
+          "instruction": "照脚本生成倒水视频，但水流进入玻璃杯后消失，玻璃杯始终是空的"
+        }
+      ]
+    },
+    {
+      "id": "S03.I6",
+      "category": "PH",
+      "sub": "PH2",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "block",
+      "description": "水流穿过玻璃杯壁流到桌面",
+      "ops": [
+        {
+          "op": "manual",
+          "method": "prompt",
+          "window": {
+            "from": "pour_start",
+            "to": "pour_end"
+          },
+          "instruction": "照脚本生成，但水流穿透玻璃杯侧壁直接落到桌面上"
+        }
+      ]
+    }
+  ],
+  "decoys": [
+    {
+      "id": "S03.D1",
+      "looks_like": "PH2",
+      "description": "倾斜时保温杯里的液面随之倾斜（正常物理）",
+      "ops": [
+        {
+          "op": "manual",
+          "method": "shoot",
+          "instruction": "实拍：换透明水瓶倒水，让液面倾斜清楚可见"
+        }
+      ]
+    },
+    {
+      "id": "S03.D2",
+      "looks_like": "TE2",
+      "description": "倒水段 0.5 倍慢动作",
+      "ops": [
+        {
+          "op": "slow",
+          "from": "pour_start",
+          "to": "pour_end",
+          "factor": 0.5
+        }
+      ]
+    }
+  ],
+  "chains": [
+    {
+      "ids": [
+        "S03.I2",
+        "S03.I5"
+      ],
+      "note": "跳过倾斜直接出水（因不成立）→ 最终玻璃杯仍空（果也不成立）"
+    }
+  ]
+}

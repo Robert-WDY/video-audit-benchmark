@@ -1,0 +1,61 @@
+{
+  "id": "S04",
+  "name": "耳机开盒取出",
+  "structure": "unboxing-reveal",
+  "product": {
+    "name": "Pebl 真无线耳机",
+    "appearance": "白色亮面卵形充电盒，正面一颗指示灯；盒内左右两只白色入耳式耳机",
+    "facts": [
+      { "id": "F1", "claim": "一副两只耳机" },
+      { "id": "F2", "claim": "开盖后指示灯亮绿色" },
+      { "id": "F3", "claim": "单耳重 4.5g" },
+      { "id": "F4", "claim": "含充电盒续航 30 小时" }
+    ]
+  },
+  "captions": ["开盖即连", "30 小时总续航"],
+  "script": {
+    "start_state": "合上的充电盒放在浅灰桌面，指示灯熄灭",
+    "actions": [
+      { "id": "A1", "actor": "人手", "desc": "掀开盒盖，指示灯亮绿", "from": "lid_start", "to": "lid_open" },
+      { "id": "A2", "actor": "人手", "desc": "伸手捏住右耳机", "from": "reach_start", "to": "grab" },
+      { "id": "A3", "actor": "人手", "desc": "取出右耳机举到镜头前", "from": "grab", "to": "lift_end" }
+    ],
+    "end_state": "右耳机在手中，盒内只剩左耳机，盒盖开着，指示灯绿色"
+  },
+  "shooting": { "duration_s": 7, "camera": "固定机位，俯拍，9:16", "notes": "拍完填写 led 区域（指示灯小框）" },
+  "markers": {
+    "lid_start": "手碰到盒盖", "lid_open": "盒盖完全打开", "reach_start": "手指开始伸向耳机",
+    "grab": "捏住耳机", "lift_end": "耳机举到镜头前停住"
+  },
+  "injections": [
+    { "id": "S04.I1", "category": "TC", "sub": "TC1", "evidence": "E2", "visibility": "V1", "disposition": "block",
+      "description": "手从盒外瞬间跳到已经捏住耳机的位置",
+      "ops": [{ "op": "drop", "from": "reach_start", "to": "grab" }] },
+    { "id": "S04.I2", "category": "TC", "sub": "TC3", "evidence": "E3", "visibility": "V1", "disposition": "block",
+      "description": "耳机已经拿在手里，画面又回到两只耳机都在盒里",
+      "ops": [{ "op": "insert", "from": "lid_open", "to": "reach_start", "at": "lift_end" }] },
+    { "id": "S04.I3", "category": "SA", "sub": "SA3", "evidence": "E4", "visibility": "V1", "disposition": "block",
+      "description": "整段倒放：变成把耳机放回去并合盖",
+      "ops": [{ "op": "reverse", "from": "start", "to": "end" }] },
+    { "id": "S04.I4", "category": "PF", "sub": "PF5", "evidence": "E1", "visibility": "V3", "disposition": "fix",
+      "description": "开盖后指示灯亮成红色（事实为绿色）",
+      "ops": [{ "op": "tint", "from": "lid_open", "to": "end", "region": "led", "hue": 120 }] },
+    { "id": "S04.I5", "category": "PF", "sub": "PF3", "secondary": ["SA6"], "evidence": "E1", "visibility": "V1", "disposition": "block",
+      "description": "盒里有三只耳机",
+      "ops": [{ "op": "manual", "method": "ref_edit", "window": { "from": "lid_open", "to": "end" },
+        "instruction": "用开盖后的帧做参考，在盒内加第三只耳机，图生视频，动作照抄底片" }] },
+    { "id": "S04.I6", "category": "VT", "sub": "VT1", "evidence": "E1", "visibility": "V2", "disposition": "block",
+      "description": "盒盖表面出现不存在的伪文字",
+      "ops": [{ "op": "manual", "method": "prompt", "window": { "from": "start", "to": "lid_open" },
+        "instruction": "照脚本生成，盒盖正面印一行看起来像英文但不可读的字符" }] }
+  ],
+  "decoys": [
+    { "id": "S04.D1", "looks_like": "PF5", "description": "盒子转动时亮面反光像指示灯变色",
+      "ops": [{ "op": "manual", "method": "shoot", "instruction": "实拍：开盖时让顶灯在盒面形成一块移动的高光" }] },
+    { "id": "S04.D2", "looks_like": "TE2", "description": "取耳机段 0.5 倍慢动作",
+      "ops": [{ "op": "slow", "from": "reach_start", "to": "grab", "factor": 0.5 }] }
+  ],
+  "chains": [
+    { "ids": ["S04.I1", "S04.I2"], "note": "手瞬移拿到耳机 → 随后耳机又回到盒里，后一处跳变由前一处引出" }
+  ]
+}

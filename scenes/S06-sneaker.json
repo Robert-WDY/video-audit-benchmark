@@ -1,0 +1,54 @@
+{
+  "id": "S06",
+  "name": "运动鞋穿戴",
+  "structure": "pov-day",
+  "product": {
+    "name": "Stride 跑鞋",
+    "appearance": "白色网面鞋身，鞋侧一道蓝色弧线标，灰色鞋底，白色鞋带",
+    "facts": [
+      { "id": "F1", "claim": "鞋身白色，侧面蓝色弧线标" },
+      { "id": "F2", "claim": "灰色缓震鞋底" },
+      { "id": "F3", "claim": "系带款" }
+    ]
+  },
+  "captions": ["轻盈缓震"],
+  "script": {
+    "start_state": "人物坐在长凳上，右脚只穿袜子；右脚跑鞋放在脚边地面，鞋带松开",
+    "actions": [
+      { "id": "A1", "actor": "人物", "desc": "把右脚伸进鞋里", "from": "foot_in_start", "to": "foot_in" },
+      { "id": "A2", "actor": "人物", "desc": "系好鞋带", "from": "foot_in", "to": "lace_end" },
+      { "id": "A3", "actor": "人物", "desc": "站起来", "from": "lace_end", "to": "stand" }
+    ],
+    "end_state": "人物站立，右脚穿着系好鞋带的跑鞋，鞋头朝前"
+  },
+  "shooting": { "duration_s": 9, "camera": "固定机位，低角度侧拍，9:16", "notes": "拍完填写 logo 区域（系鞋带后鞋侧弧线标的位置）" },
+  "markers": {
+    "foot_in_start": "脚开始伸进鞋", "foot_in": "脚完全穿入", "lace_end": "鞋带系好", "stand": "站直"
+  },
+  "injections": [
+    { "id": "S06.I1", "category": "SA", "sub": "SA3", "evidence": "E4", "visibility": "V1", "disposition": "block",
+      "description": "整段倒放：变成坐下、解鞋带、脱鞋",
+      "ops": [{ "op": "reverse", "from": "start", "to": "end" }] },
+    { "id": "S06.I2", "category": "PF", "sub": "PF4", "evidence": "E3", "visibility": "V3", "disposition": "fix",
+      "description": "系好鞋带后鞋侧弧线标从蓝色变成橙色",
+      "ops": [{ "op": "tint", "from": "lace_end", "to": "end", "region": "logo", "hue": 180 }] },
+    { "id": "S06.I3", "category": "TC", "sub": "TC1", "evidence": "E2", "visibility": "V1", "disposition": "block",
+      "description": "脚刚碰到鞋就瞬间完全穿入",
+      "ops": [{ "op": "drop", "from": "foot_in_start+0.3", "to": "foot_in" }] },
+    { "id": "S06.I4", "category": "SA", "sub": "SA5", "evidence": "E4", "visibility": "V2", "disposition": "block",
+      "description": "最后右脚穿的是左脚鞋（鞋头弧度朝内）",
+      "ops": [{ "op": "manual", "method": "prompt", "window": { "from": "foot_in", "to": "end" },
+        "instruction": "照脚本生成，但右脚穿上的是左脚的鞋，鞋头弧度明显朝向身体内侧" }] },
+    { "id": "S06.I5", "category": "PH", "sub": "PH3", "evidence": "E2", "visibility": "V2", "disposition": "block",
+      "description": "系鞋带时鞋带穿过手指",
+      "ops": [{ "op": "manual", "method": "prompt", "window": { "from": "foot_in", "to": "lace_end" },
+        "instruction": "照脚本生成，系鞋带时鞋带直接穿过手指而不是绕过" }] }
+  ],
+  "decoys": [
+    { "id": "S06.D1", "looks_like": "PF2", "description": "穿鞋时鞋面被脚撑起出现褶皱和形变（正常）",
+      "ops": [{ "op": "manual", "method": "shoot", "instruction": "实拍：穿鞋时用力踩入，让鞋面明显起皱" }] },
+    { "id": "S06.D2", "looks_like": "TE2", "description": "系鞋带段 0.5 倍慢动作",
+      "ops": [{ "op": "slow", "from": "foot_in", "to": "lace_end", "factor": 0.5 }] }
+  ],
+  "chains": []
+}

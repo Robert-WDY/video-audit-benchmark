@@ -1,0 +1,62 @@
+{
+  "id": "S01",
+  "name": "保温杯旋转展示",
+  "structure": "sensory-closeup",
+  "product": {
+    "name": "LUMO 保温杯",
+    "appearance": "红色哑光不锈钢圆柱杯身，黑色旋盖，杯身正面白色 LUMO 字样 Logo，无提手",
+    "facts": [
+      { "id": "F1", "claim": "容量 350ml" },
+      { "id": "F2", "claim": "316 不锈钢内胆" },
+      { "id": "F3", "claim": "保温 12 小时" },
+      { "id": "F4", "claim": "只有红色一种配色" }
+    ]
+  },
+  "captions": ["350ml 随身容量", "12 小时长效保温"],
+  "script": {
+    "start_state": "保温杯立在白色转台中央，杯盖关闭，Logo 朝向镜头",
+    "actions": [
+      { "id": "A1", "actor": "转台", "desc": "转台匀速旋转一整圈", "from": "rot_start", "to": "rot_end" }
+    ],
+    "end_state": "保温杯回到 Logo 朝向镜头的位置，杯身完整，仍在转台中央"
+  },
+  "shooting": { "duration_s": 9, "camera": "固定机位，平视，9:16", "notes": "柔光，无人手入镜；拍完填写 product 区域（杯身框）" },
+  "markers": {
+    "rot_start": "转台开始转动",
+    "rot_half": "转到背面（Logo 背对镜头）",
+    "rot_end": "转完一圈停住"
+  },
+  "injections": [
+    { "id": "S01.I1", "category": "PF", "sub": "PF1", "evidence": "E3", "visibility": "V1", "disposition": "block",
+      "description": "转到背面后杯身从红色变成蓝色并一直保持",
+      "ops": [{ "op": "tint", "from": "rot_half", "to": "end", "region": "product", "hue": 200 }] },
+    { "id": "S01.I2", "category": "PF", "sub": "PF1", "evidence": "E1", "visibility": "V2", "disposition": "fix",
+      "description": "杯身颜色只在约 0.15 秒内闪变成蓝色",
+      "ops": [{ "op": "tint", "from": "rot_half", "to": "rot_half+0.15", "region": "product", "hue": 200 }] },
+    { "id": "S01.I3", "category": "PF", "sub": "PF8", "evidence": "E1", "visibility": "V1", "disposition": "block",
+      "description": "字幕写 500ml，事实是 350ml",
+      "ops": [{ "op": "caption", "from": "rot_start", "to": "rot_start+2.5", "text": "500ml 超大容量" }],
+      "control": [{ "op": "caption", "from": "rot_start", "to": "rot_start+2.5", "text": "350ml 随身容量" }] },
+    { "id": "S01.I4", "category": "TC", "sub": "TC1", "evidence": "E2", "visibility": "V2", "disposition": "fix",
+      "description": "旋转中途杯子角度突然跳变约 60 度",
+      "ops": [{ "op": "drop", "from": "rot_half-0.4", "to": "rot_half+0.4" }] },
+    { "id": "S01.I5", "category": "TE", "sub": "TE4", "evidence": "E1", "visibility": "V2", "disposition": "fix",
+      "description": "单帧白闪",
+      "ops": [{ "op": "flash", "at": "rot_half", "frames": 1 }] },
+    { "id": "S01.I6", "category": "PF", "sub": "PF4", "evidence": "E1", "visibility": "V2", "disposition": "block",
+      "description": "Logo 写成 LUM0 且字形扭曲",
+      "ops": [{ "op": "manual", "method": "ref_edit", "window": { "from": "start", "to": "rot_start+1.5" },
+        "instruction": "把正确底片首帧的 Logo 改成 LUM0（字母 O 换成数字 0，笔画轻微扭曲），用改后首帧图生视频，运镜与转速照抄底片" }] },
+    { "id": "S01.I7", "category": "PF", "sub": "PF3", "evidence": "E1", "visibility": "V2", "disposition": "block",
+      "description": "杯盖上多出一个产品没有的提手",
+      "ops": [{ "op": "manual", "method": "ref_edit", "window": { "from": "start", "to": "end" },
+        "instruction": "在首帧杯盖顶部加一个黑色提环，用改后首帧图生视频，其余保持一致" }] }
+  ],
+  "decoys": [
+    { "id": "S01.D1", "looks_like": "PF1", "description": "转到侧面时受灯光影响杯身偏暗红，真实颜色没变",
+      "ops": [{ "op": "manual", "method": "shoot", "instruction": "实拍：在侧面放一块黑旗遮掉部分柔光，使转到侧面时杯身明显变暗" }] },
+    { "id": "S01.D2", "looks_like": "TE2", "description": "前半圈刻意 0.5 倍慢动作",
+      "ops": [{ "op": "slow", "from": "rot_start", "to": "rot_half", "factor": 0.5 }] }
+  ],
+  "chains": []
+}

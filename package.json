@@ -1,0 +1,13 @@
+{
+  "name": "video-audit-benchmark",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Benchmark for AI-generated video review: correct baselines, controlled error injection, blind annotation and scoring.",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "cli": "node src/cli.mjs",
+    "generate": "node src/generate.mjs"
+  }
+}
