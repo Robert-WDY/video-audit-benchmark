@@ -1,0 +1,76 @@
+{
+  "case_id": "S04-h3a__combo__S04.I4+S04.I6",
+  "blind_id": "v_4e2f9bd9bc",
+  "video": "S04-h3a__combo__S04.I4+S04.I6__PF5+VT1.mp4",
+  "tier": "combo",
+  "pattern": "overlap",
+  "continuous": true,
+  "ref": null,
+  "scene": "S04",
+  "take": "S04-h3a",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S04.I4",
+      "category": "PF",
+      "sub": "PF5",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "屏幕/指示灯/UI 与事实不符",
+      "evidence": "E1",
+      "visibility": "V3",
+      "disposition": "fix",
+      "judge_basis": "facts",
+      "description": "开盖后指示灯亮成红色（事实为绿色）",
+      "method": "tint",
+      "auto": true,
+      "windows": [
+        [
+          1.4,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    },
+    {
+      "id": "S04.I6",
+      "category": "VT",
+      "sub": "VT1",
+      "secondary": [],
+      "category_name": "文字/视觉瑕疵",
+      "sub_name": "乱码或伪文字（非代码字幕）",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "盒盖表面出现不存在的伪文字",
+      "method": "prompt",
+      "auto": false,
+      "windows": [
+        [
+          0,
+          1.4
+        ]
+      ],
+      "window_status": "estimated",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "garbled_text",
+        "product_drift"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

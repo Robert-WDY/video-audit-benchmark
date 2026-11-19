@@ -131,9 +131,10 @@
           "from": "lid_open",
           "to": "end",
           "region": "led",
-          "hue": 120,
+          "hue": -120,
           "key": "#33dd66",
-          "similarity": 0.35
+          "similarity": 0.2,
+          "blend": 0.05
         }
       ]
     },
@@ -179,6 +180,28 @@
           "instruction": "照脚本生成，盒盖正面印一行看起来像英文但不可读的字符"
         }
       ]
+    },
+    {
+      "id": "S04.I7",
+      "category": "PF",
+      "sub": "PF3",
+      "secondary": [
+        "SA6"
+      ],
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "description": "开盖后盒盖内侧多出一只耳机（一共三只，事实为一副两只）",
+      "ops": [
+        {
+          "op": "clone",
+          "from": "lid_open",
+          "to": "end",
+          "region": "bud",
+          "dx": 0,
+          "dy": -0.13
+        }
+      ]
     }
   ],
   "decoys": [
@@ -215,6 +238,15 @@
         "S04.I2"
       ],
       "note": "手瞬移拿到耳机 → 随后耳机又回到盒里，后一处跳变由前一处引出"
+    }
+  ],
+  "bundles": [
+    {
+      "ids": [
+        "S04.I7",
+        "S04.I4"
+      ],
+      "note": "同一连续镜头：盒里有三只耳机，指示灯还是红色"
     }
   ]
 }

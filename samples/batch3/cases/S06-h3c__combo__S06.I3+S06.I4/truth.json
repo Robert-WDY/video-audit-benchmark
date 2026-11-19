@@ -1,0 +1,72 @@
+{
+  "case_id": "S06-h3c__combo__S06.I3+S06.I4",
+  "blind_id": "v_fe68599fc3",
+  "video": "S06-h3c__combo__S06.I3+S06.I4__TC1+SA5.mp4",
+  "tier": "combo",
+  "pattern": "overlap",
+  "continuous": false,
+  "ref": null,
+  "scene": "S06",
+  "take": "S06-h3c",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 5.3,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S06.I3",
+      "category": "TC",
+      "sub": "TC1",
+      "secondary": [],
+      "category_name": "时序/因果",
+      "sub_name": "瞬移或位置跳变",
+      "evidence": "E2",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "脚刚碰到鞋就瞬间完全穿入",
+      "method": "drop",
+      "auto": true,
+      "windows": [
+        [
+          0.5,
+          1.1
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "instant",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S06.I4",
+      "category": "SA",
+      "sub": "SA5",
+      "secondary": [],
+      "category_name": "脚本偏离（状态/动作）",
+      "sub_name": "终态错或未达到",
+      "evidence": "E4",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "script",
+      "description": "最后右脚穿的是左脚鞋（鞋头弧度朝内）",
+      "method": "prompt",
+      "auto": false,
+      "windows": [
+        [
+          0.8,
+          5.3
+        ]
+      ],
+      "window_status": "estimated",
+      "duration_bucket": "long",
+      "expected_checks": [],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

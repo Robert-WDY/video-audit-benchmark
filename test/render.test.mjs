@@ -69,3 +69,20 @@ test('按颜色选区换色：只改 key 颜色附近的像素', () => {
   assert.match(filter, /alphamerge/);
   assert.match(filter, /overlay=0:0:enable='between\(t,4\.0000,8\.0000\)'/);
 });
+
+test('局部操作：复制区域、镜像、区域定格、区域时移都带羽化并按窗口生效', () => {
+  const tl = applyOps(6, [
+    { op: 'clone', from: 1, to: 3, region: [0.4, 0.5, 0.1, 0.1], dx: -0.12, dy: 0, id: 'C' },
+    { op: 'flip_region', from: 0, to: 2, region: [0.4, 0.4, 0.2, 0.1], id: 'F' },
+    { op: 'freeze_region', at: 0.5, from: 2, to: 6, region: [0, 0.6, 0.5, 0.3], id: 'Z' },
+    { op: 'retime_region', src_from: 4, from: 1, to: 2.5, region: [0.1, 0.3, 0.8, 0.2], id: 'R' },
+  ]);
+  const { filter } = buildFilter(tl, P);
+  assert.equal((filter.match(/geq=r='r\(X,Y\)'/g) || []).length, 4);
+  assert.match(filter, /crop=108:192:432:960,format=rgba/);
+  assert.match(filter, /overlay=302:960:eof_action=pass:enable='between\(t,1\.0000,3\.0000\)'/);
+  assert.match(filter, /hflip/);
+  assert.match(filter, /\[0:v\]trim=start=0\.5000:duration=0\.0333,setpts=PTS-STARTPTS,.*tpad=stop_mode=clone:stop_duration=7\.0000/);
+  assert.match(filter, /\[0:v\]trim=start=4\.0000:duration=1\.6000,setpts=PTS-STARTPTS\+1\.0000\/TB/);
+  assert.deepEqual(tl.windows, { C: [[1, 3]], F: [[0, 2]], Z: [[2, 6]], R: [[1, 2.5]] });
+});

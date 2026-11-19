@@ -1,0 +1,104 @@
+{
+  "case_id": "S01-h3c__combo__S01.I1+S01.I3+S01.I5",
+  "blind_id": "v_8a5d02acdd",
+  "video": "S01-h3c__combo__S01.I1+S01.I3+S01.I5__PF1+PF8+TE4.mp4",
+  "tier": "combo",
+  "pattern": "overlap",
+  "continuous": true,
+  "ref": null,
+  "scene": "S01",
+  "take": "S01-h3c",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S01.I1",
+      "category": "PF",
+      "sub": "PF1",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "颜色或材质与事实不符/中途改变",
+      "evidence": "E3",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "转到背面后杯身从红色变成蓝色并一直保持",
+      "method": "tint",
+      "auto": true,
+      "windows": [
+        [
+          3,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    },
+    {
+      "id": "S01.I3",
+      "category": "PF",
+      "sub": "PF8",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "字幕写的规格或卖点与事实不符",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "字幕写 500ml，事实是 350ml",
+      "method": "caption",
+      "auto": true,
+      "windows": [
+        [
+          1,
+          3.5
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S01.I5",
+      "category": "TE",
+      "sub": "TE4",
+      "secondary": [],
+      "category_name": "技术缺陷",
+      "sub_name": "闪帧（单帧白/黑/错帧）",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "fix",
+      "judge_basis": "common_sense",
+      "description": "单帧白闪",
+      "method": "flash",
+      "auto": true,
+      "windows": [
+        [
+          3,
+          3.033
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "flash",
+      "expected_checks": [
+        "black_silence"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending",
+  "bundle": "同一连续镜头：字幕容量写错、转到背面时白闪一帧、之后杯身变成蓝色"
+}

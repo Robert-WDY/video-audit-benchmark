@@ -1,8 +1,10 @@
 {
   "case_id": "S07-h3b__decoy__S07.D2",
   "blind_id": "v_61c1e9da4c",
+  "video": "S07-h3b__decoy__S07.D2__looks-TE2.mp4",
   "tier": "decoy",
   "pattern": null,
+  "continuous": false,
   "ref": null,
   "scene": "S07",
   "take": "S07-h3b",

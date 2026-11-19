@@ -1,0 +1,75 @@
+{
+  "case_id": "S04-h3a__combo__S04.I2+S04.I6",
+  "blind_id": "v_32fd4e9d87",
+  "video": "S04-h3a__combo__S04.I2+S04.I6__TC3+VT1.mp4",
+  "tier": "combo",
+  "pattern": "separate",
+  "continuous": false,
+  "ref": null,
+  "scene": "S04",
+  "take": "S04-h3a",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6.6,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S04.I2",
+      "category": "TC",
+      "sub": "TC3",
+      "secondary": [],
+      "category_name": "时序/因果",
+      "sub_name": "状态回跳（已发生的变化又复原）",
+      "evidence": "E3",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "耳机已经拿在手里，画面又回到两只耳机都在盒里",
+      "method": "insert",
+      "auto": true,
+      "windows": [
+        [
+          4.8,
+          5.4
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "short",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S04.I6",
+      "category": "VT",
+      "sub": "VT1",
+      "secondary": [],
+      "category_name": "文字/视觉瑕疵",
+      "sub_name": "乱码或伪文字（非代码字幕）",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "盒盖表面出现不存在的伪文字",
+      "method": "prompt",
+      "auto": false,
+      "windows": [
+        [
+          0,
+          1.4
+        ]
+      ],
+      "window_status": "estimated",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "garbled_text",
+        "product_drift"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

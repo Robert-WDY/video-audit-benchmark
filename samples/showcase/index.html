@@ -151,9 +151,21 @@ a { color: var(--accent) }
     <div class="cards" id="b2-prompt"></div>
   </section>
 
+  <section class="group" id="batch3">
+    <div class="group-head">
+      <div class="eyebrow">第三批 · 同一镜头多错误</div>
+      <h2>多个错误叠在同一段连续画面里</h2>
+      <p class="lede">前两批的组合靠剪辑时间轴，看起来像几段拼起来。这一批时间轴不动，只改画面里的一块区域：按颜色换色、区域定格、区域复制、区域镜像，再叠上字幕、静音、白闪。多个错误同时出现在同一段连续画面里，真值依然精确到帧。提示词诱导做不出来的“三只耳机”，用区域复制做出来了。</p>
+    </div>
+    <h3>局部合成</h3>
+    <div class="cards" id="b3-local"></div>
+    <h3>提示词同时要求两处文字错误</h3>
+    <div class="cards" id="b3-gen"></div>
+  </section>
+
   <section class="group">
     <div class="group-head">
-      <div class="eyebrow">两批合计</div>
+      <div class="eyebrow">三批合计</div>
       <h2>成本与产出</h2>
     </div>
     <div class="table-wrap">
@@ -299,11 +311,49 @@ const B2_PROMPT = [
     wins: [{ w: [0.5, 1.0], acc: true, label: '待判：合盖时指示灯已亮 · SA1' }] },
 ];
 
+const B3_LOCAL = [
+  { id: 'S03-h3b__combo__S03.I8+S03.I4+S03.I7__PF8+TE3+TC6', title: '容量字幕错 → 倒水没声音 → 水倒进去杯子却一直空着', media: 'b3-s03-bundle', dur: 6,
+    chips: [['combo', 'err'], ['同一连续镜头', 'acc'], ['PF8 + TE3 + TC6']],
+    kv: [['操作', '<span class="op">caption</span> <span class="op">mute</span> <span class="op">freeze_region 玻璃杯 @0s</span>'], ['看点', '水流清楚地进入杯口然后消失，杯子从头到尾是空的。单帧看每一帧都合理，要连起来看才知道错']],
+    wins: [{ w: [0.5, 2.4], label: 'S03.I8 字幕 500ml（事实 350ml）' }, { w: [2.4, 4.8], label: 'S03.I4 出水期间无声' }, { w: [2.4, 6], label: 'S03.I7 水倒进去，玻璃杯始终是空的' }] },
+  { id: 'S05-h3b__multi__S05.I9+S05.I2+S05.I8__PF4+PF8+PF5', title: 'Logo 反字 → 字幕功率错 → 放上后光环不亮', media: 'b3-s05-bundle', dur: 6,
+    chips: [['multi', 'err'], ['同一连续镜头', 'acc'], ['PF4 + PF8 + PF5']],
+    kv: [['操作', '<span class="op">flip_region Logo</span> <span class="op">caption</span> <span class="op">freeze_region 充电板 @4.1s</span>']],
+    wins: [{ w: [0, 2.7], label: 'S05.I9 Volt 变成镜像反字' }, { w: [3, 6], label: 'S05.I2 字幕 50W（事实 15W）' }, { w: [4.3, 6], label: 'S05.I8 光环始终不亮' }] },
+  { id: 'S07-h3b__combo__S07.I5+S07.I2+S07.I4__PF5+PF8+TE3', title: '光环颜色错 + 续航字幕错 + 开机无提示音（打开声音）', media: 'b3-s07-bundle', dur: 6,
+    chips: [['combo', 'err'], ['同一连续镜头', 'acc'], ['PF5 + PF8 + TE3']],
+    kv: [['说明', '两处画面错误在同一时间段重叠出现，审核需要给出两条证据，不能一句“有异常”带过']],
+    wins: [{ w: [0, 6], label: 'S07.I4 全片无声' }, { w: [3.9, 6], label: 'S07.I5 光环紫红色（事实蓝色）' }, { w: [3.9, 6], label: 'S07.I2 字幕 24 小时（事实 12 小时）' }] },
+  { id: 'S04-h3a__multi__S04.I7+S04.I4__PF3+PF5', title: '盒里三只耳机 + 指示灯红色', media: 'b3-s04-bundle', dur: 6,
+    chips: [['multi', 'err'], ['同一连续镜头', 'acc'], ['PF3 + PF5']],
+    kv: [['操作', '<span class="op">clone 左耳机 → 盒盖内侧</span> <span class="op">tint key 绿 → 红</span>'], ['对比', '提示词诱导两次都没做出三只耳机；区域复制一次做对。第一版复制框太高，把转轴也复制了一截，收窄后修好']],
+    wins: [{ w: [1.4, 6], label: 'S04.I7 第三只耳机' }, { w: [1.4, 6], label: 'S04.I4 指示灯红色（事实绿色）' }] },
+  { id: 'S01-h3c__combo__S01.I1+S01.I3+S01.I5__PF1+PF8+TE4', title: '容量字幕错 → 转到背面白闪一帧 → 杯身变蓝', media: 'b3-s01-bundle', dur: 6,
+    chips: [['combo', 'err'], ['同一连续镜头', 'acc'], ['PF1 + PF8 + TE4']],
+    kv: [['改进', '矩形换色在花纹背景上留下紫色色带；改成只换红色像素后背景干净']],
+    wins: [{ w: [1, 3.5], label: 'S01.I3 字幕 500ml' }, { w: [3, 3.04], label: 'S01.I5 单帧白闪' }, { w: [3, 6], label: 'S01.I1 杯身变蓝' }] },
+  { id: 'S03-h3b__single__S03.I7__TC6', title: '单独看“有因无果”：水在倒，杯子不满', media: 'b3-s03-i7', dur: 6,
+    chips: [['single', 'err'], ['TC6 有因无果'], ['E2 动作过程']],
+    kv: [['操作', '<span class="op">freeze_region 玻璃杯 @0s, 2.4–6.0s</span>']],
+    wins: [{ w: [2.4, 6], label: 'S03.I7 玻璃杯始终是空的' }] },
+];
+
+const B3_GEN = [
+  { id: 'S01 · seed 20261121', title: 'Logo 写成 LUM0 + 杯身伪文字', media: 'b3-gen-s01', dur: 6,
+    chips: [['PF4 + VT1'], ['两处都出现', 'err'], ['窗口为估计值', 'warn']],
+    verdict: '<b>复核：两处 present。</b>Logo 变成竖排并多出一个“0”，与事实“正面横排 LUMO”不符；杯底出现一行读不通的小字，比较细微。文字类是唯一能被提示词稳定诱导的错误，一条视频里可以同时要两处。',
+    wins: [{ w: [0, 6], label: 'S01.I6 Logo 变形' }, { w: [0, 6], label: 'S01.I8 杯底伪文字（细微）' }] },
+  { id: 'S08 · seed 20261121', title: '罐身乱码 + 盖面写成 AUAR', media: 'b3-gen-s08', dur: 6,
+    chips: [['VT1 + PF4'], ['做出一处', 'warn']],
+    verdict: '<b>复核：VT1 present，PF4 absent。</b>罐身 AURA 旁边有几行读不通的小字；盖面仍近似 AURA，没有变成 AUAR。另外涂在手背上的霜像一块不透明的圆片，可能算 VT2 质地异常，待判。',
+    wins: [{ w: [1.5, 6], label: 'S08.I5 罐身伪文字（细微）' }, { w: [3.5, 6], acc: true, label: '待判：手背上的霜像一块圆片 · VT2' }] },
+];
+
 const COST = [
-  ['H3 生成正确底片', '¥1.38 / 条', '5 条底片', '取决于底片是否干净；需盲审', '5/5 出片：3 条干净，2 条带意外或待判错误。加了物体数量约束后明显变好'],
-  ['本地剪辑注入', '¥0', '5 条底片共 45 个自动样本（去重后）', '精确到帧，由操作直接算出', '全部渲染成功。去掉了与底片逐帧相同的“只切不改”对照，纯声音错误只保留单错误和一个组合'],
-  ['H3 提示词诱导', '¥1.38 / 条', '6 条尝试', '估计窗口，需人工校准', '6 条只做出 1 条（乱码）。手部畸形和数量错误各试 2 次都没做出'],
-  ['合计', '¥15.18', '11 次 H3 调用（账单核对一致）', '', '46 个可用样本（45 个剪辑 + 1 条乱码）平摊约 ¥0.33 / 个'],
+  ['H3 生成正确底片', '¥1.38 / 条', '7 条底片', '取决于底片是否干净；需盲审', '7 条里 2 条干净，5 条带意外或待判错误。加了物体数量约束后明显变好'],
+  ['本地剪辑 + 局部合成', '¥0', '6 条底片共 71 条视频', '精确到帧，由操作直接算出', '全部渲染成功；13 条是同一连续镜头里的多错误'],
+  ['H3 提示词诱导', '¥1.38 / 条', '8 条尝试，共要求 10 处错误', '估计窗口，需人工校准', '做出 4 处，全是文字类（文字类 4/5）；手部、数量、物理类 0/5'],
+  ['合计', '¥20.70', '15 次 H3 调用', '', '账单里同期另有 2 单 H3 和 1 单 Seedance 不是本评测提交的'],
 ];
 
 const $ = (s, el = document) => el.querySelector(s);
@@ -356,7 +406,7 @@ function card(c, compact) {
 
 const cutBox = $('#cut-cards'); CUT.forEach((c) => cutBox.appendChild(card(c)));
 const promptBox = $('#prompt-cards'); PROMPT.forEach((c) => promptBox.appendChild(card(c)));
-[['#b2-base', B2_BASE], ['#b2-cut', B2_CUT], ['#b2-prompt', B2_PROMPT]].forEach(([sel, list]) => { const box = $(sel); list.forEach((c) => box.appendChild(card(c))); });
+[['#b2-base', B2_BASE], ['#b2-cut', B2_CUT], ['#b2-prompt', B2_PROMPT], ['#b3-local', B3_LOCAL], ['#b3-gen', B3_GEN]].forEach(([sel, list]) => { const box = $(sel); list.forEach((c) => box.appendChild(card(c))); });
 $('#cost-body').innerHTML = COST.map((r) => `<tr><td>${r[0]}</td><td class="num">${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`).join('');
 </script>
 

@@ -190,6 +190,26 @@
           "instruction": "照脚本生成，允许大理石纹理有轻微的帧间闪烁，其余保持干净"
         }
       ]
+    },
+    {
+      "id": "S08.I8",
+      "category": "PF",
+      "sub": "PF4",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "block",
+      "description": "盖面压印字样写成 AUAR（字母顺序错，事实为 AURA）",
+      "ops": [
+        {
+          "op": "manual",
+          "method": "prompt",
+          "window": {
+            "from": "start",
+            "to": "lid_off"
+          },
+          "instruction": "照脚本生成，但金色盖面压印的字样是 AUAR 而不是 AURA"
+        }
+      ]
     }
   ],
   "decoys": [

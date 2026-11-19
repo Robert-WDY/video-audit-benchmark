@@ -1,0 +1,19 @@
+{
+  "case_id": "S01-h3c__clean__base",
+  "blind_id": "v_ceaed2d270",
+  "video": "S01-h3c__clean__base__ok.mp4",
+  "tier": "clean",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S01",
+  "take": "S01-h3c",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": false,
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

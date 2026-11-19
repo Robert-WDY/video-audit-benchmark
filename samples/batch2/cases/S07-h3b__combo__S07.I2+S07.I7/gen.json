@@ -1,0 +1,48 @@
+{
+  "case_id": "S07-h3b__combo__S07.I2+S07.I7",
+  "scene": "S07",
+  "take": "S07-h3b",
+  "source": "../generated/S07__base__seed20261120.mp4",
+  "needs_manual": true,
+  "manual_tasks": [
+    {
+      "for": "S07.I7",
+      "method": "inpaint",
+      "instruction": "在正确底片上把 light_on 之后的光环修补成熄灭状态"
+    }
+  ],
+  "ops": [
+    {
+      "op": "caption",
+      "from": 3.9,
+      "to": 6,
+      "text": "24 小时超长续航",
+      "id": "S07.I2"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "caption",
+      "from": 3.9,
+      "to": 6,
+      "text": "24 小时超长续航",
+      "id": "S07.I2",
+      "out": [
+        3.9,
+        6
+      ]
+    }
+  ],
+  "duration": 6
+}

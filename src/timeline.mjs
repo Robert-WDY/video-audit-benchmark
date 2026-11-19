@@ -151,7 +151,9 @@ export const PIECE_OPS = {
 };
 
 // 叠加层操作在拼接后的输出时间上生效；spec 用源时间写，渲染前映射
-export const OVERLAY_OPS = new Set(['tint', 'caption', 'mute', 'flash']);
+export const OVERLAY_OPS = new Set(['tint', 'caption', 'mute', 'flash', 'clone', 'freeze_region', 'retime_region', 'flip_region']);
+// 局部操作：只改画面的一块区域，时间轴不动，可以和其他错误在同一段连续镜头里叠加
+export const LOCAL_OPS = new Set(['tint', 'clone', 'freeze_region', 'retime_region', 'flip_region']);
 
 export function isPieceOp(op) { return Object.hasOwn(PIECE_OPS, op); }
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // 视频审核评测集命令行。用法见 ../README.md。
 import { existsSync } from 'node:fs';
-import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { parseArgs } from 'node:util';
 import { agreement, blindSheet, finalize, parseCsv, readBlind, reconcileSheet, toCsv } from './annotate.mjs';
@@ -45,6 +45,8 @@ async function caseDirs() {
   return (await readdir(dir)).sort().map((d) => path.join(dir, d));
 }
 const loadTruths = async () => Promise.all((await caseDirs()).map((d) => readJson(path.join(d, 'truth.json'))));
+// 视频文件：可读名（truth.video）；旧数据没有该字段时退回 blind_id
+const videoOf = (t) => path.join(out, 'videos', t.video || `${t.blind_id}.mp4`);
 const blindFiles = () => (a.blind || die('需要 --blind a.csv,b.csv')).split(',').map((f) => path.resolve(f.trim()));
 const annotatorOf = (f) => path.basename(f).replace(/\.csv$/i, '');
 
@@ -95,13 +97,13 @@ const commands = {
     const probes = new Map(); let ok = 0; let wait = 0; let fail = 0;
     for (const d of dirs) {
       const gen = await readJson(path.join(d, 'gen.json')); const truth = await readJson(path.join(d, 'truth.json'));
-      const dst = path.join(out, 'videos', `${truth.blind_id}.mp4`);
+      const dst = videoOf(truth);
       if (existsSync(dst) && !a.force) { ok++; continue; }
       const src = gen.needs_manual ? path.join(out, 'manual', `${gen.case_id}.mp4`) : path.resolve(out, gen.source);
       if (a['dry-run'] && !gen.needs_manual) {
         const fake = { duration: gen.duration, width: 1080, height: 1920, fps: 30, audio: true };
         const args = ffmpegArgs(src, dst, gen, existsSync(src) && existsSync(a.ffmpeg) ? await probe(a.ffmpeg, src) : fake, { font: a.font || '/path/to/cjk-font.ttc' });
-        console.log(`[dry-run] ${gen.case_id} → videos/${truth.blind_id}.mp4（filter ${args[args.indexOf('-filter_complex') + 1].split(';').length} 段）`);
+        console.log(`[dry-run] ${gen.case_id} → ${path.relative(out, dst)}（filter ${args[args.indexOf('-filter_complex') + 1].split(';').length} 段）`);
         ok++; continue;
       }
       if (!existsSync(src)) { wait++; if (gen.needs_manual) console.log(`等待手工素材 ${path.relative(out, src)}`); else console.warn(`缺少底片 ${src}`); continue; }
@@ -132,7 +134,7 @@ const commands = {
     let done = 0;
     await pool(dirs, +a.concurrency, async (d) => {
       const truth = await readJson(path.join(d, 'truth.json'));
-      const video = path.join(out, 'videos', `${truth.blind_id}.mp4`);
+      const video = videoOf(truth);
       const dst = path.join(rdir, `${truth.case_id}.json`);
       if (!existsSync(video) || (existsSync(dst) && !a.force)) return;
       const input = await readJson(path.join(d, a.config === 'script' ? 'input.script.json' : 'input.json'));
@@ -146,11 +148,33 @@ const commands = {
 
   async sheets() {
     const truths = await loadTruths();
-    const have = truths.filter((t) => existsSync(path.join(out, 'videos', `${t.blind_id}.mp4`)));
-    await mkdir(path.join(out, 'annotation'), { recursive: true });
+    const have = truths.filter((t) => existsSync(videoOf(t)));
+    const bdir = path.join(out, 'annotation', 'blind');
+    await mkdir(bdir, { recursive: true });
+    // 盲审用的副本：文件名只有不透明的 blind_id，看不出场景和错误
+    for (const t of have) await copyFile(videoOf(t), path.join(bdir, `${t.blind_id}.mp4`));
     const f = path.join(out, 'annotation', 'blind-template.csv');
     await writeFile(f, blindSheet(have, { seed: +a.seed }));
-    console.log(`盲审表 ${f}（${have.length} 条已渲染视频）。每位标注员复制一份，命名为 <标注员>.csv；只把 videos/ 目录给标注员。`);
+    console.log(`盲审表 ${f}（${have.length} 条视频）。只把 annotation/blind/ 目录给标注员，不要给 videos/（文件名里有答案）。每位标注员复制一份表，命名为 <标注员>.csv。`);
+  },
+
+  async index() {
+    const truths = (await loadTruths()).filter((t) => existsSync(videoOf(t)));
+    const tierName = { clean: '正确', control: '对照', decoy: '干扰项', single: '单错误', multi: '同类多错误', combo: '异类多错误' };
+    const order = ['clean', 'decoy', 'control', 'single', 'multi', 'combo'];
+    truths.sort((x, y) => x.take.localeCompare(y.take) || order.indexOf(x.tier) - order.indexOf(y.tier) || (x.video || '').localeCompare(y.video || ''));
+    const fmtW = (ws) => ws.map(([s, e]) => (e - s < 0.05 ? `${s.toFixed(1)}s` : `${s.toFixed(1)}–${e.toFixed(1)}s`)).join(', ');
+    const rows = truths.map((t) => {
+      const errs = t.injected.map((e) => `**${e.sub}** ${fmtW(e.windows)} ${e.description}`).join('<br>') || (t.decoy ? `无错误。看起来像 ${t.decoy.looks_like}：${t.decoy.description}` : '无错误');
+      const notes = [t.bundle && `同镜头组合：${t.bundle}`, t.same_picture_as && `画面与 ${t.same_picture_as} 相同（只有声音不同）`, t.ref && `对照 ${t.ref}`].filter(Boolean).join('；');
+      const shot = t.injected.length > 1 ? (t.continuous ? '同一连续镜头' : '含剪辑') : '';
+      return `| [${t.video}](${encodeURIComponent(t.video)}) | ${tierName[t.tier] || t.tier} | ${shot} | ${errs} | ${notes} |`;
+    });
+    const md = ['# 视频清单', '', `共 ${truths.length} 条。时间为输出视频中的秒数；「同一连续镜头」表示时间轴没有被剪辑，多个错误叠加在同一段画面里。`, '',
+      '| 文件 | 类型 | 镜头 | 错误（子类 时间 描述） | 备注 |', '|---|---|---|---|---|', ...rows, ''].join('\n');
+    const f = path.join(out, 'videos', 'INDEX.md');
+    await writeFile(f, md);
+    console.log(`已写入 ${f}（${truths.length} 条）`);
   },
 
   async reconcile() {
@@ -200,7 +224,7 @@ const commands = {
 };
 
 if (!commands[cmd]) {
-  console.log('用法: node src/cli.mjs <validate|build|render|review|sheets|reconcile|agreement|finalize|score> [选项]\n详见 README.md');
+  console.log('用法: node src/cli.mjs <validate|build|render|index|review|sheets|reconcile|agreement|finalize|score> [选项]\n详见 README.md');
   process.exit(cmd ? 1 : 0);
 }
 await commands[cmd]();

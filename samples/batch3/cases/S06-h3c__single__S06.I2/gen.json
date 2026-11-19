@@ -1,0 +1,54 @@
+{
+  "case_id": "S06-h3c__single__S06.I2",
+  "scene": "S06",
+  "take": "S06-h3c",
+  "source": "../generated/S06__base__seed20261121.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "tint",
+      "from": 5.5,
+      "to": 6,
+      "region": [
+        0.3,
+        0.62,
+        0.45,
+        0.2
+      ],
+      "hue": 180,
+      "id": "S06.I2"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "tint",
+      "from": 5.5,
+      "to": 6,
+      "region": [
+        0.3,
+        0.62,
+        0.45,
+        0.2
+      ],
+      "hue": 180,
+      "id": "S06.I2",
+      "out": [
+        5.5,
+        6
+      ]
+    }
+  ],
+  "duration": 6
+}

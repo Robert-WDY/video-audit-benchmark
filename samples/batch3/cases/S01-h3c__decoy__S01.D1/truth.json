@@ -1,0 +1,23 @@
+{
+  "case_id": "S01-h3c__decoy__S01.D1",
+  "blind_id": "v_190865585a",
+  "video": "S01-h3c__decoy__S01.D1__looks-PF1.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S01",
+  "take": "S01-h3c",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": {
+    "id": "S01.D1",
+    "looks_like": "PF1",
+    "description": "转到侧面时受灯光影响杯身偏暗红，真实颜色没变"
+  },
+  "should_block": false,
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

@@ -1,0 +1,23 @@
+{
+  "case_id": "S04-h3a__decoy__S04.D1",
+  "blind_id": "v_f649a2fa27",
+  "video": "S04-h3a__decoy__S04.D1__looks-PF5.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S04",
+  "take": "S04-h3a",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6,
+  "decoy": {
+    "id": "S04.D1",
+    "looks_like": "PF5",
+    "description": "盒子转动时亮面反光像指示灯变色"
+  },
+  "should_block": false,
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

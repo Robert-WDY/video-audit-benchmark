@@ -15,25 +15,30 @@ export function worldPrompt(scene, { style = '真实商业摄影，自然光影�
   ].join('\n');
 }
 
-// 错误版：明确、可见、单一，其余保持正确
-export function errorClause(inj) {
-  return [
-    `本镜头必须出现以下不合理之处，要清晰可见、不能被模糊或遮挡：${inj.generation_hint || inj.description}。`,
-    '除这一处之外，其余所有内容都保持正确、正常。',
-  ].join('\n');
+// 错误版：每个错误明确、可见，其余保持正确。可同时要求多个错误（同一镜头内）
+export function errorClause(injs) {
+  const list = [].concat(injs);
+  const items = list.map((inj) => inj.generation_hint || inj.description);
+  const head = items.length === 1
+    ? `本镜头必须出现以下不合理之处，要清晰可见、不能被模糊或遮挡：${items[0]}。`
+    : `本镜头必须同时出现以下 ${items.length} 处不合理之处，每一处都要清晰可见、不能被模糊或遮挡：\n${items.map((x, i) => `${i + 1}. ${x}`).join('\n')}`;
+  return [head, `除这${items.length === 1 ? '一处' : '几处'}之外，其余所有内容都保持正确、正常。`].join('\n');
 }
+
+const RELAX = {
+  PF: '整个过程中产品的颜色、材质、形状、部件数量和标识始终保持不变；',
+  PH: '物体运动符合真实物理；人手结构正常；',
+  VT: '除产品 Logo 外画面中不出现其他文字。',
+};
 
 export function buildPrompt(scene, inj = null, opts = {}) {
   const world = worldPrompt(scene, opts);
-  if (!inj) return world;
-  // 有错误时，把世界描述里与错误直接矛盾的那句约束去掉，否则模型会在两条指令之间取折中
-  const relax = {
-    PF: '整个过程中产品的颜色、材质、形状、部件数量和标识始终保持不变；',
-    PH: '物体运动符合真实物理；人手结构正常；',
-    VT: '除产品 Logo 外画面中不出现其他文字。',
-  }[inj.category];
-  let w = relax ? world.replace(relax, '') : world;
+  const list = inj ? [].concat(inj) : [];
+  if (!list.length) return world;
+  // 去掉与错误直接矛盾的约束，否则模型会在两条指令之间取折中
+  let w = world;
+  for (const x of list) { const r = RELAX[x.category]; if (r) w = w.replace(r, ''); }
   // 数量类错误（部件数量、物体数量）与「每种物体只有一个」矛盾，一并去掉
-  if (['PF3', 'SA6'].includes(inj.sub)) w = w.split('\n').filter((l) => !l.startsWith('画面中只出现上面写到的物体')).join('\n');
-  return `${w}\n${errorClause(inj)}`;
+  if (list.some((x) => ['PF3', 'SA6'].includes(x.sub))) w = w.split('\n').filter((l) => !l.startsWith('画面中只出现上面写到的物体')).join('\n');
+  return `${w}\n${errorClause(list)}`;
 }

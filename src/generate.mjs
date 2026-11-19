@@ -19,13 +19,15 @@ const scene = (await loadScenes()).find((s) => s.id === a.scene);
 if (!scene) throw new Error(`没有场景 ${a.scene}`);
 let inj = null;
 if (a.inj) {
-  inj = scene.injections.find((i) => i.id === a.inj);
-  if (!inj) throw new Error(`没有错误 ${a.inj}`);
-  const m = inj.ops.find((o) => o.op === 'manual' && o.method === 'prompt');
-  if (m) inj = { ...inj, generation_hint: m.instruction.replace(/^照脚本生成[^，,]*[，,]\s*(但)?/, '') };
+  inj = a.inj.split(',').map((id) => {
+    const x = scene.injections.find((i) => i.id === id.trim());
+    if (!x) throw new Error(`没有错误 ${id}`);
+    const m = x.ops.find((o) => o.op === 'manual' && o.method === 'prompt');
+    return m ? { ...x, generation_hint: m.instruction.replace(/^照脚本生成[^，,]*[，,]\s*(但)?/, '') } : x;
+  });
 }
 const prompt = buildPrompt(scene, inj);
-const name = `${scene.id}__${inj ? inj.id : 'base'}__seed${a.seed}`;
+const name = `${scene.id}__${inj ? inj.map((x) => x.id).join('+') : 'base'}__seed${a.seed}`;
 const req = a.route === 'h3'
   ? { prompt, duration_seconds: +a.dur, quality: 'medium', resolution: '720p', aspect_ratio: '9:16', seed: +a.seed }
   : { model: a.model, channel: 'libtv', prompt, duration_seconds: +a.dur, resolution: '768p', aspect_ratio: '9:16', sound: false };

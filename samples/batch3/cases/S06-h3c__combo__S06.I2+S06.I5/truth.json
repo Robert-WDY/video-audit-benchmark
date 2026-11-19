@@ -1,0 +1,75 @@
+{
+  "case_id": "S06-h3c__combo__S06.I2+S06.I5",
+  "blind_id": "v_94e1a089a5",
+  "video": "S06-h3c__combo__S06.I2+S06.I5__PF4+PH3.mp4",
+  "tier": "combo",
+  "pattern": "overlap",
+  "continuous": true,
+  "ref": null,
+  "scene": "S06",
+  "take": "S06-h3c",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S06.I2",
+      "category": "PF",
+      "sub": "PF4",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "Logo、型号、品牌标识错误",
+      "evidence": "E3",
+      "visibility": "V3",
+      "disposition": "fix",
+      "judge_basis": "facts",
+      "description": "系好鞋带后鞋侧弧线标从蓝色变成橙色",
+      "method": "tint",
+      "auto": true,
+      "windows": [
+        [
+          5.5,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "short",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    },
+    {
+      "id": "S06.I5",
+      "category": "PH",
+      "sub": "PH3",
+      "secondary": [],
+      "category_name": "物理",
+      "sub_name": "穿模或碰撞错误",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "系鞋带时鞋带穿过手指",
+      "method": "prompt",
+      "auto": false,
+      "windows": [
+        [
+          1.5,
+          5.5
+        ]
+      ],
+      "window_status": "estimated",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

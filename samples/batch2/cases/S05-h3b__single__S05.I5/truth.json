@@ -1,8 +1,10 @@
 {
   "case_id": "S05-h3b__single__S05.I5",
   "blind_id": "v_8dda85a415",
+  "video": "S05-h3b__single__S05.I5__PH1.mp4",
   "tier": "single",
   "pattern": null,
+  "continuous": true,
   "ref": null,
   "scene": "S05",
   "take": "S05-h3b",

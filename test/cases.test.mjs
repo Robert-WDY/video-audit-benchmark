@@ -80,7 +80,7 @@ test('没有画面、声音、字幕都相同的重复用例', () => {
 
 test('纯声音错误：每条底片最多一个组合，且标出与哪条画面相同', () => {
   for (const t of takes) {
-    const n = cases.filter((c) => c.truth.take === t.id && c.injected?.length !== 0 && ['multi', 'combo'].includes(c.tier)
+    const n = cases.filter((c) => c.truth.take === t.id && !c.truth.bundle && ['multi', 'combo'].includes(c.tier)
       && c.truth.injected.some((e) => e.method === 'mute')).length;
     assert.ok(n <= 1, `${t.id} 有 ${n} 个含静音的组合`);
   }
@@ -113,4 +113,15 @@ test('组合用例最多一个手工步骤；冲突组合被跳过而不是生�
   for (const c of cases) assert.ok(c.gen.manual_tasks.length <= 1, c.id);
   assert.ok(skipped.length > 0);
   assert.ok(!cases.some((c) => c.id.includes('S02.I1+S02.I2')));
+});
+
+test('同一镜头多错误（bundle）：时间轴未剪辑、三个错误都在、文件名可读', () => {
+  const b = cases.find((c) => c.id === 'S05-real-01__multi__S05.I9+S05.I2+S05.I8');
+  assert.ok(b, '缺少 S05 的 bundle');
+  assert.equal(b.truth.continuous, true);
+  assert.equal(b.truth.injected.length, 3);
+  assert.ok(b.truth.bundle);
+  assert.equal(b.truth.video, 'S05-real-01__multi__S05.I9+S05.I2+S05.I8__PF4+PF8+PF5.mp4');
+  const reverse = cases.find((c) => c.id === 'S03-real-01__single__S03.I1');
+  assert.equal(reverse.truth.continuous, false);
 });

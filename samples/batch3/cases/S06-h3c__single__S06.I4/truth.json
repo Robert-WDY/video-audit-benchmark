@@ -1,0 +1,45 @@
+{
+  "case_id": "S06-h3c__single__S06.I4",
+  "blind_id": "v_d3de47f3c6",
+  "video": "S06-h3c__single__S06.I4__SA5.mp4",
+  "tier": "single",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S06",
+  "take": "S06-h3c",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S06.I4",
+      "category": "SA",
+      "sub": "SA5",
+      "secondary": [],
+      "category_name": "脚本偏离（状态/动作）",
+      "sub_name": "终态错或未达到",
+      "evidence": "E4",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "script",
+      "description": "最后右脚穿的是左脚鞋（鞋头弧度朝内）",
+      "method": "prompt",
+      "auto": false,
+      "windows": [
+        [
+          1.5,
+          6
+        ]
+      ],
+      "window_status": "estimated",
+      "duration_bucket": "long",
+      "expected_checks": [],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

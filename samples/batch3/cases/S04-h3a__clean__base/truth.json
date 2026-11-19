@@ -1,0 +1,19 @@
+{
+  "case_id": "S04-h3a__clean__base",
+  "blind_id": "v_999e18654f",
+  "video": "S04-h3a__clean__base__ok.mp4",
+  "tier": "clean",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S04",
+  "take": "S04-h3a",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6,
+  "decoy": null,
+  "should_block": false,
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

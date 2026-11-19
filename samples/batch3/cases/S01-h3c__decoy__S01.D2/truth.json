@@ -1,0 +1,23 @@
+{
+  "case_id": "S01-h3c__decoy__S01.D2",
+  "blind_id": "v_bab474994c",
+  "video": "S01-h3c__decoy__S01.D2__looks-TE2.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": false,
+  "ref": null,
+  "scene": "S01",
+  "take": "S01-h3c",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 8,
+  "decoy": {
+    "id": "S01.D2",
+    "looks_like": "TE2",
+    "description": "前半圈刻意 0.5 倍慢动作"
+  },
+  "should_block": false,
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

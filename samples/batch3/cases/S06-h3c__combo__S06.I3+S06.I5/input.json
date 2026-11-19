@@ -1,0 +1,40 @@
+{
+  "request": {
+    "product": {
+      "name": "Stride 跑鞋",
+      "appearance": "白色网面鞋身，鞋侧一道蓝色弧线标，灰色鞋底，白色鞋带",
+      "facts": [
+        {
+          "id": "F1",
+          "claim": "鞋身白色，侧面蓝色弧线标",
+          "text": "鞋身白色，侧面蓝色弧线标"
+        },
+        {
+          "id": "F2",
+          "claim": "灰色缓震鞋底",
+          "text": "灰色缓震鞋底"
+        },
+        {
+          "id": "F3",
+          "claim": "系带款",
+          "text": "系带款"
+        }
+      ]
+    }
+  },
+  "plan": {
+    "captions": [],
+    "shots": [
+      {
+        "id": "s1",
+        "kind": "product",
+        "uses_product": true,
+        "use_s": [
+          0,
+          5.3
+        ],
+        "dur": 5.3
+      }
+    ]
+  }
+}

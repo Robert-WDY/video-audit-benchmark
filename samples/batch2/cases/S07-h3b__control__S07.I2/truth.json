@@ -1,8 +1,10 @@
 {
   "case_id": "S07-h3b__control__S07.I2",
   "blind_id": "v_2282e10b22",
+  "video": "S07-h3b__control__base__ok.mp4",
   "tier": "control",
   "pattern": null,
+  "continuous": true,
   "ref": "S07-h3b__single__S07.I2",
   "scene": "S07",
   "take": "S07-h3b",

@@ -1,0 +1,23 @@
+{
+  "case_id": "S06-h3c__decoy__S06.D1",
+  "blind_id": "v_0d527170f7",
+  "video": "S06-h3c__decoy__S06.D1__looks-PF2.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S06",
+  "take": "S06-h3c",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": {
+    "id": "S06.D1",
+    "looks_like": "PF2",
+    "description": "穿鞋时鞋面被脚撑起出现褶皱和形变（正常）"
+  },
+  "should_block": false,
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

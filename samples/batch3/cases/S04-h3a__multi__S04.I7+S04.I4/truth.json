@@ -1,0 +1,79 @@
+{
+  "case_id": "S04-h3a__multi__S04.I7+S04.I4",
+  "blind_id": "v_cea81c0d10",
+  "video": "S04-h3a__multi__S04.I7+S04.I4__PF3+PF5.mp4",
+  "tier": "multi",
+  "pattern": "mask",
+  "continuous": true,
+  "ref": null,
+  "scene": "S04",
+  "take": "S04-h3a",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S04.I7",
+      "category": "PF",
+      "sub": "PF3",
+      "secondary": [
+        "SA6"
+      ],
+      "category_name": "产品事实",
+      "sub_name": "部件数量或位置错（按键、耳罩、接口、杯盖）",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "开盖后盒盖内侧多出一只耳机（一共三只，事实为一副两只）",
+      "method": "clone",
+      "auto": true,
+      "windows": [
+        [
+          1.4,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    },
+    {
+      "id": "S04.I4",
+      "category": "PF",
+      "sub": "PF5",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "屏幕/指示灯/UI 与事实不符",
+      "evidence": "E1",
+      "visibility": "V3",
+      "disposition": "fix",
+      "judge_basis": "facts",
+      "description": "开盖后指示灯亮成红色（事实为绿色）",
+      "method": "tint",
+      "auto": true,
+      "windows": [
+        [
+          1.4,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending",
+  "bundle": "同一连续镜头：盒里有三只耳机，指示灯还是红色"
+}

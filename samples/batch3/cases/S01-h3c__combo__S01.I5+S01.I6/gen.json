@@ -1,0 +1,46 @@
+{
+  "case_id": "S01-h3c__combo__S01.I5+S01.I6",
+  "scene": "S01",
+  "take": "S01-h3c",
+  "source": "../generated/S01__base__seed20261121.mp4",
+  "needs_manual": true,
+  "manual_tasks": [
+    {
+      "for": "S01.I6",
+      "method": "ref_edit",
+      "instruction": "把正确底片首帧的 Logo 改成 LUM0（字母 O 换成数字 0，笔画轻微扭曲），用改后首帧图生视频，运镜与转速照抄底片"
+    }
+  ],
+  "ops": [
+    {
+      "op": "flash",
+      "at": 3,
+      "frames": 1,
+      "id": "S01.I5"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "flash",
+      "at": 3,
+      "frames": 1,
+      "id": "S01.I5",
+      "out": [
+        3,
+        3.033
+      ]
+    }
+  ],
+  "duration": 6
+}

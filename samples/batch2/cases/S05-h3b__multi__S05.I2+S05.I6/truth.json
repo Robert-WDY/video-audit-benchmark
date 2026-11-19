@@ -1,8 +1,10 @@
 {
   "case_id": "S05-h3b__multi__S05.I2+S05.I6",
   "blind_id": "v_ba3ff50f96",
+  "video": "S05-h3b__multi__S05.I2+S05.I6__PF8+PF7.mp4",
   "tier": "multi",
   "pattern": "overlap",
+  "continuous": true,
   "ref": null,
   "scene": "S05",
   "take": "S05-h3b",

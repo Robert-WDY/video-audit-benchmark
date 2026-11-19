@@ -1,0 +1,44 @@
+{
+  "case_id": "S03-h3b__control__S03.I8",
+  "scene": "S03",
+  "take": "S03-h3b",
+  "source": "../generated/S03__base__seed20261120.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "caption",
+      "from": 0.5,
+      "to": 2.4,
+      "text": "350ml 随身容量",
+      "control": true,
+      "id": null
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "caption",
+      "from": 0.5,
+      "to": 2.4,
+      "text": "350ml 随身容量",
+      "control": true,
+      "id": null,
+      "out": [
+        0.5,
+        2.4
+      ]
+    }
+  ],
+  "duration": 6
+}

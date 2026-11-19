@@ -1,8 +1,10 @@
 {
   "case_id": "S07-h3b__multi__S07.I2+S07.I6",
   "blind_id": "v_5160e66bac",
+  "video": "S07-h3b__multi__S07.I2+S07.I6__PF8+PF3.mp4",
   "tier": "multi",
   "pattern": "overlap",
+  "continuous": true,
   "ref": null,
   "scene": "S07",
   "take": "S07-h3b",

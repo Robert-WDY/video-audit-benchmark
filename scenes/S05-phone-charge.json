@@ -204,6 +204,44 @@
           "instruction": "在正确底片上把 ring_on 之后的指示环和屏幕动画修补成熄灭状态"
         }
       ]
+    },
+    {
+      "id": "S05.I8",
+      "category": "PF",
+      "sub": "PF5",
+      "secondary": [
+        "TC6"
+      ],
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "block",
+      "description": "手机放上后屏幕显示充电，但充电板光环始终不亮（事实：放上后光环亮蓝色）",
+      "ops": [
+        {
+          "op": "freeze_region",
+          "at": "ring_on-0.2",
+          "from": "ring_on",
+          "to": "end",
+          "region": "pad"
+        }
+      ]
+    },
+    {
+      "id": "S05.I9",
+      "category": "PF",
+      "sub": "PF4",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "block",
+      "description": "充电板中央的 Volt 字样变成镜像反字",
+      "ops": [
+        {
+          "op": "flip_region",
+          "from": "start",
+          "to": "place-0.3",
+          "region": "logo"
+        }
+      ]
     }
   ],
   "decoys": [
@@ -232,5 +270,15 @@
       ]
     }
   ],
-  "chains": []
+  "chains": [],
+  "bundles": [
+    {
+      "ids": [
+        "S05.I9",
+        "S05.I2",
+        "S05.I8"
+      ],
+      "note": "同一连续镜头：Logo 是反字，放上后字幕写错功率，光环也不亮"
+    }
+  ]
 }

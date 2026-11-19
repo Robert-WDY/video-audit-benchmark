@@ -1,8 +1,10 @@
 {
   "case_id": "S03-h3b__combo__S03.I1+S03.I3",
   "blind_id": "v_bc5dad41fd",
+  "video": "S03-h3b__combo__S03.I1+S03.I3__PH2+TC3.mp4",
   "tier": "combo",
   "pattern": "separate",
+  "continuous": false,
   "ref": null,
   "scene": "S03",
   "take": "S03-h3b",

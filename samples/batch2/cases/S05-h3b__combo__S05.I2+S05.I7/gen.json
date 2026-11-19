@@ -1,0 +1,48 @@
+{
+  "case_id": "S05-h3b__combo__S05.I2+S05.I7",
+  "scene": "S05",
+  "take": "S05-h3b",
+  "source": "../generated/S05__base__seed20261120.mp4",
+  "needs_manual": true,
+  "manual_tasks": [
+    {
+      "for": "S05.I7",
+      "method": "inpaint",
+      "instruction": "在正确底片上把 ring_on 之后的指示环和屏幕动画修补成熄灭状态"
+    }
+  ],
+  "ops": [
+    {
+      "op": "caption",
+      "from": 3,
+      "to": 6,
+      "text": "50W 无线超级快充",
+      "id": "S05.I2"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "caption",
+      "from": 3,
+      "to": 6,
+      "text": "50W 无线超级快充",
+      "id": "S05.I2",
+      "out": [
+        3,
+        6
+      ]
+    }
+  ],
+  "duration": 6
+}

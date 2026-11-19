@@ -1,0 +1,48 @@
+{
+  "case_id": "S06-h3c__decoy__S06.D2",
+  "scene": "S06",
+  "take": "S06-h3c",
+  "source": "../generated/S06__base__seed20261121.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "slow",
+      "from": 1.5,
+      "to": 5.5,
+      "factor": 0.5,
+      "id": null
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        1.5
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "src": [
+        1.5,
+        5.5
+      ],
+      "rev": false,
+      "speed": 0.5,
+      "tag": null
+    },
+    {
+      "src": [
+        5.5,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [],
+  "duration": 10
+}

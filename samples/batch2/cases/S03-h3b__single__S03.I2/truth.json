@@ -1,8 +1,10 @@
 {
   "case_id": "S03-h3b__single__S03.I2",
   "blind_id": "v_4fc8cb374e",
+  "video": "S03-h3b__single__S03.I2__TC1.mp4",
   "tier": "single",
   "pattern": null,
+  "continuous": false,
   "ref": null,
   "scene": "S03",
   "take": "S03-h3b",

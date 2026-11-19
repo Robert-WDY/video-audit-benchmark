@@ -20,7 +20,7 @@ export async function loadScenes(dir = DEFAULT_SCENES) {
 }
 
 const MANUAL_METHODS = new Set(['prompt', 'ref_edit', 'inpaint', 'splice', 'shoot']);
-const TIME_KEYS = ['from', 'to', 'at', 'a_from', 'a_to', 'b_from', 'b_to'];
+const TIME_KEYS = ['from', 'to', 'at', 'a_from', 'a_to', 'b_from', 'b_to', 'src_from'];
 const DRIFT_SUBS = new Set(['PF1', 'PF2', 'PF3', 'PF4', 'PF5', 'PF6', 'VT2']);
 
 // —— 校验 ——
@@ -69,6 +69,10 @@ export function validateScene(scene, tax) {
     checkOps(d.id, d.ops);
   }
   for (const c of scene.chains || []) for (const id of c.ids || []) if (!ids.has(id)) e(`chains 引用了不存在的 ${id}`);
+  for (const b of scene.bundles || []) {
+    if (!Array.isArray(b.ids) || b.ids.length < 2) e('bundles 每组至少两个错误');
+    for (const id of b.ids || []) if (!ids.has(id)) e(`bundles 引用了不存在的 ${id}`);
+  }
   return errs;
 }
 
@@ -182,6 +186,10 @@ function makeCase({ tier, scene, take, tax, injections = [], extra = [], ref = n
   const idPart = [...injections.map((i) => i.id), ...(decoy ? [decoy.id] : [])].join('+') || 'base';
   const caseId = `${take.id}__${tier}__${idPart}`;
   const pattern = errors.length > 1 ? patternOf(errors, scene) : null;
+  // 时间轴没被剪过（只有一个正放片段）= 所有错误都在同一段连续镜头里，不是拼接
+  const real = tl.pieces.filter((p) => !p.marker);
+  const continuous = real.length === 1 && !!real[0].src && !real[0].rev && (real[0].speed || 1) === 1;
+  const video = `${videoName(caseId, errors, decoy)}.mp4`;
   return {
     id: caseId, blind_id: blindId(caseId, salt), tier, pattern,
     gen: {
@@ -192,7 +200,7 @@ function makeCase({ tier, scene, take, tax, injections = [], extra = [], ref = n
     input: reviewInput(scene, tl.overlays, tl.duration),
     input_script: reviewInput(scene, tl.overlays, tl.duration, { withScript: true }),
     truth: {
-      case_id: caseId, blind_id: blindId(caseId, salt), tier, pattern, ref,
+      case_id: caseId, blind_id: blindId(caseId, salt), video, tier, pattern, continuous, ref,
       scene: scene.id, take: take.id, source_kind: take.kind, baseline_verified: !!take.verified_clean,
       duration: r3(tl.duration), decoy: decoy ? { id: decoy.id, looks_like: decoy.looks_like, description: decoy.description } : null,
       should_block: errors.some((e) => e.disposition !== 'accept'),
@@ -239,12 +247,20 @@ export function visualSignature(c) {
   return JSON.stringify([canonicalPieces(c.gen.pieces), ov, manual]);
 }
 
+// 可读文件名：底片__类型__错误编号__子类，例如 S05-h3b__combo__S05.I2+S05.I4__PF8+PF5
+export function videoName(caseId, errors, decoy) {
+  const tag = errors.length ? errors.map((e) => e.sub).join('+') : decoy ? `looks-${decoy.looks_like}` : 'ok';
+  return `${caseId}__${tag}`.replace(/[^\w.+-]/g, '_');
+}
+
 function pairs(xs) { const out = []; for (let i = 0; i < xs.length; i++) for (let j = i + 1; j < xs.length; j++) out.push([xs[i], xs[j]]); return out; }
 
 // 按组合关系轮转挑选，保证 chain/mask/overlap/separate 都有代表
 function pickDiverse(cands, cap) {
   const by = new Map();
-  for (const c of cands) { const k = c.pattern; if (!by.has(k)) by.set(k, []); by.get(k).push(c); }
+  // 同一模式内，时间轴未剪辑（同一连续镜头）的组合排在前面
+  const sorted = [...cands].sort((a, b) => Number(b.truth.continuous) - Number(a.truth.continuous));
+  for (const c of sorted) { const k = c.pattern; if (!by.has(k)) by.set(k, []); by.get(k).push(c); }
   const order = ['chain', 'mask', 'overlap', 'separate'].filter((k) => by.has(k));
   const out = [];
   while (out.length < cap && order.some((k) => by.get(k).length)) {
@@ -286,13 +302,21 @@ export function expand(scenes, takes, tax, { maxMultiPerTake = 3, maxComboPerTak
       if (audio) audioCombo = true;
       (c.tier === 'multi' ? multis : combos).push(c);
     }
+    // 场景里显式定义的「同一镜头多错误」组合：数量不限，不占名额
+    const bundles = [];
+    for (const bd of scene.bundles || []) {
+      const injs = bd.ids.map((id) => scene.injections.find((i) => i.id === id));
+      const cats = new Set(injs.map((i) => i.category));
+      const c = tryMake({ ...base, tier: cats.size === 1 ? 'multi' : 'combo', injections: injs });
+      if (c) { c.truth.bundle = bd.note || null; bundles.push(c); }
+    }
     for (const ch of scene.chains || []) {
       if (ch.ids.length < 3) continue;
       const injs = ch.ids.map((id) => scene.injections.find((i) => i.id === id));
       const c = tryMake({ ...base, tier: 'combo', injections: injs });
       if (c) combos.push(c);
     }
-    cases.push(...pickDiverse(multis, maxMultiPerTake), ...pickDiverse(combos, maxComboPerTake));
+    cases.push(...bundles, ...pickDiverse(multis, maxMultiPerTake), ...pickDiverse(combos, maxComboPerTake));
   }
   // 兜底去重：画面和声音都相同的用例只留第一个；只有声音不同的，标出它与哪条画面相同
   const out = []; const seen = new Map();

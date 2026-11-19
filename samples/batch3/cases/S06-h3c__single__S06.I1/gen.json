@@ -1,0 +1,29 @@
+{
+  "case_id": "S06-h3c__single__S06.I1",
+  "scene": "S06",
+  "take": "S06-h3c",
+  "source": "../generated/S06__base__seed20261121.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "reverse",
+      "from": 0,
+      "to": 6,
+      "id": "S06.I1"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": true,
+      "speed": 1,
+      "tag": "S06.I1"
+    }
+  ],
+  "overlays": [],
+  "duration": 6
+}

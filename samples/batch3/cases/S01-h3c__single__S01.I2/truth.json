@@ -1,0 +1,48 @@
+{
+  "case_id": "S01-h3c__single__S01.I2",
+  "blind_id": "v_9cad3b241e",
+  "video": "S01-h3c__single__S01.I2__PF1.mp4",
+  "tier": "single",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S01",
+  "take": "S01-h3c",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S01.I2",
+      "category": "PF",
+      "sub": "PF1",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "颜色或材质与事实不符/中途改变",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "fix",
+      "judge_basis": "facts",
+      "description": "杯身颜色只在约 0.15 秒内闪变成蓝色",
+      "method": "tint",
+      "auto": true,
+      "windows": [
+        [
+          3,
+          3.15
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "flash",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

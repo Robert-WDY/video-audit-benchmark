@@ -1,0 +1,28 @@
+{
+  "case_id": "S01-h3c__decoy__S01.D1",
+  "scene": "S01",
+  "take": "S01-h3c",
+  "source": "../generated/S01__base__seed20261121.mp4",
+  "needs_manual": true,
+  "manual_tasks": [
+    {
+      "for": null,
+      "method": "shoot",
+      "instruction": "实拍：在侧面放一块黑旗遮掉部分柔光，使转到侧面时杯身明显变暗"
+    }
+  ],
+  "ops": [],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [],
+  "duration": 6
+}

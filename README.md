@@ -80,6 +80,24 @@
 
 用 `takes.example.json`（9 条底片）展开，大约得到 177 个用例、198 个错误实例，其中 115 个可以全自动渲染，62 个需要手工制作。
 
+## 同一镜头多错误
+
+时间轴剪辑（倒放、抽帧、换序）做出的多错误，本质上是几段画面的重新排列。要让多个错误同时出现在**同一段连续画面**里，用局部操作：时间轴不动，只改一块区域，彼此可以叠加。
+
+| 操作 | 做法 | 例子 |
+|---|---|---|
+| `tint` + `key` | 只改接近某个颜色的像素（色相旋转），背景不受影响 | 蓝色光环变紫、红杯变蓝、绿灯变红 |
+| `freeze_region` | 区域停在源时间 `at` 那一帧 | 水一直倒，玻璃杯始终是空的（TC6） |
+| `clone` | 区域复制到偏移 `dx, dy` 处 | 盒盖里多出第三只耳机（PF3） |
+| `flip_region` | 区域左右镜像 | Logo 变反字（PF4） |
+| `retime_region` | 区域显示 `src_from` 起的内容 | 区域提前或延后变化（TC5） |
+
+区域边缘自动羽化，避免贴片留下矩形边。要求底片机位固定、被改的物体在窗口内基本不动；画面有漂移的底片不适合。场景里的 `bundles` 定义专门设计的多错误组合（数量不限，不占自动组合名额）；`truth.json` 的 `continuous` 为 true 表示时间轴未被剪辑。实测提示词诱导只有文字类错误能稳定做出来（一条视频里可以同时要求两处），手部畸形、数量、物理错误都会被模型纠正回去，应改用局部合成。
+
+## 文件名与清单
+
+渲染结果用可读文件名：`底片__类型__错误编号__子类.mp4`。`node src/cli.mjs index --out <目录>` 生成 `videos/INDEX.md`，逐条列出错误的时间窗口和描述。盲审时运行 `sheets`，它把视频按不透明的 `blind_id` 复制到 `annotation/blind/`，只把这个目录给标注员。
+
 ## 流程
 
 ```bash
@@ -90,10 +108,11 @@ node src/cli.mjs build    --takes takes.json --out out
 
 # 手工制作：按 manual-tasks.csv 做出素材，放到 out/manual/<case_id>.mp4（时长和标记点要与底片一致）
 node src/cli.mjs render --out out --ffmpeg $FFMPEG_PATH --font /path/NotoSansCJK.ttc   # 先加 --dry-run 检查
-#   → out/videos/<blind_id>.mp4（文件名是不透明 id，看不出场景和错误）
+#   → out/videos/<底片__类型__错误__子类>.mp4（可读文件名）
 
-node src/cli.mjs sheets --out out                      # 生成盲审表 annotation/blind-template.csv
-#   每位标注员复制一份，命名为 <名字>.csv；只把 out/videos/ 给标注员
+node src/cli.mjs index --out out                       # 生成 videos/INDEX.md（可读清单）
+node src/cli.mjs sheets --out out                      # 盲审表 + annotation/blind/ 下的不透明命名副本
+#   每位标注员复制一份表，命名为 <名字>.csv；只把 annotation/blind/ 给标注员
 node src/cli.mjs agreement --blind out/annotation/a.csv,out/annotation/b.csv
 node src/cli.mjs reconcile --out out --blind out/annotation/a.csv,out/annotation/b.csv
 #   在 annotation/reconcile.csv 里逐行填写 verdict
@@ -166,5 +185,5 @@ node src/generate.mjs --scene S03 --inj S03.I6        # 同 seed 的错误版
 
 - **加底片**：在 `takes.json` 加一项。每多一条底片，用例就多一倍，这是提高每格样本量最便宜的办法。
 - **加场景**：复制一个 `scenes/*.json`，`validate` 会检查类别、子类、标记点引用和 id。
-- **加错误**：自动操作见 `src/timeline.mjs` 的 `PIECE_OPS`（reverse、drop、repeat、insert、swap、freeze、black、slow、cut）和叠加层（tint、caption、mute、flash）；手工操作写 `{"op":"manual","method":"prompt|ref_edit|inpaint|splice|shoot","instruction":…,"window":…}`。
+- **加错误**：自动操作见 `src/timeline.mjs` 的 `PIECE_OPS`（reverse、drop、repeat、insert、swap、freeze、black、slow、cut）和叠加层（tint、caption、mute、flash，以及局部操作 clone、freeze_region、retime_region、flip_region）；手工操作写 `{"op":"manual","method":"prompt|ref_edit|inpaint|splice|shoot","instruction":…,"window":…}`。
 - **当前缺口**：SA、PH、VT 三类和 V3 细微档的样本偏少，因为它们大多需要手工制作。正式评测前，应该优先补这几类的手工素材，或者增加底片条数。

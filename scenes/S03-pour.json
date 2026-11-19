@@ -176,6 +176,52 @@
           "instruction": "照脚本生成，但水流穿透玻璃杯侧壁直接落到桌面上"
         }
       ]
+    },
+    {
+      "id": "S03.I7",
+      "category": "TC",
+      "sub": "TC6",
+      "secondary": [
+        "PH2"
+      ],
+      "evidence": "E2",
+      "visibility": "V1",
+      "disposition": "block",
+      "description": "水一直往玻璃杯里倒，玻璃杯却始终是空的（水流进杯后消失）",
+      "ops": [
+        {
+          "op": "freeze_region",
+          "at": "start",
+          "from": "pour_start",
+          "to": "end",
+          "region": "glass"
+        }
+      ]
+    },
+    {
+      "id": "S03.I8",
+      "category": "PF",
+      "sub": "PF8",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "description": "字幕写 500ml，事实是 350ml",
+      "ops": [
+        {
+          "op": "caption",
+          "from": "lift_start",
+          "to": "pour_start",
+          "text": "500ml 超大容量"
+        }
+      ],
+      "control": [
+        {
+          "op": "caption",
+          "from": "lift_start",
+          "to": "pour_start",
+          "text": "350ml 随身容量"
+        }
+      ]
     }
   ],
   "decoys": [
@@ -212,6 +258,16 @@
         "S03.I5"
       ],
       "note": "跳过倾斜直接出水（因不成立）→ 最终玻璃杯仍空（果也不成立）"
+    }
+  ],
+  "bundles": [
+    {
+      "ids": [
+        "S03.I8",
+        "S03.I4",
+        "S03.I7"
+      ],
+      "note": "同一连续镜头：先出现错误的容量字幕，倒水时声音消失，水倒进去玻璃杯却一直是空的"
     }
   ]
 }

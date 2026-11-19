@@ -1,0 +1,64 @@
+{
+  "case_id": "S07-h3b__combo__S07.I5+S07.I7",
+  "scene": "S07",
+  "take": "S07-h3b",
+  "source": "../generated/S07__base__seed20261120.mp4",
+  "needs_manual": true,
+  "manual_tasks": [
+    {
+      "for": "S07.I7",
+      "method": "inpaint",
+      "instruction": "在正确底片上把 light_on 之后的光环修补成熄灭状态"
+    }
+  ],
+  "ops": [
+    {
+      "op": "tint",
+      "from": 3.9,
+      "to": 6,
+      "region": [
+        0.05,
+        0.2,
+        0.9,
+        0.4
+      ],
+      "hue": 90,
+      "key": "#2aa8ff",
+      "similarity": 0.35,
+      "id": "S07.I5"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "tint",
+      "from": 3.9,
+      "to": 6,
+      "region": [
+        0.05,
+        0.2,
+        0.9,
+        0.4
+      ],
+      "hue": 90,
+      "key": "#2aa8ff",
+      "similarity": 0.35,
+      "id": "S07.I5",
+      "out": [
+        3.9,
+        6
+      ]
+    }
+  ],
+  "duration": 6
+}

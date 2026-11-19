@@ -1,0 +1,76 @@
+{
+  "case_id": "S04-h3a__multi__S04.I1+S04.I2",
+  "scene": "S04",
+  "take": "S04-h3a",
+  "source": "../generated/S04__base__seed20261119.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "drop",
+      "from": 2,
+      "to": 3,
+      "id": "S04.I1"
+    },
+    {
+      "op": "insert",
+      "from": 1.4,
+      "to": 2,
+      "at": 4.8,
+      "id": "S04.I2"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        1.4
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "src": [
+        1.4,
+        2
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "marker": true,
+      "tag": "S04.I1"
+    },
+    {
+      "src": [
+        3,
+        4.8
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "src": [
+        1.4,
+        2
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": "S04.I2"
+    },
+    {
+      "src": [
+        4.8,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [],
+  "duration": 5.6
+}

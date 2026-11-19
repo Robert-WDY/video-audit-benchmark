@@ -1,0 +1,45 @@
+{
+  "case_id": "S06-h3c__single__S06.I1",
+  "blind_id": "v_4ccaabe624",
+  "video": "S06-h3c__single__S06.I1__SA3.mp4",
+  "tier": "single",
+  "pattern": null,
+  "continuous": false,
+  "ref": null,
+  "scene": "S06",
+  "take": "S06-h3c",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S06.I1",
+      "category": "SA",
+      "sub": "SA3",
+      "secondary": [],
+      "category_name": "脚本偏离（状态/动作）",
+      "sub_name": "动作反向（打开变关闭、拿起变放下）",
+      "evidence": "E4",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "script",
+      "description": "整段倒放：变成坐下、解鞋带、脱鞋",
+      "method": "reverse",
+      "auto": true,
+      "windows": [
+        [
+          0,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

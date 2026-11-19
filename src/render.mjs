@@ -4,6 +4,7 @@
 import { spawn } from 'node:child_process';
 import { mkdir } from 'node:fs/promises';
 import path from 'node:path';
+import { totalDur } from './timeline.mjs';
 
 export const ENCODE = ['-c:v', 'libx264', '-preset', 'medium', '-crf', '18', '-pix_fmt', 'yuv420p',
   '-c:a', 'aac', '-b:a', '160k', '-ar', '48000', '-movflags', '+faststart'];
@@ -86,6 +87,32 @@ export function buildFilter({ pieces, overlays = [] }, probe, { font } = {}) {
       chains.push(`[${v}]split[${nv}b][${nv}t]`,
         `[${nv}t]crop=${cw}:${ch}:${cx}:${cy},hue=h=${o.hue ?? 180}:s=${o.saturation ?? 1}[${nv}c]`,
         `[${nv}b][${nv}c]overlay=${cx}:${cy}:${between(o.out)}[${nv}]`);
+    } else if (['clone', 'flip_region', 'freeze_region', 'retime_region'].includes(o.op)) {
+      const [rx, ry, rw, rh] = o.region || [0, 0, 1, 1];
+      const cw = Math.max(2, Math.round(rw * W / 2) * 2); const ch = Math.max(2, Math.round(rh * H / 2) * 2);
+      const cx = Math.round(rx * W); const cy = Math.round(ry * H);
+      const crop = `crop=${cw}:${ch}:${cx}:${cy}`;
+      // 羽化边缘，避免贴片出现生硬的矩形边（那会变成另一处不在真值里的瑕疵）
+      const F = Math.max(2, Math.round(Math.min(cw, ch) * (o.feather ?? 0.15)));
+      const feather = `format=rgba,geq=r='r(X,Y)':g='g(X,Y)':b='b(X,Y)':a='255*clip(min(min(X,W-1-X),min(Y,H-1-Y))/${F},0,1)'`;
+      let px = cx; let py = cy;
+      if (o.op === 'clone') {
+        px = cx + Math.round((o.dx || 0) * W); py = cy + Math.round((o.dy || 0) * H);
+        chains.push(`[${v}]split[${nv}b][${nv}s]`, `[${nv}s]${crop},${feather}[${nv}c]`);
+      } else if (o.op === 'flip_region') {
+        chains.push(`[${v}]split[${nv}b][${nv}s]`, `[${nv}s]${crop},hflip,${feather}[${nv}c]`);
+      } else if (o.op === 'freeze_region') {
+        // 区域停在源时间 at 那一帧（例如玻璃杯一直是空的）
+        const total = totalDur(pieces) + 1;
+        chains.push(`[${v}]null[${nv}b]`,
+          `[0:v]trim=start=${n(o.at)}:duration=${n(1 / fps)},setpts=PTS-STARTPTS,${norm},tpad=stop_mode=clone:stop_duration=${n(total)},${crop},${feather}[${nv}c]`);
+      } else {
+        // 区域提前或延后：显示源时间 src_from 起的内容，放在输出的 out 窗口
+        const d = o.out[1] - o.out[0];
+        chains.push(`[${v}]null[${nv}b]`,
+          `[0:v]trim=start=${n(o.src_from)}:duration=${n(d + 0.1)},setpts=PTS-STARTPTS+${n(o.out[0])}/TB,${norm},${crop},${feather}[${nv}c]`);
+      }
+      chains.push(`[${nv}b][${nv}c]overlay=${px}:${py}:eof_action=pass:${between(o.out)}[${nv}]`);
     } else if (o.op === 'flash') {
       const e = o.out[0] + (o.frames || 1) / fps - 1e-3;
       chains.push(`[${v}]drawbox=x=0:y=0:w=iw:h=ih:color=${o.color || 'white'}@1:t=fill:${between([o.out[0], e])}[${nv}]`);

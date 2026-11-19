@@ -1,0 +1,76 @@
+{
+  "case_id": "S01-h3c__combo__S01.I1+S01.I8",
+  "blind_id": "v_cfd683e854",
+  "video": "S01-h3c__combo__S01.I1+S01.I8__PF1+VT1.mp4",
+  "tier": "combo",
+  "pattern": "overlap",
+  "continuous": true,
+  "ref": null,
+  "scene": "S01",
+  "take": "S01-h3c",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S01.I1",
+      "category": "PF",
+      "sub": "PF1",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "颜色或材质与事实不符/中途改变",
+      "evidence": "E3",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "转到背面后杯身从红色变成蓝色并一直保持",
+      "method": "tint",
+      "auto": true,
+      "windows": [
+        [
+          3,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    },
+    {
+      "id": "S01.I8",
+      "category": "VT",
+      "sub": "VT1",
+      "secondary": [],
+      "category_name": "文字/视觉瑕疵",
+      "sub_name": "乱码或伪文字（非代码字幕）",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "杯身 Logo 下方出现一行不可读的伪文字",
+      "method": "prompt",
+      "auto": false,
+      "windows": [
+        [
+          0,
+          6
+        ]
+      ],
+      "window_status": "estimated",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "garbled_text",
+        "product_drift"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

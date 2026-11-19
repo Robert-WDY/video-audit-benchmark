@@ -1,0 +1,50 @@
+{
+  "case_id": "S04-h3a__single__S04.I5",
+  "blind_id": "v_9153d45236",
+  "video": "S04-h3a__single__S04.I5__PF3.mp4",
+  "tier": "single",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S04",
+  "take": "S04-h3a",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "injected": [
+    {
+      "id": "S04.I5",
+      "category": "PF",
+      "sub": "PF3",
+      "secondary": [
+        "SA6"
+      ],
+      "category_name": "产品事实",
+      "sub_name": "部件数量或位置错（按键、耳罩、接口、杯盖）",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "盒里有三只耳机",
+      "method": "prompt",
+      "auto": false,
+      "windows": [
+        [
+          1.4,
+          6
+        ]
+      ],
+      "window_status": "estimated",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

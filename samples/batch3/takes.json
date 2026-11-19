@@ -1,0 +1,76 @@
+{
+ "takes": [
+  {
+   "id": "S04-h3a",
+   "scene": "S04",
+   "kind": "ai",
+   "path": "../generated/S04__base__seed20261119.mp4",
+   "duration": 6.0,
+   "verified_clean": true,
+   "markers": {
+    "lid_start": 0.5,
+    "lid_open": 1.4,
+    "reach_start": 2.0,
+    "grab": 3.0,
+    "lift_end": 4.8
+   },
+   "regions": {
+    "led": [
+     0.45,
+     0.56,
+     0.1,
+     0.07
+    ],
+    "bud": [
+     0.15,
+     0.465,
+     0.22,
+     0.115
+    ]
+   }
+  },
+  {
+   "id": "S01-h3c",
+   "scene": "S01",
+   "kind": "ai",
+   "path": "../generated/S01__base__seed20261121.mp4",
+   "duration": 6.0,
+   "verified_clean": false,
+   "markers": {
+    "rot_start": 1.0,
+    "rot_half": 3.0,
+    "rot_end": 5.5
+   },
+   "regions": {
+    "product": [
+     0.24,
+     0.14,
+     0.48,
+     0.75
+    ]
+   }
+  },
+  {
+   "id": "S06-h3c",
+   "scene": "S06",
+   "kind": "ai",
+   "path": "../generated/S06__base__seed20261121.mp4",
+   "duration": 6.0,
+   "verified_clean": false,
+   "markers": {
+    "foot_in_start": 0.5,
+    "foot_in": 1.5,
+    "lace_end": 5.5,
+    "stand": 5.9
+   },
+   "regions": {
+    "logo": [
+     0.3,
+     0.62,
+     0.45,
+     0.2
+    ]
+   }
+  }
+ ]
+}
