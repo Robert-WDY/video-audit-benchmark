@@ -6,7 +6,7 @@
 import { createHash } from 'node:crypto';
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
-import { ConflictError, OVERLAY_OPS, applyOps, cutPoints, isPieceOp, resolveTime } from './timeline.mjs';
+import { ConflictError, OVERLAY_OPS, applyOps, isPieceOp, resolveTime } from './timeline.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 export const DEFAULT_TAXONOMY = path.join(ROOT, 'taxonomy.json');
@@ -201,16 +201,42 @@ function makeCase({ tier, scene, take, tax, injections = [], extra = [], ref = n
   };
 }
 
+// 对照组只做「内容对照」（例如同位置的正确字幕）。只切不改的对照渲染出来与正确底片逐帧相同，
+// 正确底片本身也走同一条编码管线，所以不再生成。
 function controlFor(single, inj, scene, take, tax, salt) {
-  const cuts = cutPoints(single.gen.pieces).filter((t) => t > 1e-3 && t < take.duration - 1e-3);
-  if (!cuts.length && !inj.control) return null;
-  const extra = [{ id: null, ops: cuts.map((t) => ({ op: 'cut', at: t })) }];
-  if (inj.control) extra.push({ id: null, ops: inj.control.map((o) => ({ ...o, control: true })) });
-  const c = makeCase({ tier: 'control', scene, take, tax, extra: extra.filter((x) => x.ops.length), ref: single.id, salt });
+  if (!inj.control) return null;
+  const extra = [{ id: null, ops: inj.control.map((o) => ({ ...o, control: true })) }];
+  const c = makeCase({ tier: 'control', scene, take, tax, extra, ref: single.id, salt });
   c.id = `${take.id}__control__${inj.id}`;
   c.gen.case_id = c.id; c.truth.case_id = c.id;
   c.blind_id = c.truth.blind_id = blindId(c.id, salt);
   return c;
+}
+
+const AUDIO_OPS = new Set(['mute']);
+export const isAudioOnly = (inj) => inj.ops.every((o) => AUDIO_OPS.has(o.op));
+
+// 把相邻、连续、同方向同速度的片段合并，得到与切点无关的规范形式
+function canonicalPieces(pieces) {
+  const out = [];
+  for (const p of pieces) {
+    if (p.marker) continue;
+    const q = { ...p, tag: undefined };
+    const last = out[out.length - 1];
+    if (last && last.src && q.src && !last.rev && !q.rev && (last.speed || 1) === (q.speed || 1) && Math.abs(last.src[1] - q.src[0]) < 1e-4) {
+      last.src = [last.src[0], q.src[1]];
+    } else out.push(q);
+  }
+  return out.map((p) => (p.src ? { src: p.src.map((x) => +x.toFixed(3)), rev: !!p.rev, speed: p.speed || 1 } : p.hold !== undefined ? { hold: p.hold, dur: p.dur } : { black: p.black }));
+}
+
+// 用例的画面指纹：规范化的片段 + 所有改变画面的叠加层。两条用例指纹相同 = 画面逐帧相同
+export function visualSignature(c) {
+  const ov = c.gen.overlays.filter((o) => !AUDIO_OPS.has(o.op))
+    .map((o) => ({ op: o.op, out: o.out, text: o.text, region: o.region, hue: o.hue, key: o.key, color: o.color, frames: o.frames }));
+  // 手工步骤会产生不同的素材，必须计入指纹，否则会被误判为与正确底片相同
+  const manual = c.gen.manual_tasks.map((m) => `${m.for}|${m.method}|${m.instruction}`);
+  return JSON.stringify([canonicalPieces(c.gen.pieces), ov, manual]);
 }
 
 function pairs(xs) { const out = []; for (let i = 0; i < xs.length; i++) for (let j = i + 1; j < xs.length; j++) out.push([xs[i], xs[j]]); return out; }
@@ -249,10 +275,16 @@ export function expand(scenes, takes, tax, { maxMultiPerTake = 3, maxComboPerTak
     }
     const isManual = (inj) => inj.ops.some((o) => o.op === 'manual');
     const combos = []; const multis = [];
+    let audioCombo = false;
     for (const [a, b] of pairs(scene.injections)) {
       if (isManual(a) && isManual(b)) continue;
+      // 纯声音错误和画面错误组合后，画面与那个单错误完全相同；每条底片只保留一个这种组合
+      const audio = isAudioOnly(a) || isAudioOnly(b);
+      if (audio && audioCombo) continue;
       const c = tryMake({ ...base, tier: a.category === b.category ? 'multi' : 'combo', injections: [a, b] });
-      if (c) (c.tier === 'multi' ? multis : combos).push(c);
+      if (!c) continue;
+      if (audio) audioCombo = true;
+      (c.tier === 'multi' ? multis : combos).push(c);
     }
     for (const ch of scene.chains || []) {
       if (ch.ids.length < 3) continue;
@@ -262,7 +294,19 @@ export function expand(scenes, takes, tax, { maxMultiPerTake = 3, maxComboPerTak
     }
     cases.push(...pickDiverse(multis, maxMultiPerTake), ...pickDiverse(combos, maxComboPerTake));
   }
-  return cases.filter(Boolean);
+  // 兜底去重：画面和声音都相同的用例只留第一个；只有声音不同的，标出它与哪条画面相同
+  const out = []; const seen = new Map();
+  for (const c of cases.filter(Boolean)) {
+    const audio = JSON.stringify(c.gen.overlays.filter((o) => AUDIO_OPS.has(o.op)).map((o) => o.out));
+    const vis = `${c.truth.take}|${visualSignature(c)}`;
+    const full = `${vis}|${audio}|${JSON.stringify(c.input.plan.captions)}`;
+    if (seen.has(full)) { skipped.push({ take: c.truth.take, ids: c.truth.injected.map((e) => e.id), reason: `与 ${seen.get(full)} 完全相同` }); continue; }
+    seen.set(full, c.id);
+    const twin = out.find((x) => `${x.truth.take}|${visualSignature(x)}` === vis);
+    if (twin) c.truth.same_picture_as = twin.id;
+    out.push(c);
+  }
+  return out;
 }
 
 export function summarizeCases(cases) {

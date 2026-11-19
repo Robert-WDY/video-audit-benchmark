@@ -41,5 +41,6 @@
     }
   ],
   "actual": null,
-  "annotation_status": "pending"
+  "annotation_status": "pending",
+  "same_picture_as": "S03-ai-h3__clean__base"
 }

@@ -1,28 +1,27 @@
 {
-  "built_at": "2026-11-19T04:12:30.753Z",
+  "built_at": "2026-11-19T06:52:12.228Z",
   "salt": "vr1",
   "summary": {
-    "cases": 20,
+    "cases": 17,
     "by_tier": {
       "clean": 1,
       "decoy": 2,
       "single": 6,
-      "control": 3,
       "multi": 2,
       "combo": 6
     },
     "by_pattern": {
-      "-": 12,
+      "-": 9,
       "overlap": 4,
       "separate": 3,
       "chain": 1
     },
-    "needs_manual": 7,
+    "needs_manual": 8,
     "errors": 22,
     "errors_by_category": {
-      "PH": 7,
+      "PH": 8,
       "TC": 8,
-      "TE": 3,
+      "TE": 2,
       "SA": 4
     },
     "errors_by_evidence": {

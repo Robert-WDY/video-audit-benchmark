@@ -1,6 +1,6 @@
 {
-  "case_id": "S03-h3b__combo__S03.I3+S03.I4",
-  "blind_id": "v_be6650f05a",
+  "case_id": "S03-h3b__combo__S03.I3+S03.I6",
+  "blind_id": "v_be5f24719c",
   "tier": "combo",
   "pattern": "separate",
   "ref": null,
@@ -40,29 +40,29 @@
       "expected_fix": "regen"
     },
     {
-      "id": "S03.I4",
-      "category": "TE",
-      "sub": "TE3",
+      "id": "S03.I6",
+      "category": "PH",
+      "sub": "PH2",
       "secondary": [],
-      "category_name": "技术缺陷",
-      "sub_name": "静音或长时间无声",
+      "category_name": "物理",
+      "sub_name": "流体错误（向上流、穿过杯壁、凭空出现）",
       "evidence": "E2",
       "visibility": "V2",
-      "disposition": "fix",
+      "disposition": "block",
       "judge_basis": "common_sense",
-      "description": "倒水声在出水期间完全消失",
-      "method": "mute",
-      "auto": true,
+      "description": "水流穿过玻璃杯壁流到桌面",
+      "method": "prompt",
+      "auto": false,
       "windows": [
         [
           2.4,
           4.8
         ]
       ],
-      "window_status": "exact",
+      "window_status": "estimated",
       "duration_bucket": "long",
       "expected_checks": [
-        "black_silence"
+        "physics"
       ],
       "expected_fix": "regen"
     }

@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { blindId, expand, loadScenes, loadTaxonomy, patternOf, validateScene, validateTake } from '../src/cases.mjs';
+import { blindId, expand, loadScenes, loadTaxonomy, patternOf, validateScene, validateTake, visualSignature } from '../src/cases.mjs';
 
 const tax = await loadTaxonomy();
 const scenes = await loadScenes();
@@ -67,12 +67,25 @@ test('字幕事实错误：审核输入里的字幕就是烧进画面的错误�
   assert.deepEqual(k.truth.injected, []);
 });
 
-test('对照组复现错误样本的剪辑点', () => {
-  const s = cases.find((c) => c.id === 'S03-real-01__single__S03.I1');
-  const k = cases.find((c) => c.id === 'S03-real-01__control__S03.I1');
-  assert.deepEqual(k.gen.pieces.map((p) => p.src), [[0, 2.6], [2.6, 5.6], [5.6, 8]]);
-  assert.equal(k.gen.duration, s.gen.duration);
-  assert.ok(k.gen.pieces.every((p) => !p.rev));
+test('不生成只切不改的对照组；内容对照（字幕）保留', () => {
+  assert.ok(!cases.some((c) => c.id === 'S03-real-01__control__S03.I1'));
+  assert.ok(cases.every((c) => c.tier !== 'control' || c.gen.ops.every((o) => o.op !== 'cut')));
+  assert.ok(cases.some((c) => c.id === 'S05-real-01__control__S05.I2'));
+});
+
+test('没有画面、声音、字幕都相同的重复用例', () => {
+  const keys = cases.map((c) => `${c.truth.take}|${visualSignature(c)}|${JSON.stringify(c.gen.overlays.filter((o) => o.op === 'mute').map((o) => o.out))}|${JSON.stringify(c.input.plan.captions)}`);
+  assert.equal(new Set(keys).size, keys.length);
+});
+
+test('纯声音错误：每条底片最多一个组合，且标出与哪条画面相同', () => {
+  for (const t of takes) {
+    const n = cases.filter((c) => c.truth.take === t.id && c.injected?.length !== 0 && ['multi', 'combo'].includes(c.tier)
+      && c.truth.injected.some((e) => e.method === 'mute')).length;
+    assert.ok(n <= 1, `${t.id} 有 ${n} 个含静音的组合`);
+  }
+  const mute = cases.find((c) => c.id === 'S03-real-01__single__S03.I4');
+  assert.equal(mute.truth.same_picture_as, 'S03-real-01__clean__base');
 });
 
 test('脚本配置把镜头卡追加进事实列表', () => {

@@ -1,28 +1,28 @@
 {
-  "built_at": "2026-11-19T05:50:16.367Z",
+  "built_at": "2026-11-19T06:52:13.245Z",
   "salt": "vr1",
   "summary": {
-    "cases": 64,
+    "cases": 57,
     "by_tier": {
       "clean": 3,
       "decoy": 6,
       "single": 20,
-      "control": 9,
       "multi": 8,
-      "combo": 18
+      "combo": 18,
+      "control": 2
     },
     "by_pattern": {
-      "-": 38,
+      "-": 31,
       "overlap": 19,
       "separate": 6,
       "chain": 1
     },
-    "needs_manual": 20,
+    "needs_manual": 21,
     "errors": 72,
     "errors_by_category": {
-      "PH": 9,
+      "PH": 10,
       "TC": 24,
-      "TE": 13,
+      "TE": 12,
       "SA": 4,
       "PF": 22
     },
