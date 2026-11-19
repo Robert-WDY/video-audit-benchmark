@@ -17,6 +17,8 @@
     "description": "盒子转动时亮面反光像指示灯变色"
   },
   "should_block": false,
+  "base_errors": [],
+  "base_notes": [],
   "injected": [],
   "actual": null,
   "annotation_status": "pending"

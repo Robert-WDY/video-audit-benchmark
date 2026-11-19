@@ -1,14 +1,27 @@
 {
   "version": "1.0",
   "note": "一级类别互斥：一个异常只取一个主类别，按 decision_order 依次判断，命中即停；其余相关类别记入 secondary。",
-  "decision_order": ["TE", "PF", "SA", "TC", "PH", "VT"],
+  "decision_order": [
+    "TE",
+    "PF",
+    "SA",
+    "TC",
+    "PH",
+    "VT"
+  ],
   "categories": {
     "TE": {
       "name": "技术缺陷",
       "question": "是否是编码/播放层面的问题（与画面内容无关）？",
       "judge_basis": "common_sense",
-      "reviewer_checks": ["black_silence"],
-      "hard_gates": ["black", "freeze", "silence"],
+      "reviewer_checks": [
+        "black_silence"
+      ],
+      "hard_gates": [
+        "black",
+        "freeze",
+        "silence"
+      ],
       "subs": {
         "TE1": "黑场",
         "TE2": "冻帧（非刻意定格）",
@@ -21,7 +34,10 @@
       "name": "产品事实",
       "question": "画面或字幕是否与给定的产品外观/事实（封闭世界）矛盾？",
       "judge_basis": "facts",
-      "reviewer_checks": ["product_drift", "fact_error"],
+      "reviewer_checks": [
+        "product_drift",
+        "fact_error"
+      ],
       "subs": {
         "PF1": "颜色或材质与事实不符/中途改变",
         "PF2": "外形或比例改变",
@@ -44,14 +60,17 @@
         "SA3": "动作反向（打开变关闭、拿起变放下）",
         "SA4": "动作主体错（应由人操作却自己动）",
         "SA5": "终态错或未达到",
-        "SA6": "物体数量与脚本不符"
+        "SA6": "物体数量与脚本不符",
+        "SA7": "执行了错误的动作（按错键、拿错物体、操作了错误部件）"
       }
     },
     "TC": {
       "name": "时序/因果",
       "question": "需要对比两个以上时刻才能发现：连续性断裂或因果不成立？",
       "judge_basis": "common_sense",
-      "reviewer_checks": ["physics"],
+      "reviewer_checks": [
+        "physics"
+      ],
       "subs": {
         "TC1": "瞬移或位置跳变",
         "TC2": "物体凭空出现或消失",
@@ -66,7 +85,9 @@
       "name": "物理",
       "question": "单个时刻或一小段运动就违反物理常识？",
       "judge_basis": "common_sense",
-      "reviewer_checks": ["physics"],
+      "reviewer_checks": [
+        "physics"
+      ],
       "subs": {
         "PH1": "重力错误（悬浮、无支撑平衡）",
         "PH2": "流体错误（向上流、穿过杯壁、凭空出现）",
@@ -80,7 +101,10 @@
       "name": "文字/视觉瑕疵",
       "question": "生成质量瑕疵：不违反事实/物理，但画面本身坏了？",
       "judge_basis": "common_sense",
-      "reviewer_checks": ["garbled_text", "product_drift"],
+      "reviewer_checks": [
+        "garbled_text",
+        "product_drift"
+      ],
       "subs": {
         "VT1": "乱码或伪文字（非代码字幕）",
         "VT2": "局部融化或扭曲",
@@ -90,9 +114,18 @@
     }
   },
   "confusion_groups": {
-    "dynamic": ["SA", "TC", "PH"],
-    "appearance": ["PF", "VT"],
-    "technical": ["TE"]
+    "dynamic": [
+      "SA",
+      "TC",
+      "PH"
+    ],
+    "appearance": [
+      "PF",
+      "VT"
+    ],
+    "technical": [
+      "TE"
+    ]
   },
   "evidence_levels": {
     "E1": "单帧即可发现",
@@ -106,9 +139,18 @@
     "V3": "细微：小区域、低对比或被遮挡/快切掩盖"
   },
   "duration_buckets": {
-    "flash": [0, 0.2],
-    "short": [0.2, 1.0],
-    "long": [1.0, null]
+    "flash": [
+      0,
+      0.2
+    ],
+    "short": [
+      0.2,
+      1.0
+    ],
+    "long": [
+      1.0,
+      null
+    ]
   },
   "dispositions": {
     "block": "必须拦截，不能上线",

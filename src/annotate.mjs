@@ -73,19 +73,19 @@ export function reconcileSheet(truths, blinds, tax) {
   for (const t of truths) {
     const anns = blinds.flatMap((b) => b.get(t.blind_id)?.errors || []);
     const used = new Set();
-    for (const e of t.injected) {
+    for (const e of [...t.injected, ...(t.base_errors || [])]) {
       const hits = anns.filter((a) => overlaps(a.window, e.windows, tol));
       hits.forEach((h) => used.add(h));
       const span = [Math.min(...e.windows.map((w) => w[0])), Math.max(...e.windows.map((w) => w[1]))];
-      rows.push({ blind_id: t.blind_id, case_id: t.case_id, kind: 'injected', ref: e.id, category: e.category, sub: e.sub,
+      rows.push({ blind_id: t.blind_id, case_id: t.case_id, kind: e.source === 'base' ? 'base' : 'injected', ref: e.id, category: e.category, sub: e.sub,
         description: e.description, t_start: span[0], t_end: span[1],
         blind_hits: `${hits.length}/${blinds.length}` + (hits.length ? ` (${hits.map((h) => `${h.annotator}:${h.category}${h.sub ? '/' + h.sub : ''}`).join(' ')})` : ''),
-        suggested: hits.length ? 'present' : (e.auto ? 'present?' : 'absent?'), verdict: '', disposition: e.disposition, note: '' });
+        suggested: e.source === 'base' ? 'present（底片已人工确认）' : hits.length ? 'present' : (e.auto ? 'present?' : 'absent?'), verdict: '', disposition: e.disposition, note: '' });
     }
     anns.filter((a) => !used.has(a)).forEach((a, i) => rows.push({ blind_id: t.blind_id, case_id: t.case_id, kind: 'blind',
       ref: `${a.annotator}#${i + 1}`, category: a.category, sub: a.sub, description: a.note, t_start: a.window[0], t_end: a.window[1],
       blind_hits: '', suggested: 'accidental?', verdict: '', disposition: a.disposition || 'block', note: '' }));
-    if (!t.injected.length && !anns.length) {
+    if (!t.injected.length && !(t.base_errors || []).length && !anns.length) {
       rows.push({ blind_id: t.blind_id, case_id: t.case_id, kind: 'none', ref: '', category: '', sub: '', description: t.decoy ? `干扰项：${t.decoy.description}` : '正确视频',
         t_start: '', t_end: '', blind_hits: `0/${blinds.length}`, suggested: 'clean', verdict: '', disposition: '', note: '' });
     }
@@ -108,12 +108,12 @@ export function finalize(truths, rows, tax) {
     if (rs.some((r) => r.verdict === 'reject')) { out.push({ ...t, actual: null, annotation_status: 'rejected' }); continue; }
     const actual = [];
     for (const r of rs) {
-      if (r.kind === 'injected' && (r.verdict === 'present' || r.verdict === 'partial')) {
-        const e = t.injected.find((x) => x.id === r.ref);
+      if ((r.kind === 'injected' || r.kind === 'base') && (r.verdict === 'present' || r.verdict === 'partial')) {
+        const e = [...t.injected, ...(t.base_errors || [])].find((x) => x.id === r.ref);
         if (!e) throw new Error(`${t.case_id}: 复核表引用了不存在的错误 ${r.ref}`);
         const s = Number(r.t_start); const en = Number(r.t_end);
         const adjusted = e.window_status !== 'exact' && Number.isFinite(s) && Number.isFinite(en);
-        actual.push({ ...e, source: 'injected', partial: r.verdict === 'partial',
+        actual.push({ ...e, source: e.source || 'injected', partial: r.verdict === 'partial',
           disposition: r.disposition || e.disposition,
           ...(adjusted ? { windows: [[s, en]], window_status: 'annotated' } : {}) });
       }

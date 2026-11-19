@@ -253,10 +253,10 @@ const B2_BASE = [
     verdict: '<b>复核：干净。</b>拿起、放上、屏幕亮、蓝色光环亮，顺序与脚本一致；充电板上的 Volt 字样正确。',
     wins: [] },
   { id: 'S07 · seed 20261120', title: 'S07 音箱按键开机', media: 'b2-s07--base', dur: 6,
-    chips: [['clean', 'acc'], ['有一处待判', 'warn']],
-    kv: [['标记点', '<span class="op">伸手 1.4</span> <span class="op">按下 2.0</span> <span class="op">亮起 3.9</span> <span class="op">离开 4.6</span>']],
-    verdict: '<b>复核：待人工判断。</b>开机顺序正确。手指按键期间音箱布面从深灰变成偏红褐色，亮灯后又变回深灰。这可能是 PF1 颜色漂移，也可能是光照变化，属于盲审时要两人独立判断的边界情况，所以这条底片的 verified_clean 暂记为 false。',
-    wins: [{ w: [2.0, 3.8], acc: true, label: '待判：布面变红褐色 · PF1 或光照' }] },
+    chips: [['clean', 'acc'], ['人工确认：SA7', 'err']],
+    kv: [['标记点', '<span class="op">伸手 1.4</span> <span class="op">按下 2.7</span> <span class="op">亮起 3.9</span> <span class="op">离开 4.6</span>']],
+    verdict: '<b>人工复核：SA7 执行了错误动作。</b>约 2.7–4.0 秒食指按的是左侧小键，中间电源键未被按下，蓝环却在约 3.9 秒亮起。我看帧时漏掉了这一处。布面变红褐、邻近木桌同步偏暖，判断为光照，不算错误。这处错误已写进这条底片派生的每一条视频的真值。',
+    wins: [{ w: [2.7, 4.0], label: 'SA7 按的是左侧小键，电源键未按下，蓝环却亮了' }, { w: [2.0, 3.8], acc: true, label: '光照变化，不算错误' }] },
 ];
 
 const B2_CUT = [

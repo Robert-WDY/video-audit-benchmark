@@ -13,6 +13,8 @@
   "duration": 6,
   "decoy": null,
   "should_block": false,
+  "base_errors": [],
+  "base_notes": [],
   "injected": [],
   "actual": null,
   "annotation_status": "pending"

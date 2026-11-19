@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { ConflictError, PIECE_OPS, applyOps, cutPoints, initial, resolveTime, srcToOut, totalDur } from '../src/timeline.mjs';
+import { ConflictError, PIECE_OPS, applyOps, cutPoints, initial, resolveTime, srcToOut, srcWindowToOut, totalDur } from '../src/timeline.mjs';
 
 test('标记点表达式解析', () => {
   const m = { pour_start: 2.5 };
@@ -92,4 +92,14 @@ test('多个操作组合：时间窗口逐个正确', () => {
   assert.deepEqual(r.windows.A, [[0.7, 1.3]]);
   assert.deepEqual(r.windows.B, [[5, 6]]);
   assert.deepEqual(r.windows.C, [[7, 8]]);
+});
+
+test('底片错误窗口映射到输出：抽帧、倒放、插帧', () => {
+  const drop = applyOps(8, [{ op: 'drop', from: 2, to: 4, id: 'E' }]);
+  assert.deepEqual(srcWindowToOut(drop.pieces, [3, 6]), [[2, 4]]);
+  const rev = applyOps(8, [{ op: 'reverse', from: 2, to: 5, id: 'E' }]);
+  assert.deepEqual(srcWindowToOut(rev.pieces, [2, 3]), [[4, 5]]);
+  const ins = applyOps(8, [{ op: 'insert', from: 0, to: 1, at: 7, id: 'E' }]);
+  assert.deepEqual(srcWindowToOut(ins.pieces, [0, 8]), [[0, 9]]);
+  assert.deepEqual(srcWindowToOut(ins.pieces, [0.5, 0.8]), [[0.5, 0.8], [7.5, 7.8]]);
 });

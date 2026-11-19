@@ -34,7 +34,7 @@ async function loadAll() {
   if (a.takes) {
     const file = path.resolve(a.takes); const m = await readJson(file);
     takes = (m.takes || []).map((t) => ({ ...t, path: path.resolve(path.dirname(file), t.path) }));
-    for (const t of takes) errs.push(...validateTake(t, scenes.find((s) => s.id === t.scene)));
+    for (const t of takes) errs.push(...validateTake(t, scenes.find((s) => s.id === t.scene), tax));
   }
   return { tax, scenes, takes, errs };
 }
@@ -165,8 +165,10 @@ const commands = {
     truths.sort((x, y) => x.take.localeCompare(y.take) || order.indexOf(x.tier) - order.indexOf(y.tier) || (x.video || '').localeCompare(y.video || ''));
     const fmtW = (ws) => ws.map(([s, e]) => (e - s < 0.05 ? `${s.toFixed(1)}s` : `${s.toFixed(1)}–${e.toFixed(1)}s`)).join(', ');
     const rows = truths.map((t) => {
-      const errs = t.injected.map((e) => `**${e.sub}** ${fmtW(e.windows)} ${e.description}`).join('<br>') || (t.decoy ? `无错误。看起来像 ${t.decoy.looks_like}：${t.decoy.description}` : '无错误');
-      const notes = [t.bundle && `同镜头组合：${t.bundle}`, t.same_picture_as && `画面与 ${t.same_picture_as} 相同（只有声音不同）`, t.ref && `对照 ${t.ref}`].filter(Boolean).join('；');
+      const inj = t.injected.map((e) => `**${e.sub}** ${fmtW(e.windows)} ${e.description}`);
+      const base = (t.base_errors || []).map((e) => `底片自带 **${e.sub}** ${fmtW(e.windows)} ${e.description}`);
+      const errs = [...inj, ...base].join('<br>') || (t.decoy ? `无错误。看起来像 ${t.decoy.looks_like}：${t.decoy.description}` : '无错误');
+      const notes = [...(t.base_notes || []).map((x) => `复核备注：${x}`), t.bundle && `同镜头组合：${t.bundle}`, t.same_picture_as && `画面与 ${t.same_picture_as} 相同（只有声音不同）`, t.ref && `对照 ${t.ref}`].filter(Boolean).join('；');
       const shot = t.injected.length > 1 ? (t.continuous ? '同一连续镜头' : '含剪辑') : '';
       return `| [${t.video}](${encodeURIComponent(t.video)}) | ${tierName[t.tier] || t.tier} | ${shot} | ${errs} | ${notes} |`;
     });

@@ -17,6 +17,8 @@
     "description": "倒水段 0.5 倍慢动作"
   },
   "should_block": false,
+  "base_errors": [],
+  "base_notes": [],
   "injected": [],
   "actual": null,
   "annotation_status": "pending"

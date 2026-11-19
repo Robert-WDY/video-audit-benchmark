@@ -48,9 +48,9 @@ export function judgeCategory(pred, err, tax) {
 
 export function effectiveTier(truth) {
   if (truth.tier === 'decoy' || truth.tier === 'control' || truth.tier === 'clean') {
-    return (truth.actual || truth.injected).filter((e) => e.disposition !== 'accept').length ? 'contaminated' : truth.tier;
+    return (truth.actual || [...truth.injected, ...(truth.base_errors || [])]).filter((e) => e.disposition !== 'accept').length ? 'contaminated' : truth.tier;
   }
-  const errs = (truth.actual || truth.injected).filter((e) => e.disposition !== 'accept');
+  const errs = (truth.actual || [...truth.injected, ...(truth.base_errors || [])]).filter((e) => e.disposition !== 'accept');
   if (!errs.length) return 'clean';
   if (errs.length === 1) return 'single';
   return new Set(errs.map((e) => e.category)).size === 1 ? 'multi' : 'combo';
@@ -61,7 +61,7 @@ export function scoreCase(truth, raw, tax, { useInjected = false } = {}) {
   const final = truth.annotation_status === 'final' && Array.isArray(truth.actual);
   if (!final && !useInjected) return { case_id: truth.case_id, status: 'unannotated' };
   if (truth.annotation_status === 'rejected') return { case_id: truth.case_id, status: 'rejected' };
-  const errors = final ? truth.actual : truth.injected;
+  const errors = final ? truth.actual : [...truth.injected, ...(truth.base_errors || [])];
   const pred = normalizePrediction(raw);
   const shouldBlock = errors.some((e) => e.disposition !== 'accept');
   const base = { case_id: truth.case_id, tier: truth.tier, effective_tier: effectiveTier({ ...truth, actual: errors }),

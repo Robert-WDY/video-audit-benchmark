@@ -48,7 +48,23 @@
      0.48,
      0.75
     ]
-   }
+   },
+   "known_errors": [
+    {
+     "id": "K1",
+     "category": "PF",
+     "sub": "PF3",
+     "description": "杯盖带提环和正面锁扣，多个角度可见（事实：无提手的黑色旋盖）",
+     "window": [
+      "start",
+      "end"
+     ],
+     "evidence": "E1",
+     "visibility": "V1",
+     "disposition": "block",
+     "reviewed_by": "human"
+    }
+   ]
   },
   {
    "id": "S06-h3c",
@@ -70,7 +86,23 @@
      0.45,
      0.2
     ]
-   }
+   },
+   "known_errors": [
+    {
+     "id": "K1",
+     "category": "SA",
+     "sub": "SA5",
+     "description": "约 5.7 秒系完鞋带，直到最后一帧人物仍没有站直（脚本终态：人物站立）",
+     "window": [
+      5.7,
+      "end"
+     ],
+     "evidence": "E4",
+     "visibility": "V1",
+     "disposition": "block",
+     "reviewed_by": "human"
+    }
+   ]
   }
  ]
 }

@@ -70,7 +70,11 @@ test('字幕事实错误：审核输入里的字幕就是烧进画面的错误�
 test('不生成只切不改的对照组；内容对照（字幕）保留', () => {
   assert.ok(!cases.some((c) => c.id === 'S03-real-01__control__S03.I1'));
   assert.ok(cases.every((c) => c.tier !== 'control' || c.gen.ops.every((o) => o.op !== 'cut')));
-  assert.ok(cases.some((c) => c.id === 'S05-real-01__control__S05.I2'));
+  const ctl = cases.find((c) => c.id === 'S05-real-01__control__S05.I2');
+  assert.ok(ctl);
+  assert.equal(ctl.truth.video, 'S05-real-01__control__S05.I2__ok.mp4');
+  const names = cases.map((c) => c.truth.video);
+  assert.equal(new Set(names).size, names.length, '视频文件名有重复');
 });
 
 test('没有画面、声音、字幕都相同的重复用例', () => {
@@ -124,4 +128,19 @@ test('同一镜头多错误（bundle）：时间轴未剪辑、三个错误都�
   assert.equal(b.truth.video, 'S05-real-01__multi__S05.I9+S05.I2+S05.I8__PF4+PF8+PF5.mp4');
   const reverse = cases.find((c) => c.id === 'S03-real-01__single__S03.I1');
   assert.equal(reverse.truth.continuous, false);
+});
+
+test('底片上人工确认的错误进入每条派生用例的真值，窗口随剪辑换算', () => {
+  const tk = structuredClone(takes.find((t) => t.id === 'S06-real-01'));
+  tk.known_errors = [{ id: 'K1', category: 'SA', sub: 'SA5', description: '没站起来', window: [8.0, 'end'], disposition: 'block' }];
+  assert.deepEqual(validateTake(tk, scenes.find((s) => s.id === 'S06'), tax), []);
+  const cs = expand(scenes, [tk], tax, {});
+  const clean = cs.find((c) => c.tier === 'clean');
+  assert.equal(clean.truth.should_block, true);
+  assert.deepEqual(clean.truth.base_errors[0].windows, [[8, 9]]);
+  assert.match(clean.truth.video, /__base-SA5\.mp4$/);
+  const rev = cs.find((c) => c.id.endsWith('__single__S06.I1'));
+  assert.deepEqual(rev.truth.base_errors[0].windows, [[0, 1]]);
+  const bad = { ...tk, known_errors: [{ id: 'K2', category: 'SA', sub: 'PF1', description: 'x', window: [0, 1] }] };
+  assert.ok(validateTake(bad, scenes.find((s) => s.id === 'S06'), tax).some((e) => e.includes('PF1')));
 });

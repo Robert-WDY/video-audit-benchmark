@@ -17,6 +17,8 @@
     "description": "放上后定格 0.6 秒强调结果"
   },
   "should_block": false,
+  "base_errors": [],
+  "base_notes": [],
   "injected": [],
   "actual": null,
   "annotation_status": "pending"

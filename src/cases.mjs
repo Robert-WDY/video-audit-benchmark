@@ -6,7 +6,7 @@
 import { createHash } from 'node:crypto';
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
-import { ConflictError, OVERLAY_OPS, applyOps, isPieceOp, resolveTime } from './timeline.mjs';
+import { ConflictError, OVERLAY_OPS, applyOps, isPieceOp, resolveTime, srcWindowToOut } from './timeline.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 export const DEFAULT_TAXONOMY = path.join(ROOT, 'taxonomy.json');
@@ -76,7 +76,7 @@ export function validateScene(scene, tax) {
   return errs;
 }
 
-export function validateTake(take, scene) {
+export function validateTake(take, scene, tax = null) {
   const errs = []; const e = (m) => errs.push(`${take.id}: ${m}`);
   if (!scene) return [`${take.id}: 场景 ${take.scene} 不存在`];
   if (!(take.duration > 0)) e('duration 必须大于 0');
@@ -96,7 +96,29 @@ export function validateTake(take, scene) {
     const b = take.regions?.[r];
     if (!Array.isArray(b) || b.length !== 4 || b.some((v) => !(v >= 0 && v <= 1))) e(`区域 ${r} 需为 0-1 的 [x,y,w,h]`);
   }
+  for (const k of take.known_errors || []) {
+    if (!k.id || !k.category || !k.sub || !k.description || !Array.isArray(k.window)) { e(`底片错误 ${k.id || '?'} 缺少 id/category/sub/description/window`); continue; }
+    if (tax && !tax.categories[k.category]?.subs[k.sub]) e(`底片错误 ${k.id}: 子类 ${k.sub} 不属于 ${k.category}`);
+    try { const m = { ...take.markers, start: 0, end: take.duration }; k.window.forEach((v) => resolveTime(v, m)); } catch (x) { e(`底片错误 ${k.id}: ${x.message}`); }
+  }
   return errs;
+}
+
+// 底片上人工确认的错误：换算到这条用例的输出时间轴；被剪掉的部分不出现
+function baseErrorsOf(take, tax, pieces) {
+  const m = { ...take.markers, start: 0, end: take.duration };
+  return (take.known_errors || []).map((k) => {
+    const cat = tax.categories[k.category];
+    const windows = srcWindowToOut(pieces, k.window.map((v) => resolveTime(v, m)));
+    if (!windows.length) return null;
+    return {
+      id: `${take.id}#${k.id}`, category: k.category, sub: k.sub, secondary: k.secondary || [],
+      category_name: cat.name, sub_name: cat.subs[k.sub], evidence: k.evidence || null, visibility: k.visibility || null,
+      disposition: k.disposition || 'block', judge_basis: k.judge_basis || cat.judge_basis, description: k.description,
+      method: 'base', auto: false, windows, window_status: 'annotated', duration_bucket: null,
+      expected_checks: cat.reviewer_checks, expected_fix: 'regen', source: 'base', reviewed_by: k.reviewed_by || 'human',
+    };
+  }).filter(Boolean);
 }
 
 // —— 解析 ——
@@ -189,7 +211,8 @@ function makeCase({ tier, scene, take, tax, injections = [], extra = [], ref = n
   // 时间轴没被剪过（只有一个正放片段）= 所有错误都在同一段连续镜头里，不是拼接
   const real = tl.pieces.filter((p) => !p.marker);
   const continuous = real.length === 1 && !!real[0].src && !real[0].rev && (real[0].speed || 1) === 1;
-  const video = `${videoName(caseId, errors, decoy)}.mp4`;
+  const baseErrors = baseErrorsOf(take, tax, tl.pieces);
+  const video = `${videoName(caseId, errors, decoy, baseErrors)}.mp4`;
   return {
     id: caseId, blind_id: blindId(caseId, salt), tier, pattern,
     gen: {
@@ -203,7 +226,8 @@ function makeCase({ tier, scene, take, tax, injections = [], extra = [], ref = n
       case_id: caseId, blind_id: blindId(caseId, salt), video, tier, pattern, continuous, ref,
       scene: scene.id, take: take.id, source_kind: take.kind, baseline_verified: !!take.verified_clean,
       duration: r3(tl.duration), decoy: decoy ? { id: decoy.id, looks_like: decoy.looks_like, description: decoy.description } : null,
-      should_block: errors.some((e) => e.disposition !== 'accept'),
+      should_block: [...errors, ...baseErrors].some((e) => e.disposition !== 'accept'),
+      base_errors: baseErrors, base_notes: take.review_notes || [],
       injected: errors, actual: null, annotation_status: 'pending',
     },
   };
@@ -218,6 +242,7 @@ function controlFor(single, inj, scene, take, tax, salt) {
   c.id = `${take.id}__control__${inj.id}`;
   c.gen.case_id = c.id; c.truth.case_id = c.id;
   c.blind_id = c.truth.blind_id = blindId(c.id, salt);
+  c.truth.video = `${videoName(c.id, [], null, c.truth.base_errors)}.mp4`;
   return c;
 }
 
@@ -248,8 +273,10 @@ export function visualSignature(c) {
 }
 
 // 可读文件名：底片__类型__错误编号__子类，例如 S05-h3b__combo__S05.I2+S05.I4__PF8+PF5
-export function videoName(caseId, errors, decoy) {
-  const tag = errors.length ? errors.map((e) => e.sub).join('+') : decoy ? `looks-${decoy.looks_like}` : 'ok';
+export function videoName(caseId, errors, decoy, baseErrors = []) {
+  // 注入错误的子类；没有注入错误时，标出底片自带的错误（base-）或干扰项（looks-），都没有才是 ok
+  const base = baseErrors.length ? `base-${baseErrors.map((e) => e.sub).join('+')}` : '';
+  const tag = errors.length ? errors.map((e) => e.sub).join('+') : [decoy ? `looks-${decoy.looks_like}` : '', base].filter(Boolean).join('_') || 'ok';
   return `${caseId}__${tag}`.replace(/[^\w.+-]/g, '_');
 }
 

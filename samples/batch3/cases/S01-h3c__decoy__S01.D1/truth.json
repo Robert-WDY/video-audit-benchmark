@@ -1,7 +1,7 @@
 {
   "case_id": "S01-h3c__decoy__S01.D1",
   "blind_id": "v_190865585a",
-  "video": "S01-h3c__decoy__S01.D1__looks-PF1.mp4",
+  "video": "S01-h3c__decoy__S01.D1__looks-PF1_base-PF3.mp4",
   "tier": "decoy",
   "pattern": null,
   "continuous": true,
@@ -16,7 +16,40 @@
     "looks_like": "PF1",
     "description": "转到侧面时受灯光影响杯身偏暗红，真实颜色没变"
   },
-  "should_block": false,
+  "should_block": true,
+  "base_errors": [
+    {
+      "id": "S01-h3c#K1",
+      "category": "PF",
+      "sub": "PF3",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "部件数量或位置错（按键、耳罩、接口、杯盖）",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "杯盖带提环和正面锁扣，多个角度可见（事实：无提手的黑色旋盖）",
+      "method": "base",
+      "auto": false,
+      "windows": [
+        [
+          0,
+          6
+        ]
+      ],
+      "window_status": "annotated",
+      "duration_bucket": null,
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "regen",
+      "source": "base",
+      "reviewed_by": "human"
+    }
+  ],
+  "base_notes": [],
   "injected": [],
   "actual": null,
   "annotation_status": "pending"

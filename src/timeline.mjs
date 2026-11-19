@@ -228,3 +228,27 @@ export function applyOps(duration, ops) {
   }
   return { pieces, overlays, windows, duration: round(outDur) };
 }
+
+// 底片上一段源时间 [a,b] 在输出里出现在哪些窗口（考虑倒放、变速、重复、定格；被剪掉的部分不出现）
+export function srcWindowToOut(pieces, [a, b]) {
+  const out = []; let cur = 0;
+  for (const p of pieces) {
+    const d = pieceDur(p);
+    if (p.src) {
+      const s = Math.max(a, p.src[0]); const e = Math.min(b, p.src[1]);
+      if (e > s + EPS || (Math.abs(a - b) < EPS && a >= p.src[0] - EPS && a <= p.src[1] + EPS)) {
+        const sp = p.speed || 1;
+        const w = p.rev ? [cur + (p.src[1] - e) / sp, cur + (p.src[1] - s) / sp] : [cur + (s - p.src[0]) / sp, cur + (e - p.src[0]) / sp];
+        out.push(w);
+      }
+    } else if (p.hold !== undefined && p.hold >= a - EPS && p.hold <= b + EPS) out.push([cur, cur + d]);
+    cur += d;
+  }
+  out.sort((x, y) => x[0] - y[0]);
+  const merged = [];
+  for (const w of out) {
+    const last = merged[merged.length - 1];
+    if (last && w[0] <= last[1] + 1e-3) last[1] = Math.max(last[1], w[1]); else merged.push([...w]);
+  }
+  return merged.map((w) => w.map((x) => Math.round(x * 1000) / 1000));
+}

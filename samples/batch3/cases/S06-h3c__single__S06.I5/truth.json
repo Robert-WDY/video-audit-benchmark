@@ -13,6 +13,36 @@
   "duration": 6,
   "decoy": null,
   "should_block": true,
+  "base_errors": [
+    {
+      "id": "S06-h3c#K1",
+      "category": "SA",
+      "sub": "SA5",
+      "secondary": [],
+      "category_name": "脚本偏离（状态/动作）",
+      "sub_name": "终态错或未达到",
+      "evidence": "E4",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "script",
+      "description": "约 5.7 秒系完鞋带，直到最后一帧人物仍没有站直（脚本终态：人物站立）",
+      "method": "base",
+      "auto": false,
+      "windows": [
+        [
+          5.7,
+          6
+        ]
+      ],
+      "window_status": "annotated",
+      "duration_bucket": null,
+      "expected_checks": [],
+      "expected_fix": "regen",
+      "source": "base",
+      "reviewed_by": "human"
+    }
+  ],
+  "base_notes": [],
   "injected": [
     {
       "id": "S06.I5",
