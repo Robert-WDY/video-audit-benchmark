@@ -1,0 +1,42 @@
+{
+  "case_id": "S06-h3d__single__S06.I3",
+  "scene": "S06",
+  "take": "S06-h3d",
+  "source": "../generated/S06__base__seed20261122.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "drop",
+      "from": 0.6,
+      "to": 1,
+      "id": "S06.I3"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        0.6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "marker": true,
+      "tag": "S06.I3"
+    },
+    {
+      "src": [
+        1,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [],
+  "duration": 5.6
+}

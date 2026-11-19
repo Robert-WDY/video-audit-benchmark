@@ -86,3 +86,10 @@ test('局部操作：复制区域、镜像、区域定格、区域时移都带�
   assert.match(filter, /\[0:v\]trim=start=4\.0000:duration=1\.6000,setpts=PTS-STARTPTS\+1\.0000\/TB/);
   assert.deepEqual(tl.windows, { C: [[1, 3]], F: [[0, 2]], Z: [[2, 6]], R: [[1, 2.5]] });
 });
+
+test('按色度选区：只对蓝色度高的像素去色压暗', () => {
+  const tl = applyOps(6, [{ op: 'tint', from: 3, to: 6, region: [0, 0, 1, 1], chroma: 'blue', threshold: 3, gain: 24, darken: -0.42, id: 'D' }]);
+  const { filter } = buildFilter(tl, P);
+  assert.match(filter, /hue=h=0:s=0,eq=brightness=-0\.42/);
+  assert.match(filter, /geq=lum='clip\(\(cb\(X,Y\)-128-3\)\*24,0,255\)':cb=128:cr=128,format=gray/);
+});

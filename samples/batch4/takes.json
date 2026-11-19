@@ -1,0 +1,90 @@
+{
+ "takes": [
+  {
+   "id": "S01-h3d",
+   "scene": "S01",
+   "kind": "ai",
+   "path": "../generated/S01__base__seed20261122.mp4",
+   "duration": 6.0,
+   "verified_clean": false,
+   "markers": {
+    "rot_start": 0.2,
+    "rot_half": 3.0,
+    "rot_end": 5.6
+   },
+   "regions": {
+    "product": [
+     0.3,
+     0.24,
+     0.37,
+     0.55
+    ]
+   },
+   "review_notes": [
+    "Claude 看帧：平顶黑色旋盖，无提环无锁扣；Logo 竖排（事实未规定方向）。待人工确认"
+   ]
+  },
+  {
+   "id": "S06-h3d",
+   "scene": "S06",
+   "kind": "ai",
+   "path": "../generated/S06__base__seed20261122.mp4",
+   "duration": 6.0,
+   "verified_clean": false,
+   "markers": {
+    "foot_in_start": 0.3,
+    "foot_in": 1.0,
+    "lace_end": 4.9,
+    "stand": 5.3
+   },
+   "regions": {
+    "logo": [
+     0.05,
+     0.58,
+     0.95,
+     0.3
+    ]
+   },
+   "review_notes": [
+    "Claude 看帧：约 5.3 秒起人物站直，终态达成。待人工确认"
+   ]
+  },
+  {
+   "id": "S07-h3d",
+   "scene": "S07",
+   "kind": "ai",
+   "path": "../generated/S07__base__seed20261123.mp4",
+   "duration": 6.0,
+   "verified_clean": false,
+   "markers": {
+    "reach": 0.2,
+    "press": 0.75,
+    "light_on": 1.85,
+    "settle": 2.6
+   },
+   "regions": {
+    "ring": [
+     0.04,
+     0.25,
+     0.92,
+     0.36
+    ],
+    "button": [
+     0.334,
+     0.416,
+     0.092,
+     0.048
+    ]
+   },
+   "offsets": {
+    "button": [
+     0.113,
+     -0.033
+    ]
+   },
+   "review_notes": [
+    "Claude 看帧：三个圆形按键横排，中间最大为电源键；一只手按下中间键后光环亮起，无闪烁。待人工确认"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,60 @@
+{
+  "case_id": "S07-h3d__single__S07.I7",
+  "scene": "S07",
+  "take": "S07-h3d",
+  "source": "../generated/S07__base__seed20261123.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "tint",
+      "from": 1.85,
+      "to": 6,
+      "region": [
+        0.04,
+        0.25,
+        0.92,
+        0.36
+      ],
+      "chroma": "blue",
+      "threshold": 3,
+      "gain": 24,
+      "darken": -0.42,
+      "id": "S07.I7"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "tint",
+      "from": 1.85,
+      "to": 6,
+      "region": [
+        0.04,
+        0.25,
+        0.92,
+        0.36
+      ],
+      "chroma": "blue",
+      "threshold": 3,
+      "gain": 24,
+      "darken": -0.42,
+      "id": "S07.I7",
+      "out": [
+        1.85,
+        6
+      ]
+    }
+  ],
+  "duration": 6
+}

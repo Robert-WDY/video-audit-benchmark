@@ -1,0 +1,22 @@
+{
+  "case_id": "S01-h3d__clean__base",
+  "scene": "S01",
+  "take": "S01-h3d",
+  "source": "../generated/S01__base__seed20261122.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [],
+  "duration": 6
+}

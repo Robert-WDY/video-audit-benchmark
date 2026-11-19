@@ -1,0 +1,23 @@
+{
+  "case_id": "S07-h3d__control__S07.I2",
+  "blind_id": "v_b54db0e526",
+  "video": "S07-h3d__control__S07.I2__ok.mp4",
+  "tier": "control",
+  "pattern": null,
+  "continuous": true,
+  "ref": "S07-h3d__single__S07.I2",
+  "scene": "S07",
+  "take": "S07-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：三个圆形按键横排，中间最大为电源键；一只手按下中间键后光环亮起，无闪烁。待人工确认"
+  ],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

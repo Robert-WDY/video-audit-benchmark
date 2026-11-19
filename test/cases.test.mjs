@@ -101,8 +101,22 @@ test('脚本配置把镜头卡追加进事实列表', () => {
 });
 
 test('可接受的瑕疵不让视频变成应拦截', () => {
-  const c = cases.find((x) => x.id === 'S08-real-01__single__S08.I7');
+  const sc = structuredClone(scenes.find((x) => x.id === 'S08'));
+  sc.injections.push({ id: 'S08.IX', category: 'VT', sub: 'VT4', evidence: 'E2', visibility: 'V3', disposition: 'accept',
+    description: '轻微亮度闪动', ops: [{ op: 'flash', at: 'dip', frames: 1, color: 'gray' }] });
+  const cs = expand([sc], takes.filter((t) => t.scene === 'S08'), tax, {});
+  const c = cs.find((x) => x.id.endsWith('__single__S08.IX'));
   assert.equal(c.truth.should_block, false);
+});
+
+test('提示词诱导、已停用的错误和实拍干扰项不在底片上派生', () => {
+  assert.ok(!cases.some((c) => c.truth.injected.some((e) => e.method === 'prompt')));
+  assert.ok(!cases.some((c) => c.tier === 'decoy' && c.gen.manual_tasks.some((m) => m.method === 'shoot')));
+  const sc = structuredClone(scenes.find((x) => x.id === 'S03'));
+  sc.injections.find((i) => i.id === 'S03.I1').retired = '测试';
+  const cs = expand([sc], takes.filter((t) => t.scene === 'S03'), tax, {});
+  assert.ok(!cs.some((c) => c.truth.injected.some((e) => e.id === 'S03.I1')));
+  assert.ok(validateScene({ ...sc, injections: [{ ...sc.injections[0], retired: '' }] }, tax).some((e) => e.includes('停用原因')));
 });
 
 test('组合关系判定', () => {

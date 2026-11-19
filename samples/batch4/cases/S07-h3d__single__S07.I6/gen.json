@@ -1,0 +1,58 @@
+{
+  "case_id": "S07-h3d__single__S07.I6",
+  "scene": "S07",
+  "take": "S07-h3d",
+  "source": "../generated/S07__base__seed20261123.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "clone",
+      "from": 0,
+      "to": 6,
+      "region": [
+        0.334,
+        0.416,
+        0.092,
+        0.048
+      ],
+      "offset": "button",
+      "id": "S07.I6",
+      "dx": 0.113,
+      "dy": -0.033
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "clone",
+      "from": 0,
+      "to": 6,
+      "region": [
+        0.334,
+        0.416,
+        0.092,
+        0.048
+      ],
+      "offset": "button",
+      "id": "S07.I6",
+      "dx": 0.113,
+      "dy": -0.033,
+      "out": [
+        0,
+        6
+      ]
+    }
+  ],
+  "duration": 6
+}

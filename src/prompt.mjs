@@ -10,6 +10,7 @@ export function worldPrompt(scene, { style = '真实商业摄影，自然光影�
     `开始画面：${s.start_state}。`,
     `动作按顺序发生：${actions}。`,
     `结束画面：${s.end_state}。`,
+    ...(scene.generation_notes ? [scene.generation_notes] : []),
     '画面中只出现上面写到的物体，每种物体只有一个（除非本描述中另有写明），不要额外添加相同或相似的物体。',
     '整个过程中产品的颜色、材质、形状、部件数量和标识始终保持不变；物体运动符合真实物理；人手结构正常；除产品 Logo 外画面中不出现其他文字。',
   ].join('\n');

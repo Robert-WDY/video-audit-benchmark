@@ -1,50 +1,48 @@
 {
-  "built_at": "2026-11-19T08:02:35.799Z",
+  "built_at": "2026-11-19T08:14:33.766Z",
   "salt": "vr1",
   "summary": {
-    "cases": 66,
+    "cases": 59,
     "by_tier": {
       "clean": 3,
-      "decoy": 6,
-      "single": 24,
+      "decoy": 3,
+      "single": 20,
       "control": 3,
       "combo": 20,
       "multi": 10
     },
     "by_pattern": {
-      "-": 36,
-      "overlap": 22,
-      "separate": 7,
-      "chain": 1
+      "-": 29,
+      "overlap": 21,
+      "chain": 1,
+      "separate": 8
     },
-    "needs_manual": 26,
-    "errors": 87,
+    "needs_manual": 0,
+    "errors": 83,
     "errors_by_category": {
-      "PH": 11,
-      "TC": 24,
-      "TE": 9,
-      "SA": 4,
-      "PF": 39
+      "PH": 4,
+      "TC": 28,
+      "TE": 13,
+      "PF": 38
     },
     "errors_by_evidence": {
-      "E2": 25,
-      "E3": 10,
-      "E4": 13,
-      "E1": 39
+      "E2": 20,
+      "E3": 17,
+      "E1": 39,
+      "E4": 7
     },
     "errors_by_visibility": {
-      "V1": 49,
-      "V2": 38
+      "V1": 53,
+      "V2": 30
     },
     "errors_by_duration": {
-      "long": 78,
+      "long": 71,
       "instant": 3,
-      "short": 6
+      "short": 9
     },
     "errors_by_basis": {
-      "common_sense": 44,
-      "script": 4,
-      "facts": 39
+      "common_sense": 45,
+      "facts": 38
     }
   },
   "unverified_takes": [

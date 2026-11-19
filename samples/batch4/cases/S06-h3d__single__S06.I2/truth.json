@@ -1,0 +1,52 @@
+{
+  "case_id": "S06-h3d__single__S06.I2",
+  "blind_id": "v_0fc98c67d8",
+  "video": "S06-h3d__single__S06.I2__PF4.mp4",
+  "tier": "single",
+  "pattern": null,
+  "continuous": true,
+  "ref": null,
+  "scene": "S06",
+  "take": "S06-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：约 5.3 秒起人物站直，终态达成。待人工确认"
+  ],
+  "injected": [
+    {
+      "id": "S06.I2",
+      "category": "PF",
+      "sub": "PF4",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "Logo、型号、品牌标识错误",
+      "evidence": "E3",
+      "visibility": "V3",
+      "disposition": "fix",
+      "judge_basis": "facts",
+      "description": "系好鞋带后鞋侧的蓝色弧线标变成橙色",
+      "method": "tint",
+      "auto": true,
+      "windows": [
+        [
+          4.9,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

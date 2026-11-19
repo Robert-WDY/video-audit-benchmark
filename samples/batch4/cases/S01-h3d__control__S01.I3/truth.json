@@ -1,0 +1,23 @@
+{
+  "case_id": "S01-h3d__control__S01.I3",
+  "blind_id": "v_fbfd4f0c8e",
+  "video": "S01-h3d__control__S01.I3__ok.mp4",
+  "tier": "control",
+  "pattern": null,
+  "continuous": true,
+  "ref": "S01-h3d__single__S01.I3",
+  "scene": "S01",
+  "take": "S01-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：平顶黑色旋盖，无提环无锁扣；Logo 竖排（事实未规定方向）。待人工确认"
+  ],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

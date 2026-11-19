@@ -3,14 +3,8 @@
   "scene": "S07",
   "take": "S07-h3b",
   "source": "../generated/S07__base__seed20261120.mp4",
-  "needs_manual": true,
-  "manual_tasks": [
-    {
-      "for": "S07.I6",
-      "method": "ref_edit",
-      "instruction": "在首帧顶部光环内加第 4 个按键，图生视频，按键动作照抄底片"
-    }
-  ],
+  "needs_manual": false,
+  "manual_tasks": [],
   "ops": [
     {
       "op": "caption",
@@ -18,6 +12,21 @@
       "to": 6,
       "text": "24 小时超长续航",
       "id": "S07.I2"
+    },
+    {
+      "op": "clone",
+      "from": 0,
+      "to": 6,
+      "region": [
+        0.44,
+        0.405,
+        0.08,
+        0.035
+      ],
+      "offset": "button",
+      "id": "S07.I6",
+      "dx": 0.13,
+      "dy": -0.005
     }
   ],
   "pieces": [
@@ -40,6 +49,25 @@
       "id": "S07.I2",
       "out": [
         3.9,
+        6
+      ]
+    },
+    {
+      "op": "clone",
+      "from": 0,
+      "to": 6,
+      "region": [
+        0.44,
+        0.405,
+        0.08,
+        0.035
+      ],
+      "offset": "button",
+      "id": "S07.I6",
+      "dx": 0.13,
+      "dy": -0.005,
+      "out": [
+        0,
         6
       ]
     }

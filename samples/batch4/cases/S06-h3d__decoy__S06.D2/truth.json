@@ -1,0 +1,27 @@
+{
+  "case_id": "S06-h3d__decoy__S06.D2",
+  "blind_id": "v_183d9b69d0",
+  "video": "S06-h3d__decoy__S06.D2__looks-TE2.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": false,
+  "ref": null,
+  "scene": "S06",
+  "take": "S06-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 9.9,
+  "decoy": {
+    "id": "S06.D2",
+    "looks_like": "TE2",
+    "description": "系鞋带段 0.5 倍慢动作"
+  },
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：约 5.3 秒起人物站直，终态达成。待人工确认"
+  ],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

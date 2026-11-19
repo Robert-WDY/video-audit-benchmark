@@ -55,7 +55,7 @@
       "visibility": "V3",
       "disposition": "fix",
       "judge_basis": "facts",
-      "description": "系好鞋带后鞋侧弧线标从蓝色变成橙色",
+      "description": "系好鞋带后鞋侧的蓝色弧线标变成橙色",
       "method": "tint",
       "auto": true,
       "windows": [

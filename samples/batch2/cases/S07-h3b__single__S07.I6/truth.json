@@ -59,16 +59,16 @@
       "visibility": "V2",
       "disposition": "block",
       "judge_basis": "facts",
-      "description": "顶部有 4 个按键",
-      "method": "ref_edit",
-      "auto": false,
+      "description": "顶部有 4 个按键（复制出一个多余的按键，事实为 3 个）",
+      "method": "clone",
+      "auto": true,
       "windows": [
         [
           0,
           6
         ]
       ],
-      "window_status": "estimated",
+      "window_status": "exact",
       "duration_bucket": "long",
       "expected_checks": [
         "product_drift",

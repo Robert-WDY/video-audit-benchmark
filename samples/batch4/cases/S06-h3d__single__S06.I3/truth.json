@@ -1,0 +1,51 @@
+{
+  "case_id": "S06-h3d__single__S06.I3",
+  "blind_id": "v_aca38fcb01",
+  "video": "S06-h3d__single__S06.I3__TC1.mp4",
+  "tier": "single",
+  "pattern": null,
+  "continuous": false,
+  "ref": null,
+  "scene": "S06",
+  "take": "S06-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 5.6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：约 5.3 秒起人物站直，终态达成。待人工确认"
+  ],
+  "injected": [
+    {
+      "id": "S06.I3",
+      "category": "TC",
+      "sub": "TC1",
+      "secondary": [],
+      "category_name": "时序/因果",
+      "sub_name": "瞬移或位置跳变",
+      "evidence": "E2",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "脚刚碰到鞋就瞬间完全穿入",
+      "method": "drop",
+      "auto": true,
+      "windows": [
+        [
+          0.3,
+          0.9
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "instant",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

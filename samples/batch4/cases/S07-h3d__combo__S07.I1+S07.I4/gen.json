@@ -1,0 +1,75 @@
+{
+  "case_id": "S07-h3d__combo__S07.I1+S07.I4",
+  "scene": "S07",
+  "take": "S07-h3d",
+  "source": "../generated/S07__base__seed20261123.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "swap",
+      "a_from": 0.2,
+      "a_to": 0.75,
+      "b_from": 0.75,
+      "b_to": 2.6,
+      "id": "S07.I1"
+    },
+    {
+      "op": "mute",
+      "from": 0,
+      "to": 6,
+      "id": "S07.I4"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        0.2
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "src": [
+        0.75,
+        2.6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": "S07.I1"
+    },
+    {
+      "src": [
+        0.2,
+        0.75
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": "S07.I1"
+    },
+    {
+      "src": [
+        2.6,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "mute",
+      "from": 0,
+      "to": 6,
+      "id": "S07.I4",
+      "out": [
+        0,
+        6
+      ]
+    }
+  ],
+  "duration": 6
+}

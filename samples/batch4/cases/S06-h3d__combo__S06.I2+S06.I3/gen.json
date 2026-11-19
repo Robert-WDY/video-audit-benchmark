@@ -1,0 +1,83 @@
+{
+  "case_id": "S06-h3d__combo__S06.I2+S06.I3",
+  "scene": "S06",
+  "take": "S06-h3d",
+  "source": "../generated/S06__base__seed20261122.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "tint",
+      "from": 4.9,
+      "to": 6,
+      "region": [
+        0.05,
+        0.58,
+        0.95,
+        0.3
+      ],
+      "chroma": "blue",
+      "threshold": 6,
+      "gain": 14,
+      "hue": 180,
+      "saturation": 1.3,
+      "darken": 0,
+      "id": "S06.I2"
+    },
+    {
+      "op": "drop",
+      "from": 0.6,
+      "to": 1,
+      "id": "S06.I3"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        0.6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    },
+    {
+      "marker": true,
+      "tag": "S06.I3"
+    },
+    {
+      "src": [
+        1,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "tint",
+      "from": 4.9,
+      "to": 6,
+      "region": [
+        0.05,
+        0.58,
+        0.95,
+        0.3
+      ],
+      "chroma": "blue",
+      "threshold": 6,
+      "gain": 14,
+      "hue": 180,
+      "saturation": 1.3,
+      "darken": 0,
+      "id": "S06.I2",
+      "out": [
+        4.5,
+        5.6
+      ]
+    }
+  ],
+  "duration": 5.6
+}

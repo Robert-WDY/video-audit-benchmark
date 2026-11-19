@@ -1,0 +1,108 @@
+{
+  "case_id": "S01-h3c__combo__S01.I3+S01.I4",
+  "blind_id": "v_ccfa420150",
+  "video": "S01-h3c__combo__S01.I3+S01.I4__PF8+TC1.mp4",
+  "tier": "combo",
+  "pattern": "overlap",
+  "continuous": false,
+  "ref": null,
+  "scene": "S01",
+  "take": "S01-h3c",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 5.2,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [
+    {
+      "id": "S01-h3c#K1",
+      "category": "PF",
+      "sub": "PF3",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "部件数量或位置错（按键、耳罩、接口、杯盖）",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "杯盖带提环和正面锁扣，多个角度可见（事实：无提手的黑色旋盖）",
+      "method": "base",
+      "auto": false,
+      "windows": [
+        [
+          0,
+          5.2
+        ]
+      ],
+      "window_status": "annotated",
+      "duration_bucket": null,
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "regen",
+      "source": "base",
+      "reviewed_by": "human"
+    }
+  ],
+  "base_notes": [],
+  "injected": [
+    {
+      "id": "S01.I3",
+      "category": "PF",
+      "sub": "PF8",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "字幕写的规格或卖点与事实不符",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "字幕写 500ml，事实是 350ml",
+      "method": "caption",
+      "auto": true,
+      "windows": [
+        [
+          1,
+          2.7
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S01.I4",
+      "category": "TC",
+      "sub": "TC1",
+      "secondary": [],
+      "category_name": "时序/因果",
+      "sub_name": "瞬移或位置跳变",
+      "evidence": "E2",
+      "visibility": "V2",
+      "disposition": "fix",
+      "judge_basis": "common_sense",
+      "description": "旋转中途杯子角度突然跳变约 60 度",
+      "method": "drop",
+      "auto": true,
+      "windows": [
+        [
+          2.3,
+          2.9
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "instant",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

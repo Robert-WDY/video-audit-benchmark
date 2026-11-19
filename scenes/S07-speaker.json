@@ -172,16 +172,14 @@
       "evidence": "E1",
       "visibility": "V2",
       "disposition": "block",
-      "description": "顶部有 4 个按键",
+      "description": "顶部有 4 个按键（复制出一个多余的按键，事实为 3 个）",
       "ops": [
         {
-          "op": "manual",
-          "method": "ref_edit",
-          "window": {
-            "from": "start",
-            "to": "end"
-          },
-          "instruction": "在首帧顶部光环内加第 4 个按键，图生视频，按键动作照抄底片"
+          "op": "clone",
+          "from": "start",
+          "to": "end",
+          "region": "button",
+          "offset": "button"
         }
       ]
     },
@@ -192,16 +190,37 @@
       "evidence": "E4",
       "visibility": "V2",
       "disposition": "block",
-      "description": "按下电源键后光环始终不亮",
+      "description": "按下电源键后光环始终不亮（蓝色光环被压暗去色）",
+      "ops": [
+        {
+          "op": "tint",
+          "from": "light_on",
+          "to": "end",
+          "region": "ring",
+          "chroma": "blue",
+          "threshold": 3,
+          "gain": 24,
+          "darken": -0.42
+        }
+      ]
+    },
+    {
+      "id": "S07.I8",
+      "category": "VT",
+      "sub": "VT1",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "block",
+      "description": "音箱顶部按键旁边印着一行读不通的伪文字",
       "ops": [
         {
           "op": "manual",
-          "method": "inpaint",
+          "method": "prompt",
           "window": {
-            "from": "light_on",
+            "from": "start",
             "to": "end"
           },
-          "instruction": "在正确底片上把 light_on 之后的光环修补成熄灭状态"
+          "instruction": "照脚本生成，但音箱顶部按键旁边印着一行看起来像英文却拼不出任何单词的小字，字迹清晰"
         }
       ]
     }
@@ -242,5 +261,6 @@
       ],
       "note": "同一连续镜头：光环颜色错、续航字幕错、开机提示音消失"
     }
-  ]
+  ],
+  "generation_notes": "顶部只有三个圆形按键，横向排成一排，中间那个最大的是电源键，左右两个较小；只出现一只手，用食指明确按下中间最大的电源键，不要碰其他按键；光环在电源键被按下后亮起并保持常亮，不要闪烁。"
 }

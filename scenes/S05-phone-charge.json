@@ -163,7 +163,8 @@
           },
           "instruction": "照脚本生成，但手机最后悬停在充电板上方约 1cm 不接触，仍然显示充电动画"
         }
-      ]
+      ],
+      "retired": "提示词诱导做不出来（H3 会把物理、手部、数量类错误纠正回正常，实测 0/5），局部合成也无法可信地伪造"
     },
     {
       "id": "S05.I6",
@@ -183,7 +184,8 @@
           },
           "instruction": "照脚本生成，充电时手机上方出现悬浮的全息电量百分比投影"
         }
-      ]
+      ],
+      "retired": "提示词诱导的虚构功能（全息投影）未验证可做出，且局部合成无法可信地伪造"
     },
     {
       "id": "S05.I7",
@@ -203,7 +205,8 @@
           },
           "instruction": "在正确底片上把 ring_on 之后的指示环和屏幕动画修补成熄灭状态"
         }
-      ]
+      ],
+      "retired": "已由 S05.I8（区域定格让光环不亮）替代"
     },
     {
       "id": "S05.I8",
@@ -240,6 +243,26 @@
           "from": "start",
           "to": "place-0.3",
           "region": "logo"
+        }
+      ]
+    },
+    {
+      "id": "S05.I10",
+      "category": "PF",
+      "sub": "PF4",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "block",
+      "description": "充电板中央的字样拼成 Vlot（事实为 Volt）",
+      "ops": [
+        {
+          "op": "manual",
+          "method": "prompt",
+          "window": {
+            "from": "start",
+            "to": "place"
+          },
+          "instruction": "照脚本生成，但充电板中央印的品牌字样清楚地拼成 Vlot（字母 l 和 o 的顺序颠倒），字母清晰可读"
         }
       ]
     }

@@ -1,0 +1,79 @@
+{
+  "case_id": "S06-h3d__combo__S06.I2+S06.I3",
+  "blind_id": "v_4ff9531643",
+  "video": "S06-h3d__combo__S06.I2+S06.I3__PF4+TC1.mp4",
+  "tier": "combo",
+  "pattern": "separate",
+  "continuous": false,
+  "ref": null,
+  "scene": "S06",
+  "take": "S06-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 5.6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：约 5.3 秒起人物站直，终态达成。待人工确认"
+  ],
+  "injected": [
+    {
+      "id": "S06.I2",
+      "category": "PF",
+      "sub": "PF4",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "Logo、型号、品牌标识错误",
+      "evidence": "E3",
+      "visibility": "V3",
+      "disposition": "fix",
+      "judge_basis": "facts",
+      "description": "系好鞋带后鞋侧的蓝色弧线标变成橙色",
+      "method": "tint",
+      "auto": true,
+      "windows": [
+        [
+          4.5,
+          5.6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    },
+    {
+      "id": "S06.I3",
+      "category": "TC",
+      "sub": "TC1",
+      "secondary": [],
+      "category_name": "时序/因果",
+      "sub_name": "瞬移或位置跳变",
+      "evidence": "E2",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "脚刚碰到鞋就瞬间完全穿入",
+      "method": "drop",
+      "auto": true,
+      "windows": [
+        [
+          0.3,
+          0.9
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "instant",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

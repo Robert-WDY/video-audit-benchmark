@@ -1,0 +1,27 @@
+{
+  "case_id": "S01-h3d__decoy__S01.D2",
+  "blind_id": "v_3ba48da3b7",
+  "video": "S01-h3d__decoy__S01.D2__looks-TE2.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": false,
+  "ref": null,
+  "scene": "S01",
+  "take": "S01-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 8.8,
+  "decoy": {
+    "id": "S01.D2",
+    "looks_like": "TE2",
+    "description": "前半圈刻意 0.5 倍慢动作"
+  },
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：平顶黑色旋盖，无提环无锁扣；Logo 竖排（事实未规定方向）。待人工确认"
+  ],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

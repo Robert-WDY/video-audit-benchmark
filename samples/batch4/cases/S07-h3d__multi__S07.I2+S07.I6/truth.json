@@ -1,0 +1,80 @@
+{
+  "case_id": "S07-h3d__multi__S07.I2+S07.I6",
+  "blind_id": "v_00d7effe11",
+  "video": "S07-h3d__multi__S07.I2+S07.I6__PF8+PF3.mp4",
+  "tier": "multi",
+  "pattern": "overlap",
+  "continuous": true,
+  "ref": null,
+  "scene": "S07",
+  "take": "S07-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：三个圆形按键横排，中间最大为电源键；一只手按下中间键后光环亮起，无闪烁。待人工确认"
+  ],
+  "injected": [
+    {
+      "id": "S07.I2",
+      "category": "PF",
+      "sub": "PF8",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "字幕写的规格或卖点与事实不符",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "字幕写 24 小时续航，事实是 12 小时",
+      "method": "caption",
+      "auto": true,
+      "windows": [
+        [
+          1.85,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S07.I6",
+      "category": "PF",
+      "sub": "PF3",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "部件数量或位置错（按键、耳罩、接口、杯盖）",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "顶部有 4 个按键（复制出一个多余的按键，事实为 3 个）",
+      "method": "clone",
+      "auto": true,
+      "windows": [
+        [
+          0,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

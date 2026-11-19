@@ -1,0 +1,79 @@
+{
+  "case_id": "S04-h3a__combo__S04.I2+S04.I7",
+  "blind_id": "v_b106187dee",
+  "video": "S04-h3a__combo__S04.I2+S04.I7__TC3+PF3.mp4",
+  "tier": "combo",
+  "pattern": "overlap",
+  "continuous": false,
+  "ref": null,
+  "scene": "S04",
+  "take": "S04-h3a",
+  "source_kind": "ai",
+  "baseline_verified": true,
+  "duration": 6.6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [],
+  "injected": [
+    {
+      "id": "S04.I2",
+      "category": "TC",
+      "sub": "TC3",
+      "secondary": [],
+      "category_name": "时序/因果",
+      "sub_name": "状态回跳（已发生的变化又复原）",
+      "evidence": "E3",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "common_sense",
+      "description": "耳机已经拿在手里，画面又回到两只耳机都在盒里",
+      "method": "insert",
+      "auto": true,
+      "windows": [
+        [
+          4.8,
+          5.4
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "short",
+      "expected_checks": [
+        "physics"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S04.I7",
+      "category": "PF",
+      "sub": "PF3",
+      "secondary": [
+        "SA6"
+      ],
+      "category_name": "产品事实",
+      "sub_name": "部件数量或位置错（按键、耳罩、接口、杯盖）",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "开盖后盒盖内侧多出一只耳机（一共三只，事实为一副两只）",
+      "method": "clone",
+      "auto": true,
+      "windows": [
+        [
+          1.4,
+          6.6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

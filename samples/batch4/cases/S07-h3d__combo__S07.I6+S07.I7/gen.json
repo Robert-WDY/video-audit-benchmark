@@ -1,0 +1,94 @@
+{
+  "case_id": "S07-h3d__combo__S07.I6+S07.I7",
+  "scene": "S07",
+  "take": "S07-h3d",
+  "source": "../generated/S07__base__seed20261123.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "clone",
+      "from": 0,
+      "to": 6,
+      "region": [
+        0.334,
+        0.416,
+        0.092,
+        0.048
+      ],
+      "offset": "button",
+      "id": "S07.I6",
+      "dx": 0.113,
+      "dy": -0.033
+    },
+    {
+      "op": "tint",
+      "from": 1.85,
+      "to": 6,
+      "region": [
+        0.04,
+        0.25,
+        0.92,
+        0.36
+      ],
+      "chroma": "blue",
+      "threshold": 3,
+      "gain": 24,
+      "darken": -0.42,
+      "id": "S07.I7"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "clone",
+      "from": 0,
+      "to": 6,
+      "region": [
+        0.334,
+        0.416,
+        0.092,
+        0.048
+      ],
+      "offset": "button",
+      "id": "S07.I6",
+      "dx": 0.113,
+      "dy": -0.033,
+      "out": [
+        0,
+        6
+      ]
+    },
+    {
+      "op": "tint",
+      "from": 1.85,
+      "to": 6,
+      "region": [
+        0.04,
+        0.25,
+        0.92,
+        0.36
+      ],
+      "chroma": "blue",
+      "threshold": 3,
+      "gain": 24,
+      "darken": -0.42,
+      "id": "S07.I7",
+      "out": [
+        1.85,
+        6
+      ]
+    }
+  ],
+  "duration": 6
+}

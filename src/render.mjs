@@ -74,11 +74,22 @@ export function buildFilter({ pieces, overlays = [] }, probe, { font } = {}) {
           `[${v}][${nv}c]overlay=${cx}:${cy}:shortest=1:${between(o.out)}[${nv}]`);
         v = nv; continue;
       }
+      if (o.chroma === 'blue') {
+        // 按色度选区：只选蓝色度（Cb）明显高于中性值的像素（蓝/青色的灯光和光晕），灰色表面和暖色背景不受影响。
+        // 被选中的像素去色并压暗（灯没亮），或旋转色相（蓝色标识变成别的颜色）
+        const t = o.threshold ?? 10; const g = o.gain ?? 10;
+        chains.push(`[${v}]split=3[${nv}b][${nv}t][${nv}k]`,
+          `[${nv}t]crop=${cw}:${ch}:${cx}:${cy},hue=h=${o.hue ?? 0}:s=${o.saturation ?? 0},eq=brightness=${o.darken ?? -0.3},format=rgba[${nv}h]`,
+          `[${nv}k]crop=${cw}:${ch}:${cx}:${cy},format=yuv444p,geq=lum='clip((cb(X,Y)-128-${t})*${g},0,255)':cb=128:cr=128,format=gray[${nv}m]`,
+          `[${nv}h][${nv}m]alphamerge[${nv}c]`,
+          `[${nv}b][${nv}c]overlay=${cx}:${cy}:${between(o.out)}[${nv}]`);
+        v = nv; continue;
+      }
       if (o.key) {
         // 按颜色选区：只改变接近 key 颜色的像素（如蓝色光环），背景和其他物体不受色相旋转影响
         const key = String(o.key).replace('#', '0x');
         chains.push(`[${v}]split=3[${nv}b][${nv}t][${nv}k]`,
-          `[${nv}t]crop=${cw}:${ch}:${cx}:${cy},hue=h=${o.hue ?? 180}:s=${o.saturation ?? 1},format=rgba[${nv}h]`,
+          `[${nv}t]crop=${cw}:${ch}:${cx}:${cy},hue=h=${o.hue ?? 180}:s=${o.saturation ?? 1}:b=${o.brightness ?? 0},format=rgba[${nv}h]`,
           `[${nv}k]crop=${cw}:${ch}:${cx}:${cy},format=rgba,colorkey=color=${key}:similarity=${o.similarity ?? 0.3}:blend=${o.blend ?? 0.15},alphaextract,negate[${nv}m]`,
           `[${nv}h][${nv}m]alphamerge[${nv}c]`,
           `[${nv}b][${nv}c]overlay=${cx}:${cy}:${between(o.out)}[${nv}]`);

@@ -1,0 +1,79 @@
+{
+  "case_id": "S01-h3d__combo__S01.I3+S01.I5",
+  "blind_id": "v_74bd9d133b",
+  "video": "S01-h3d__combo__S01.I3+S01.I5__PF8+TE4.mp4",
+  "tier": "combo",
+  "pattern": "separate",
+  "continuous": true,
+  "ref": null,
+  "scene": "S01",
+  "take": "S01-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：平顶黑色旋盖，无提环无锁扣；Logo 竖排（事实未规定方向）。待人工确认"
+  ],
+  "injected": [
+    {
+      "id": "S01.I3",
+      "category": "PF",
+      "sub": "PF8",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "字幕写的规格或卖点与事实不符",
+      "evidence": "E1",
+      "visibility": "V1",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "字幕写 500ml，事实是 350ml",
+      "method": "caption",
+      "auto": true,
+      "windows": [
+        [
+          0.2,
+          2.7
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "regen"
+    },
+    {
+      "id": "S01.I5",
+      "category": "TE",
+      "sub": "TE4",
+      "secondary": [],
+      "category_name": "技术缺陷",
+      "sub_name": "闪帧（单帧白/黑/错帧）",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "fix",
+      "judge_basis": "common_sense",
+      "description": "单帧白闪",
+      "method": "flash",
+      "auto": true,
+      "windows": [
+        [
+          3,
+          3.033
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "flash",
+      "expected_checks": [
+        "black_silence"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

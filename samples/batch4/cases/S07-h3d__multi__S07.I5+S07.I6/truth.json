@@ -1,0 +1,80 @@
+{
+  "case_id": "S07-h3d__multi__S07.I5+S07.I6",
+  "blind_id": "v_9166f9d759",
+  "video": "S07-h3d__multi__S07.I5+S07.I6__PF5+PF3.mp4",
+  "tier": "multi",
+  "pattern": "overlap",
+  "continuous": true,
+  "ref": null,
+  "scene": "S07",
+  "take": "S07-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：三个圆形按键横排，中间最大为电源键；一只手按下中间键后光环亮起，无闪烁。待人工确认"
+  ],
+  "injected": [
+    {
+      "id": "S07.I5",
+      "category": "PF",
+      "sub": "PF5",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "屏幕/指示灯/UI 与事实不符",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "fix",
+      "judge_basis": "facts",
+      "description": "光环亮成紫红色（事实为蓝色）",
+      "method": "tint",
+      "auto": true,
+      "windows": [
+        [
+          1.85,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    },
+    {
+      "id": "S07.I6",
+      "category": "PF",
+      "sub": "PF3",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "部件数量或位置错（按键、耳罩、接口、杯盖）",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "facts",
+      "description": "顶部有 4 个按键（复制出一个多余的按键，事实为 3 个）",
+      "method": "clone",
+      "auto": true,
+      "windows": [
+        [
+          0,
+          6
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "long",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

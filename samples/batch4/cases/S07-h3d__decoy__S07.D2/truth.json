@@ -1,0 +1,27 @@
+{
+  "case_id": "S07-h3d__decoy__S07.D2",
+  "blind_id": "v_25f2db5850",
+  "video": "S07-h3d__decoy__S07.D2__looks-TE2.mp4",
+  "tier": "decoy",
+  "pattern": null,
+  "continuous": false,
+  "ref": null,
+  "scene": "S07",
+  "take": "S07-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6.6,
+  "decoy": {
+    "id": "S07.D2",
+    "looks_like": "TE2",
+    "description": "开机后定格 0.6 秒"
+  },
+  "should_block": false,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：三个圆形按键横排，中间最大为电源键；一只手按下中间键后光环亮起，无闪烁。待人工确认"
+  ],
+  "injected": [],
+  "actual": null,
+  "annotation_status": "pending"
+}

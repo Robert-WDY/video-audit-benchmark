@@ -1,0 +1,42 @@
+{
+  "case_id": "S01-h3d__single__S01.I3",
+  "scene": "S01",
+  "take": "S01-h3d",
+  "source": "../generated/S01__base__seed20261122.mp4",
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
+    {
+      "op": "caption",
+      "from": 0.2,
+      "to": 2.7,
+      "text": "500ml 超大容量",
+      "id": "S01.I3"
+    }
+  ],
+  "pieces": [
+    {
+      "src": [
+        0,
+        6
+      ],
+      "rev": false,
+      "speed": 1,
+      "tag": null
+    }
+  ],
+  "overlays": [
+    {
+      "op": "caption",
+      "from": 0.2,
+      "to": 2.7,
+      "text": "500ml 超大容量",
+      "id": "S01.I3",
+      "out": [
+        0.2,
+        2.7
+      ]
+    }
+  ],
+  "duration": 6
+}

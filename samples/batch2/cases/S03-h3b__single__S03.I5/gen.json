@@ -3,15 +3,23 @@
   "scene": "S03",
   "take": "S03-h3b",
   "source": "../generated/S03__base__seed20261120.mp4",
-  "needs_manual": true,
-  "manual_tasks": [
+  "needs_manual": false,
+  "manual_tasks": [],
+  "ops": [
     {
-      "for": "S03.I5",
-      "method": "prompt",
-      "instruction": "照脚本生成倒水视频，但水流进入玻璃杯后消失，玻璃杯始终是空的"
+      "op": "freeze_region",
+      "at": 0,
+      "from": 4.8,
+      "to": 6,
+      "region": [
+        0.04,
+        0.6,
+        0.5,
+        0.32
+      ],
+      "id": "S03.I5"
     }
   ],
-  "ops": [],
   "pieces": [
     {
       "src": [
@@ -23,6 +31,24 @@
       "tag": null
     }
   ],
-  "overlays": [],
+  "overlays": [
+    {
+      "op": "freeze_region",
+      "at": 0,
+      "from": 4.8,
+      "to": 6,
+      "region": [
+        0.04,
+        0.6,
+        0.5,
+        0.32
+      ],
+      "id": "S03.I5",
+      "out": [
+        4.8,
+        6
+      ]
+    }
+  ],
   "duration": 6
 }

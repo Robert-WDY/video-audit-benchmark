@@ -163,9 +163,18 @@ a { color: var(--accent) }
     <div class="cards" id="b3-gen"></div>
   </section>
 
+  <section class="group" id="batch4">
+    <div class="group-head">
+      <div class="eyebrow">第四批 · 补齐与重做</div>
+      <h2>底片按复核意见重做，手工错误改成局部合成</h2>
+      <p class="lede">按人工复核结论，在提示词里写死“无提环”“最后站起来”“按中间电源键”后重做 S01、S06、S07。S07 第一次重做仍然不对（按键布局不符、光环闪一下），第二次才合格。提示词做不出来的手工错误，能合成的改成局部合成，不能的标记停用并写明原因。现在每一批的用例都已渲染完，没有待补的素材。</p>
+    </div>
+    <div class="cards" id="b4-cards"></div>
+  </section>
+
   <section class="group">
     <div class="group-head">
-      <div class="eyebrow">三批合计</div>
+      <div class="eyebrow">四批合计</div>
       <h2>成本与产出</h2>
     </div>
     <div class="table-wrap">
@@ -349,11 +358,42 @@ const B3_GEN = [
     wins: [{ w: [1.5, 6], label: 'S08.I5 罐身伪文字（细微）' }, { w: [3.5, 6], acc: true, label: '待判：手背上的霜像一块圆片 · VT2' }] },
 ];
 
+const B4 = [
+  { id: 'S07 · seed 20261123', title: '重做的 S07 底片：按中间电源键，光环稳定亮起', media: 'b4-s07-base', dur: 6,
+    chips: [['clean', 'acc'], ['第二次重做才合格', 'warn']],
+    verdict: '<b>复核：基本干净（待人工确认）。</b>三个圆形按键横排，中间最大的是电源键；一只手按下中间键，光环约 1.85 秒亮起。逐帧测量光环蓝色亮度单调上升，没有闪烁。第一次重做（seed 20261122）按键是两个椭圆键，光环还亮一下灭一下，没有采用。',
+    wins: [] },
+  { id: 'S07-h3d__single__S07.I7__TC6', title: '按下电源键，光环始终不亮', media: 'b4-s07-off', dur: 6,
+    chips: [['single', 'err'], ['TC6 有因无果'], ['按色度选区']],
+    kv: [['做法', '只选蓝色度明显偏高的像素（光环和它的光晕），去色并压暗。按颜色值选区要么漏掉光晕，要么把整块表面压黑，换成色度判断后才干净'], ['替代', '原来是需要手工修补的 inpaint 任务']],
+    wins: [{ w: [1.85, 6], label: 'S07.I7 光环不亮' }] },
+  { id: 'S07-h3d__single__S07.I6__PF3', title: '顶部多出第 4 个按键', media: 'b4-s07-4btn', dur: 6,
+    chips: [['single', 'err'], ['PF3 部件数量'], ['区域复制']],
+    kv: [['做法', '把左侧小键复制到电源键正上方。第一版位置太高，被顶板边缘裁掉一半，下移后才完整'], ['替代', '原来是需要改首帧再图生视频的 ref_edit 任务']],
+    wins: [{ w: [0, 6], label: 'S07.I6 4 个按键（事实 3 个）' }] },
+  { id: 'S03-h3b__single__S03.I5__TC3', title: '倒完水，玻璃杯突然变回空的', media: 'b4-s03-i5', dur: 6,
+    chips: [['single', 'err'], ['TC3 状态回跳'], ['区域定格']],
+    kv: [['做法', '倒水过程中液面正常上升，停水后玻璃杯区域定格回开头的空杯'], ['替代', '原来是提示词诱导，做不出来']],
+    wins: [{ w: [4.8, 6], label: 'S03.I5 玻璃杯变回空的' }] },
+  { id: 'S05 · seed 20261122', title: '提示词：充电板字样拼成 Vlot', media: 'b4-gen-s05', dur: 6,
+    chips: [['PF4 标识'], ['做出来了', 'err']],
+    verdict: '<b>复核：present，清楚。</b>同样是把品牌名拼错，Vlot 做出来了，面霜盖的 AUAR 试了两次都还是 AURA。品牌名类的文字错误时成时不成，要逐条复核。',
+    wins: [{ w: [0, 3], label: 'S05.I10 Vlot（事实 Volt）' }] },
+  { id: 'S03 · seed 20261122', title: '提示词：玻璃杯上印伪中文', media: 'b4-gen-s03', dur: 6,
+    chips: [['VT1 伪文字'], ['做出来了', 'err']],
+    verdict: '<b>复核：present，清楚。</b>玻璃杯外壁有一列竖排的白色伪中文。随机伪文字是提示词最稳定能做出来的错误：这一批 6 条文字错误做出 4 条。',
+    wins: [{ w: [0, 6], label: 'S03.I9 玻璃杯伪文字' }] },
+  { id: 'S06 · seed 20261122', title: '重做的 S06 底片：最后站起来了', media: 'b4-s06-base', dur: 6,
+    chips: [['clean', 'acc'], ['终态达成', 'ok']],
+    verdict: '<b>复核：基本干净（待人工确认）。</b>系完鞋带后约 5.3 秒人物站直，镜头拍到站立时穿着跑鞋的双脚。',
+    wins: [] },
+];
+
 const COST = [
-  ['H3 生成正确底片', '¥1.38 / 条', '7 条底片', '取决于底片是否干净；需盲审', '7 条里 2 条干净，5 条带意外或待判错误。加了物体数量约束后明显变好'],
-  ['本地剪辑 + 局部合成', '¥0', '6 条底片共 71 条视频', '精确到帧，由操作直接算出', '全部渲染成功；13 条是同一连续镜头里的多错误'],
-  ['H3 提示词诱导', '¥1.38 / 条', '8 条尝试，共要求 10 处错误', '估计窗口，需人工校准', '做出 4 处，全是文字类（文字类 4/5）；手部、数量、物理类 0/5'],
-  ['合计', '¥20.70', '15 次 H3 调用', '', '账单里同期另有 2 单 H3 和 1 单 Seedance 不是本评测提交的'],
+  ['H3 生成正确底片', '¥1.38 / 条', '11 条底片', '取决于底片是否干净；需盲审', '11 条里 6 条可用；按复核意见在提示词里写死约束后，S01、S06 一次合格，S07 第二次才合格'],
+  ['本地剪辑 + 局部合成', '¥0', '9 条底片共 136 条视频', '精确到帧，由操作直接算出', '全部渲染完成，没有待补素材；手工 inpaint / ref_edit 任务都改成了局部合成'],
+  ['H3 提示词诱导', '¥1.38 / 条', '14 条尝试，共要求 16 处错误', '估计窗口，需人工校准', '文字类 8/11；手部、数量、物理类 0/5，已停用'],
+  ['合计', '¥34.50', '25 次 H3 调用', '', '每条可用样本约 ¥0.24'],
 ];
 
 const $ = (s, el = document) => el.querySelector(s);
@@ -406,7 +446,7 @@ function card(c, compact) {
 
 const cutBox = $('#cut-cards'); CUT.forEach((c) => cutBox.appendChild(card(c)));
 const promptBox = $('#prompt-cards'); PROMPT.forEach((c) => promptBox.appendChild(card(c)));
-[['#b2-base', B2_BASE], ['#b2-cut', B2_CUT], ['#b2-prompt', B2_PROMPT], ['#b3-local', B3_LOCAL], ['#b3-gen', B3_GEN]].forEach(([sel, list]) => { const box = $(sel); list.forEach((c) => box.appendChild(card(c))); });
+[['#b2-base', B2_BASE], ['#b2-cut', B2_CUT], ['#b2-prompt', B2_PROMPT], ['#b3-local', B3_LOCAL], ['#b3-gen', B3_GEN], ['#b4-cards', B4]].forEach(([sel, list]) => { const box = $(sel); list.forEach((c) => box.appendChild(card(c))); });
 $('#cost-body').innerHTML = COST.map((r) => `<tr><td>${r[0]}</td><td class="num">${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`).join('');
 </script>
 

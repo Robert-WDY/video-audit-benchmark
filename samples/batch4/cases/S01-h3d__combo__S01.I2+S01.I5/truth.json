@@ -1,0 +1,79 @@
+{
+  "case_id": "S01-h3d__combo__S01.I2+S01.I5",
+  "blind_id": "v_7e0330423a",
+  "video": "S01-h3d__combo__S01.I2+S01.I5__PF1+TE4.mp4",
+  "tier": "combo",
+  "pattern": "overlap",
+  "continuous": true,
+  "ref": null,
+  "scene": "S01",
+  "take": "S01-h3d",
+  "source_kind": "ai",
+  "baseline_verified": false,
+  "duration": 6,
+  "decoy": null,
+  "should_block": true,
+  "base_errors": [],
+  "base_notes": [
+    "Claude 看帧：平顶黑色旋盖，无提环无锁扣；Logo 竖排（事实未规定方向）。待人工确认"
+  ],
+  "injected": [
+    {
+      "id": "S01.I2",
+      "category": "PF",
+      "sub": "PF1",
+      "secondary": [],
+      "category_name": "产品事实",
+      "sub_name": "颜色或材质与事实不符/中途改变",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "fix",
+      "judge_basis": "facts",
+      "description": "杯身颜色只在约 0.15 秒内闪变成蓝色",
+      "method": "tint",
+      "auto": true,
+      "windows": [
+        [
+          3,
+          3.15
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "flash",
+      "expected_checks": [
+        "product_drift",
+        "fact_error"
+      ],
+      "expected_fix": "replace_plate"
+    },
+    {
+      "id": "S01.I5",
+      "category": "TE",
+      "sub": "TE4",
+      "secondary": [],
+      "category_name": "技术缺陷",
+      "sub_name": "闪帧（单帧白/黑/错帧）",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "fix",
+      "judge_basis": "common_sense",
+      "description": "单帧白闪",
+      "method": "flash",
+      "auto": true,
+      "windows": [
+        [
+          3,
+          3.033
+        ]
+      ],
+      "window_status": "exact",
+      "duration_bucket": "flash",
+      "expected_checks": [
+        "black_silence"
+      ],
+      "expected_fix": "regen"
+    }
+  ],
+  "actual": null,
+  "annotation_status": "pending"
+}

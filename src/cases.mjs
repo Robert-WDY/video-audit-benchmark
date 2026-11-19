@@ -59,6 +59,7 @@ export function validateScene(scene, tax) {
     if (!tax.visibility_levels[inj.visibility]) e(`${inj.id}: visibility ${inj.visibility} 未定义`);
     if (!tax.dispositions[inj.disposition]) e(`${inj.id}: disposition ${inj.disposition} 未定义`);
     if (!inj.description) e(`${inj.id}: 缺少 description`);
+    if (inj.retired !== undefined && (typeof inj.retired !== 'string' || !inj.retired)) e(`${inj.id}: retired 需写明停用原因`);
     checkOps(inj.id, inj.ops);
     if (inj.ops?.filter((o) => o.op === 'manual').length > 1) e(`${inj.id}: 一个错误最多一个手工操作`);
     if (inj.control) checkOps(`${inj.id}.control`, inj.control);
@@ -90,7 +91,17 @@ export function validateTake(take, scene, tax = null) {
   for (let i = 1; i < vals.length; i++) if (vals[i] < vals[i - 1]) e('标记点应按场景里定义的顺序递增');
   const regions = new Set();
   for (const x of [...scene.injections, ...(scene.decoys || [])]) {
+    if (x.retired) continue;
     for (const o of [...x.ops, ...(x.control || [])]) if (typeof o.region === 'string') regions.add(o.region);
+  }
+  const offsets = new Set();
+  for (const x of [...scene.injections, ...(scene.decoys || [])]) {
+    if (x.retired) continue;
+    for (const o of x.ops) if (typeof o.offset === 'string') offsets.add(o.offset);
+  }
+  for (const o of offsets) {
+    const v = take.offsets?.[o];
+    if (!Array.isArray(v) || v.length !== 2 || v.some((n) => !Number.isFinite(n))) e(`偏移量 offsets.${o} 需为 [dx, dy]`);
   }
   for (const r of regions) {
     const b = take.regions?.[r];
@@ -129,6 +140,11 @@ export function resolveOps(ops, take, id) {
     for (const k of TIME_KEYS) if (o[k] !== undefined) r[k] = Math.min(take.duration, Math.max(0, resolveTime(o[k], markers)));
     if (o.window) r.window = { from: resolveTime(o.window.from, markers), to: resolveTime(o.window.to, markers) };
     if (typeof o.region === 'string') r.region = take.regions?.[o.region];
+    if (typeof o.offset === 'string') {
+      const off = take.offsets?.[o.offset];
+      if (!Array.isArray(off)) throw new Error(`${take.id}: 缺少偏移量 offsets.${o.offset}`);
+      [r.dx, r.dy] = off;
+    }
     return r;
   });
 }
@@ -296,7 +312,7 @@ function pickDiverse(cands, cap) {
   return out;
 }
 
-export function expand(scenes, takes, tax, { maxMultiPerTake = 3, maxComboPerTake = 6, salt = 'vr1', skipped = [] } = {}) {
+export function expand(scenes, takes, tax, { maxMultiPerTake = 3, maxComboPerTake = 6, salt = 'vr1', skipped = [], includeShoot = false } = {}) {
   const byId = new Map(scenes.map((s) => [s.id, s]));
   const cases = [];
   const tryMake = (args) => {
@@ -305,8 +321,15 @@ export function expand(scenes, takes, tax, { maxMultiPerTake = 3, maxComboPerTak
       throw e;
     }
   };
+  // 不在底片上派生的错误：已停用的；提示词诱导的（单独生成的视频，时间轴与底片对不上）；需要实拍的干扰项（默认跳过）
+  const methods = (x) => x.ops.filter((o) => o.op === 'manual').map((o) => o.method);
+  const usable = (inj) => !inj.retired && !methods(inj).includes('prompt');
+  const usableDecoy = (d) => includeShoot || !methods(d).includes('shoot');
   for (const take of takes) {
-    const scene = byId.get(take.scene);
+    const scene0 = byId.get(take.scene);
+    const scene = { ...scene0, injections: scene0.injections.filter(usable), decoys: (scene0.decoys || []).filter(usableDecoy),
+      bundles: (scene0.bundles || []).filter((b) => b.ids.every((id) => scene0.injections.some((i) => i.id === id && usable(i)))),
+      chains: (scene0.chains || []).filter((c) => c.ids.every((id) => scene0.injections.some((i) => i.id === id && usable(i)))) };
     const base = { scene, take };
     cases.push(tryMake({ ...base, tier: 'clean' }));
     for (const d of scene.decoys || []) cases.push(tryMake({ ...base, tier: 'decoy', extra: [{ id: null, ops: d.ops }], decoy: d }));

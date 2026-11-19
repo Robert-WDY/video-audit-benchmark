@@ -136,24 +136,22 @@
     },
     {
       "id": "S03.I5",
-      "category": "SA",
-      "sub": "SA5",
+      "category": "TC",
+      "sub": "TC3",
       "secondary": [
-        "TC2"
+        "SA5"
       ],
-      "evidence": "E4",
+      "evidence": "E3",
       "visibility": "V1",
       "disposition": "block",
-      "description": "水倒进去了，但最后玻璃杯仍然是空的",
+      "description": "倒完水后玻璃杯突然变回空的（倒水过程中液面正常上升）",
       "ops": [
         {
-          "op": "manual",
-          "method": "prompt",
-          "window": {
-            "from": "pour_end",
-            "to": "end"
-          },
-          "instruction": "照脚本生成倒水视频，但水流进入玻璃杯后消失，玻璃杯始终是空的"
+          "op": "freeze_region",
+          "at": "start",
+          "from": "pour_end",
+          "to": "end",
+          "region": "glass"
         }
       ]
     },
@@ -175,7 +173,8 @@
           },
           "instruction": "照脚本生成，但水流穿透玻璃杯侧壁直接落到桌面上"
         }
-      ]
+      ],
+      "retired": "提示词诱导做不出来（H3 会把物理、手部、数量类错误纠正回正常，实测 0/5），局部合成也无法可信地伪造"
     },
     {
       "id": "S03.I7",
@@ -220,6 +219,26 @@
           "from": "lift_start",
           "to": "pour_start",
           "text": "350ml 随身容量"
+        }
+      ]
+    },
+    {
+      "id": "S03.I9",
+      "category": "VT",
+      "sub": "VT1",
+      "evidence": "E1",
+      "visibility": "V2",
+      "disposition": "block",
+      "description": "玻璃杯外壁印着一行读不通的伪文字",
+      "ops": [
+        {
+          "op": "manual",
+          "method": "prompt",
+          "window": {
+            "from": "start",
+            "to": "end"
+          },
+          "instruction": "照脚本生成，但玻璃杯外壁印着一行看起来像中文却不是真字的白色文字，字迹清晰"
         }
       ]
     }
