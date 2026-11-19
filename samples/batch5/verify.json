@@ -1,5 +1,5 @@
 {
-  "ok": 55,
+  "ok": 56,
   "problem": 0,
   "skipped": 4,
   "results": [
@@ -15,7 +15,7 @@
     },
     {
       "case_id": "S02-h3e__decoy__S02.D2",
-      "video": "S02-h3e__decoy__S02.D2__looks-TE2.mp4",
+      "video": "S02-h3e__decoy__S02.D2__looks-TE2_base-SA5.mp4",
       "status": "ok",
       "problems": [],
       "stats": {
@@ -25,7 +25,7 @@
     },
     {
       "case_id": "S02-h3e__decoy__S02.D3",
-      "video": "S02-h3e__decoy__S02.D3__looks-PF2.mp4",
+      "video": "S02-h3e__decoy__S02.D3__looks-PF2_base-SA5.mp4",
       "status": "ok",
       "problems": [],
       "stats": {
@@ -35,7 +35,7 @@
     },
     {
       "case_id": "S02-h3e__decoy__S02.D4",
-      "video": "S02-h3e__decoy__S02.D4__looks-PF1.mp4",
+      "video": "S02-h3e__decoy__S02.D4__looks-PF1_base-SA5.mp4",
       "status": "ok",
       "problems": [],
       "stats": {
@@ -354,6 +354,16 @@
       }
     },
     {
+      "case_id": "S05-h3e__multi__S05.I9+S05.I2+S05.I4",
+      "video": "S05-h3e__multi__S05.I9+S05.I2+S05.I4__PF4+PF8+PF5.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
       "case_id": "S05-h3e__single__S05.I1",
       "video": "S05-h3e__single__S05.I1__TC4.mp4",
       "status": "ok",
@@ -475,7 +485,7 @@
     },
     {
       "case_id": "S08-h3e__decoy__S08.D2",
-      "video": "S08-h3e__decoy__S08.D2__looks-TE2.mp4",
+      "video": "S08-h3e__decoy__S08.D2__looks-TE2_base-SA5.mp4",
       "status": "ok",
       "problems": [],
       "stats": {
@@ -485,7 +495,7 @@
     },
     {
       "case_id": "S08-h3e__decoy__S08.D3",
-      "video": "S08-h3e__decoy__S08.D3__looks-PF2.mp4",
+      "video": "S08-h3e__decoy__S08.D3__looks-PF2_base-SA5.mp4",
       "status": "ok",
       "problems": [],
       "stats": {
@@ -495,7 +505,7 @@
     },
     {
       "case_id": "S08-h3e__decoy__S08.D4",
-      "video": "S08-h3e__decoy__S08.D4__looks-PF1.mp4",
+      "video": "S08-h3e__decoy__S08.D4__looks-PF1_base-SA5.mp4",
       "status": "ok",
       "problems": [],
       "stats": {

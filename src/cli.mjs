@@ -18,7 +18,7 @@ const { positionals, values: a } = parseArgs({
     ffmpeg: { type: 'string', default: process.env.FFMPEG_PATH || 'ffmpeg' }, font: { type: 'string', default: process.env.CAPTION_FONT },
     only: { type: 'string' }, 'dry-run': { type: 'boolean', default: false }, force: { type: 'boolean', default: false },
     config: { type: 'string', default: 'facts' }, concurrency: { type: 'string', default: '2' },
-    blind: { type: 'string' }, sheet: { type: 'string' }, 'use-injected': { type: 'boolean', default: false }, seed: { type: 'string', default: '1' },
+    blind: { type: 'string' }, sheet: { type: 'string' }, 'use-injected': { type: 'boolean', default: false }, 'allow-missing': { type: 'boolean', default: false }, seed: { type: 'string', default: '1' },
   },
 });
 const cmd = positionals[0];
@@ -302,13 +302,15 @@ const commands = {
   async score() {
     const tax = await loadTaxonomy(a.taxonomy); const truths = await loadTruths();
     const rdir = path.join(out, 'reviews', a.config);
-    const results = [];
+    const results = []; const missing = [];
     for (const t of truths) {
       const f = path.join(rdir, `${t.case_id}.json`);
-      if (!existsSync(f)) continue;
+      // 缺失的审核输出不能静默跳过（会缩小分母）：记为 missing，默认报错
+      if (!existsSync(f)) { missing.push(t.case_id); results.push({ case_id: t.case_id, status: 'missing' }); continue; }
       results.push(scoreCase(t, await readJson(f), tax, { useInjected: a['use-injected'] }));
     }
-    if (!results.length) die(`${rdir} 下没有审核结果`);
+    if (missing.length === truths.length) die(`${rdir} 下没有审核结果`);
+    if (missing.length && !a['allow-missing']) die(`有 ${missing.length} 条用例缺少审核输出（例如 ${missing.slice(0, 3).join('、')}）。补跑 review，或加 --allow-missing 明确接受缺失（报告会列出缺失数）。`);
     const agg = aggregate(results);
     await writeFile(path.join(out, `results-${a.config}.json`), J({ aggregate: agg, cases: results }));
     const md = reportMarkdown(agg, { config: a.config, tax });

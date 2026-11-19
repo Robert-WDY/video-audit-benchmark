@@ -1,5 +1,5 @@
 {
-  "ok": 71,
+  "ok": 70,
   "problem": 0,
   "skipped": 3,
   "results": [
@@ -254,6 +254,16 @@
       }
     },
     {
+      "case_id": "S05-h3b__combo__S05.I11+S05.I12",
+      "video": "S05-h3b__combo__S05.I11+S05.I12__PF8+VT1.mp4",
+      "status": "ok",
+      "problems": [],
+      "stats": {
+        "frames": 144,
+        "worst_outside": 0
+      }
+    },
+    {
       "case_id": "S05-h3b__combo__S05.I2+S05.I12",
       "video": "S05-h3b__combo__S05.I2+S05.I12__PF8+VT1.mp4",
       "status": "ok",
@@ -266,16 +276,6 @@
     {
       "case_id": "S05-h3b__combo__S05.I4+S05.I12",
       "video": "S05-h3b__combo__S05.I4+S05.I12__PF5+VT1.mp4",
-      "status": "ok",
-      "problems": [],
-      "stats": {
-        "frames": 144,
-        "worst_outside": 0
-      }
-    },
-    {
-      "case_id": "S05-h3b__combo__S05.I8+S05.I12",
-      "video": "S05-h3b__combo__S05.I8+S05.I12__PF5+VT1.mp4",
       "status": "ok",
       "problems": [],
       "stats": {
@@ -374,8 +374,8 @@
       }
     },
     {
-      "case_id": "S05-h3b__multi__S05.I9+S05.I2+S05.I8",
-      "video": "S05-h3b__multi__S05.I9+S05.I2+S05.I8__PF4+PF8+PF5.mp4",
+      "case_id": "S05-h3b__multi__S05.I9+S05.I2+S05.I4",
+      "video": "S05-h3b__multi__S05.I9+S05.I2+S05.I4__PF4+PF8+PF5.mp4",
       "status": "ok",
       "problems": [],
       "stats": {
@@ -436,16 +436,6 @@
     {
       "case_id": "S05-h3b__single__S05.I4",
       "video": "S05-h3b__single__S05.I4__PF5.mp4",
-      "status": "ok",
-      "problems": [],
-      "stats": {
-        "frames": 144,
-        "worst_outside": 0
-      }
-    },
-    {
-      "case_id": "S05-h3b__single__S05.I8",
-      "video": "S05-h3b__single__S05.I8__PF5.mp4",
       "status": "ok",
       "problems": [],
       "stats": {

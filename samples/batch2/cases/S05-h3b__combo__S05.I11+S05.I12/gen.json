@@ -1,5 +1,5 @@
 {
-  "case_id": "S05-h3b__combo__S05.I8+S05.I12",
+  "case_id": "S05-h3b__combo__S05.I11+S05.I12",
   "scene": "S05",
   "take": "S05-h3b",
   "source": "../generated/S05__base__seed20261120.mp4",
@@ -7,17 +7,14 @@
   "manual_tasks": [],
   "ops": [
     {
-      "op": "freeze_region",
-      "at": 4.1,
-      "from": 4.3,
+      "op": "caption",
+      "from": 3,
       "to": 6,
-      "region": [
-        0.06,
-        0.31,
-        0.88,
-        0.42
-      ],
-      "id": "S05.I8"
+      "text": "*最高支持 50W 无线快充",
+      "size": 48,
+      "x": 0.05,
+      "y": 0.93,
+      "id": "S05.I11"
     },
     {
       "op": "text_overlay",
@@ -49,19 +46,16 @@
   ],
   "overlays": [
     {
-      "op": "freeze_region",
-      "at": 4.1,
-      "from": 4.3,
+      "op": "caption",
+      "from": 3,
       "to": 6,
-      "region": [
-        0.06,
-        0.31,
-        0.88,
-        0.42
-      ],
-      "id": "S05.I8",
+      "text": "*最高支持 50W 无线快充",
+      "size": 48,
+      "x": 0.05,
+      "y": 0.93,
+      "id": "S05.I11",
       "out": [
-        4.3,
+        3,
         6
       ]
     },

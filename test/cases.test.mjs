@@ -134,12 +134,12 @@ test('组合用例最多一个手工步骤；冲突组合被跳过而不是生�
 });
 
 test('同一镜头多错误（bundle）：时间轴未剪辑、三个错误都在、文件名可读', () => {
-  const b = cases.find((c) => c.id === 'S05-real-01__multi__S05.I9+S05.I2+S05.I8');
+  const b = cases.find((c) => c.id === 'S05-real-01__multi__S05.I9+S05.I2+S05.I4');
   assert.ok(b, '缺少 S05 的 bundle');
   assert.equal(b.truth.continuous, true);
   assert.equal(b.truth.injected.length, 3);
   assert.ok(b.truth.bundle);
-  assert.equal(b.truth.video, 'S05-real-01__multi__S05.I9+S05.I2+S05.I8__PF4+PF8+PF5.mp4');
+  assert.equal(b.truth.video, 'S05-real-01__multi__S05.I9+S05.I2+S05.I4__PF4+PF8+PF5.mp4');
   const reverse = cases.find((c) => c.id === 'S03-real-01__single__S03.I1');
   assert.equal(reverse.truth.continuous, false);
 });
@@ -164,4 +164,16 @@ test('静音和音画偏移不会被当成同一条视频去重', () => {
   const cs = expand(scenes, tk, tax, {});
   assert.ok(cs.some((c) => c.id.endsWith('__single__S07.I4')));
   assert.ok(cs.some((c) => c.id.endsWith('__single__S07.I12')));
+});
+
+test('同一组错误换个顺序不会生成第二条用例', () => {
+  const tk = takes.filter((t) => t.scene === 'S04');
+  const cs = expand(scenes, tk, tax, {});
+  const sets = cs.filter((c) => c.truth.injected.length > 1).map((c) => `${c.truth.take}|${c.truth.injected.map((e) => e.id).sort().join('+')}`);
+  assert.equal(new Set(sets).size, sets.length);
+});
+
+test('「光环不亮」从按键时刻开始，不会漏出亮起的帧', () => {
+  const s07 = scenes.find((s) => s.id === 'S07');
+  assert.equal(s07.injections.find((i) => i.id === 'S07.I7').ops[0].from, 'press');
 });

@@ -1,7 +1,7 @@
 {
   "case_id": "S02-h3e__decoy__S02.D3",
   "blind_id": "v_87056a02a5",
-  "video": "S02-h3e__decoy__S02.D3__looks-PF2.mp4",
+  "video": "S02-h3e__decoy__S02.D3__looks-PF2_base-SA5.mp4",
   "tier": "decoy",
   "pattern": null,
   "continuous": true,
@@ -16,10 +16,38 @@
     "looks_like": "PF2",
     "description": "镜头缓慢数码推近（广告常用手法），产品在画面中变大但比例不变"
   },
-  "should_block": false,
-  "base_errors": [],
+  "should_block": true,
+  "base_errors": [
+    {
+      "id": "S02-h3e#K1",
+      "category": "SA",
+      "sub": "SA5",
+      "secondary": [],
+      "category_name": "脚本偏离（状态/动作）",
+      "sub_name": "终态错或未达到",
+      "evidence": "E4",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "script",
+      "description": "片尾手仍拿着杯盖留在画面里（脚本终态：手离开画面）",
+      "method": "base",
+      "auto": false,
+      "windows": [
+        [
+          5.2,
+          6
+        ]
+      ],
+      "window_status": "annotated",
+      "duration_bucket": null,
+      "expected_checks": [],
+      "expected_fix": "regen",
+      "source": "base",
+      "reviewed_by": "human"
+    }
+  ],
   "base_notes": [
-    "Claude 看帧：动作完整；结尾手仍拿着杯盖未离开画面（脚本终态要求手离开），待人工判断是否算 SA5"
+    "人工复核确认：片尾手没有离开画面"
   ],
   "injected": [],
   "actual": null,

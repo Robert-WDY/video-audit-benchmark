@@ -1,5 +1,5 @@
 {
-  "ok": 49,
+  "ok": 48,
   "problem": 0,
   "skipped": 3,
   "results": [
@@ -340,16 +340,6 @@
       "problems": [],
       "stats": {
         "frames": 159,
-        "worst_outside": 0
-      }
-    },
-    {
-      "case_id": "S04-h3a__multi__S04.I4+S04.I7",
-      "video": "S04-h3a__multi__S04.I4+S04.I7__PF5+PF3.mp4",
-      "status": "ok",
-      "problems": [],
-      "stats": {
-        "frames": 144,
         "worst_outside": 0
       }
     },

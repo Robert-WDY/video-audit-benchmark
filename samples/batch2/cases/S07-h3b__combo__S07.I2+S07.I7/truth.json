@@ -27,7 +27,7 @@
       "visibility": "V2",
       "disposition": "block",
       "judge_basis": "facts",
-      "description": "食指按的是左侧小键，中间电源键没有被按下，蓝环却在约 3.9 秒亮起（事实：中间是电源键，按下电源键才亮）",
+      "description": "食指按的是左侧小键，中间电源键没有被按下（事实：中间是电源键）",
       "method": "base",
       "auto": false,
       "windows": [
@@ -92,7 +92,7 @@
       "auto": true,
       "windows": [
         [
-          3.9,
+          2.7,
           6
         ]
       ],

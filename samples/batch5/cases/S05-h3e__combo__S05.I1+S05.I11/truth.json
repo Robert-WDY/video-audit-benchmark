@@ -14,9 +14,7 @@
   "decoy": null,
   "should_block": true,
   "base_errors": [],
-  "base_notes": [
-    "手 3.5 秒才离开、3.6 秒屏幕和光环同时亮，没有「手已离开、光环未亮」的画面可做区域定格，排除 S05.I8"
-  ],
+  "base_notes": [],
   "injected": [
     {
       "id": "S05.I1",

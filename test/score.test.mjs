@@ -79,3 +79,32 @@ test('汇总与报告', () => {
   const [lo, hi] = wilson(6, 10);
   assert.ok(lo > 0.29 && lo < 0.32 && hi > 0.82 && hi < 0.85);
 });
+
+test('配对与证据顺序无关：窗口重叠时按类别配对，不漏命中', () => {
+  const t = truth([err('A', 'PF', [[2, 6]]), err('B', 'TC', [[2, 6]]), err('C', 'TE', [[2, 6]])]);
+  const evs = [ev(3, 'fact_error'), ev(3.5, 'physics'), ev(4, 'black_silence')];
+  const key = (r) => JSON.stringify(r.errors.map((e) => [e.id, e.detected, e.category_result]));
+  const ref = key(scoreCase(t, { ok: false, checks: {}, evidence: evs }, tax));
+  assert.equal(ref, JSON.stringify([['A', true, 'correct'], ['B', true, 'correct'], ['C', true, 'correct']]));
+  for (let k = 0; k < 50; k++) {
+    const shuffled = [...evs].sort(() => Math.random() - 0.5);
+    assert.equal(key(scoreCase(t, { ok: false, checks: {}, evidence: shuffled }, tax)), ref);
+  }
+});
+
+test('只有一条证据能配给两个错误时，配给分类正确的那个', () => {
+  const t = truth([err('A', 'TC', [[1, 3]]), err('B', 'PF', [[1, 3]])]);
+  const r = scoreCase(t, { ok: false, checks: {}, evidence: [ev(2, 'fact_error')] }, tax);
+  assert.deepEqual(r.errors.map((e) => [e.id, e.detected]), [['A', false], ['B', true]]);
+  assert.equal(r.errors[1].category_result, 'correct');
+});
+
+test('底片未确认的负样本不进误拦率主指标', () => {
+  const rs = [
+    scoreCase(truth([], { annotation_status: 'pending', actual: null, baseline_verified: true }), { ok: false, checks: {}, evidence: [ev(1, 'physics')] }, tax, { useInjected: true }),
+    scoreCase(truth([], { annotation_status: 'pending', actual: null, baseline_verified: false }), { ok: false, checks: {}, evidence: [ev(1, 'physics')] }, tax, { useInjected: true }),
+  ];
+  const agg = aggregate(rs);
+  assert.equal(agg.video.negatives, 1);
+  assert.equal(agg.video.unverified_negatives, 1);
+});

@@ -191,7 +191,7 @@
         {
           "op": "freeze_region",
           "at": "start",
-          "from": "pour_start",
+          "from": "pour_start-0.2",
           "to": "end",
           "region": "glass"
         }

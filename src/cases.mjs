@@ -378,7 +378,9 @@ export function expand(scenes, takes, tax, { maxMultiPerTake = 3, maxComboPerTak
   for (const c of cases.filter(Boolean)) {
     const audio = JSON.stringify(c.gen.overlays.filter((o) => AUDIO_OPS.has(o.op)).map((o) => [o.op, o.out, o.ms ?? null]));
     const vis = `${c.truth.take}|${visualSignature(c)}`;
-    const full = `${vis}|${audio}|${JSON.stringify(c.input.plan.captions)}`;
+    // 同一底片、同一组错误（不论先后顺序）、同样的对照或干扰项 = 同一条视频（例如手动组合与自动配对选中了同一对错误）
+    const ids = [...c.truth.injected.map((e) => e.id)].sort().join('+');
+    const full = `${c.truth.take}|${c.tier === 'control' ? 'control:' + c.truth.ref : ''}|${c.truth.decoy?.id || ''}|${ids}|${ids ? '' : vis + audio + JSON.stringify(c.input.plan.captions)}`;
     if (seen.has(full)) { skipped.push({ take: c.truth.take, ids: c.truth.injected.map((e) => e.id), reason: `与 ${seen.get(full)} 完全相同` }); continue; }
     seen.set(full, c.id);
     const twin = out.find((x) => `${x.truth.take}|${visualSignature(x)}` === vis);

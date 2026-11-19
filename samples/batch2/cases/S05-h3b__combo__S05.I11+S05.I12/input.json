@@ -23,7 +23,13 @@
     }
   },
   "plan": {
-    "captions": [],
+    "captions": [
+      {
+        "id": "c1",
+        "text": "*最高支持 50W 无线快充",
+        "shot": "s1"
+      }
+    ],
     "shots": [
       {
         "id": "s1",

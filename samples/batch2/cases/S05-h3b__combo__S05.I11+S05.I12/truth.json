@@ -1,7 +1,7 @@
 {
-  "case_id": "S05-h3b__combo__S05.I8+S05.I12",
-  "blind_id": "v_6b8e148ab7",
-  "video": "S05-h3b__combo__S05.I8+S05.I12__PF5+VT1.mp4",
+  "case_id": "S05-h3b__combo__S05.I11+S05.I12",
+  "blind_id": "v_18f21a9783",
+  "video": "S05-h3b__combo__S05.I11+S05.I12__PF8+VT1.mp4",
   "tier": "combo",
   "pattern": "separate",
   "continuous": true,
@@ -17,24 +17,22 @@
   "base_notes": [],
   "injected": [
     {
-      "id": "S05.I8",
+      "id": "S05.I11",
       "category": "PF",
-      "sub": "PF5",
-      "secondary": [
-        "TC6"
-      ],
+      "sub": "PF8",
+      "secondary": [],
       "category_name": "产品事实",
-      "sub_name": "屏幕/指示灯/UI 与事实不符",
-      "evidence": "E2",
-      "visibility": "V2",
+      "sub_name": "字幕写的规格或卖点与事实不符",
+      "evidence": "E1",
+      "visibility": "V3",
       "disposition": "block",
       "judge_basis": "facts",
-      "description": "手机放上后屏幕显示充电，但充电板光环始终不亮（事实：放上后光环亮蓝色）",
-      "method": "freeze_region",
+      "description": "角落小字写「最高支持 50W 无线快充」，事实为 15W",
+      "method": "caption",
       "auto": true,
       "windows": [
         [
-          4.3,
+          3,
           6
         ]
       ],
@@ -44,7 +42,7 @@
         "product_drift",
         "fact_error"
       ],
-      "expected_fix": "replace_plate"
+      "expected_fix": "regen"
     },
     {
       "id": "S05.I12",

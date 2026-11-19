@@ -1,7 +1,7 @@
 {
-  "case_id": "S05-h3b__multi__S05.I9+S05.I2+S05.I8",
-  "blind_id": "v_23098afbe3",
-  "video": "S05-h3b__multi__S05.I9+S05.I2+S05.I8__PF4+PF8+PF5.mp4",
+  "case_id": "S05-h3b__multi__S05.I9+S05.I2+S05.I4",
+  "blind_id": "v_38d44fad04",
+  "video": "S05-h3b__multi__S05.I9+S05.I2+S05.I4__PF4+PF8+PF5.mp4",
   "tier": "multi",
   "pattern": "overlap",
   "continuous": true,
@@ -73,20 +73,18 @@
       "expected_fix": "regen"
     },
     {
-      "id": "S05.I8",
+      "id": "S05.I4",
       "category": "PF",
       "sub": "PF5",
-      "secondary": [
-        "TC6"
-      ],
+      "secondary": [],
       "category_name": "产品事实",
       "sub_name": "屏幕/指示灯/UI 与事实不符",
-      "evidence": "E2",
+      "evidence": "E1",
       "visibility": "V2",
-      "disposition": "block",
+      "disposition": "fix",
       "judge_basis": "facts",
-      "description": "手机放上后屏幕显示充电，但充电板光环始终不亮（事实：放上后光环亮蓝色）",
-      "method": "freeze_region",
+      "description": "指示环亮成绿色（事实为蓝色）",
+      "method": "tint",
       "auto": true,
       "windows": [
         [
@@ -105,5 +103,5 @@
   ],
   "actual": null,
   "annotation_status": "pending",
-  "bundle": "同一连续镜头：Logo 是反字，放上后字幕写错功率，光环也不亮"
+  "bundle": "同一连续镜头：Logo 是反字，放上后字幕写错功率，光环亮成绿色"
 }

@@ -1,8 +1,8 @@
 {
-  "case_id": "S05-h3b__multi__S05.I9+S05.I2+S05.I8",
+  "case_id": "S05-h3e__multi__S05.I9+S05.I2+S05.I4",
   "scene": "S05",
-  "take": "S05-h3b",
-  "source": "../generated/S05__base__seed20261120.mp4",
+  "take": "S05-h3e",
+  "source": "../generated/S05__base__seed20261124.mp4",
   "needs_manual": false,
   "manual_tasks": [],
   "ops": [
@@ -12,9 +12,9 @@
       "to": 2.7,
       "region": [
         0.36,
-        0.41,
+        0.42,
         0.28,
-        0.15
+        0.14
       ],
       "id": "S05.I9"
     },
@@ -26,17 +26,19 @@
       "id": "S05.I2"
     },
     {
-      "op": "freeze_region",
-      "at": 4.1,
-      "from": 4.3,
+      "op": "tint",
+      "from": 3.6,
       "to": 6,
       "region": [
-        0.06,
+        0.03,
         0.31,
-        0.88,
+        0.92,
         0.42
       ],
-      "id": "S05.I8"
+      "hue": -100,
+      "key": "#2aa8ff",
+      "similarity": 0.2,
+      "id": "S05.I4"
     }
   ],
   "pieces": [
@@ -57,9 +59,9 @@
       "to": 2.7,
       "region": [
         0.36,
-        0.41,
+        0.42,
         0.28,
-        0.15
+        0.14
       ],
       "id": "S05.I9",
       "out": [
@@ -79,19 +81,21 @@
       ]
     },
     {
-      "op": "freeze_region",
-      "at": 4.1,
-      "from": 4.3,
+      "op": "tint",
+      "from": 3.6,
       "to": 6,
       "region": [
-        0.06,
+        0.03,
         0.31,
-        0.88,
+        0.92,
         0.42
       ],
-      "id": "S05.I8",
+      "hue": -100,
+      "key": "#2aa8ff",
+      "similarity": 0.2,
+      "id": "S05.I4",
       "out": [
-        4.3,
+        3.6,
         6
       ]
     }

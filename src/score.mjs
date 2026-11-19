@@ -46,6 +46,44 @@ export function judgeCategory(pred, err, tax) {
   return 'other';
 }
 
+// 最大权匹配（匈牙利算法）。可配对：证据时间落在错误窗口 ±tol 内。
+// 权重：命中 1e6，分类正确 +1e3（同一易混组 +500），时间偏差越小越好（最多 -999）
+export function assign(preds, errors, tax, tol) {
+  const P = preds.length; const E = errors.length;
+  const out = new Map();
+  if (!P || !E) return out;
+  const w = preds.map((p) => errors.map((e) => {
+    const d = dist(p.t, e.windows);
+    if (d > tol) return 0;
+    const c = judgeCategory(p, e, tax);
+    return 1e6 + (c === 'correct' ? 1e3 : c === 'group' ? 500 : 0) - Math.min(999, Math.round(d * 100));
+  }));
+  const n = Math.max(P, E); const MAXW = 1e6 + 1e3;
+  const cost = Array.from({ length: n }, (_, i) => Array.from({ length: n }, (_, j) => (i < P && j < E ? MAXW - w[i][j] : MAXW)));
+  // 标准 O(n^3) 匈牙利算法（下标从 1 开始）
+  const u = new Array(n + 1).fill(0); const v = new Array(n + 1).fill(0); const pM = new Array(n + 1).fill(0); const way = new Array(n + 1).fill(0);
+  for (let i = 1; i <= n; i++) {
+    pM[0] = i; let j0 = 0; const minv = new Array(n + 1).fill(Infinity); const used = new Array(n + 1).fill(false);
+    do {
+      used[j0] = true; const i0 = pM[j0]; let delta = Infinity; let j1 = 0;
+      for (let j = 1; j <= n; j++) {
+        if (used[j]) continue;
+        const cur = cost[i0 - 1][j - 1] - u[i0] - v[j];
+        if (cur < minv[j]) { minv[j] = cur; way[j] = j0; }
+        if (minv[j] < delta) { delta = minv[j]; j1 = j; }
+      }
+      for (let j = 0; j <= n; j++) { if (used[j]) { u[pM[j]] += delta; v[j] -= delta; } else minv[j] -= delta; }
+      j0 = j1;
+    } while (pM[j0] !== 0);
+    do { const j1 = way[j0]; pM[j0] = pM[j1]; j0 = j1; } while (j0);
+  }
+  for (let j = 1; j <= n; j++) {
+    const i = pM[j] - 1; const e = j - 1;
+    if (i < P && e < E && w[i][e] > 0) out.set(e, i);
+  }
+  return out;
+}
+
 export function effectiveTier(truth) {
   if (truth.tier === 'decoy' || truth.tier === 'control' || truth.tier === 'clean') {
     return (truth.actual || [...truth.injected, ...(truth.base_errors || [])]).filter((e) => e.disposition !== 'accept').length ? 'contaminated' : truth.tier;
@@ -65,20 +103,14 @@ export function scoreCase(truth, raw, tax, { useInjected = false } = {}) {
   const pred = normalizePrediction(raw);
   const shouldBlock = errors.some((e) => e.disposition !== 'accept');
   const base = { case_id: truth.case_id, tier: truth.tier, effective_tier: effectiveTier({ ...truth, actual: errors }),
-    pattern: truth.pattern, source_kind: truth.source_kind, should_block: shouldBlock };
+    pattern: truth.pattern, source_kind: truth.source_kind, should_block: shouldBlock,
+    // 负样本可信度：底片经人工确认干净，或人工定稿后确认无错误
+    verified: final || !!truth.baseline_verified };
   if (pred.unavailable) return { ...base, status: 'unavailable', blocked: pred.blocked };
 
-  const cand = [];
-  pred.preds.forEach((p, i) => errors.forEach((e, j) => {
-    const d = dist(p.t, e.windows);
-    if (d <= tol) cand.push({ i, j, d });
-  }));
-  cand.sort((a, b) => a.d - b.d);
-  const usedP = new Set(); const usedE = new Map();
-  for (const c of cand) {
-    if (usedP.has(c.i) || usedE.has(c.j)) continue;
-    usedP.add(c.i); usedE.set(c.j, c.i);
-  }
+  // 证据与错误的一对一配对：整体最优（命中数最多 → 分类正确最多 → 时间偏差最小），与证据顺序无关
+  const usedE = assign(pred.preds, errors, tax, tol);
+  const usedP = new Set(usedE.values());
   const perError = errors.map((e, j) => {
     const i = usedE.get(j);
     const hit = i !== undefined ? pred.preds[i] : null;
@@ -120,14 +152,19 @@ export function aggregate(results, { minCell = MIN_CELL } = {}) {
     return { key: k, n, blocked: b, rate: n ? b / n : 0, ci: wilson(b, n),
       fp_per_video: n ? rs.reduce((s, r) => s + r.false_positives.length, 0) / n : 0, enough: n >= minCell };
   });
-  const pos = scored.filter((r) => r.should_block); const neg = scored.filter((r) => !r.should_block);
+  // 不应拦截的视频只有在底片确认干净（或已人工定稿）时才计入误拦率；其余单独列为候选负例，不进主指标
+  const pos = scored.filter((r) => r.should_block);
+  const neg = scored.filter((r) => !r.should_block && r.verified);
+  const negU = scored.filter((r) => !r.should_block && !r.verified);
   const tp = pos.filter((r) => r.blocked).length; const fpv = neg.filter((r) => r.blocked).length;
+  const fpu = negU.filter((r) => r.blocked).length;
   return {
     total: results.length,
     status: Object.fromEntries(bucket(results, 'status').map(([k, rs]) => [k, rs.length])),
     video: {
       block_rate: pos.length ? tp / pos.length : null, block_ci: wilson(tp, pos.length), positives: pos.length,
       false_block_rate: neg.length ? fpv / neg.length : null, false_block_ci: wilson(fpv, neg.length), negatives: neg.length,
+      unverified_negatives: negU.length, unverified_false_block_rate: negU.length ? fpu / negU.length : null,
       by_tier: videoBy,
     },
     errors: {
@@ -148,7 +185,8 @@ export function reportMarkdown(agg, { title = '视频审核评测报告', config
   const L = [`# ${title}`, '', `审核输入配置：\`${config}\`。样本少于 ${MIN_CELL} 的格子标 ⚠，只看数字，不下结论。`, ''];
   L.push('## 总体', '', '| 指标 | 值 | 95% 区间 | 样本 |', '|---|---|---|---|');
   L.push(`| 应拦视频的拦截率 | ${pct(agg.video.block_rate)} | ${ci(agg.video.block_ci)} | ${agg.video.positives} |`);
-  L.push(`| 不应拦视频的误拦率 | ${pct(agg.video.false_block_rate)} | ${ci(agg.video.false_block_ci)} | ${agg.video.negatives} |`);
+  L.push(`| 不应拦视频的误拦率（底片已确认干净） | ${pct(agg.video.false_block_rate)} | ${ci(agg.video.false_block_ci)} | ${agg.video.negatives} |`);
+  L.push(`| 候选负例的误拦率（底片未确认，仅供参考） | ${pct(agg.video.unverified_false_block_rate)} | | ${agg.video.unverified_negatives} |`);
   L.push(`| 错误实例召回率（时间定位 ±${tax?.matching.time_tolerance_s ?? 1}s） | ${pct(agg.errors.recall)} | | ${agg.errors.n} |`);
   L.push('', `用例状态：${Object.entries(agg.status).map(([k, v]) => `${k} ${v}`).join('，')}。`, '');
   L.push('## 按用例类型（视频级）', '', '| 类型 | 样本 | 拦截 | 拦截率 | 95% 区间 | 每条误报证据数 |', '|---|---|---|---|---|---|');

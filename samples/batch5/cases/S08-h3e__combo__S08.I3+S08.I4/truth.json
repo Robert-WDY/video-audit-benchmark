@@ -13,9 +13,41 @@
   "duration": 7.3,
   "decoy": null,
   "should_block": true,
-  "base_errors": [],
+  "base_errors": [
+    {
+      "id": "S08-h3e#K1",
+      "category": "SA",
+      "sub": "SA5",
+      "secondary": [],
+      "category_name": "脚本偏离（状态/动作）",
+      "sub_name": "终态错或未达到",
+      "evidence": "E4",
+      "visibility": "V2",
+      "disposition": "block",
+      "judge_basis": "script",
+      "description": "最后一帧手背上仍有明显一块霜，没有推开吸收（脚本终态：霜体已推开吸收）",
+      "method": "base",
+      "auto": false,
+      "windows": [
+        [
+          5.7,
+          6.1
+        ],
+        [
+          7.2,
+          7.3
+        ]
+      ],
+      "window_status": "annotated",
+      "duration_bucket": null,
+      "expected_checks": [],
+      "expected_fix": "regen",
+      "source": "base",
+      "reviewed_by": "human"
+    }
+  ],
   "base_notes": [
-    "Claude 看帧：开盖、蘸取、涂抹完整；涂抹到最后一帧仍在进行，待人工确认"
+    "人工复核确认：最后一帧仍有明显一块霜"
   ],
   "injected": [
     {

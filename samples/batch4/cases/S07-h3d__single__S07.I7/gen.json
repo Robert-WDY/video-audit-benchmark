@@ -8,7 +8,7 @@
   "ops": [
     {
       "op": "tint",
-      "from": 1.85,
+      "from": 0.75,
       "to": 6,
       "region": [
         0.04,
@@ -17,9 +17,9 @@
         0.36
       ],
       "chroma": "blue",
-      "threshold": 3,
-      "gain": 24,
-      "darken": -0.42,
+      "threshold": 1,
+      "gain": 40,
+      "darken": -0.5,
       "id": "S07.I7"
     }
   ],
@@ -37,7 +37,7 @@
   "overlays": [
     {
       "op": "tint",
-      "from": 1.85,
+      "from": 0.75,
       "to": 6,
       "region": [
         0.04,
@@ -46,12 +46,12 @@
         0.36
       ],
       "chroma": "blue",
-      "threshold": 3,
-      "gain": 24,
-      "darken": -0.42,
+      "threshold": 1,
+      "gain": 40,
+      "darken": -0.5,
       "id": "S07.I7",
       "out": [
-        1.85,
+        0.75,
         6
       ]
     }

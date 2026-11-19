@@ -194,13 +194,13 @@
       "ops": [
         {
           "op": "tint",
-          "from": "light_on",
+          "from": "press",
           "to": "end",
           "region": "ring",
           "chroma": "blue",
-          "threshold": 3,
-          "gain": 24,
-          "darken": -0.42
+          "threshold": 1,
+          "gain": 40,
+          "darken": -0.5
         }
       ]
     },
