@@ -1,0 +1,17 @@
+{
+  "id": "A5__P-MOOD__briefA-videoB",
+  "video": "A5__P-MOOD__briefA-videoB.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "A5",
+      "category_name": "氛围情绪不符",
+      "group": "A",
+      "description": "创意要求「轻松愉快、温暖明亮」，成片是「清冷惨淡、灰暗压抑」",
+      "windows": null
+    }
+  ],
+  "source": "pair",
+  "verified_by": "claude",
+  "verification_note": "灰蓝冷调、昏暗、窗外阴沉"
+}

@@ -1,0 +1,9 @@
+{
+  "id": "OK__P-ACTION__briefA-videoA",
+  "video": "OK__P-ACTION__briefA-videoA.mp4",
+  "verdict": "pass",
+  "errors": [],
+  "source": "pair",
+  "verified_by": "claude",
+  "verification_note": "内盒像抽屉一样水平推出后取出蜡烛"
+}

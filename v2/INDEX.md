@@ -1,6 +1,6 @@
 # 用例清单
 
-共 78 条。
+共 86 条。
 
 | 用例 | 结论 | 错误 | 来源 | 状态 |
 |---|---|---|---|---|
@@ -12,6 +12,8 @@
 | [A1__S01-logo-lid](videos/A1__S01-logo-lid.mp4) | 拦截 | **A1 产品不一致**：Logo 变成竖排并多出一个「0」；杯盖带提环和锁扣（产品为平顶旋盖、正面 LUMO 字样） | generated | Claude 复核 |
 | [A1__S04-h3a__S04.I7](videos/A1__S04-h3a__S04.I7.mp4) | 拦截 | **A1 产品不一致**：开盖后盒盖内侧多出一只耳机（一共三只，事实为一副两只） | edit | Claude 复核 |
 | [A1__S05-vlot](videos/A1__S05-vlot.mp4) | 拦截 | **A1 产品不一致**：充电板中央字样拼成 Vlot（产品为 Volt） | generated | Claude 复核 |
+| [A2__P-ACTION__briefA-videoB](videos/A2__P-ACTION__briefA-videoB.mp4) | 拦截 | **A2 动作方式不符**：创意要求「推开抽屉式内盒，再取出蜡烛」，成片是「直接掀开顶盖取出蜡烛」 | pair | Claude 复核 |
+| [A2__P-ACTION__briefB-videoA](videos/A2__P-ACTION__briefB-videoA.mp4) | 拦截 | **A2 动作方式不符**：创意要求「直接掀开顶盖取出蜡烛」，成片是「推开抽屉式内盒，再取出蜡烛」 | pair | Claude 复核 |
 | [A2__S02-handleave](videos/A2__S02-handleave.mp4) | 拦截 | **A2 动作方式不符**：片尾手仍拿着杯盖留在画面里（要求手离开画面） | base | 人工确认 |
 | [A2__S04-h3a__S04.I3](videos/A2__S04-h3a__S04.I3.mp4) | 拦截 | **A2 动作方式不符**：动作反了：变成把耳机放回盒里并合上盖子（要求是开盖取出耳机） | edit | Claude 复核 |
 | [A2__S06-h3d__S06.I1](videos/A2__S06-h3d__S06.I1.mp4) | 拦截 | **A2 动作方式不符**：动作反了：变成坐下、解开鞋带、脱鞋（要求是穿鞋、系带、站起来） | edit | Claude 复核 |
@@ -19,6 +21,8 @@
 | [A2__S08-absorb](videos/A2__S08-absorb.mp4) | 拦截 | **A2 动作方式不符**：最后手背上仍有明显一块霜没有推开（要求推开吸收） | base | 人工确认 |
 | [A3__P-TARGET-SPK__briefA-videoB](videos/A3__P-TARGET-SPK__briefA-videoB.mp4) | 拦截 | **A3 交互对象不符**：创意要求「食指按顶部正中间最大的电源键」，成片是「食指按顶部左侧的小按键」 | pair | 人工确认 |
 | [A3__P-TARGET-SPK__briefB-videoA](videos/A3__P-TARGET-SPK__briefB-videoA.mp4) | 拦截 | **A3 交互对象不符**：创意要求「食指按顶部左侧的小按键」，成片是「食指按顶部正中间最大的电源键」 | pair | Claude 复核 |
+| [A5__P-MOOD__briefA-videoB](videos/A5__P-MOOD__briefA-videoB.mp4) | 拦截 | **A5 氛围情绪不符**：创意要求「轻松愉快、温暖明亮」，成片是「清冷惨淡、灰暗压抑」 | pair | Claude 复核 |
+| [A5__P-MOOD__briefB-videoA](videos/A5__P-MOOD__briefB-videoA.mp4) | 拦截 | **A5 氛围情绪不符**：创意要求「清冷惨淡、灰暗压抑」，成片是「轻松愉快、温暖明亮」 | pair | Claude 复核 |
 | [A7__S01-h3d__S01.I3](videos/A7__S01-h3d__S01.I3.mp4) | 拦截 | **A7 文案字幕不符**：字幕写「500ml 超大容量」，要求的文案是 350ml | edit | Claude 复核 |
 | [A7__S03-h3b__S03.I8](videos/A7__S03-h3b__S03.I8.mp4) | 拦截 | **A7 文案字幕不符**：字幕写「500ml 超大容量」，要求的文案是 350ml | edit | Claude 复核 |
 | [A7__S05-h3b__S05.I2](videos/A7__S05-h3b__S05.I2.mp4) | 拦截 | **A7 文案字幕不符**：字幕写「50W 无线超级快充」，要求的文案是 15W | edit | Claude 复核 |
@@ -41,6 +45,10 @@
 | [B3__S07-h3d__S07.I3](videos/B3__S07-h3d__S07.I3.mp4) | 拦截 | **B3 技术故障**：光环亮起瞬间冻帧 1.5 秒 | edit | Claude 复核 |
 | [B3__S07-h3d__S07.I4](videos/B3__S07-h3d__S07.I4.mp4) | 拦截 | **B3 技术故障**：全片无声（开机提示音也没有） | edit | Claude 复核 |
 | [B4__S03-glasstext](videos/B4__S03-glasstext.mp4) | 拦截 | **B4 画面崩坏**：玻璃杯外壁出现一列竖排的白色伪中文，读不通 | generated | Claude 复核 |
+| [OK__P-ACTION__briefA-videoA](videos/OK__P-ACTION__briefA-videoA.mp4) | 放行 | — | pair | Claude 复核 |
+| [OK__P-ACTION__briefB-videoB](videos/OK__P-ACTION__briefB-videoB.mp4) | 放行 | — | pair | Claude 复核 |
+| [OK__P-MOOD__briefA-videoA](videos/OK__P-MOOD__briefA-videoA.mp4) | 放行 | — | pair | Claude 复核 |
+| [OK__P-MOOD__briefB-videoB](videos/OK__P-MOOD__briefB-videoB.mp4) | 放行 | — | pair | Claude 复核 |
 | [OK__P-PROD-CUP__briefA-videoA](videos/OK__P-PROD-CUP__briefA-videoA.mp4) | 放行 | — | pair | Claude 复核 |
 | [OK__P-PROD-CUP__briefB-videoB](videos/OK__P-PROD-CUP__briefB-videoB.mp4) | 放行 | — | pair | 人工确认 |
 | [OK__P-PROD-EARBUD__briefA-videoA](videos/OK__P-PROD-EARBUD__briefA-videoA.mp4) | 放行 | — | pair | Claude 复核 |

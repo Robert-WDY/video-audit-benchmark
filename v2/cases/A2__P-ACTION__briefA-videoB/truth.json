@@ -1,0 +1,17 @@
+{
+  "id": "A2__P-ACTION__briefA-videoB",
+  "video": "A2__P-ACTION__briefA-videoB.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "A2",
+      "category_name": "动作方式不符",
+      "group": "A",
+      "description": "创意要求「推开抽屉式内盒，再取出蜡烛」，成片是「直接掀开顶盖取出蜡烛」",
+      "windows": null
+    }
+  ],
+  "source": "pair",
+  "verified_by": "claude",
+  "verification_note": "直接向上掀开顶盖后取出蜡烛"
+}

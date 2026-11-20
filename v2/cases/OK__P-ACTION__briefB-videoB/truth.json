@@ -1,0 +1,9 @@
+{
+  "id": "OK__P-ACTION__briefB-videoB",
+  "video": "OK__P-ACTION__briefB-videoB.mp4",
+  "verdict": "pass",
+  "errors": [],
+  "source": "pair",
+  "verified_by": "claude",
+  "verification_note": "直接向上掀开顶盖后取出蜡烛"
+}

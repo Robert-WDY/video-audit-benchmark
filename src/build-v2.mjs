@@ -43,8 +43,9 @@ for (const src of cfg.pairs) {
     for (const briefSide of ['A', 'B']) {
       for (const videoSide of ['A', 'B']) {
         const ok = briefSide === videoSide;
+        // 给审核的创意要求只写这一对要测的维度和视频确实做到的内容；生成用的严格提示词不进创意要求
         const brief = {
-          product: p.product,
+          product: { name: p.product.name, appearance: p.brief_product_appearance || p.product.appearance },
           requirements: [p.base_brief || p.base, `${p.dim_name}：${p[briefSide].label}`],
           checks: [{ dimension: p.dim_name, expected: p[briefSide].label }],
         };

@@ -42,6 +42,35 @@
           }
         }
       }
+    },
+    {
+      "file": "briefs/pilot.json",
+      "videos": {
+        "P-MOOD": {
+          "A": {
+            "path": "../samples/pairs/P-MOOD-A__seed20261201.mp4",
+            "verified_by": "claude",
+            "note": "暖金晨光、水果绿植，明亮轻快"
+          },
+          "B": {
+            "path": "../samples/pairs/P-MOOD-B__seed20261201.mp4",
+            "verified_by": "claude",
+            "note": "灰蓝冷调、昏暗、窗外阴沉"
+          }
+        },
+        "P-ACTION": {
+          "A": {
+            "path": "../samples/pairs/P-ACTION-A__seed20261202.mp4",
+            "verified_by": "claude",
+            "note": "内盒像抽屉一样水平推出后取出蜡烛"
+          },
+          "B": {
+            "path": "../samples/pairs/P-ACTION-B__seed20261202.mp4",
+            "verified_by": "claude",
+            "note": "直接向上掀开顶盖后取出蜡烛"
+          }
+        }
+      }
     }
   ],
   "edits": {
