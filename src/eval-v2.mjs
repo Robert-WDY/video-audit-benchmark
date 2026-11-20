@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { randomUUID } from 'node:crypto';
 import { existsSync } from 'node:fs';
-import { copyFile, mkdir, mkdtemp, readdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, mkdtemp, readdir, readFile, realpath, rename, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
@@ -94,6 +94,7 @@ async function readResult(dir, id) {
   try {
     const result = await readJson(path.join(dir, `${id}.json`));
     if (result?.status === 'reviewed' && isVerdict(result.verdict)) return result;
+    if (result?.status === 'uncertain' && result.verdict === 'uncertain') return result;
     if (result?.status === 'unavailable') return { status: 'unavailable' };
     return { status: 'invalid' };
   } catch (error) {
@@ -104,8 +105,11 @@ async function readResult(dir, id) {
 }
 
 function normalizeReview(result) {
-  if (result?.reason === 'review_unavailable') return { status: 'unavailable' };
-  if (isVerdict(result?.verdict)) return { status: 'reviewed', verdict: result.verdict };
+  if (result?.reason === 'review_unavailable' || result?.verdict === 'unavailable') return { status: 'unavailable' };
+  const evidence = Object.fromEntries(['issues', 'reviewer', 'media_sha256', 'brief_sha256', 'receipts']
+    .filter(field => result?.[field] !== undefined).map(field => [field, result[field]]));
+  if (result?.verdict === 'uncertain') return { status: 'uncertain', verdict: 'uncertain', ...evidence };
+  if (isVerdict(result?.verdict)) return { status: 'reviewed', verdict: result.verdict, ...evidence };
   if (result?.verdict === undefined && typeof result?.ok === 'boolean') {
     return { status: 'reviewed', verdict: result.ok ? 'pass' : 'fail' };
   }
@@ -117,9 +121,11 @@ async function review(input, out, concurrency, force) {
   validateIds(inputs);
   if (inputs.some(({ brief }) => !Array.isArray(brief?.requirements))) throw new Error('审核清单中的创意要求无效');
   const { REVIEW_MODULE, REVIEW_RELAY_BASE: relayBase, REVIEW_RELAY_KEY: relayKey, REVIEW_MODEL: model } = process.env;
-  if (!REVIEW_MODULE) throw new Error('请设置 REVIEW_MODULE，指向支持 video({video, brief}) 的审核模块');
-  const { createReview } = await import(pathToFileURL(path.resolve(REVIEW_MODULE)).href);
-  const reviewer = await createReview({ relayBase, relayKey, model });
+  const moduleUrl = REVIEW_MODULE ? pathToFileURL(path.resolve(REVIEW_MODULE)) : new URL('../reviewers/frozen/index.mjs', import.meta.url);
+  const { createReview } = await import(moduleUrl.href);
+  const stateDir = path.join(out, '.frozen-state', force ? randomUUID() : 'resume');
+  const config = { relayBase, relayKey, model };
+  const reviewer = await createReview(REVIEW_MODULE ? config : { ...config, stateDir });
   if (typeof reviewer?.video !== 'function') throw new Error('审核模块必须由 createReview 提供 video({video, brief}) 方法');
   await mkdir(out, { recursive: true });
   let next = 0;
@@ -127,7 +133,7 @@ async function review(input, out, concurrency, force) {
   async function worker() {
     while (next < inputs.length) {
       const { id, brief } = inputs[next++];
-      if (!force && (await readResult(out, id)).status === 'reviewed') continue;
+      if (!force && ['reviewed', 'uncertain'].includes((await readResult(out, id)).status)) continue;
       const file = path.join(input, 'videos', `${id}.mp4`);
       let result;
       try {
@@ -137,7 +143,7 @@ async function review(input, out, concurrency, force) {
         result = { status: 'unavailable' };
       }
       await writeJson(path.join(out, `${id}.json`), result);
-      if (result.status !== 'reviewed') {
+      if (!['reviewed', 'uncertain'].includes(result.status)) {
         incomplete++;
         console.error(`${id}: ${result.status}`);
       }
@@ -150,8 +156,46 @@ async function review(input, out, concurrency, force) {
 
 const fraction = (n, d) => d ? n / d : null;
 
+async function stability(input, rounds, out) {
+  if (rounds?.length !== 3 || new Set(await Promise.all(rounds.map(dir => realpath(dir)))).size !== 3) {
+    throw new Error('请用 --round 指定三个独立审核输出目录');
+  }
+  const inputs = await readJson(path.join(input, 'manifest.json'));
+  validateIds(inputs);
+  const cases = [];
+  for (const { id } of inputs) {
+    const records = await Promise.all(rounds.map(dir => readResult(dir, id)));
+    const verdicts = records.map(r => r.verdict ?? null);
+    const statuses = records.map(r => r.status);
+    const jobs = records.map(r => r.receipts?.[0]).filter(Boolean);
+    const sameInput = ['media_sha256', 'brief_sha256'].every(field =>
+      new Set(records.map(r => r[field]).filter(Boolean)).size <= 1);
+    const complete = statuses.every(s => s === 'reviewed' || s === 'uncertain');
+    if (new Set(jobs).size !== jobs.length || !sameInput) throw new Error(`${id} 有重复首审回执或审核输入不一致`);
+    const [a, b, c] = verdicts;
+    cases.push({ id, verdicts, statuses, first_jobs_verified: jobs.length === 3,
+      flip: complete ? new Set(verdicts).size > 1 : null,
+      pair_changes: complete ? Number(a !== b) + Number(a !== c) + Number(b !== c) : null,
+      adjacent_changes: complete ? Number(a !== b) + Number(b !== c) : null });
+  }
+  const valid = cases.filter(r => r.flip !== null);
+  const flips = valid.filter(r => r.flip).length;
+  const pairs = valid.reduce((n, r) => n + r.pair_changes, 0);
+  const adjacent = valid.reduce((n, r) => n + r.adjacent_changes, 0);
+  const report = { total: cases.length, complete: valid.length, incomplete: cases.length - valid.length,
+    any_flip: flips, any_flip_rate: fraction(flips, valid.length),
+    pair_changes: pairs, pair_disagreement: fraction(pairs, 3 * valid.length),
+    adjacent_changes: adjacent, adjacent_disagreement: fraction(adjacent, 2 * valid.length),
+    pass_fail: valid.filter(r => r.verdicts.includes('pass') && r.verdicts.includes('fail')).length,
+    cases };
+  await mkdir(path.dirname(out), { recursive: true });
+  await writeJson(out, report);
+  console.log(`三轮齐备 ${valid.length}/${cases.length}，至少翻转一次 ${flips} 条。`);
+  if (report.incomplete) process.exitCode = 1;
+}
+
 function summarize(cases) {
-  const statuses = { reviewed: 0, missing: 0, unavailable: 0, invalid: 0 };
+  const statuses = { reviewed: 0, uncertain: 0, missing: 0, unavailable: 0, invalid: 0 };
   let correct = 0;
   let passed = 0;
   let blocked = 0;
@@ -173,6 +217,7 @@ function summarize(cases) {
     total: cases.length, statuses, correct,
     coverage: fraction(statuses.reviewed, cases.length),
     accuracy_on_reviewed: fraction(correct, statuses.reviewed),
+    accuracy_on_all: fraction(correct, cases.length),
     pass_reviewed: passed, fail_reviewed: blocked,
     false_block: falseBlock, false_pass: falsePass,
     false_block_rate: fraction(falseBlock, passed), false_pass_rate: fraction(falsePass, blocked),
@@ -199,7 +244,7 @@ async function score(keyFile, reviews, out) {
   const allCorrect = groups.filter((row) => row.correct === 4).length;
   const overall = summarize(cases);
   const report = {
-    complete: overall.statuses.reviewed === overall.total,
+    complete: overall.statuses.reviewed + overall.statuses.uncertain === overall.total,
     overall,
     by_verification: Object.fromEntries([...new Set(cases.map((row) => row.verified_by))]
       .map((level) => [level, summarize(cases.filter((row) => row.verified_by === level))])),
@@ -208,19 +253,20 @@ async function score(keyFile, reviews, out) {
   };
   await mkdir(path.dirname(out), { recursive: true });
   await writeJson(out, report);
-  console.log(`有效审核 ${overall.statuses.reviewed}/${overall.total}，判对 ${overall.correct}，四项全对 ${allCorrect}/${groups.length} 组。报告：${out}`);
+  console.log(`确定判词 ${overall.statuses.reviewed}/${overall.total}，待复核 ${overall.statuses.uncertain}，判对 ${overall.correct}，四项全对 ${allCorrect}/${groups.length} 组。报告：${out}`);
   if (!report.complete) process.exitCode = 1;
 }
 
 const usage = `用法：
   node src/eval-v2.mjs prepare --dataset <已组装的 v2> --out <新目录>
   node src/eval-v2.mjs review --input <盲评包/inputs> --out <审核输出目录> [--concurrency 2] [--force]
-  node src/eval-v2.mjs score --key <盲评包/key.json> --reviews <审核输出目录> --out <报告.json>`;
+  node src/eval-v2.mjs score --key <盲评包/key.json> --reviews <审核输出目录> --out <报告.json>
+  node src/eval-v2.mjs stability --input <盲评包/inputs> --round <R1> --round <R2> --round <R3> --out <报告.json>`;
 try {
   const { positionals, values } = parseArgs({ allowPositionals: true, options: {
     dataset: { type: 'string' }, out: { type: 'string' }, input: { type: 'string' }, key: { type: 'string' },
     reviews: { type: 'string' }, concurrency: { type: 'string', default: '2' },
-    force: { type: 'boolean' }, help: { type: 'boolean', short: 'h' },
+    round: { type: 'string', multiple: true }, force: { type: 'boolean' }, help: { type: 'boolean', short: 'h' },
   } });
   const [cmd] = positionals;
   if (values.help || !cmd) {
@@ -238,6 +284,8 @@ try {
       await review(requiredPath('input'), requiredPath('out'), concurrency, values.force);
     } else if (cmd === 'score') {
       await score(requiredPath('key'), requiredPath('reviews'), requiredPath('out'));
+    } else if (cmd === 'stability') {
+      await stability(requiredPath('input'), values.round, requiredPath('out'));
     } else {
       throw new Error(`未知命令：${cmd}\n${usage}`);
     }

@@ -23,7 +23,9 @@ node src/eval-v2.mjs prepare --dataset .work/v2-dataset --out .work/v2-blind
 
 只把 `.work/v2-blind/inputs/` 交给审核端。里面只有随机 ID、创意要求、同名视频。评分方保留 `key.json`。组装目录和本页索引供制作方查阅，含答案。
 
-在审核环境中设置 `REVIEW_MODULE` 为审核适配器的文件路径。适配器导出 `createReview({ relayBase, relayKey, model })`，返回带 `async video({ video, brief })` 方法的对象。`video` 是匿名 MP4 的路径，`brief` 是原始创意要求。审核返回 `{ verdict: 'pass' }` 或 `{ verdict: 'fail' }`，也可返回布尔值字段 `ok`。服务不可用时抛出异常或返回 `{ reason: 'review_unavailable' }`。按适配器需要设置 `REVIEW_RELAY_BASE`、`REVIEW_RELAY_KEY` 和 `REVIEW_MODEL`。
+默认使用仓库内置的冻结审核器，请先配置整片审核和画格复核服务。[安装与配置](../reviewers/frozen/README.md)
+
+可通过 `REVIEW_MODULE` 指定其他适配器，入口为 `createReview({ relayBase, relayKey, model }).video({ video, brief })`。适配器可返回 `verdict`（`pass`、`fail` 或 `uncertain`），也兼容布尔字段 `ok`。服务不可用时抛出异常或返回 `{ reason: 'review_unavailable' }`。确定判词与待复核均作为已完成审核保存，证据保留在逐条结果的 `issues` 中。按适配器需要设置 `REVIEW_RELAY_BASE`、`REVIEW_RELAY_KEY` 和 `REVIEW_MODEL`。
 
 ```sh
 node src/eval-v2.mjs review --input .work/v2-blind/inputs --out .work/v2-reviews
