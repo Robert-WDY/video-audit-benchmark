@@ -1,0 +1,22 @@
+{
+  "id": "A4__perfume-notlifted",
+  "video": "A4__perfume-notlifted.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "A4",
+      "category_name": "使用方法不符",
+      "group": "A",
+      "description": "要求拿起香水喷在手腕上，成片里瓶子一直放在台面上，只按了一下喷头，没有喷到手腕",
+      "windows": [
+        [
+          0,
+          6
+        ]
+      ]
+    }
+  ],
+  "source": "generated",
+  "verified_by": "claude",
+  "verification_note": "瓶子一直放在台面上，只按了喷头，没有拿起、也没有对着手腕喷"
+}

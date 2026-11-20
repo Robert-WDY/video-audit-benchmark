@@ -1,0 +1,17 @@
+{
+  "id": "A6__P-ENV__briefA-videoB",
+  "video": "A6__P-ENV__briefA-videoB.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "A6",
+      "category_name": "场景环境不符",
+      "group": "A",
+      "description": "创意要求「户外公园晨跑」，成片是「室内健身房跑步机」",
+      "windows": null
+    }
+  ],
+  "source": "pair",
+  "verified_by": "claude",
+  "verification_note": "室内健身房跑步机，背景器械"
+}

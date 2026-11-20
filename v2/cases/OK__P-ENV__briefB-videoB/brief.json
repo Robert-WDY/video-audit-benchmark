@@ -1,0 +1,16 @@
+{
+  "product": {
+    "name": "Stride 跑鞋",
+    "appearance": "白色跑鞋，鞋侧有蓝色线条"
+  },
+  "requirements": [
+    "一个人穿着跑鞋慢跑几步，镜头对着双脚。",
+    "场景环境：室内健身房跑步机"
+  ],
+  "checks": [
+    {
+      "dimension": "场景环境",
+      "expected": "室内健身房跑步机"
+    }
+  ]
+}

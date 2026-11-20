@@ -1,0 +1,9 @@
+{
+  "id": "OK__P-ENV__briefA-videoA",
+  "video": "OK__P-ENV__briefA-videoA.mp4",
+  "verdict": "pass",
+  "errors": [],
+  "source": "pair",
+  "verified_by": "claude",
+  "verification_note": "户外公园跑道，树木草地，自然光"
+}

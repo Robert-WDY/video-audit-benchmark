@@ -1,0 +1,22 @@
+{
+  "id": "A4__perfume-sprayair",
+  "video": "A4__perfume-sprayair.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "A4",
+      "category_name": "使用方法不符",
+      "group": "A",
+      "description": "要求把香水喷在手腕上，成片是对着空中喷出一团雾，没有喷在皮肤上",
+      "windows": [
+        [
+          4.5,
+          6
+        ]
+      ]
+    }
+  ],
+  "source": "generated",
+  "verified_by": "claude",
+  "verification_note": "按压后瓶子留在台面，最后另一只手拿着瓶子向空中喷出一团雾"
+}

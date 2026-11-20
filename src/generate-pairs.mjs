@@ -7,7 +7,7 @@ import { parseArgs } from 'node:util';
 import { ROUTES, download, submit, waitFor } from './aicentre.mjs';
 
 const { values: a } = parseArgs({ options: {
-  file: { type: 'string' }, only: { type: 'string' }, out: { type: 'string', default: '.work/pairs' }, 'dry-run': { type: 'boolean', default: false },
+  file: { type: 'string' }, only: { type: 'string' }, out: { type: 'string', default: '.work/pairs' }, 'dry-run': { type: 'boolean', default: false }, side: { type: 'string' },
   // generic = 通用接口（支持幂等去重和按 external_ref 反查）；h3 = 自建池（不支持去重，提交即建新任务）
   route: { type: 'string', default: 'generic' }, model: { type: 'string', default: 'minimax-h3-hs' },
 } });
@@ -27,12 +27,13 @@ const dir = path.resolve(a.out); await mkdir(dir, { recursive: true });
 const jobs = [];
 for (const p of spec.pairs) {
   if (a.only && !a.only.split(',').includes(p.id)) continue;
-  for (const side of ['A', 'B']) {
-    const prompt = pairPrompt(p, side); const name = `${p.id}-${side}__seed${p.seed}`;
+  for (const side of (a.side ? [a.side] : ['A', 'B'])) {
+    const seed = p[`seed_${side}`] || p.seed;
+    const prompt = pairPrompt(p, side); const name = `${p.id}-${side}__seed${seed}`;
     if (a['dry-run']) { console.log(`== ${name}\n${prompt}\n`); continue; }
     jobs.push((async () => {
       const req = a.route === 'h3'
-        ? { prompt, duration_seconds: 6, quality: 'medium', resolution: '720p', aspect_ratio: '9:16', seed: p.seed }
+        ? { prompt, duration_seconds: 6, quality: 'medium', resolution: '720p', aspect_ratio: '9:16', seed }
         : { model: a.model, channel: 'libtv', prompt, duration_seconds: 6, resolution: '768p', aspect_ratio: '9:16', sound: true };
       const job = await submit(a.route, req, `vr-pair-${a.route}-${name}`);
       // 提交后立即记录任务编号，便于需要时取消

@@ -1,0 +1,17 @@
+{
+  "id": "A3__P-TARGET__briefB-videoA",
+  "video": "A3__P-TARGET__briefB-videoA.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "A3",
+      "category_name": "交互对象不符",
+      "group": "A",
+      "description": "创意要求「食指触摸琴身侧面的外壳」，成片是「食指按下中间的白色琴键」",
+      "windows": null
+    }
+  ],
+  "source": "pair",
+  "verified_by": "claude",
+  "verification_note": "食指按下琴键区的白键。备注：黑键分组不太规整、TONO 旁有几个小字，正常观看不明显，不算错误"
+}

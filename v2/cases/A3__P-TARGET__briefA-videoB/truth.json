@@ -1,0 +1,17 @@
+{
+  "id": "A3__P-TARGET__briefA-videoB",
+  "video": "A3__P-TARGET__briefA-videoB.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "A3",
+      "category_name": "交互对象不符",
+      "group": "A",
+      "description": "创意要求「食指按下中间的白色琴键」，成片是「食指触摸琴身侧面的外壳」",
+      "windows": null
+    }
+  ],
+  "source": "pair",
+  "verified_by": "claude",
+  "verification_note": "食指始终按在最左侧白色外壳上，没有碰琴键"
+}

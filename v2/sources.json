@@ -69,6 +69,30 @@
             "verified_by": "claude",
             "note": "直接向上掀开顶盖后取出蜡烛"
           }
+        },
+        "P-TARGET": {
+          "A": {
+            "path": "../samples/pairs/P-TARGET-A__seed20261203.mp4",
+            "verified_by": "claude",
+            "note": "食指按下琴键区的白键。备注：黑键分组不太规整、TONO 旁有几个小字，正常观看不明显，不算错误"
+          },
+          "B": {
+            "path": "../samples/pairs/P-TARGET-B__seed20261203.mp4",
+            "verified_by": "claude",
+            "note": "食指始终按在最左侧白色外壳上，没有碰琴键"
+          }
+        },
+        "P-ENV": {
+          "A": {
+            "path": "../samples/pairs/P-ENV-A__seed20261205.mp4",
+            "verified_by": "claude",
+            "note": "户外公园跑道，树木草地，自然光"
+          },
+          "B": {
+            "path": "../samples/pairs/P-ENV-B__seed20261205.mp4",
+            "verified_by": "claude",
+            "note": "室内健身房跑步机，背景器械"
+          }
         }
       }
     }
@@ -155,7 +179,8 @@
             ]
           ]
         }
-      ]
+      ],
+      "brief": "S06-base"
     },
     {
       "id": "S02-handleave",
@@ -172,7 +197,8 @@
             ]
           ]
         }
-      ]
+      ],
+      "brief": "S02-base"
     },
     {
       "id": "S08-absorb",
@@ -189,7 +215,8 @@
             ]
           ]
         }
-      ]
+      ],
+      "brief": "S08-base"
     }
   ],
   "generated": [
@@ -210,7 +237,8 @@
             ]
           ]
         }
-      ]
+      ],
+      "brief": "S03-gen"
     },
     {
       "id": "S05-vlot",
@@ -229,7 +257,8 @@
             ]
           ]
         }
-      ]
+      ],
+      "brief": "S05-gen"
     },
     {
       "id": "S01-logo-lid",
@@ -248,7 +277,205 @@
             ]
           ]
         }
+      ],
+      "brief": "S01-gen"
+    },
+    {
+      "id": "perfume-twobottles",
+      "scene": "S03",
+      "brief": "perfume-wrist",
+      "path": "../samples/pairs/P-USAGE-A__seed20261204.mp4",
+      "verified_by": "claude",
+      "note": "台面上的瓶子没动，喷头却像被按着；之后她手里又出现第二个瓶子",
+      "errors": [
+        {
+          "category": "B2",
+          "description": "台面上已有一瓶香水，她手里又凭空出现第二瓶，画面里同时有两个瓶子",
+          "windows": [
+            [
+              3.0,
+              6.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "perfume-notlifted",
+      "scene": "S03",
+      "brief": "perfume-wrist",
+      "path": "../samples/pairs/P-USAGE-A__seed20261214.mp4",
+      "verified_by": "claude",
+      "note": "瓶子一直放在台面上，只按了喷头，没有拿起、也没有对着手腕喷",
+      "errors": [
+        {
+          "category": "A4",
+          "description": "要求拿起香水喷在手腕上，成片里瓶子一直放在台面上，只按了一下喷头，没有喷到手腕",
+          "windows": [
+            [
+              0,
+              6
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "perfume-sprayair",
+      "scene": "S03",
+      "brief": "perfume-wrist",
+      "path": "../samples/pairs/P-USAGE-B__seed20261204.mp4",
+      "verified_by": "claude",
+      "note": "按压后瓶子留在台面，最后另一只手拿着瓶子向空中喷出一团雾",
+      "errors": [
+        {
+          "category": "A4",
+          "description": "要求把香水喷在手腕上，成片是对着空中喷出一团雾，没有喷在皮肤上",
+          "windows": [
+            [
+              4.5,
+              6.0
+            ]
+          ]
+        }
       ]
     }
-  ]
+  ],
+  "take_briefs": {
+    "S03-h3b": {
+      "product": {
+        "name": "LUMO 保温杯",
+        "appearance": "红色保温杯，杯口敞开，杯身印白色 LUMO 字样"
+      },
+      "requirements": [
+        "一只手拿起保温杯，把水倒进旁边的玻璃杯，然后把保温杯放回桌上",
+        "结束时玻璃杯里有水"
+      ]
+    },
+    "S05-h3b": {
+      "product": {
+        "name": "Volt 无线充电板",
+        "appearance": "黑色圆形充电板，搭配一台黑色手机"
+      },
+      "requirements": [
+        "一只手拿起桌上的手机，放到充电板上",
+        "放上后手机屏幕显示充电，充电板边缘光环亮起蓝色"
+      ]
+    },
+    "S05-h3e": {
+      "product": {
+        "name": "Volt 无线充电板",
+        "appearance": "黑色圆形充电板，中央印 Volt 字样，搭配一台黑色手机"
+      },
+      "requirements": [
+        "一只手拿起桌上的手机，放到充电板上",
+        "放上后手机屏幕显示充电，充电板边缘光环亮起蓝色"
+      ]
+    },
+    "S04-h3a": {
+      "product": {
+        "name": "Pebl 真无线耳机",
+        "appearance": "白色充电盒，正面一颗指示灯；盒内一副两只白色耳机，每只带短柄"
+      },
+      "requirements": [
+        "打开充电盒，开盖后指示灯亮绿色",
+        "取出右耳机举到镜头前"
+      ]
+    },
+    "S07-h3d": {
+      "product": {
+        "name": "Hum 蓝牙音箱",
+        "appearance": "深灰色布面圆柱音箱，顶部 3 个圆形按键横排，中间最大的是电源键，外圈一圈光环"
+      },
+      "requirements": [
+        "食指按下顶部中间的电源键",
+        "按下后光环亮起蓝色并保持常亮"
+      ]
+    },
+    "S01-h3d": {
+      "product": {
+        "name": "LUMO 保温杯",
+        "appearance": "红色圆柱杯身，平顶黑色旋盖，杯身印白色 LUMO 字样"
+      },
+      "requirements": [
+        "保温杯立在白色转台上，随转台旋转展示"
+      ]
+    },
+    "S06-h3d": {
+      "product": {
+        "name": "Stride 跑鞋",
+        "appearance": "白色跑鞋，鞋侧有蓝色线条，灰色鞋底"
+      },
+      "requirements": [
+        "坐着把脚穿进跑鞋并系好鞋带",
+        "系好后站起来"
+      ]
+    },
+    "S06-base": {
+      "product": {
+        "name": "Stride 跑鞋",
+        "appearance": "白色跑鞋，鞋侧有蓝色线条，灰色鞋底"
+      },
+      "requirements": [
+        "坐着把脚穿进跑鞋并系好鞋带",
+        "系好后站起来"
+      ]
+    },
+    "S02-base": {
+      "product": {
+        "name": "LUMO 保温杯",
+        "appearance": "红色保温杯，黑色杯盖"
+      },
+      "requirements": [
+        "一只手拧开杯盖并取下，放在杯子旁边",
+        "最后手离开画面"
+      ]
+    },
+    "S08-base": {
+      "product": {
+        "name": "AURA 保湿面霜",
+        "appearance": "白色圆罐，金色盖子，霜体纯白"
+      },
+      "requirements": [
+        "打开盖子，用指尖蘸取面霜",
+        "把面霜在手背上涂开，推开吸收"
+      ]
+    },
+    "S03-gen": {
+      "product": {
+        "name": "LUMO 保温杯",
+        "appearance": "红色保温杯，杯口敞开，杯身印白色 LUMO 字样；一只透明玻璃杯"
+      },
+      "requirements": [
+        "一只手拿起保温杯，把水倒进玻璃杯，然后放回"
+      ]
+    },
+    "S05-gen": {
+      "product": {
+        "name": "Volt 无线充电板",
+        "appearance": "黑色圆形充电板，中央印 Volt 字样，搭配一台黑色手机"
+      },
+      "requirements": [
+        "一只手把手机放到充电板上，充电板光环亮起"
+      ]
+    },
+    "S01-gen": {
+      "product": {
+        "name": "LUMO 保温杯",
+        "appearance": "红色圆柱杯身，平顶黑色旋盖（无提环、无锁扣），杯身正面横排印白色 LUMO 字样"
+      },
+      "requirements": [
+        "保温杯立在转台上旋转展示"
+      ]
+    },
+    "perfume-wrist": {
+      "product": {
+        "name": "ELAN 淡香水",
+        "appearance": "方形透明玻璃香水瓶，淡粉色香水，银色喷头"
+      },
+      "requirements": [
+        "她拿起香水瓶，把香水喷在自己手腕内侧，然后闻一下手腕"
+      ]
+    }
+  }
 }

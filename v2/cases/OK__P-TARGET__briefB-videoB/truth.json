@@ -1,0 +1,9 @@
+{
+  "id": "OK__P-TARGET__briefB-videoB",
+  "video": "OK__P-TARGET__briefB-videoB.mp4",
+  "verdict": "pass",
+  "errors": [],
+  "source": "pair",
+  "verified_by": "claude",
+  "verification_note": "食指始终按在最左侧白色外壳上，没有碰琴键"
+}

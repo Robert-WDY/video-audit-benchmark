@@ -1,0 +1,22 @@
+{
+  "id": "B2__perfume-twobottles",
+  "video": "B2__perfume-twobottles.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "B2",
+      "category_name": "画面跳变",
+      "group": "B",
+      "description": "台面上已有一瓶香水，她手里又凭空出现第二瓶，画面里同时有两个瓶子",
+      "windows": [
+        [
+          3,
+          6
+        ]
+      ]
+    }
+  ],
+  "source": "generated",
+  "verified_by": "claude",
+  "verification_note": "台面上的瓶子没动，喷头却像被按着；之后她手里又出现第二个瓶子"
+}

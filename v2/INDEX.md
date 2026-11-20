@@ -1,6 +1,6 @@
 # 用例清单
 
-共 86 条。
+共 97 条。
 
 | 用例 | 结论 | 错误 | 来源 | 状态 |
 |---|---|---|---|---|
@@ -19,10 +19,16 @@
 | [A2__S06-h3d__S06.I1](videos/A2__S06-h3d__S06.I1.mp4) | 拦截 | **A2 动作方式不符**：动作反了：变成坐下、解开鞋带、脱鞋（要求是穿鞋、系带、站起来） | edit | Claude 复核 |
 | [A2__S06-standup](videos/A2__S06-standup.mp4) | 拦截 | **A2 动作方式不符**：系完鞋带后一直没有站起来（要求最后站起来） | base | 人工确认 |
 | [A2__S08-absorb](videos/A2__S08-absorb.mp4) | 拦截 | **A2 动作方式不符**：最后手背上仍有明显一块霜没有推开（要求推开吸收） | base | 人工确认 |
+| [A3__P-TARGET__briefA-videoB](videos/A3__P-TARGET__briefA-videoB.mp4) | 拦截 | **A3 交互对象不符**：创意要求「食指按下中间的白色琴键」，成片是「食指触摸琴身侧面的外壳」 | pair | Claude 复核 |
+| [A3__P-TARGET__briefB-videoA](videos/A3__P-TARGET__briefB-videoA.mp4) | 拦截 | **A3 交互对象不符**：创意要求「食指触摸琴身侧面的外壳」，成片是「食指按下中间的白色琴键」 | pair | Claude 复核 |
 | [A3__P-TARGET-SPK__briefA-videoB](videos/A3__P-TARGET-SPK__briefA-videoB.mp4) | 拦截 | **A3 交互对象不符**：创意要求「食指按顶部正中间最大的电源键」，成片是「食指按顶部左侧的小按键」 | pair | 人工确认 |
 | [A3__P-TARGET-SPK__briefB-videoA](videos/A3__P-TARGET-SPK__briefB-videoA.mp4) | 拦截 | **A3 交互对象不符**：创意要求「食指按顶部左侧的小按键」，成片是「食指按顶部正中间最大的电源键」 | pair | Claude 复核 |
+| [A4__perfume-notlifted](videos/A4__perfume-notlifted.mp4) | 拦截 | **A4 使用方法不符**：要求拿起香水喷在手腕上，成片里瓶子一直放在台面上，只按了一下喷头，没有喷到手腕 | generated | Claude 复核 |
+| [A4__perfume-sprayair](videos/A4__perfume-sprayair.mp4) | 拦截 | **A4 使用方法不符**：要求把香水喷在手腕上，成片是对着空中喷出一团雾，没有喷在皮肤上 | generated | Claude 复核 |
 | [A5__P-MOOD__briefA-videoB](videos/A5__P-MOOD__briefA-videoB.mp4) | 拦截 | **A5 氛围情绪不符**：创意要求「轻松愉快、温暖明亮」，成片是「清冷惨淡、灰暗压抑」 | pair | Claude 复核 |
 | [A5__P-MOOD__briefB-videoA](videos/A5__P-MOOD__briefB-videoA.mp4) | 拦截 | **A5 氛围情绪不符**：创意要求「清冷惨淡、灰暗压抑」，成片是「轻松愉快、温暖明亮」 | pair | Claude 复核 |
+| [A6__P-ENV__briefA-videoB](videos/A6__P-ENV__briefA-videoB.mp4) | 拦截 | **A6 场景环境不符**：创意要求「户外公园晨跑」，成片是「室内健身房跑步机」 | pair | Claude 复核 |
+| [A6__P-ENV__briefB-videoA](videos/A6__P-ENV__briefB-videoA.mp4) | 拦截 | **A6 场景环境不符**：创意要求「室内健身房跑步机」，成片是「户外公园晨跑」 | pair | Claude 复核 |
 | [A7__S01-h3d__S01.I3](videos/A7__S01-h3d__S01.I3.mp4) | 拦截 | **A7 文案字幕不符**：字幕写「500ml 超大容量」，要求的文案是 350ml | edit | Claude 复核 |
 | [A7__S03-h3b__S03.I8](videos/A7__S03-h3b__S03.I8.mp4) | 拦截 | **A7 文案字幕不符**：字幕写「500ml 超大容量」，要求的文案是 350ml | edit | Claude 复核 |
 | [A7__S05-h3b__S05.I2](videos/A7__S05-h3b__S05.I2.mp4) | 拦截 | **A7 文案字幕不符**：字幕写「50W 无线超级快充」，要求的文案是 15W | edit | Claude 复核 |
@@ -31,6 +37,7 @@
 | [B1__S03-h3b__S03.I1](videos/B1__S03-h3b__S03.I1.mp4) | 拦截 | **B1 物理或因果不合理**：水从玻璃杯向上倒流回保温杯 | edit | Claude 复核 |
 | [B1__S03-h3b__S03.I7](videos/B1__S03-h3b__S03.I7.mp4) | 拦截 | **B1 物理或因果不合理**：水一直往玻璃杯里倒，玻璃杯却始终是空的（水流进杯后消失） | edit | Claude 复核 |
 | [B1__S07-h3d__S07.I9](videos/B1__S07-h3d__S07.I9.mp4) | 拦截 | **B1 物理或因果不合理**：手没有按任何键，光环自己亮了，手突然出现在离开的位置 | edit | Claude 复核 |
+| [B2__perfume-twobottles](videos/B2__perfume-twobottles.mp4) | 拦截 | **B2 画面跳变**：台面上已有一瓶香水，她手里又凭空出现第二瓶，画面里同时有两个瓶子 | generated | Claude 复核 |
 | [B2__S03-h3b__S03.I3](videos/B2__S03-h3b__S03.I3.mp4) | 拦截 | **B2 画面跳变**：保温杯放回后，画面突然回到开头，玻璃杯又变成空的 | edit | Claude 复核 |
 | [B2__S03-h3b__S03.I5](videos/B2__S03-h3b__S03.I5.mp4) | 拦截 | **B2 画面跳变**：倒完水后玻璃杯突然变回空的（倒水过程中液面正常上升） | edit | Claude 复核 |
 | [B2__S04-h3a__S04.I1](videos/B2__S04-h3a__S04.I1.mp4) | 拦截 | **B2 画面跳变**：手从盒外瞬间跳到已经捏住耳机的位置 | edit | Claude 复核 |
@@ -47,12 +54,16 @@
 | [B4__S03-glasstext](videos/B4__S03-glasstext.mp4) | 拦截 | **B4 画面崩坏**：玻璃杯外壁出现一列竖排的白色伪中文，读不通 | generated | Claude 复核 |
 | [OK__P-ACTION__briefA-videoA](videos/OK__P-ACTION__briefA-videoA.mp4) | 放行 | — | pair | Claude 复核 |
 | [OK__P-ACTION__briefB-videoB](videos/OK__P-ACTION__briefB-videoB.mp4) | 放行 | — | pair | Claude 复核 |
+| [OK__P-ENV__briefA-videoA](videos/OK__P-ENV__briefA-videoA.mp4) | 放行 | — | pair | Claude 复核 |
+| [OK__P-ENV__briefB-videoB](videos/OK__P-ENV__briefB-videoB.mp4) | 放行 | — | pair | Claude 复核 |
 | [OK__P-MOOD__briefA-videoA](videos/OK__P-MOOD__briefA-videoA.mp4) | 放行 | — | pair | Claude 复核 |
 | [OK__P-MOOD__briefB-videoB](videos/OK__P-MOOD__briefB-videoB.mp4) | 放行 | — | pair | Claude 复核 |
 | [OK__P-PROD-CUP__briefA-videoA](videos/OK__P-PROD-CUP__briefA-videoA.mp4) | 放行 | — | pair | Claude 复核 |
 | [OK__P-PROD-CUP__briefB-videoB](videos/OK__P-PROD-CUP__briefB-videoB.mp4) | 放行 | — | pair | 人工确认 |
 | [OK__P-PROD-EARBUD__briefA-videoA](videos/OK__P-PROD-EARBUD__briefA-videoA.mp4) | 放行 | — | pair | Claude 复核 |
 | [OK__P-PROD-EARBUD__briefB-videoB](videos/OK__P-PROD-EARBUD__briefB-videoB.mp4) | 放行 | — | pair | 人工确认 |
+| [OK__P-TARGET__briefA-videoA](videos/OK__P-TARGET__briefA-videoA.mp4) | 放行 | — | pair | Claude 复核 |
+| [OK__P-TARGET__briefB-videoB](videos/OK__P-TARGET__briefB-videoB.mp4) | 放行 | — | pair | Claude 复核 |
 | [OK__P-TARGET-SPK__briefA-videoA](videos/OK__P-TARGET-SPK__briefA-videoA.mp4) | 放行 | — | pair | Claude 复核 |
 | [OK__P-TARGET-SPK__briefB-videoB](videos/OK__P-TARGET-SPK__briefB-videoB.mp4) | 放行 | — | pair | 人工确认 |
 | [OK__S01-h3d__base](videos/OK__S01-h3d__base.mp4) | 放行 | — | edit | Claude 复核 |

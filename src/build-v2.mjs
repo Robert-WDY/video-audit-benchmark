@@ -85,7 +85,9 @@ for (const dirSpec of cfg.edits.dirs) {
     if (inj.some((e) => !OBVIOUS.has(e.visibility) || SKIP_SUBS.has(e.sub))) continue;
     const input = await readJson(path.join(dir, 'cases', c, 'input.json'));
     const s = scenes.get(t.scene);
-    const brief = sceneBrief(s, input.plan.captions.map((x) => x.text));
+    // 优先用按底片写的创意要求（只写这条底片确实做到的内容），没有才退回场景脚本
+    const tb = (cfg.take_briefs || {})[t.take];
+    const brief = tb ? { product: tb.product, requirements: tb.requirements, copy: input.plan.captions.map((x) => x.text) } : sceneBrief(s, input.plan.captions.map((x) => x.text));
     // 字幕类：创意要求里的文案是正确版本，成片字幕是错的
     const capErr = inj.find((e) => e.sub === 'PF8');
     if (capErr) brief.copy = (s.injections.find((i) => i.id === capErr.id)?.control || []).map((o) => o.text);
@@ -102,7 +104,9 @@ for (const dirSpec of cfg.edits.dirs) {
 for (const b of [...(cfg.bases || []), ...(cfg.generated || []).map((g) => ({ ...g, source: 'generated' }))]) {
   const s = scenes.get(b.scene);
   const errors = b.errors.map((e) => ({ ...cat(e.category), description: e.description, windows: e.windows || null }));
-  await emit({ id: `${[...new Set(errors.map((e) => e.category))].join('+')}__${b.id}`, brief: sceneBrief(s, []),
+  const tb = (cfg.take_briefs || {})[b.brief];
+  const brief = tb ? { product: tb.product, requirements: tb.requirements, copy: [] } : sceneBrief(s, []);
+  await emit({ id: `${[...new Set(errors.map((e) => e.category))].join('+')}__${b.id}`, brief,
     video: path.resolve(cfgDir, b.path), errors, source: b.source || 'base', verified_by: b.verified_by || 'human', note: b.note || '人工复核确认' });
 }
 

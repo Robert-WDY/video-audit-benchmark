@@ -1,0 +1,9 @@
+{
+  "id": "OK__P-TARGET__briefA-videoA",
+  "video": "OK__P-TARGET__briefA-videoA.mp4",
+  "verdict": "pass",
+  "errors": [],
+  "source": "pair",
+  "verified_by": "claude",
+  "verification_note": "食指按下琴键区的白键。备注：黑键分组不太规整、TONO 旁有几个小字，正常观看不明显，不算错误"
+}
