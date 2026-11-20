@@ -70,7 +70,11 @@ def annotate(errors,issues,cache,ask):
                 one=ask(cache,"single-match","只比对标注与判词是否明确指同一对象、同一错误事件。不确定填 null。返回 JSON 对象，字段 same_object 和 same_event。"+json.dumps([err["description"],issue["note"]],ensure_ascii=False))
                 item=one["data"]
                 if any(k not in item or (item[k] is not None and type(item[k])!=bool) for k in ("same_object","same_event")):
-                    raise ValueError("Invalid single object/event annotation")
+                    labels["pair_receipts"].append(one["receipt"])
+                    one=ask(cache,"single-schema","只输出一个完整 JSON 对象，使用如下精确字段及 JSON 布尔值，不要代码围栏或说明文字。无法判断填 null。示例格式 {\"same_object\":true,\"same_event\":false}。只在标注和判词指向相同对象、相同的错误事件时对应字段为 true。\n"+json.dumps({"标注":err["description"],"判词":issue["note"]},ensure_ascii=False))
+                    item=one["data"]
+                    if any(k not in item or (item[k] is not None and type(item[k])!=bool) for k in ("same_object","same_event")):
+                        raise ValueError("Invalid single object/event annotation")
                 labels["pairs"].append(dict(ref=r,issue=i,same_object=item["same_object"],same_event=item["same_event"]))
                 labels["pair_receipts"].append(one["receipt"])
         score(errors,issues,labels)

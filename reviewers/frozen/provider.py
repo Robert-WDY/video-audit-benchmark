@@ -29,7 +29,7 @@ def first_pass(video, context, state, *, temperature=None, media_url=None):
     rec = json.loads(path.read_text(encoding="utf8")) if path.exists() else {}
     if "answer" in rec:
         return rec["answer"]
-    if not rec:
+    if not rec.get("job_id"):
         if media_url is None:
             with video.open("rb") as stream:
                 upload = requests.post(
@@ -43,29 +43,21 @@ def first_pass(video, context, state, *, temperature=None, media_url=None):
             "prompt": SCHEMA + "\n\n本次镜头的产品事实与制作要求：\n" + context.strip(),
             "reference_video_urls": [media_url],
             "max_tokens": 2000,
-            "external_ref": "visual-qa-" + uuid4().hex[:25],
+            "external_ref": rec.get("external_ref") or "visual-qa-" + uuid4().hex[:25],
         }
         if temperature is not None:
             body["temperature"] = temperature
         rec = {"external_ref": body["external_ref"], "temperature": temperature}
         save(path, rec)
         for admission in range(13):
-            response = requests.post(endpoint, json=body, headers=headers, timeout=90)
+            # AI Centre binds the same external_ref to the job's idempotency key.
+            # A lost response or a concurrency rejection must retain this identity.
+            response = requests.post(endpoint, json=body, headers={**headers, "Idempotency-Key": rec["external_ref"]}, timeout=90)
             if response.status_code != 429 or "concurrency" not in response.text.lower() or admission == 12:
                 break
             time.sleep(min(2**admission, 12))
-        if response.status_code == 429:
-            path.unlink()  # Admission was explicitly rejected.
         response.raise_for_status()
         rec["job_id"] = response.json()["job_id"]
-        save(path, rec)
-    if not rec.get("job_id"):
-        lookup = requests.get(
-            endpoint, params={"external_ref": rec["external_ref"]}, headers=headers, timeout=30
-        )
-        lookup.raise_for_status()
-        data = lookup.json()
-        rec["job_id"] = data.get("job_id") or data["id"]
         save(path, rec)
     deadline = time.monotonic() + 600
     while time.monotonic() < deadline:
