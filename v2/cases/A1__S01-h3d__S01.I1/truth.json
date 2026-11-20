@@ -1,0 +1,23 @@
+{
+  "id": "A1__S01-h3d__S01.I1",
+  "video": "A1__S01-h3d__S01.I1.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "A1",
+      "category_name": "产品不一致",
+      "group": "A",
+      "description": "转到背面后杯身从红色变成蓝色并一直保持",
+      "windows": [
+        [
+          3,
+          6
+        ]
+      ],
+      "from_v1": "PF1"
+    }
+  ],
+  "source": "edit",
+  "verified_by": "claude",
+  "verification_note": "注入错误由确定性剪辑/合成产生，已通过逐帧真值校验；底片干净与否见 verified_by"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "B3__S05-h3e__S05.I3",
+  "video": "B3__S05-h3e__S05.I3.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "B3",
+      "category_name": "技术故障",
+      "group": "B",
+      "description": "移动手机时插入 0.6 秒黑场",
+      "windows": [
+        [
+          2,
+          2.6
+        ]
+      ],
+      "from_v1": "TE1"
+    }
+  ],
+  "source": "edit",
+  "verified_by": "claude",
+  "verification_note": "注入错误由确定性剪辑/合成产生，已通过逐帧真值校验；底片干净与否见 verified_by"
+}

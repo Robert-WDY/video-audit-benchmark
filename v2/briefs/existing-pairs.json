@@ -1,0 +1,20 @@
+{
+  "note": "用已有视频组成的对比对（不需要新生成）。",
+  "pairs": [
+    { "id": "P-PROD-EARBUD", "dim": "product", "dim_name": "产品外观", "category": "A1",
+      "product": { "name": "Pebl 真无线耳机", "appearance": "白色亮面充电盒，盒内一副白色入耳式耳机" },
+      "base_brief": "打开充电盒，取出右耳机举到镜头前。",
+      "A": { "label": "每只耳机带一根向下的短柄（柄式入耳耳机）" },
+      "B": { "label": "圆润的豆式耳机，没有柄" } },
+    { "id": "P-PROD-CUP", "dim": "product", "dim_name": "产品外观", "category": "A1",
+      "product": { "name": "LUMO 保温杯", "appearance": "红色不锈钢圆柱杯身，杯身印白色 LUMO 字样" },
+      "base_brief": "保温杯立在白色转台上旋转一圈展示。",
+      "A": { "label": "杯盖是平顶黑色旋盖，没有提环、没有锁扣" },
+      "B": { "label": "杯盖是带提环和正面锁扣的黑色翻盖" } },
+    { "id": "P-TARGET-SPK", "dim": "target", "dim_name": "交互对象", "category": "A3",
+      "product": { "name": "Hum 蓝牙音箱", "appearance": "深灰色布面圆柱音箱，顶部有几个圆形按键，外圈一圈光环" },
+      "base_brief": "手指按下音箱顶部的按键开机，光环亮起。",
+      "A": { "label": "食指按顶部正中间最大的电源键" },
+      "B": { "label": "食指按顶部左侧的小按键" } }
+  ]
+}

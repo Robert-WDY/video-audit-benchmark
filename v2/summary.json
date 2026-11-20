@@ -1,0 +1,27 @@
+{
+  "total": 78,
+  "verdict": {
+    "fail": 37,
+    "pass": 41
+  },
+  "by_category": {
+    "A1": 8,
+    "A2": 5,
+    "A3": 2,
+    "A7": 5,
+    "B1": 3,
+    "B2": 9,
+    "B3": 4,
+    "B4": 1
+  },
+  "by_source": {
+    "pair": 12,
+    "edit": 60,
+    "generated": 3,
+    "base": 3
+  },
+  "verified_by": {
+    "human": 9,
+    "claude": 69
+  }
+}

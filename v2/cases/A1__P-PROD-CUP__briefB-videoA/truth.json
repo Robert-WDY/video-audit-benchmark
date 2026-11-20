@@ -1,0 +1,17 @@
+{
+  "id": "A1__P-PROD-CUP__briefB-videoA",
+  "video": "A1__P-PROD-CUP__briefB-videoA.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "A1",
+      "category_name": "产品不一致",
+      "group": "A",
+      "description": "创意要求「杯盖是带提环和正面锁扣的黑色翻盖」，成片是「杯盖是平顶黑色旋盖，没有提环、没有锁扣」",
+      "windows": null
+    }
+  ],
+  "source": "pair",
+  "verified_by": "claude",
+  "verification_note": "平顶旋盖，无提环无锁扣"
+}

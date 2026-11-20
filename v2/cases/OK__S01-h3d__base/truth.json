@@ -1,0 +1,9 @@
+{
+  "id": "OK__S01-h3d__base",
+  "video": "OK__S01-h3d__base.mp4",
+  "verdict": "pass",
+  "errors": [],
+  "source": "edit",
+  "verified_by": "claude",
+  "verification_note": "注入错误由确定性剪辑/合成产生，已通过逐帧真值校验；底片干净与否见 verified_by"
+}

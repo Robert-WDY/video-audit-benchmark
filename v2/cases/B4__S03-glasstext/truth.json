@@ -1,0 +1,22 @@
+{
+  "id": "B4__S03-glasstext",
+  "video": "B4__S03-glasstext.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "B4",
+      "category_name": "画面崩坏",
+      "group": "B",
+      "description": "玻璃杯外壁出现一列竖排的白色伪中文，读不通",
+      "windows": [
+        [
+          0,
+          6
+        ]
+      ]
+    }
+  ],
+  "source": "generated",
+  "verified_by": "claude",
+  "verification_note": "提示词直接生成"
+}

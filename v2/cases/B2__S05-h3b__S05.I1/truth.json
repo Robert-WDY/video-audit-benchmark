@@ -1,0 +1,23 @@
+{
+  "id": "B2__S05-h3b__S05.I1",
+  "video": "B2__S05-h3b__S05.I1.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "B2",
+      "category_name": "画面跳变",
+      "group": "B",
+      "description": "画面先出现手机已在板上充电，接着才出现把手机拿过去放上",
+      "windows": [
+        [
+          1.7,
+          6
+        ]
+      ],
+      "from_v1": "TC4"
+    }
+  ],
+  "source": "edit",
+  "verified_by": "claude",
+  "verification_note": "注入错误由确定性剪辑/合成产生，已通过逐帧真值校验；底片干净与否见 verified_by"
+}

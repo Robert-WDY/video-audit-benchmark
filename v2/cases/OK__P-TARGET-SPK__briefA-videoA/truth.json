@@ -1,0 +1,9 @@
+{
+  "id": "OK__P-TARGET-SPK__briefA-videoA",
+  "video": "OK__P-TARGET-SPK__briefA-videoA.mp4",
+  "verdict": "pass",
+  "errors": [],
+  "source": "pair",
+  "verified_by": "claude",
+  "verification_note": "按中间电源键"
+}

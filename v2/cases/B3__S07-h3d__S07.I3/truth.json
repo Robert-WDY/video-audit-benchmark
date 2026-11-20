@@ -1,0 +1,23 @@
+{
+  "id": "B3__S07-h3d__S07.I3",
+  "video": "B3__S07-h3d__S07.I3.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "B3",
+      "category_name": "技术故障",
+      "group": "B",
+      "description": "光环亮起瞬间冻帧 1.5 秒",
+      "windows": [
+        [
+          1.85,
+          3.35
+        ]
+      ],
+      "from_v1": "TE2"
+    }
+  ],
+  "source": "edit",
+  "verified_by": "claude",
+  "verification_note": "注入错误由确定性剪辑/合成产生，已通过逐帧真值校验；底片干净与否见 verified_by"
+}

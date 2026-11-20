@@ -1,0 +1,22 @@
+{
+  "id": "A1__S01-logo-lid",
+  "video": "A1__S01-logo-lid.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "A1",
+      "category_name": "产品不一致",
+      "group": "A",
+      "description": "Logo 变成竖排并多出一个「0」；杯盖带提环和锁扣（产品为平顶旋盖、正面 LUMO 字样）",
+      "windows": [
+        [
+          0,
+          6
+        ]
+      ]
+    }
+  ],
+  "source": "generated",
+  "verified_by": "claude",
+  "verification_note": "提示词直接生成"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "B1__S03-h3b__S03.I1",
+  "video": "B1__S03-h3b__S03.I1.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "B1",
+      "category_name": "物理或因果不合理",
+      "group": "B",
+      "description": "水从玻璃杯向上倒流回保温杯",
+      "windows": [
+        [
+          2.4,
+          4.8
+        ]
+      ],
+      "from_v1": "PH2"
+    }
+  ],
+  "source": "edit",
+  "verified_by": "claude",
+  "verification_note": "注入错误由确定性剪辑/合成产生，已通过逐帧真值校验；底片干净与否见 verified_by"
+}

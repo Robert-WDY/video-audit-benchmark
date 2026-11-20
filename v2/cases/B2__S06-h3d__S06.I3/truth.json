@@ -1,0 +1,23 @@
+{
+  "id": "B2__S06-h3d__S06.I3",
+  "video": "B2__S06-h3d__S06.I3.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "B2",
+      "category_name": "画面跳变",
+      "group": "B",
+      "description": "脚刚碰到鞋就瞬间完全穿入",
+      "windows": [
+        [
+          0.3,
+          0.9
+        ]
+      ],
+      "from_v1": "TC1"
+    }
+  ],
+  "source": "edit",
+  "verified_by": "claude",
+  "verification_note": "注入错误由确定性剪辑/合成产生，已通过逐帧真值校验；底片干净与否见 verified_by"
+}

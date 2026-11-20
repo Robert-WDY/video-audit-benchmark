@@ -1,0 +1,9 @@
+{
+  "id": "OK-decoy__S01-h3d__S01.D2",
+  "video": "OK-decoy__S01-h3d__S01.D2.mp4",
+  "verdict": "pass",
+  "errors": [],
+  "source": "edit",
+  "verified_by": "claude",
+  "verification_note": "干扰项：前半圈刻意 0.5 倍慢动作。注入错误由确定性剪辑/合成产生，已通过逐帧真值校验；底片干净与否见 verified_by"
+}

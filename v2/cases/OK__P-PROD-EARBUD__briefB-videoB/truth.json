@@ -1,0 +1,9 @@
+{
+  "id": "OK__P-PROD-EARBUD__briefB-videoB",
+  "video": "OK__P-PROD-EARBUD__briefB-videoB.mp4",
+  "verdict": "pass",
+  "errors": [],
+  "source": "pair",
+  "verified_by": "human",
+  "verification_note": "人工指出：耳机没有柄"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "B1__S07-h3d__S07.I9",
+  "video": "B1__S07-h3d__S07.I9.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "B1",
+      "category_name": "物理或因果不合理",
+      "group": "B",
+      "description": "手没有按任何键，光环自己亮了，手突然出现在离开的位置",
+      "windows": [
+        [
+          0,
+          0.5
+        ]
+      ],
+      "from_v1": "TC5"
+    }
+  ],
+  "source": "edit",
+  "verified_by": "claude",
+  "verification_note": "注入错误由确定性剪辑/合成产生，已通过逐帧真值校验；底片干净与否见 verified_by"
+}

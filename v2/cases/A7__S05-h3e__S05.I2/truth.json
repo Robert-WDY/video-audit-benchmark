@@ -1,0 +1,23 @@
+{
+  "id": "A7__S05-h3e__S05.I2",
+  "video": "A7__S05-h3e__S05.I2.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "A7",
+      "category_name": "文案字幕不符",
+      "group": "A",
+      "description": "字幕写「50W 无线超级快充」，要求的文案是 15W",
+      "windows": [
+        [
+          3,
+          6
+        ]
+      ],
+      "from_v1": "PF8"
+    }
+  ],
+  "source": "edit",
+  "verified_by": "claude",
+  "verification_note": "注入错误由确定性剪辑/合成产生，已通过逐帧真值校验；底片干净与否见 verified_by"
+}

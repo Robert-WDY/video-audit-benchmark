@@ -1,0 +1,9 @@
+{
+  "id": "OK__P-PROD-EARBUD__briefA-videoA",
+  "video": "OK__P-PROD-EARBUD__briefA-videoA.mp4",
+  "verdict": "pass",
+  "errors": [],
+  "source": "pair",
+  "verified_by": "claude",
+  "verification_note": "柄式耳机"
+}

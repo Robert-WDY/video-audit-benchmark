@@ -1,0 +1,22 @@
+{
+  "id": "A2__S06-standup",
+  "video": "A2__S06-standup.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "A2",
+      "category_name": "动作方式不符",
+      "group": "A",
+      "description": "系完鞋带后一直没有站起来（要求最后站起来）",
+      "windows": [
+        [
+          5.7,
+          6
+        ]
+      ]
+    }
+  ],
+  "source": "base",
+  "verified_by": "human",
+  "verification_note": "人工复核确认"
+}

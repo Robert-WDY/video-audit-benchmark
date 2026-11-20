@@ -1,0 +1,9 @@
+{
+  "id": "OK__P-PROD-CUP__briefB-videoB",
+  "video": "OK__P-PROD-CUP__briefB-videoB.mp4",
+  "verdict": "pass",
+  "errors": [],
+  "source": "pair",
+  "verified_by": "human",
+  "verification_note": "人工确认：杯盖带提环和锁扣"
+}

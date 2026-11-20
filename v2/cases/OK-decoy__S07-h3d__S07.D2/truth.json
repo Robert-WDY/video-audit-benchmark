@@ -1,0 +1,9 @@
+{
+  "id": "OK-decoy__S07-h3d__S07.D2",
+  "video": "OK-decoy__S07-h3d__S07.D2.mp4",
+  "verdict": "pass",
+  "errors": [],
+  "source": "edit",
+  "verified_by": "claude",
+  "verification_note": "干扰项：开机后定格 0.6 秒。注入错误由确定性剪辑/合成产生，已通过逐帧真值校验；底片干净与否见 verified_by"
+}

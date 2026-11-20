@@ -1,0 +1,9 @@
+{
+  "id": "OK__P-PROD-CUP__briefA-videoA",
+  "video": "OK__P-PROD-CUP__briefA-videoA.mp4",
+  "verdict": "pass",
+  "errors": [],
+  "source": "pair",
+  "verified_by": "claude",
+  "verification_note": "平顶旋盖，无提环无锁扣"
+}

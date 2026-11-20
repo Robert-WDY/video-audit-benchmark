@@ -1,0 +1,225 @@
+{
+  "taxonomy": "taxonomy.json",
+  "scenes": "../scenes",
+  "pairs": [
+    {
+      "file": "briefs/existing-pairs.json",
+      "videos": {
+        "P-PROD-EARBUD": {
+          "A": {
+            "path": "../samples/generated/S04__base__seed20261119.mp4",
+            "verified_by": "claude",
+            "note": "柄式耳机"
+          },
+          "B": {
+            "path": "../samples/generated/S04__base__seed20261124.mp4",
+            "verified_by": "human",
+            "note": "人工指出：耳机没有柄"
+          }
+        },
+        "P-PROD-CUP": {
+          "A": {
+            "path": "../samples/generated/S01__base__seed20261122.mp4",
+            "verified_by": "claude",
+            "note": "平顶旋盖，无提环无锁扣"
+          },
+          "B": {
+            "path": "../samples/generated/S01__base__seed20261121.mp4",
+            "verified_by": "human",
+            "note": "人工确认：杯盖带提环和锁扣"
+          }
+        },
+        "P-TARGET-SPK": {
+          "A": {
+            "path": "../samples/generated/S07__base__seed20261123.mp4",
+            "verified_by": "claude",
+            "note": "按中间电源键"
+          },
+          "B": {
+            "path": "../samples/generated/S07__base__seed20261120.mp4",
+            "verified_by": "human",
+            "note": "人工确认：按的是左侧小键"
+          }
+        }
+      }
+    }
+  ],
+  "edits": {
+    "visibility": [
+      "V1"
+    ],
+    "skip_subs": [
+      "TE4",
+      "TE5"
+    ],
+    "dirs": [
+      {
+        "path": "../samples/batch2",
+        "takes": [
+          "S03-h3b",
+          "S05-h3b"
+        ],
+        "verified_by": {
+          "S03-h3b": "claude",
+          "S05-h3b": "claude"
+        }
+      },
+      {
+        "path": "../samples/batch3",
+        "takes": [
+          "S04-h3a"
+        ],
+        "verified_by": {
+          "S04-h3a": "claude"
+        }
+      },
+      {
+        "path": "../samples/batch4",
+        "takes": [
+          "S07-h3d",
+          "S01-h3d",
+          "S06-h3d"
+        ],
+        "verified_by": {
+          "S07-h3d": "claude",
+          "S01-h3d": "claude",
+          "S06-h3d": "claude"
+        }
+      },
+      {
+        "path": "../samples/batch5",
+        "takes": [
+          "S05-h3e"
+        ],
+        "verified_by": {
+          "S05-h3e": "claude"
+        }
+      }
+    ],
+    "descriptions": {
+      "S03.I1": "水从玻璃杯向上倒流回保温杯",
+      "S04.I3": "动作反了：变成把耳机放回盒里并合上盖子（要求是开盖取出耳机）",
+      "S06.I1": "动作反了：变成坐下、解开鞋带、脱鞋（要求是穿鞋、系带、站起来）",
+      "S07.I9": "手没有按任何键，光环自己亮了，手突然出现在离开的位置",
+      "S03.I3": "保温杯放回后，画面突然回到开头，玻璃杯又变成空的",
+      "S05.I1": "画面先出现手机已在板上充电，接着才出现把手机拿过去放上",
+      "S07.I1": "光环先亮了，手指之后才去按键",
+      "S01.I3": "字幕写「500ml 超大容量」，要求的文案是 350ml",
+      "S03.I8": "字幕写「500ml 超大容量」，要求的文案是 350ml",
+      "S05.I2": "字幕写「50W 无线超级快充」，要求的文案是 15W",
+      "S07.I2": "字幕写「24 小时超长续航」，要求的文案是 12 小时"
+    }
+  },
+  "bases": [
+    {
+      "id": "S06-standup",
+      "scene": "S06",
+      "path": "../samples/generated/S06__base__seed20261121.mp4",
+      "errors": [
+        {
+          "category": "A2",
+          "description": "系完鞋带后一直没有站起来（要求最后站起来）",
+          "windows": [
+            [
+              5.7,
+              6.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S02-handleave",
+      "scene": "S02",
+      "path": "../samples/generated/S02__base__seed20261124.mp4",
+      "errors": [
+        {
+          "category": "A2",
+          "description": "片尾手仍拿着杯盖留在画面里（要求手离开画面）",
+          "windows": [
+            [
+              5.2,
+              6.0
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S08-absorb",
+      "scene": "S08",
+      "path": "../samples/generated/S08__base__seed20261124.mp4",
+      "errors": [
+        {
+          "category": "A2",
+          "description": "最后手背上仍有明显一块霜没有推开（要求推开吸收）",
+          "windows": [
+            [
+              5.5,
+              6.0
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "generated": [
+    {
+      "id": "S03-glasstext",
+      "scene": "S03",
+      "path": "../samples/generated/S03__S03.I9__seed20261122.mp4",
+      "verified_by": "claude",
+      "note": "提示词直接生成",
+      "errors": [
+        {
+          "category": "B4",
+          "description": "玻璃杯外壁出现一列竖排的白色伪中文，读不通",
+          "windows": [
+            [
+              0,
+              6
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S05-vlot",
+      "scene": "S05",
+      "path": "../samples/generated/S05__S05.I10__seed20261122.mp4",
+      "verified_by": "claude",
+      "note": "提示词直接生成",
+      "errors": [
+        {
+          "category": "A1",
+          "description": "充电板中央字样拼成 Vlot（产品为 Volt）",
+          "windows": [
+            [
+              0,
+              3
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "S01-logo-lid",
+      "scene": "S01",
+      "path": "../samples/generated/S01__S01.I6+S01.I8__seed20261121.mp4",
+      "verified_by": "claude",
+      "note": "提示词直接生成",
+      "errors": [
+        {
+          "category": "A1",
+          "description": "Logo 变成竖排并多出一个「0」；杯盖带提环和锁扣（产品为平顶旋盖、正面 LUMO 字样）",
+          "windows": [
+            [
+              0,
+              6
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

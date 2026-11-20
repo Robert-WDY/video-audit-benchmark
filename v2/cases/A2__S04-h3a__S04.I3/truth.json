@@ -1,0 +1,23 @@
+{
+  "id": "A2__S04-h3a__S04.I3",
+  "video": "A2__S04-h3a__S04.I3.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "A2",
+      "category_name": "动作方式不符",
+      "group": "A",
+      "description": "动作反了：变成把耳机放回盒里并合上盖子（要求是开盖取出耳机）",
+      "windows": [
+        [
+          0,
+          6
+        ]
+      ],
+      "from_v1": "SA3"
+    }
+  ],
+  "source": "edit",
+  "verified_by": "claude",
+  "verification_note": "注入错误由确定性剪辑/合成产生，已通过逐帧真值校验；底片干净与否见 verified_by"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "A1__S05-vlot",
+  "video": "A1__S05-vlot.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "A1",
+      "category_name": "产品不一致",
+      "group": "A",
+      "description": "充电板中央字样拼成 Vlot（产品为 Volt）",
+      "windows": [
+        [
+          0,
+          3
+        ]
+      ]
+    }
+  ],
+  "source": "generated",
+  "verified_by": "claude",
+  "verification_note": "提示词直接生成"
+}

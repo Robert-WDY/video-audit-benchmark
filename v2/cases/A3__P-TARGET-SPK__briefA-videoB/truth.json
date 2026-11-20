@@ -1,0 +1,17 @@
+{
+  "id": "A3__P-TARGET-SPK__briefA-videoB",
+  "video": "A3__P-TARGET-SPK__briefA-videoB.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "A3",
+      "category_name": "交互对象不符",
+      "group": "A",
+      "description": "创意要求「食指按顶部正中间最大的电源键」，成片是「食指按顶部左侧的小按键」",
+      "windows": null
+    }
+  ],
+  "source": "pair",
+  "verified_by": "human",
+  "verification_note": "人工确认：按的是左侧小键"
+}

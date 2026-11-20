@@ -1,0 +1,9 @@
+{
+  "id": "OK-decoy__S03-h3b__S03.D4",
+  "video": "OK-decoy__S03-h3b__S03.D4.mp4",
+  "verdict": "pass",
+  "errors": [],
+  "source": "edit",
+  "verified_by": "claude",
+  "verification_note": "干扰项：整片偏暖的调色，所有物体一起变暖，产品真实颜色未变。注入错误由确定性剪辑/合成产生，已通过逐帧真值校验；底片干净与否见 verified_by"
+}

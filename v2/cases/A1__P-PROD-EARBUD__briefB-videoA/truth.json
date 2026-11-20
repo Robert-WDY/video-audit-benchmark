@@ -1,0 +1,17 @@
+{
+  "id": "A1__P-PROD-EARBUD__briefB-videoA",
+  "video": "A1__P-PROD-EARBUD__briefB-videoA.mp4",
+  "verdict": "fail",
+  "errors": [
+    {
+      "category": "A1",
+      "category_name": "产品不一致",
+      "group": "A",
+      "description": "创意要求「圆润的豆式耳机，没有柄」，成片是「每只耳机带一根向下的短柄（柄式入耳耳机）」",
+      "windows": null
+    }
+  ],
+  "source": "pair",
+  "verified_by": "claude",
+  "verification_note": "柄式耳机"
+}
