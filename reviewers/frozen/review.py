@@ -74,7 +74,9 @@ def review(video, brief, state_root):
             "FROZEN_BOARD_BASE",
         )
     }
-    identity = json.dumps(["frozen-shot-v1", sha, brief, config], ensure_ascii=False, sort_keys=True)
+    from identity import fingerprint
+    version = fingerprint("frozen")
+    identity = json.dumps([version, sha, brief, config], ensure_ascii=False, sort_keys=True)
     key = hashlib.sha256(identity.encode()).hexdigest()
     state = state_root / key
     state.mkdir(parents=True, exist_ok=True)
@@ -116,12 +118,12 @@ def review(video, brief, state_root):
 
             try:
                 return assess_board(ev.sheet(r, signals, mode), text, check, ev.SCHEMA, state, mode)
-            except (OSError, RuntimeError, ValueError, KeyError):
-                return {"verdict": "UNAVAILABLE", "issues": []}
+            except (OSError, RuntimeError, ValueError, KeyError) as exc:
+                raise RuntimeError(f"{mode}: {type(exc).__name__}") from exc
 
         out = decision(first, signals, ev.known, technical, review_view)
         brief_hash = hashlib.sha256(json.dumps(brief, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
-        out.update(reviewer="frozen-shot-v1", media_sha256=sha, brief_sha256=brief_hash)
+        out.update(reviewer="frozen-shot-v1", fingerprint=version, media_sha256=sha, brief_sha256=brief_hash)
         return out
 
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { randomUUID } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { copyFile, mkdir, mkdtemp, readdir, readFile, realpath, rename, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -61,6 +61,7 @@ async function prepare(dataset, out) {
     inputs.push({ id, brief });
     key.push({
       id, case_id: truth.id, verdict: truth.verdict, verified_by: truth.verified_by || 'none',
+      errors: truth.errors ?? [], windows: truth.windows ?? [],
       pair: pair?.[1] ?? null, sides: pair ? pair[2] + pair[3] : null,
     });
     videos.set(id, path.join(dataset, 'videos', truth.video));
@@ -106,7 +107,7 @@ async function readResult(dir, id) {
 
 function normalizeReview(result) {
   if (result?.reason === 'review_unavailable' || result?.verdict === 'unavailable') return { status: 'unavailable' };
-  const evidence = Object.fromEntries(['issues', 'reviewer', 'media_sha256', 'brief_sha256', 'receipts']
+  const evidence = Object.fromEntries(['issues', 'reviewer', 'media_sha256', 'brief_sha256', 'receipts', 'fingerprint', 'pending']
     .filter(field => result?.[field] !== undefined).map(field => [field, result[field]]));
   if (result?.verdict === 'uncertain') return { status: 'uncertain', verdict: 'uncertain', ...evidence };
   if (isVerdict(result?.verdict)) return { status: 'reviewed', verdict: result.verdict, ...evidence };
@@ -125,7 +126,7 @@ async function review(input, out, concurrency, force) {
   const { createReview } = await import(moduleUrl.href);
   const stateDir = path.join(out, '.frozen-state', force ? randomUUID() : 'resume');
   const config = { relayBase, relayKey, model };
-  const reviewer = await createReview(REVIEW_MODULE ? config : { ...config, stateDir });
+  const reviewer = await createReview({ ...config, stateDir });
   if (typeof reviewer?.video !== 'function') throw new Error('审核模块必须由 createReview 提供 video({video, brief}) 方法');
   await mkdir(out, { recursive: true });
   let next = 0;
@@ -133,14 +134,21 @@ async function review(input, out, concurrency, force) {
   async function worker() {
     while (next < inputs.length) {
       const { id, brief } = inputs[next++];
-      if (!force && ['reviewed', 'uncertain'].includes((await readResult(out, id)).status)) continue;
       const file = path.join(input, 'videos', `${id}.mp4`);
-      let result;
+      let result, inputDigest;
       try {
+        const prior = !force && await readResult(out, id);
+        if (reviewer.fingerprint && existsSync(file)) {
+          inputDigest = createHash('sha256').update(await readFile(file)).update(JSON.stringify(brief)).digest('hex');
+        }
+        if (prior && ['reviewed','uncertain'].includes(prior.status) && (!reviewer.fingerprint ||
+            (prior.fingerprint === reviewer.fingerprint && prior.input_digest === inputDigest))) continue;
         if (!existsSync(file)) throw new Error('缺少审核视频');
         result = normalizeReview(await reviewer.video({ video: file, brief }));
-      } catch {
-        result = { status: 'unavailable' };
+        if (inputDigest) result.input_digest = inputDigest;
+      } catch (error) {
+        // Only the built-in adapter supplies a sanitized diagnostic.
+        result = { status: 'unavailable', error: error.auditDiagnostic || { stage:'review', type:error.name || 'Error' } };
       }
       await writeJson(path.join(out, `${id}.json`), result);
       if (!['reviewed', 'uncertain'].includes(result.status)) {
@@ -167,13 +175,13 @@ async function stability(input, rounds, out) {
     const records = await Promise.all(rounds.map(dir => readResult(dir, id)));
     const verdicts = records.map(r => r.verdict ?? null);
     const statuses = records.map(r => r.status);
-    const jobs = records.map(r => r.receipts?.[0]).filter(Boolean);
+    const jobs = records.flatMap(r => (r.receipts || []).filter(Boolean));
     const sameInput = ['media_sha256', 'brief_sha256'].every(field =>
       new Set(records.map(r => r[field]).filter(Boolean)).size <= 1);
     const complete = statuses.every(s => s === 'reviewed' || s === 'uncertain');
     if (new Set(jobs).size !== jobs.length || !sameInput) throw new Error(`${id} 有重复首审回执或审核输入不一致`);
     const [a, b, c] = verdicts;
-    cases.push({ id, verdicts, statuses, first_jobs_verified: jobs.length === 3,
+    cases.push({ id, verdicts, statuses, first_jobs_verified: records.every(r => Boolean(r.receipts?.[0])),
       flip: complete ? new Set(verdicts).size > 1 : null,
       pair_changes: complete ? Number(a !== b) + Number(a !== c) + Number(b !== c) : null,
       adjacent_changes: complete ? Number(a !== b) + Number(b !== c) : null });

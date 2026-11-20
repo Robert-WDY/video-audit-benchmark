@@ -4,7 +4,7 @@
 
 ## 运行
 
-需要 Windows 简体中文 OCR（Windows.Media.Ocr）、Node.js 20+、Python 3.11+、FFmpeg 和 ffprobe。服务配置通过进程环境传入。
+需要 Node.js 20+、Python 3.11+、FFmpeg 和 ffprobe。基准记录使用 Windows.Media.Ocr。指定 `AUDIT_OCR=tesseract` 时需要 Tesseract 和 `chi_sim+eng` 语言包。服务配置通过进程环境传入。三首审、局部跳变和物理因果实验可使用[候选审核器](../candidate/README.md)。
 
 | 环境变量 | 用途 |
 |---|---|

@@ -18,7 +18,7 @@ def save(path, value):
     tmp.replace(path)
 
 
-def first_pass(video, context, state):
+def first_pass(video, context, state, *, temperature=None, media_url=None):
     base = os.environ["AICENTRE_BASE_URL"].rstrip("/")
     token = os.environ["AICENTRE_API_KEY"]
     model = os.getenv("REVIEW_MODEL") or "qwen3.8-omni-flash"
@@ -30,20 +30,24 @@ def first_pass(video, context, state):
     if "answer" in rec:
         return rec["answer"]
     if not rec:
-        with video.open("rb") as stream:
-            upload = requests.post(
-                base + "/v1/uploads", headers=headers, files={"file": ("asset.mp4", stream)}, timeout=180
-            )
-        upload.raise_for_status()
+        if media_url is None:
+            with video.open("rb") as stream:
+                upload = requests.post(
+                    base + "/v1/uploads", headers=headers, files={"file": ("asset.mp4", stream)}, timeout=180
+                )
+            upload.raise_for_status()
+            media_url = upload.json()["url"]
         body = {
             "model": model,
             "channel": channel,
             "prompt": SCHEMA + "\n\n本次镜头的产品事实与制作要求：\n" + context.strip(),
-            "reference_video_urls": [upload.json()["url"]],
+            "reference_video_urls": [media_url],
             "max_tokens": 2000,
             "external_ref": "visual-qa-" + uuid4().hex[:25],
         }
-        rec = {"external_ref": body["external_ref"]}
+        if temperature is not None:
+            body["temperature"] = temperature
+        rec = {"external_ref": body["external_ref"], "temperature": temperature}
         save(path, rec)
         for admission in range(13):
             response = requests.post(endpoint, json=body, headers=headers, timeout=90)

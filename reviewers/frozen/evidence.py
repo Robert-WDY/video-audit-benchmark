@@ -125,6 +125,21 @@ def run_ocr(chunk):
         tasks.extend(dict(image_id=f"{k}_{i}", url=str(frame(r, i))) for i in inds)
     if not tasks:
         return
+    backend=os.getenv("AUDIT_OCR") or ("windows" if os.name=="nt" else "tesseract")
+    if backend=="tesseract":
+        lang=os.getenv("TESSERACT_LANG") or "chi_sim+eng"
+        byid={}
+        for item in tasks:
+            res=ff(["tesseract",item["url"],"stdout","-l",lang,"--psm","11"])
+            # Tesseract may exit successfully after silently dropping one language.
+            if b"Failed loading language" in res.stderr:
+                raise RuntimeError("Missing requested Tesseract language data")
+            byid[item["image_id"]]=res.stdout.decode("utf8").splitlines()
+        for k,items in span.items():
+            write(folder/(k+".json"),[dict(t=t,lines=byid[f]) for f,t in items])
+        return
+    if backend!="windows":
+        raise ValueError("Unknown OCR backend")
     with tempfile.TemporaryDirectory(dir=folder) as tmp:
         manifest = Path(tmp) / "queue.json"
         write(manifest, {"images": tasks})
