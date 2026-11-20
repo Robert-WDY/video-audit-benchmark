@@ -12,6 +12,26 @@ v2/
 └── sources.json              由哪些素材组装而来（node src/build-v2.mjs --config v2/sources.json --out v2）
 ```
 
+## 盲评与跑分
+
+先组装素材，再把审核输入导出到一个新目录。
+
+```sh
+node src/build-v2.mjs --config v2/sources.json --out .work/v2-dataset
+node src/eval-v2.mjs prepare --dataset .work/v2-dataset --out .work/v2-blind
+```
+
+只把 `.work/v2-blind/inputs/` 交给审核端。里面只有随机 ID、创意要求、同名视频。评分方保留 `key.json`。组装目录和本页索引供制作方查阅，含答案。
+
+在审核环境中设置 `REVIEW_MODULE` 为审核适配器的文件路径。适配器导出 `createReview({ relayBase, relayKey, model })`，返回带 `async video({ video, brief })` 方法的对象。`video` 是匿名 MP4 的路径，`brief` 是原始创意要求。审核返回 `{ verdict: 'pass' }` 或 `{ verdict: 'fail' }`，也可返回布尔值字段 `ok`。服务不可用时抛出异常或返回 `{ reason: 'review_unavailable' }`。按适配器需要设置 `REVIEW_RELAY_BASE`、`REVIEW_RELAY_KEY` 和 `REVIEW_MODEL`。
+
+```sh
+node src/eval-v2.mjs review --input .work/v2-blind/inputs --out .work/v2-reviews
+node src/eval-v2.mjs score --key .work/v2-blind/key.json --reviews .work/v2-reviews --out .work/v2-score.json
+```
+
+同一审核配置可用同一输出目录续跑。有效结果会保留，失败或格式无效的结果可重试。更换模型或审核配置时使用新的审核输出目录。评分报告会列出总用例数、有效审核分母、误放、误拦、各确认来源的成绩，以及每组对照四项全对的数量。若有缺失、不可用或无效输出，评分仍会写出报告并返回非零退出码。
+
 ## 错误类别
 
 | 大类 | 类别 | 例子 |

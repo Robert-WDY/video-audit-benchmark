@@ -6,9 +6,10 @@
 import { createHash } from 'node:crypto';
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { ConflictError, OVERLAY_OPS, applyOps, isPieceOp, resolveTime, srcWindowToOut } from './timeline.mjs';
 
-const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+const ROOT = fileURLToPath(new URL('..', import.meta.url));
 export const DEFAULT_TAXONOMY = path.join(ROOT, 'taxonomy.json');
 export const DEFAULT_SCENES = path.join(ROOT, 'scenes');
 
